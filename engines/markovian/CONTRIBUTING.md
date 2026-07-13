@@ -1,6 +1,6 @@
 # Contributing to Markovian
 
-Thanks for being here. Markovian is an MIT-licensed engine in the Meterless stack and contributions are very welcome.
+Thanks for being here. Markovian is an Apache 2.0-licensed engine in the Meterless stack and contributions are very welcome.
 
 ## Ways to help
 
@@ -48,4 +48,4 @@ Be kind. Disagreements about code are fine. Disagreements about people aren't.
 
 ## License
 
-By contributing you agree your contributions are MIT-licensed.
+By contributing you agree your contributions are Apache 2.0-licensed.

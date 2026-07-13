@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Runnable TypeScript reference implementation of the Markovian engine contract (see ../AGENTS.md). Zero runtime dependencies.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "test": "vitest run",
     "measured-run": "tsx scripts/measured-run.ts"

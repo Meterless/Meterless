@@ -1,6 +1,6 @@
 # Meterless
 
-> The local-first context stack for agentic AI. This repository contains engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, product documentation, and the project narrative. Everything here is MIT. Product application binaries are proprietary and live in per-app repos.
+> The local-first context stack for agentic AI. This repository contains engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, product documentation, and the project narrative. Everything here is Apache 2.0. Product application binaries are proprietary and live in per-app repos.
 
 ## Folder map
 

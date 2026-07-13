@@ -6,7 +6,7 @@
 
 **A living memory system for AI agents. Not a vector store. Not a chat log. A knowledge graph that mines, retrieves, dreams, and audits.**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Architecture](https://img.shields.io/badge/architecture-provider--agnostic-purple.svg)](docs/architecture.md)
 [![Docs](https://img.shields.io/badge/docs-deep--dive-orange.svg)](docs/)
 
@@ -283,4 +283,4 @@ Details in [`conformance/`](conformance/).
 
 ## License
 
-MIT. Use it. Fork it. Ship it.
+Apache 2.0. Use it. Fork it. Ship it.

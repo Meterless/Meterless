@@ -19,7 +19,7 @@ A contributor should be able to make a useful first contribution in under five m
 
 This repo contains specs and docs, not application code. The engines are AGENTS.md-driven implementation specs. You implement them in your own stack with a coding agent. Feedback from real implementations is the most valuable contribution there is: what was ambiguous, what was missing, what broke.
 
-Product binaries are proprietary and ship from the per-app repos (`meterless/gaia`, `meterless/relay`, `meterless/swarms`). Product documentation lives here and is MIT.
+Product binaries are proprietary and ship from the per-app repos (`meterless/gaia`, `meterless/relay`, `meterless/swarms`). Product documentation lives here and is Apache 2.0.
 
 ## How to submit
 

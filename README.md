@@ -1,6 +1,6 @@
 # Meterless
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Engines](https://img.shields.io/badge/engines-4_specs,_3_runnable-purple.svg)](engines/)
 [![Conformance](https://img.shields.io/badge/conformance-suites_included-18E299.svg)](AGENTS.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -111,4 +111,4 @@ Engines drop monthly as tagged releases on this repo. Next: swarm-orchestration 
 
 Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Everything in this repo is [MIT](LICENSE). Product application binaries are proprietary and live in the per-app repos.
+Everything in this repo is [Apache 2.0](LICENSE). Product application binaries are proprietary and live in the per-app repos.

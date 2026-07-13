@@ -30,7 +30,7 @@ Every AI product eventually needs a persistent picture of its domain. Most teams
 - Built for replay from day one. Bug fixes don't require migrations.
 - Operator control plane specified up front — inspect, merge, edit, rebuild, repair. No "we'll design the admin panel later."
 - Schema versioning is mandatory, not optional.
-- MIT-licensed. Yours forever.
+- Apache 2.0-licensed. Yours forever.
 
 ## Adopt it
 

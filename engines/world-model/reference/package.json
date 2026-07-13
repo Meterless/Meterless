@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Zero-dependency TypeScript reference implementation of the Meterless World Model contract (AGENTS.md). Runtime dependencies: none. devDependencies are tsx and vitest for running and testing, plus esbuild used only by scripts/build-browser-bundle.ts to emit the committed control-plane bundle.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "test": "vitest run",
     "idempotency-check": "tsx scripts/idempotency-check.ts",

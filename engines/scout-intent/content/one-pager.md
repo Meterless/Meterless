@@ -40,7 +40,7 @@ Every agent stack grows a routing-and-policy layer. It starts as three if-statem
 - Decisions are scored, not "AI-vibes"
 - Releases are gated by metrics
 - Adversarial corpus included
-- MIT-licensed. Yours forever.
+- Apache 2.0-licensed. Yours forever.
 
 ## Adopt it
 

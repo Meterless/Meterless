@@ -2,7 +2,7 @@
 
 ## Positioning
 
-H-MEM is a hierarchical human-memory architecture for agents: short-term, working, and long-term memory with mining, retrieval, dreaming, sleep, trust, and conflict resolution. Provider-agnostic. MIT.
+H-MEM is a hierarchical human-memory architecture for agents: short-term, working, and long-term memory with mining, retrieval, dreaming, sleep, trust, and conflict resolution. Provider-agnostic. Apache 2.0.
 
 ## Hero line
 

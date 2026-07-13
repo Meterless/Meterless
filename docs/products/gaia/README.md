@@ -8,7 +8,7 @@ Gaia is the local-first AI interface that remembers your context, understands yo
 
 ## Install
 
-Download the latest installer from [Releases](https://github.com/meterless/gaia/releases/latest). The application binary is proprietary. This documentation is MIT, like everything in the flagship repo.
+Download the latest installer from [Releases](https://github.com/meterless/gaia/releases/latest). The application binary is proprietary. This documentation is Apache 2.0, like everything in the flagship repo.
 
 ## Engines inside
 

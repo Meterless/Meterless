@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Choose the right move before you act. Intent sensing, risk checks, tool routing, and signed execution contracts for AI systems. This folder is the implementation spec; the package is not published. Verify implementations with the eval harness (npm run evals).",
   "private": true,
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "scripts": {
     "evals": "tsx evals/runner/index.ts all",

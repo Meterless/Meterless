@@ -971,4 +971,4 @@ Read order for a new implementer: `README.md` → `docs/architecture.md` → `do
 
 ## License
 
-MIT. Use it. Fork it. Ship it.
+Apache 2.0. Use it. Fork it. Ship it.

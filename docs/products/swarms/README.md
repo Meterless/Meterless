@@ -8,7 +8,7 @@ Swarms breaks AI sameness. It turns one prompt into a coordinated team of agents
 
 ## Install
 
-Download the latest desktop installer from [Releases](https://github.com/meterless/swarms/releases/latest), or use the web version via [meterless.ai](https://www.meterless.ai). The application binary is proprietary. This documentation is MIT, like everything in the flagship repo.
+Download the latest desktop installer from [Releases](https://github.com/meterless/swarms/releases/latest), or use the web version via [meterless.ai](https://www.meterless.ai). The application binary is proprietary. This documentation is Apache 2.0, like everything in the flagship repo.
 
 ## Engines inside
 

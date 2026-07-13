@@ -8,7 +8,7 @@ Relay gives AI agents a local body: the ability to operate desktop workflows, fi
 
 ## Install
 
-Download the latest installer from [Releases](https://github.com/meterless/relay/releases/latest). The application binary is proprietary. This documentation is MIT, like everything in the flagship repo.
+Download the latest installer from [Releases](https://github.com/meterless/relay/releases/latest). The application binary is proprietary. This documentation is Apache 2.0, like everything in the flagship repo.
 
 ## Engines inside
 

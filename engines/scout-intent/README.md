@@ -6,7 +6,7 @@
 
 Intent sensing. Risk checks. Tool routing. Recommended action.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-black.svg?style=flat-square)](./LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-black.svg?style=flat-square)](./LICENSE)
 [![Local-first](https://img.shields.io/badge/local--first-✓-black.svg?style=flat-square)](#why-scout)
 [![Eval harness](https://img.shields.io/badge/evals-locked%20regression%20set-black.svg?style=flat-square)](./evals)
 [![Engine of the Meterless stack](https://img.shields.io/badge/engine-meterless%20stack-black.svg?style=flat-square)](#compose-with-the-meterless-engine-stack)
@@ -248,7 +248,7 @@ Education-first, in the spirit of 12-Factor Agents:
 
 ## License
 
-MIT.
+Apache 2.0.
 
 ---
 

@@ -1003,4 +1003,4 @@ The repo folder specifies the contract; you bring the stack. A minimal runnable 
 
 ## License
 
-MIT. Use it. Fork it. Ship it.
+Apache 2.0. Use it. Fork it. Ship it.

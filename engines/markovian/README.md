@@ -6,7 +6,7 @@
 
 **Long reasoning in bounded chunks. Flat per-step context cost instead of O(n²) cumulative growth. Provider-agnostic implementation spec.**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Architecture](https://img.shields.io/badge/architecture-provider--agnostic-purple.svg)](docs/architecture.md)
 [![Status](https://img.shields.io/badge/status-implementation%20spec-green.svg)](#quickstart)
 
@@ -298,7 +298,7 @@ Details in [`conformance/`](conformance/).
 
 ## License
 
-MIT. Use it. Fork it. Ship it.
+Apache 2.0. Use it. Fork it. Ship it.
 
 ---
 

@@ -35,7 +35,7 @@ Long agent runs blow up. Every step appends to history. By step 30 you're shippi
 - Markers are typed data, not prose summaries
 - Bounded blast radius — a confused step affects one chunk
 - Inspectable runs with full per-chunk history
-- MIT-licensed. Yours forever.
+- Apache 2.0-licensed. Yours forever.
 
 ## Adopt it
 

@@ -54,7 +54,7 @@ Use both: vector DB for retrieval, World Model for the structured layer that sur
 | Audit trail | ✓ | ✗ |
 | Operator inspect/merge/repair | ✓ | ✗ |
 | Schema-versioned | ✓ | ✗ |
-| Standalone usable without a specific framework | ✓ MIT | ⚠ coupled |
+| Standalone usable without a specific framework | ✓ Apache 2.0 | ⚠ coupled |
 
 **Use World Model when:** you need a domain layer that lives longer than any one agent or framework.
 **Use framework memory when:** you have one agent, one job, one session.

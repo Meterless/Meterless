@@ -42,4 +42,4 @@ Not a vector database (it uses one underneath). Not a chat-history summarizer. N
 
 > Memory should not just remember. It should learn, evolve, and explain itself.
 
-H-MEM is MIT. Read the [architecture](../docs/architecture.md), run the [lifecycle demo](../demos/memory-lifecycle-visual/README.md), ship the [first production slice](../docs/practical-how-to.md).
+H-MEM is Apache 2.0. Read the [architecture](../docs/architecture.md), run the [lifecycle demo](../demos/memory-lifecycle-visual/README.md), ship the [first production slice](../docs/practical-how-to.md).
