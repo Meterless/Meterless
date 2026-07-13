@@ -1,0 +1,37 @@
+# Meterless
+
+> The local-first context stack for agentic AI. This repository contains engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, product documentation, and the project narrative. Everything here is MIT. Product application binaries are proprietary and live in per-app repos.
+
+## Folder map
+
+- /engines/hmem/ : H-MEM, hierarchical memory and durable context. Self-contained spec with AGENTS.md, docs, examples, evals, workshops.
+- /engines/world-model/ : World Model, user/task/environment state modeling. Self-contained spec.
+- /engines/markovian/ : Markovian, reasoning compression and next-action logic. Self-contained spec.
+- /engines/scout-intent/ : Scout Intent, intent detection, risk guarding, routing, signed execution contracts. Self-contained spec with a runnable eval harness.
+- /docs/architecture/ : why Meterless exists, local-first agentic context, stack overview.
+- /docs/engines/ : one overview page per engine, linking into the spec folders.
+- /docs/products/gaia/ : Gaia documentation. Gaia is the personal agent workspace.
+- /docs/products/relay/ : Relay documentation. Relay is the agent execution layer.
+- /docs/products/swarms/ : Swarms documentation. Swarms is the divergent generation layer.
+- /docs/agent-ready/ : using this repo with Claude Code and Cursor.
+- /docs/community/ : hackathon guide.
+- /examples/memory-compounding-research/ : runnable cross-engine demo (H-MEM + Markovian, mock LLM, no keys).
+- /templates/agentathon-starter/ : hackathon starter, a memory notebook agent on the H-MEM reference.
+
+## Canonical docs
+
+- https://github.com/meterless/meterless/blob/main/README.md
+- https://github.com/meterless/meterless/blob/main/AGENTS.md
+- https://github.com/meterless/meterless/blob/main/docs/architecture/why-meterless.md
+- https://github.com/meterless/meterless/blob/main/docs/architecture/stack-overview.md
+- https://github.com/meterless/meterless/blob/main/ROADMAP.md
+
+## Products (installers, proprietary)
+
+- https://github.com/meterless/gaia/releases/latest
+- https://github.com/meterless/relay/releases/latest
+- https://github.com/meterless/swarms/releases/latest
+
+## Focused clone of one engine
+
+npx degit meterless/meterless/engines/hmem my-hmem

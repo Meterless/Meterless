@@ -1,0 +1,5 @@
+We decided to use sqlite for local storage because the app must work offline.
+I always prefer dark mode in every editor we ship.
+The weekly demo happens on thursdays because the design review is wednesday.
+We must always encrypt the local database at rest because enterprise pilots require it.
+Prefer typescript for all new services because the team reviews it fastest.
