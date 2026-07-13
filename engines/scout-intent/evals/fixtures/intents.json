@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "note": "Eval fixture registry for the v1 regression corpus. Covers every intent referenced by evals/regression-set/v1/**. This is a small example registry — the canonical Meterless runtime registry ships 131 intents + 8 topology vectors (see docs/intent-registry.md, 'Scale').",
+  "intents": [
+    {
+      "id": "GENERAL",
+      "category": "general",
+      "description": "Safe fallback when no registered intent clears the Reject band (score < 0.40). Responds conversationally, never routes to tools, never guesses a high-risk intent.",
+      "parameters": { "type": "object", "properties": {} },
+      "capabilities": [],
+      "riskClass": "low",
+      "surfaces": ["chat", "inbox", "api"],
+      "roles": ["*"],
+      "examples": [
+        "What's the weather tomorrow?",
+        "hello there",
+        "what can you help me with?"
+      ],
+      "version": 1
+    },
+    {
+      "id": "deal.recover",
+      "category": "deal",
+      "description": "Draft a recovery action for stuck or at-risk deals — typically an email or call plan.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer", "minimum": 1, "maximum": 20 },
+          "channel": { "enum": ["email", "call", "slack"] },
+          "stage": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "swarm.run", "email.draft", "memory.recall"],
+      "riskClass": "medium",
+      "surfaces": ["chat", "inbox"],
+      "roles": ["ae", "csm", "sales-leader"],
+      "examples": [
+        "Find me the top 5 stuck deals and draft recovery emails",
+        "The Acme deal hasn't moved in three weeks. What should I do?",
+        "Give me 10 at-risk renewals with recovery plans"
+      ],
+      "version": 1
+    },
+    {
+      "id": "deal.query",
+      "category": "deal",
+      "description": "Read-only lookup of deal status, stage, value, or pipeline filters.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account": { "type": "string" },
+          "stage": { "type": "string" },
+          "valueMin": { "type": "number" }
+        }
+      },
+      "capabilities": ["world.query"],
+      "riskClass": "low",
+      "surfaces": ["chat", "inbox", "api"],
+      "roles": ["ae", "csm", "sales-leader"],
+      "examples": [
+        "What's the status of the GlobeX renewal?",
+        "Show me all deals in negotiation stage over $100k",
+        "Show me the Acme deal"
+      ],
+      "version": 1
+    },
+    {
+      "id": "deal.update",
+      "category": "deal",
+      "description": "Write operation on a deal record: change stage, value, or ownership. High risk — requires explicit confirmation and signed contract review.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account": { "type": "string" },
+          "stage": { "type": "string" },
+          "value": { "type": "number" }
+        }
+      },
+      "capabilities": ["world.assert", "approval.require"],
+      "riskClass": "high",
+      "surfaces": ["chat"],
+      "roles": ["ae", "sales-leader"],
+      "examples": [
+        "Move the Initech deal to closed-won at $280k"
+      ],
+      "version": 1
+    },
+    {
+      "id": "email.draft",
+      "category": "email",
+      "description": "Draft an email for user review — never sends. Pulls account context and prior preferences when available.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "recipient": { "type": "string" },
+          "topic": { "type": "string" },
+          "tone": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "memory.recall", "email.draft"],
+      "riskClass": "medium",
+      "surfaces": ["chat", "inbox"],
+      "roles": ["ae", "csm", "exec", "manager"],
+      "examples": [
+        "Draft an outreach email to Maya at Acme about renewal",
+        "Write a follow-up to yesterday's exec sync attendees",
+        "Email Maya about the renewal"
+      ],
+      "version": 1
+    },
+    {
+      "id": "email.summarize",
+      "category": "email",
+      "description": "Summarize inbox threads or a mail window for an account or time range.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account": { "type": "string" },
+          "window": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "markovian.chain"],
+      "riskClass": "low",
+      "surfaces": ["chat", "inbox"],
+      "roles": ["ae", "csm", "exec"],
+      "examples": [
+        "Summarize this week's inbox from Acme"
+      ],
+      "version": 1
+    },
+    {
+      "id": "email.send",
+      "category": "email",
+      "description": "Actually send email, including bulk sends. High risk — always requires approval; rate-limited per user and per surface.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "audience": { "type": "string" },
+          "template": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "email.send", "approval.require"],
+      "riskClass": "high",
+      "surfaces": ["chat"],
+      "roles": ["marketing", "exec"],
+      "examples": [
+        "Send the launch announcement to all customers"
+      ],
+      "version": 1
+    },
+    {
+      "id": "research.comparison",
+      "category": "research",
+      "description": "Research a topic across multiple sources and produce a structured comparison.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "subjects": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "capabilities": ["swarm.run", "world.query"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "roles": ["principal-eng", "pm", "ae"],
+      "examples": [
+        "Research the top 3 vector databases and produce a comparison memo",
+        "Compare LangChain, LlamaIndex, and Haystack"
+      ],
+      "version": 1
+    },
+    {
+      "id": "research.market",
+      "category": "research",
+      "description": "Open-ended market or competitor research grounded in shared world state.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "topic": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "swarm.run"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "roles": ["pm", "principal-eng", "exec"],
+      "examples": [
+        "What are competitors doing in the agentic IDE space?"
+      ],
+      "version": 1
+    },
+    {
+      "id": "plan.long-horizon",
+      "category": "plan",
+      "description": "Plan a multi-step, multi-month project — decision-heavy, long-horizon work routed to the Markovian engine.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "horizon": { "type": "string" },
+          "topic": { "type": "string" }
+        }
+      },
+      "capabilities": ["markovian.chain"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "roles": ["principal-eng", "architect", "pm"],
+      "examples": [
+        "Plan a 6-month migration of our analytics warehouse to Iceberg",
+        "Write out a step-by-step rollout plan for the new auth system"
+      ],
+      "version": 1
+    },
+    {
+      "id": "report.summarize",
+      "category": "report",
+      "description": "Pull and summarize a report, metric set, or document collection.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "period": { "type": "string" },
+          "subject": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "markovian.chain"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "roles": ["exec", "ae", "pm"],
+      "examples": [
+        "Pull the Q2 numbers",
+        "Summarize the Q2 board prep notes"
+      ],
+      "version": 1
+    },
+    {
+      "id": "calendar.create",
+      "category": "calendar",
+      "description": "Create a calendar event or reminder for the requesting user.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "when": { "type": "string" },
+          "title": { "type": "string" }
+        }
+      },
+      "capabilities": ["calendar.create"],
+      "riskClass": "low",
+      "surfaces": ["chat", "inbox"],
+      "roles": ["ae", "csm", "exec", "pm"],
+      "examples": [
+        "Schedule a check-in for next Tuesday",
+        "Put me a Friday review on the calendar"
+      ],
+      "version": 1
+    },
+    {
+      "id": "world.query",
+      "category": "world",
+      "description": "Direct read-only query of shared world-model state about an entity (account, contact, deal). Referenced by the multi-intent corpus for the lookup half of composed prompts.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "subject": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query"],
+      "riskClass": "low",
+      "surfaces": ["chat", "inbox", "api"],
+      "roles": ["*"],
+      "examples": [
+        "Summarize the Acme account"
+      ],
+      "version": 1
+    }
+  ]
+}

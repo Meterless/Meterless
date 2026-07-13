@@ -1,0 +1,3 @@
+{"id":"multi-001","prompt":"Pull the Q2 numbers and draft a board email","user":{"role":"exec"},"surface":"chat","expected":{"intents":["report.summarize","email.draft"]},"tags":["multi-intent","report+email"]}
+{"id":"multi-002","prompt":"Summarize the Acme account and schedule a check-in for next Tuesday","user":{"role":"ae"},"surface":"chat","expected":{"intents":["world.query","calendar.create"]},"tags":["multi-intent","query+schedule"]}
+{"id":"multi-003","prompt":"Find stuck deals, draft recovery emails, and put me a Friday review on the calendar","user":{"role":"ae"},"surface":"chat","expected":{"intents":["deal.recover","calendar.create"]},"tags":["multi-intent","three-step"]}

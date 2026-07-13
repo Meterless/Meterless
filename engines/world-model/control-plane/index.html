@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Model Control Plane</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f5f5f5;
+      --text-muted: rgba(245, 245, 245, 0.6);
+      --accent: #18E299;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    header h1 { font-size: 16px; font-weight: 500; }
+    .role-pill { font-size: 12px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-muted); }
+    main { display: grid; grid-template-columns: 220px 1fr; height: calc(100vh - 88px); }
+    nav { border-right: 1px solid var(--border); padding: 1rem 0.5rem; }
+    nav button { display: block; width: 100%; text-align: left; background: transparent; color: var(--text-muted); border: none; padding: 8px 12px; font-size: 14px; cursor: pointer; border-radius: 6px; font-family: inherit; }
+    nav button:hover { background: var(--surface); color: var(--text); }
+    nav button.active { background: var(--surface); color: var(--accent); }
+    section { padding: 1.5rem; overflow-y: auto; }
+    section h2 { font-size: 18px; font-weight: 500; margin-bottom: 0.5rem; }
+    section p.lede { color: var(--text-muted); margin-bottom: 1.5rem; }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+    .panel h3 { font-size: 14px; font-weight: 500; margin-bottom: 0.5rem; }
+    .panel pre { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: var(--text-muted); white-space: pre-wrap; }
+    .empty { color: var(--text-muted); font-style: italic; padding: 2rem; text-align: center; border: 1px dashed var(--border); border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>World Model — Control Plane</h1>
+    <span class="role-pill" id="role">Role: Admin</span>
+  </header>
+  <div style="background: rgba(24, 226, 153, 0.08); border-bottom: 1px solid var(--border); padding: 6px 1.5rem; font-size: 12px; color: var(--text-muted);">
+    Illustrative mock — hard-coded sample data, no live World Model behind it. For the version running the real reference implementation, open <a href="live.html" style="color: var(--accent);">live.html</a>. The panels demonstrate the operator contract in <code>docs/operator-control-plane.md</code>.
+  </div>
+  <main>
+    <nav>
+      <button class="active" data-panel="inspect">Inspect</button>
+      <button data-panel="merge">Merge</button>
+      <button data-panel="edit">Edit</button>
+      <button data-panel="rebuild">Rebuild</button>
+      <button data-panel="repair">Repair</button>
+      <button data-panel="audit">Audit log</button>
+    </nav>
+    <section id="content">
+      <!-- panels render here -->
+    </section>
+  </main>
+
+  <script type="module">
+    // In production this imports the real library:
+    // import { WorldModel } from '@meterless/world-model';
+    // For the demo we ship an in-memory mock so the page works standalone.
+    const world = createMockWorld();
+
+    const panels = {
+      inspect: () => `
+        <h2>Inspect</h2>
+        <p class="lede">Browse entities, contexts, and relationships. Click anything to see provenance and history.</p>
+        ${world.entities().map(e => `
+          <div class="panel">
+            <h3>${e.type}:${e.id}</h3>
+            <pre>${JSON.stringify(e.attrs, null, 2)}</pre>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Source: ${e.source.kind} · ${new Date(e.source.at).toLocaleString()}</p>
+          </div>
+        `).join('')}
+      `,
+      merge: () => `
+        <h2>Merge <span style="font-size:10px;letter-spacing:1px;color:#e2b418;border:1px solid rgba(226,180,24,0.4);border-radius:4px;padding:2px 6px;vertical-align:middle;margin-left:8px;">PLACEHOLDER</span></h2>
+        <p class="lede">Pick two entities. Review the diff. Commit a merge as a single alias event — reversible from the audit log.</p>
+        <div class="empty">No merge candidates queued. The resolver flags probable duplicates here.</div>
+      `,
+      edit: () => `
+        <h2>Edit <span style="font-size:10px;letter-spacing:1px;color:#e2b418;border:1px solid rgba(226,180,24,0.4);border-radius:4px;padding:2px 6px;vertical-align:middle;margin-left:8px;">PLACEHOLDER</span></h2>
+        <p class="lede">Correct a fact. The edit is a new event with operator provenance; the original fact is preserved and superseded.</p>
+        <div class="empty">Select an entity in Inspect, then choose Edit Fact.</div>
+      `,
+      rebuild: () => `
+        <h2>Rebuild <span style="font-size:10px;letter-spacing:1px;color:#e2b418;border:1px solid rgba(226,180,24,0.4);border-radius:4px;padding:2px 6px;vertical-align:middle;margin-left:8px;">PLACEHOLDER</span></h2>
+        <p class="lede">Wipe a derived view and re-project from the event log. Canonical store is untouched.</p>
+        <div class="panel">
+          <h3>Available views</h3>
+          <pre>graph · timeline · search · snapshot</pre>
+        </div>
+      `,
+      repair: () => `
+        <h2>Repair <span style="font-size:10px;letter-spacing:1px;color:#e2b418;border:1px solid rgba(226,180,24,0.4);border-radius:4px;padding:2px 6px;vertical-align:middle;margin-left:8px;">PLACEHOLDER</span></h2>
+        <p class="lede">Replay an ingest pipeline from a checkpoint. Bad events get superseded; the audit trail keeps both.</p>
+        <div class="empty">No active sources. Configure ingest pipelines to enable repair.</div>
+      `,
+      audit: () => `
+        <h2>Audit log</h2>
+        <p class="lede">Every state change is an event. Filter by entity, source, operator, kind, or time window.</p>
+        ${world.events().map(ev => `
+          <div class="panel">
+            <h3>${ev.kind} · ${ev.id}</h3>
+            <pre>${JSON.stringify(ev.payload, null, 2)}</pre>
+          </div>
+        `).join('')}
+      `,
+    };
+
+    const content = document.getElementById('content');
+    function render(name) {
+      content.innerHTML = panels[name]();
+      document.querySelectorAll('nav button').forEach(b => {
+        b.classList.toggle('active', b.dataset.panel === name);
+      });
+    }
+    document.querySelectorAll('nav button').forEach(b => {
+      b.addEventListener('click', () => render(b.dataset.panel));
+    });
+    render('inspect');
+
+    function createMockWorld() {
+      const evts = [];
+      const ents = [
+        { type: 'player', id: 'tommie-frazier-iii', attrs: { name: 'Tommie Frazier III', position: 'QB', tier: 'legendary' }, source: { kind: 'manual', at: Date.now() } },
+        { type: 'team', id: 'bengals', attrs: { name: 'Bengals' }, source: { kind: 'manual', at: Date.now() } },
+        { type: 'article', id: 'guardian-fed-rates', attrs: { title: 'Fed holds rates steady', publishedAt: '2026-05-17' }, source: { kind: 'rss', url: 'https://example.com', at: Date.now() } },
+      ];
+      ents.forEach((e, i) => evts.push({ id: `evt-${i+1}`, kind: 'upsertEntity', payload: e }));
+      return {
+        entities: () => ents,
+        events: () => evts,
+      };
+    }
+  </script>
+</body>
+</html>

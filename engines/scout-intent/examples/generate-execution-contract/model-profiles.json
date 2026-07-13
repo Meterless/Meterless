@@ -1,0 +1,37 @@
+{
+  "profiles": [
+    {
+      "id": "default-fast",
+      "provider": "openai",
+      "model": "gpt-4.1-nano",
+      "context": 128000,
+      "cost": { "in": 0.0001, "out": 0.0004 },
+      "latency": { "p95Ms": 800 },
+      "capabilities": ["text", "function-calling"],
+      "dataClasses": ["public"],
+      "fallbacks": ["local-capable"]
+    },
+    {
+      "id": "default-capable",
+      "provider": "anthropic",
+      "model": "claude-opus-4-7",
+      "context": 200000,
+      "cost": { "in": 0.003, "out": 0.015 },
+      "latency": { "p95Ms": 2200 },
+      "capabilities": ["text", "function-calling", "json-mode"],
+      "dataClasses": ["public", "internal"],
+      "fallbacks": ["local-capable"]
+    },
+    {
+      "id": "local-capable",
+      "provider": "webllm",
+      "model": "llama-3.1-8b-instruct",
+      "context": 32000,
+      "cost": { "in": 0, "out": 0 },
+      "latency": { "p95Ms": 4000 },
+      "capabilities": ["text", "json-mode"],
+      "dataClasses": ["public", "internal", "confidential", "restricted"]
+    }
+  ],
+  "defaultChain": "local-first"
+}

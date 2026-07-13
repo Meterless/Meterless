@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "intents": [
+    {
+      "id": "account.lookup",
+      "category": "account",
+      "description": "Quick read-only lookup of a single fact about an account — narrow context plan",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account": { "type": "string" },
+          "field": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "roles": ["ae", "csm", "sales-leader"],
+      "examples": [
+        "what's Acme's primary contact?",
+        "who owns the GlobeX account",
+        "when did we last talk to Initech"
+      ],
+      "version": 1
+    },
+    {
+      "id": "account.plan",
+      "category": "account",
+      "description": "Strategic account planning across deals, contacts, and history — wide context plan (maxTokens > 16000)",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account": { "type": "string" },
+          "horizon": { "type": "string" }
+        }
+      },
+      "capabilities": ["world.query", "markovian.chain"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "roles": ["ae", "sales-leader"],
+      "examples": [
+        "build a full account plan for Acme next quarter",
+        "draft the annual strategy for the GlobeX relationship",
+        "map everything we know about Initech into a plan"
+      ],
+      "version": 1
+    }
+  ]
+}

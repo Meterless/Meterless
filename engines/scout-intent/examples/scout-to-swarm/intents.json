@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "intents": [
+    {
+      "id": "research.comparison",
+      "category": "research",
+      "description": "Research a topic across multiple sources and produce a structured comparison",
+      "capabilities": ["swarm.run", "world.query"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "examples": [
+        "research the top 3 vector databases and compare them",
+        "give me a comparison memo on managed Kafka providers",
+        "compare LangChain vs LlamaIndex vs Haystack"
+      ]
+    }
+  ]
+}

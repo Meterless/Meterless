@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "intents": [
+    {
+      "id": "plan.long-horizon",
+      "category": "plan",
+      "description": "Plan a multi-step, multi-month engineering or migration project",
+      "capabilities": ["markovian.chain"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "examples": [
+        "plan a 6-month migration to Iceberg",
+        "step by step quarterly roadmap for migrating the data lake",
+        "write out a long migration plan with checkpoints"
+      ]
+    }
+  ]
+}

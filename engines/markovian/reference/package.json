@@ -1,0 +1,16 @@
+{
+  "name": "@meterless/markovian-reference",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Runnable TypeScript reference implementation of the Markovian engine contract (see ../AGENTS.md). Zero runtime dependencies.",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "measured-run": "tsx scripts/measured-run.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "vitest": "^3.0.0"
+  }
+}

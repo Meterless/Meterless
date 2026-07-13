@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "intents": [
+    {
+      "id": "deal.recover",
+      "category": "deal",
+      "description": "Draft a recovery action for stuck deals",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer", "minimum": 1, "maximum": 20 },
+          "channel": { "enum": ["email", "call", "slack"] }
+        }
+      },
+      "capabilities": ["world.query", "swarm.run", "email.draft"],
+      "riskClass": "medium",
+      "surfaces": ["chat", "inbox"],
+      "examples": [
+        "find stuck deals and draft recovery emails",
+        "top 5 at-risk accounts and what to send them",
+        "the Acme deal hasn't moved in 3 weeks — fix it"
+      ]
+    },
+    {
+      "id": "report.summarize",
+      "category": "report",
+      "description": "Summarize a report or document set",
+      "capabilities": ["world.query", "markovian.chain"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "examples": [
+        "summarize the Q2 board prep notes",
+        "give me the highlights from yesterday's exec sync",
+        "tldr on the security incident report"
+      ]
+    },
+    {
+      "id": "weather.lookup",
+      "category": "weather",
+      "description": "Get current or forecasted weather",
+      "capabilities": ["weather.fetch"],
+      "riskClass": "low",
+      "surfaces": ["chat"],
+      "examples": [
+        "what's the weather",
+        "is it raining tomorrow",
+        "weather in San Francisco this weekend"
+      ]
+    }
+  ]
+}

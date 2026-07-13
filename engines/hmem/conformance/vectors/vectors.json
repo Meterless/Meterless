@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "engine": "hmem",
+  "clock": 1750000000000,
+  "sections": {
+    "record-validation": [
+      { "id": "rv-001", "description": "a record with no source is rejected by construction", "input": { "content": "no source here", "source": "" }, "expect": "reject" },
+      { "id": "rv-002", "description": "a record with a source is accepted", "input": { "content": "valid record", "source": "test" }, "expect": "accept" }
+    ],
+    "feedback-deltas": [
+      { "id": "fd-001", "description": "helpful adds exactly +0.05 confidence and +1 accessCount", "start": 0.7, "kind": "helpful", "expectConfidence": 0.75, "expectAccessDelta": 1 },
+      { "id": "fd-002", "description": "not_helpful subtracts exactly 0.03", "start": 0.7, "kind": "not_helpful", "expectConfidence": 0.67, "expectAccessDelta": 0 },
+      { "id": "fd-003", "description": "wrong subtracts exactly 0.20 and adds the review tag", "start": 0.7, "kind": "wrong", "expectConfidence": 0.5, "expectAccessDelta": 0, "expectTag": "review" },
+      { "id": "fd-004", "description": "confidence clamps at 0 (wrong at 0.1)", "start": 0.1, "kind": "wrong", "expectConfidence": 0 },
+      { "id": "fd-005", "description": "confidence clamps at 1 (helpful at 0.98)", "start": 0.98, "kind": "helpful", "expectConfidence": 1 }
+    ],
+    "ranking-order": [
+      {
+        "id": "ro-001",
+        "description": "superseded penalty dominates: a superseded record ranks below a fresh one with identical content relevance",
+        "records": [
+          { "key": "fresh", "content": "we deploy the api with docker on mondays", "confidence": 0.9, "layer": "long_term" },
+          { "key": "old", "content": "we deploy the api with docker on fridays", "confidence": 0.9, "layer": "long_term", "supersededByKey": "fresh" }
+        ],
+        "query": "when do we deploy the api with docker",
+        "expectOrder": ["fresh", "old"]
+      },
+      {
+        "id": "ro-002",
+        "description": "confidence multiplies the whole score: identical records rank by confidence",
+        "records": [
+          { "key": "high", "content": "the deploy window is monday morning", "confidence": 0.9, "layer": "working" },
+          { "key": "low", "content": "the deploy window is monday morning", "confidence": 0.4, "layer": "working" }
+        ],
+        "query": "deploy window",
+        "expectOrder": ["high", "low"]
+      }
+    ],
+    "sleep-guardrails": [
+      {
+        "id": "sg-001",
+        "description": "old low-access plain record archives; dream-derived record with identical age does not",
+        "records": [
+          { "key": "plain", "content": "random one-off note about parking near the office", "source": "chat" },
+          { "key": "derived", "content": "synthesized insight about the quarterly roadmap", "source": "dreaming", "derivedFrom": ["mem-x"] }
+        ],
+        "ageDays": 40,
+        "expectArchived": ["plain"],
+        "expectProtected": ["derived"]
+      }
+    ],
+    "conflict-gate": [
+      { "id": "cg-001", "description": "auto-resolve marks the loser supersededBy and deletes nothing", "a": { "content": "always enable telemetry uploads for diagnostics", "confidence": 0.95 }, "b": { "content": "never enable telemetry uploads for diagnostics", "confidence": 0.2 }, "expect": "loser-superseded-both-kept" }
+    ],
+    "ledger-audit": [
+      { "id": "la-001", "description": "create then feedback reconstructs: actions in order, previous and new confidence present", "start": 0.7, "kind": "wrong", "expectActions": ["create", "feedback"], "expectPrev": 0.7, "expectNew": 0.5 }
+    ],
+    "dream-boundary": [
+      { "id": "db-001", "description": "dream proposals never materialize before approval; approval creates a long_term record with lineage", "records": [ { "content": "prefer short bullet answers", "type": "preference" }, { "content": "prefer python for scripting", "type": "preference" } ] }
+    ]
+  }
+}

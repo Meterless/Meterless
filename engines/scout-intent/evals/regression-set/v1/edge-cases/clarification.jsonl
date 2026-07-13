@@ -1,0 +1,4 @@
+{"id":"edge-amb-001","prompt":"Handle the Acme situation","user":{"role":"ae"},"surface":"chat","expected":{"clarification":true,"reason":"underspecified"},"tags":["edge","ambiguous"]}
+{"id":"edge-amb-002","prompt":"Do the thing we talked about yesterday","user":{"role":"ae"},"surface":"chat","expected":{"clarification":true,"reason":"reference-unresolved"},"tags":["edge","reference"]}
+{"id":"edge-twoway-001","prompt":"Show me the Acme deal","user":{"role":"ae"},"surface":"chat","expected":{"intent":"deal.query","clarification":false},"tags":["edge","disambiguates-cleanly"]}
+{"id":"edge-overlap-001","prompt":"Email Maya about the renewal","user":{"role":"ae"},"surface":"chat","expected":{"intent":"email.draft","clarification":false},"tags":["edge","entity-bound"]}

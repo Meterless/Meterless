@@ -1,0 +1,39 @@
+{
+  "name": "@meterless/scout",
+  "version": "0.1.0",
+  "description": "Choose the right move before you act. Intent sensing, risk checks, tool routing, and signed execution contracts for AI systems. This folder is the implementation spec; the package is not published. Verify implementations with the eval harness (npm run evals).",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "evals": "tsx evals/runner/index.ts all",
+    "evals:intent": "tsx evals/runner/index.ts intent",
+    "evals:injection": "tsx evals/runner/index.ts injection",
+    "evals:multi-intent": "tsx evals/runner/index.ts multi-intent",
+    "evals:report": "tsx evals/runner/index.ts all --report",
+    "evals:add": "tsx evals/runner/add.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "yaml": "^2.5.0"
+  },
+  "keywords": [
+    "intent-classification",
+    "agent-routing",
+    "prompt-injection",
+    "policy-engine",
+    "execution-contract",
+    "meterless",
+    "ai-infrastructure",
+    "local-first"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meterless/meterless/tree/main/engines/scout-intent"
+  },
+  "homepage": "https://www.meterless.ai",
+  "bugs": "https://github.com/meterless/meterless/tree/main/engines/scout-intent/issues",
+  "engines": {
+    "node": ">=18"
+  }
+}

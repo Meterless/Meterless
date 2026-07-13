@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markovian Token Economics</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f5f5f5;
+      --text-muted: rgba(245, 245, 245, 0.6);
+      --accent: #18E299;
+      --naive: #ff6b6b;
+      --markovian: #18E299;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+    p.lede { color: var(--text-muted); margin-bottom: 2rem; }
+    .layout { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; max-width: 1100px; }
+    .controls { display: flex; flex-direction: column; gap: 1.25rem; }
+    .control label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .control input[type="range"] { width: 100%; }
+    .control .value { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; }
+    .chart-area { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+    .legend { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: 13px; }
+    .legend .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+    canvas { width: 100%; height: 360px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 1.5rem; }
+    .stat { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+    .stat .label { font-size: 12px; color: var(--text-muted); }
+    .stat .value { font-size: 20px; font-weight: 500; margin-top: 4px; font-family: 'Geist Mono', ui-monospace, monospace; }
+    .stat .delta { font-size: 12px; color: var(--accent); margin-top: 2px; }
+    .footer { margin-top: 1.5rem; color: var(--text-muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Markovian token economics</h1>
+  <p class="lede">Adjust the sliders. Watch the naive curve grow quadratically while Markovian stays flat.</p>
+
+  <div class="layout">
+    <div class="controls">
+      <div class="control">
+        <label>Steps (N)</label>
+        <input type="range" id="N" min="3" max="100" value="20" />
+        <div class="value" id="N-val">20</div>
+      </div>
+      <div class="control">
+        <label>Per-step output (O)</label>
+        <input type="range" id="O" min="200" max="3000" step="100" value="1200" />
+        <div class="value" id="O-val">1200 tokens</div>
+      </div>
+      <div class="control">
+        <label>Carryover budget (C)</label>
+        <input type="range" id="C" min="100" max="3000" step="50" value="800" />
+        <div class="value" id="C-val">800 tokens</div>
+      </div>
+      <div class="control">
+        <label>Framing (F)</label>
+        <input type="range" id="F" min="100" max="2000" step="50" value="400" />
+        <div class="value" id="F-val">400 tokens</div>
+      </div>
+      <div class="control">
+        <label>Goal (G)</label>
+        <input type="range" id="G" min="50" max="1000" step="50" value="200" />
+        <div class="value" id="G-val">200 tokens</div>
+      </div>
+      <div class="control">
+        <label>Step input (S)</label>
+        <input type="range" id="S" min="100" max="2000" step="50" value="300" />
+        <div class="value" id="S-val">300 tokens</div>
+      </div>
+      <div class="control">
+        <label>Cost per 1M input tokens ($)</label>
+        <input type="range" id="rate" min="0.1" max="20" step="0.1" value="3.0" />
+        <div class="value" id="rate-val">$3.00</div>
+      </div>
+    </div>
+
+    <div class="chart-area">
+      <div class="legend">
+        <span><span class="swatch" style="background: var(--naive)"></span>Naive (append history)</span>
+        <span><span class="swatch" style="background: var(--markovian)"></span>Markovian (bounded carryover)</span>
+      </div>
+      <canvas id="chart"></canvas>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="label">Total tokens · naive</div>
+          <div class="value" id="naive-total">—</div>
+          <div class="delta" id="naive-cost">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Total tokens · Markovian</div>
+          <div class="value" id="mark-total">—</div>
+          <div class="delta" id="mark-cost">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Savings</div>
+          <div class="value" id="savings">—</div>
+          <div class="delta" id="savings-pct">—</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Markovian wins from chunk <span id="crossover">3</span> onwards. See
+        <a href="../docs/efficiency-model.md" style="color: var(--accent);">efficiency-model.md</a>
+        for the derivation.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ids = ["N", "O", "C", "F", "G", "S", "rate"];
+    const inputs = {};
+    ids.forEach((id) => { inputs[id] = document.getElementById(id); });
+
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.clientWidth * dpr;
+      canvas.height = canvas.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", () => { resize(); render(); });
+
+    function fmt(n) { return n.toLocaleString(undefined, { maximumFractionDigits: 0 }); }
+    function fmtMoney(n) {
+      if (n < 0.01) return `<$0.01`;
+      if (n < 1) return `$${n.toFixed(2)}`;
+      return `$${n.toFixed(2)}`;
+    }
+
+    function compute() {
+      const N = +inputs.N.value;
+      const O = +inputs.O.value;
+      const C = +inputs.C.value;
+      const F = +inputs.F.value;
+      const G = +inputs.G.value;
+      const S = +inputs.S.value;
+      const rate = +inputs.rate.value;
+
+      const naiveSeries = [];
+      const markSeries = [];
+      let naiveTotal = 0, markTotal = 0;
+      for (let i = 0; i < N; i++) {
+        // Matches docs/efficiency-model.md: naive_in(i) = F+G+(i-1)O+S (1-based),
+        // markovian_in = F+G+C+S constant per step.
+        const naiveIn = F + G + i * O + S;
+        const markIn = F + G + C + S;
+        naiveSeries.push(naiveIn);
+        markSeries.push(markIn);
+        naiveTotal += naiveIn;
+        markTotal += markIn;
+      }
+      const crossover = Math.ceil(1 + (2 * C) / O);
+
+      return { N, O, C, F, G, S, rate, naiveSeries, markSeries, naiveTotal, markTotal, crossover };
+    }
+
+    function render() {
+      const d = compute();
+
+      // labels
+      inputs.N.nextElementSibling; // unused
+      document.getElementById("N-val").textContent = d.N;
+      document.getElementById("O-val").textContent = `${d.O} tokens`;
+      document.getElementById("C-val").textContent = `${d.C} tokens`;
+      document.getElementById("F-val").textContent = `${d.F} tokens`;
+      document.getElementById("G-val").textContent = `${d.G} tokens`;
+      document.getElementById("S-val").textContent = `${d.S} tokens`;
+      document.getElementById("rate-val").textContent = `$${d.rate.toFixed(2)}`;
+
+      document.getElementById("naive-total").textContent = fmt(d.naiveTotal);
+      document.getElementById("mark-total").textContent = fmt(d.markTotal);
+      document.getElementById("savings").textContent = fmt(d.naiveTotal - d.markTotal);
+      document.getElementById("savings-pct").textContent =
+        d.naiveTotal > 0 ? `${(((d.naiveTotal - d.markTotal) / d.naiveTotal) * 100).toFixed(1)}% saved` : "—";
+      document.getElementById("naive-cost").textContent = fmtMoney((d.naiveTotal / 1_000_000) * d.rate);
+      document.getElementById("mark-cost").textContent = fmtMoney((d.markTotal / 1_000_000) * d.rate);
+      document.getElementById("crossover").textContent = d.crossover;
+
+      // Chart
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      const pad = { l: 60, r: 20, t: 20, b: 40 };
+      const plotW = w - pad.l - pad.r;
+      const plotH = h - pad.t - pad.b;
+      const maxY = Math.max(...d.naiveSeries, ...d.markSeries) * 1.1;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Axes
+      ctx.strokeStyle = "rgba(255,255,255,0.15)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, pad.t);
+      ctx.lineTo(pad.l, h - pad.b);
+      ctx.lineTo(w - pad.r, h - pad.b);
+      ctx.stroke();
+
+      // Y labels
+      ctx.fillStyle = "rgba(245,245,245,0.5)";
+      ctx.font = "11px 'Geist Mono', ui-monospace, monospace";
+      ctx.textAlign = "right";
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.t + (plotH / 4) * i;
+        const val = Math.round(maxY * (1 - i / 4));
+        ctx.fillText(fmt(val), pad.l - 8, y + 4);
+        ctx.strokeStyle = "rgba(255,255,255,0.04)";
+        ctx.beginPath();
+        ctx.moveTo(pad.l, y);
+        ctx.lineTo(w - pad.r, y);
+        ctx.stroke();
+      }
+
+      // X labels
+      ctx.textAlign = "center";
+      for (let i = 0; i <= 4; i++) {
+        const x = pad.l + (plotW / 4) * i;
+        const step = Math.round((d.N - 1) * (i / 4)) + 1;
+        ctx.fillText(`step ${step}`, x, h - pad.b + 18);
+      }
+
+      // Draw series
+      function plot(series, color) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let i = 0; i < series.length; i++) {
+          const x = pad.l + (plotW * i) / (series.length - 1 || 1);
+          const y = pad.t + plotH * (1 - series[i] / maxY);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      plot(d.naiveSeries, getComputedStyle(document.documentElement).getPropertyValue("--naive").trim());
+      plot(d.markSeries, getComputedStyle(document.documentElement).getPropertyValue("--markovian").trim());
+    }
+
+    ids.forEach((id) => inputs[id].addEventListener("input", render));
+    resize();
+    render();
+  </script>
+</body>
+</html>

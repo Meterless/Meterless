@@ -1,0 +1,15 @@
+{
+  "name": "@meterless/hmem-reference",
+  "version": "0.1.0",
+  "description": "Minimal runnable reference implementation of the H-MEM spec (AGENTS.md). Deterministic, zero runtime dependencies, not a production library.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "vitest": "^2.1.0"
+  }
+}
