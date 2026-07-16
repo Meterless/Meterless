@@ -73,6 +73,17 @@ Your agent is done when the conformance suite passes: `HMEM_IMPL=<your build> np
 
 ## Engines
 
+<table>
+  <tr>
+    <td><a href="engines/hmem/"><img src="engines/hmem/images/H-MEM_Hero_Image.png" alt="H-MEM — memory that remembers, learns, and evolves: a three-tier memory pyramid (short-term, working, long-term) that captures from every interaction, consolidates into lasting knowledge, dreams, sleeps, and audits with a trust ledger" width="410" /></a></td>
+    <td><a href="engines/world-model/"><img src="engines/world-model/images/World_Model_Hero_Image.png" alt="World Model — one shared model of your world: documents, conversations, signals, and actions unified into a living graph of entities, contexts, and relationships that powers search, timeline, retrieval, and agents" width="410" /></a></td>
+  </tr>
+  <tr>
+    <td><a href="engines/markovian/"><img src="engines/markovian/images/Markovian_Engine_Hero_Image.png" alt="Markovian Engine — think in steps, win at scale: complex work broken into bounded chunks with safe carryover between steps, O(1) context per step, and drastically fewer tokens than retained-history runs" width="410" /></a></td>
+    <td><a href="engines/scout-intent/"><img src="engines/scout-intent/images/Scout_Intent_Hero_Image.png" alt="Scout Intent — sense intent early: see what the user is trying to do before the model spins up by detecting intent from raw input, capturing entities and signals, and spotting ambiguity" width="410" /></a></td>
+  </tr>
+</table>
+
 | Engine | Role | Status | Verify |
 |---|---|---|---|
 | [H-MEM](engines/hmem/) | Hierarchical memory and durable context. A knowledge graph that mines, retrieves, dreams, and audits. | Spec + runnable reference | [conformance](engines/hmem/conformance/) |
