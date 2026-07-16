@@ -1,0 +1,113 @@
+<svg viewBox="0 0 960 500" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>The Meterless architecture: a request flows from user event through Scout Intent, H-MEM and World Model, Markovian or Swarm, the Runtime Quality Layer, and the Relay, Gaia, and Swarms product surfaces to verified output — with memory written back</title>
+
+  <rect x="0.5" y="0.5" width="959" height="499" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="44" font-size="20" font-weight="700" fill="#171310">One architecture. Every surface runs the same flow.</text>
+
+  <!-- spine -->
+  <g stroke="#D9CFC0" stroke-width="1.5">
+    <line x1="480" y1="100" x2="480" y2="122"/>
+    <line x1="480" y1="164" x2="480" y2="186"/>
+    <line x1="480" y1="228" x2="480" y2="250"/>
+    <line x1="480" y1="292" x2="480" y2="314"/>
+    <line x1="480" y1="352" x2="480" y2="374"/>
+    <line x1="480" y1="416" x2="480" y2="438"/>
+  </g>
+
+  <!-- memory write-back path -->
+  <path d="M318 459 C150 448 130 240 318 209" fill="none" stroke="#E8590C" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"/>
+  <text x="118" y="330" font-size="10.5" fill="#B05612" transform="rotate(-83 128 330)">memory writes back</text>
+
+  <!-- layer halos -->
+  <g>
+    <rect x="314" y="118" width="332" height="50" rx="12" fill="#2B8A3E" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.25;0;0" keyTimes="0;0.1;0.16;0.24;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="314" y="182" width="332" height="50" rx="12" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.22;0;0" keyTimes="0;0.22;0.28;0.36;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="314" y="246" width="332" height="50" rx="12" fill="#E03131" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.22;0;0" keyTimes="0;0.34;0.40;0.48;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="314" y="310" width="332" height="46" rx="12" fill="#0FA97A" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.20;0;0" keyTimes="0;0.45;0.51;0.59;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="314" y="370" width="332" height="50" rx="12" fill="#7C4DE0" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.22;0;0" keyTimes="0;0.56;0.62;0.70;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="314" y="434" width="332" height="46" rx="12" fill="#18E299" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.30;0;0" keyTimes="0;0.66;0.72;0.80;1" dur="8s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- 1 user/event -->
+  <rect x="380" y="60" width="200" height="40" rx="10" fill="#171310"/>
+  <text x="480" y="85" font-size="13.5" font-weight="600" fill="#FBF7F0" text-anchor="middle">User / Event</text>
+
+  <!-- 2 scout -->
+  <rect x="320" y="122" width="320" height="42" rx="10" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.6"/>
+  <text x="480" y="148" font-size="14" font-weight="700" fill="#1E6B34" text-anchor="middle">Scout Intent</text>
+  <text x="668" y="141" font-size="11" fill="#756D60">what does the user want?</text>
+  <text x="668" y="155" font-size="11" fill="#756D60">which agent or workflow activates?</text>
+
+  <!-- 3 hmem + world model -->
+  <rect x="320" y="186" width="153" height="42" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.6"/>
+  <text x="396" y="212" font-size="13.5" font-weight="700" fill="#C74E0B" text-anchor="middle">H-MEM</text>
+  <rect x="487" y="186" width="153" height="42" rx="10" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.6"/>
+  <text x="563" y="212" font-size="13.5" font-weight="700" fill="#3049B5" text-anchor="middle">World Model</text>
+  <text x="668" y="205" font-size="11" fill="#756D60">what do we durably know?</text>
+  <text x="668" y="219" font-size="11" fill="#756D60">what is the current state?</text>
+
+  <!-- 4 markovian / swarm -->
+  <rect x="320" y="250" width="153" height="42" rx="10" fill="#FFFFFF" stroke="#E03131" stroke-width="1.6"/>
+  <text x="396" y="276" font-size="13.5" font-weight="700" fill="#C22525" text-anchor="middle">Markovian</text>
+  <rect x="487" y="250" width="153" height="42" rx="10" fill="#FFFFFF" stroke="#7C4DE0" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="563" y="269" font-size="13" font-weight="700" fill="#6A3FC7" text-anchor="middle">Swarm</text>
+  <text x="563" y="284" font-size="9.5" fill="#9A8BC4" text-anchor="middle">drops Aug 2026</text>
+  <text x="668" y="269" font-size="11" fill="#756D60">compressed reasoning, or</text>
+  <text x="668" y="283" font-size="11" fill="#756D60">divergent multi-agent generation</text>
+
+  <!-- 5 runtime quality -->
+  <rect x="320" y="314" width="320" height="38" rx="10" fill="#FFFFFF" stroke="#0FA97A" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="480" y="333" font-size="13" font-weight="700" fill="#0B8560" text-anchor="middle">Runtime Quality Layer</text>
+  <text x="480" y="346" font-size="9.5" fill="#7DBFA9" text-anchor="middle">drops Q4 2026</text>
+  <text x="668" y="330" font-size="11" fill="#756D60">quality, cost, and</text>
+  <text x="668" y="344" font-size="11" fill="#756D60">latency routing</text>
+
+  <!-- 6 product surfaces -->
+  <rect x="320" y="374" width="320" height="42" rx="10" fill="#FFFFFF" stroke="#7C4DE0" stroke-width="1.6"/>
+  <g font-size="12.5" font-weight="700" fill="#6A3FC7" text-anchor="middle">
+    <text x="376" y="400">Relay</text>
+    <text x="480" y="400">Gaia</text>
+    <text x="583" y="400">Swarms</text>
+  </g>
+  <g stroke="#E4DBF6" stroke-width="1"><line x1="427" y1="382" x2="427" y2="408"/><line x1="532" y1="382" x2="532" y2="408"/></g>
+  <text x="668" y="393" font-size="11" fill="#756D60">execution, interface, and</text>
+  <text x="668" y="407" font-size="11" fill="#756D60">output surfaces</text>
+
+  <!-- 7 output -->
+  <rect x="320" y="438" width="320" height="38" rx="10" fill="#0FA97A"/>
+  <text x="480" y="462" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Verified Output + Updated Memory &#10003;</text>
+
+  <!-- descending request pulse -->
+  <circle r="8" fill="#18E299" opacity="0">
+    <set attributeName="opacity" to="0.25" begin="0s"/>
+    <animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.72;1"
+      path="M480 78 L480 457"/>
+  </circle>
+  <circle r="4.5" fill="#0FA97A" opacity="0">
+    <set attributeName="opacity" to="1" begin="0s"/>
+    <animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.72;1"
+      path="M480 78 L480 457"/>
+    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.72;0.74;0.98;1" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <!-- memory write-back pulse -->
+  <circle r="4.5" fill="#E8590C" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.74;0.76;0.93;0.95;1" dur="8s" repeatCount="indefinite"/>
+    <animateMotion dur="8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.74;0.95;1"
+      path="M318 459 C150 448 130 240 318 209"/>
+  </circle>
+
+  <text x="40" y="484" font-size="11" fill="#9A9284">Solid boxes ship today as specs. Dashed boxes are future engine drops &#8212; see the roadmap.</text>
+</svg>

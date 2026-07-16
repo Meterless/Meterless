@@ -1,0 +1,90 @@
+<svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Gaia: H-MEM, World Model, and Markovian feed the personal agent workspace, and remembered context carries across sessions without the user managing it</title>
+
+  <rect x="0.5" y="0.5" width="959" height="299" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="46" font-size="20" font-weight="700" fill="#171310">Remembers your context. Understands your work.</text>
+
+  <!-- engine chips -->
+  <g font-size="12" font-weight="700">
+    <rect x="40" y="78" width="210" height="44" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/>
+    <text x="56" y="97" fill="#C74E0B">H-MEM</text>
+    <text x="56" y="113" font-size="10" font-weight="400" fill="#756D60">remembers across sessions</text>
+
+    <rect x="40" y="134" width="210" height="44" rx="10" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.4"/>
+    <text x="56" y="153" fill="#3049B5">World Model</text>
+    <text x="56" y="169" font-size="10" font-weight="400" fill="#756D60">projects &#183; tasks &#183; environment</text>
+
+    <rect x="40" y="190" width="210" height="44" rx="10" fill="#FFFFFF" stroke="#E03131" stroke-width="1.4"/>
+    <text x="56" y="209" fill="#C22525">Markovian</text>
+    <text x="56" y="225" font-size="10" font-weight="400" fill="#756D60">long-horizon chunked reasoning</text>
+
+    <rect x="40" y="246" width="210" height="34" rx="10" fill="#FFFFFF" stroke="#7C4DE0" stroke-width="1.2" stroke-dasharray="5 4"/>
+    <text x="56" y="267" font-size="11" fill="#6A3FC7">Swarm mode &#183; <tspan font-weight="400" fill="#9A8BC4">engine drops Aug 2026</tspan></text>
+  </g>
+
+  <!-- flows into gaia -->
+  <g stroke="#D9CFC0" stroke-width="1.5" fill="none">
+    <path d="M250 100 C300 100 310 150 360 156"/>
+    <path d="M250 156 L360 156"/>
+    <path d="M250 212 C300 212 310 162 360 156"/>
+  </g>
+  <g fill="#8B5CF6">
+    <circle r="4" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.06;0.2;0.22;1" dur="7s" repeatCount="indefinite"/>
+      <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.04;0.22;1" path="M250 100 C300 100 310 150 360 156"/>
+    </circle>
+    <circle r="4" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.16;0.18;0.32;0.34;1" dur="7s" repeatCount="indefinite"/>
+      <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.16;0.34;1" path="M250 156 L360 156"/>
+    </circle>
+    <circle r="4" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.28;0.3;0.44;0.46;1" dur="7s" repeatCount="indefinite"/>
+      <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.28;0.46;1" path="M250 212 C300 212 310 162 360 156"/>
+    </circle>
+  </g>
+
+  <!-- gaia core -->
+  <rect x="356" y="106" width="212" height="100" rx="14" fill="#8B5CF6" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.18;0.06;0.18;0.06" keyTimes="0;0.44;0.5;0.65;0.8;1" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="362" y="112" width="200" height="88" rx="12" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1.8"/>
+  <text x="462" y="147" font-size="17" font-weight="800" fill="#6A3FC7" text-anchor="middle">GAIA</text>
+  <text x="462" y="167" font-size="11" fill="#756D60" text-anchor="middle">the personal agent workspace</text>
+  <text x="462" y="186" font-size="10" fill="#9A9284" text-anchor="middle">local-first &#183; your data stays home</text>
+
+  <!-- sessions strip -->
+  <g>
+    <rect x="640" y="92" width="128" height="72" rx="10" fill="#FFFFFF" stroke="#E7DFD3"/>
+    <text x="704" y="114" font-size="11" font-weight="700" fill="#3E3831" text-anchor="middle">Session &#183; Monday</text>
+    <text x="704" y="132" font-size="10" fill="#756D60" text-anchor="middle">&#8220;we deploy on</text>
+    <text x="704" y="145" font-size="10" fill="#756D60" text-anchor="middle">green CI only&#8221;</text>
+    <circle cx="704" cy="154" r="3.5" fill="#E8590C"/>
+
+    <rect x="800" y="92" width="128" height="72" rx="10" fill="#FFFFFF" stroke="#E7DFD3"/>
+    <text x="864" y="114" font-size="11" font-weight="700" fill="#3E3831" text-anchor="middle">Session &#183; Friday</text>
+    <text x="864" y="132" font-size="10" fill="#756D60" text-anchor="middle">still knows it &#8212;</text>
+    <text x="864" y="145" font-size="10" fill="#756D60" text-anchor="middle">no re-explaining</text>
+    <circle cx="864" cy="154" r="3.5" fill="#E8590C" opacity="0.25">
+      <animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0;0.72;0.76;1" dur="7s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- memory carrying across -->
+    <path d="M704 158 C704 190 864 190 864 158" fill="none" stroke="#E8590C" stroke-width="1.4" stroke-dasharray="4 4" opacity="0.5"/>
+    <circle r="4" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.56;0.58;0.72;0.74;1" dur="7s" repeatCount="indefinite"/>
+      <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.56;0.74;1" path="M704 158 C704 190 864 190 864 158"/>
+    </circle>
+    <text x="784" y="205" font-size="10.5" fill="#B05612" text-anchor="middle">memory carries across sessions</text>
+  </g>
+
+  <!-- gaia -> sessions -->
+  <path d="M562 156 C600 156 606 128 636 124" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+  <circle r="4" fill="#8B5CF6" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.46;0.48;0.54;0.56;1" dur="7s" repeatCount="indefinite"/>
+    <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.46;0.56;1" path="M562 156 C600 156 606 128 636 124"/>
+  </circle>
+
+  <text x="356" y="262" font-size="11.5" fill="#756D60">Gaia coordinates the engines so you never manage memory, state, or context by hand.</text>
+  <text x="356" y="282" font-size="10.5" fill="#9A9284">Same engines, same architecture as Relay and Swarms &#8212; proven three ways.</text>
+</svg>

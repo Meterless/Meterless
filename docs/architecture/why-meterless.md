@@ -13,6 +13,8 @@ Most agent stacks today:
 - Cannot touch the user's actual computer. No execution layer.
 - Route every token through expensive cloud inference. No runtime quality or cost control.
 
+<img src="../images/problem-map.svg" alt="Animated: six agent failure modes mapped to the layer that fixes each — H-MEM, World Model, Markovian, Swarms, Relay, and Runtime" width="820" />
+
 ## The Meterless answer
 
 One architecture, validated through three product surfaces. See [stack-overview.md](stack-overview.md) for the full flow.

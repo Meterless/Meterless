@@ -1,0 +1,82 @@
+<svg viewBox="0 0 960 240" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Meterless engine release timeline: H-MEM, World Model, Markovian, and Scout Intent are shipped; swarm-orchestration targets August 2026, runtime targets Q4 2026, fulcrum is planned</title>
+
+  <rect x="0.5" y="0.5" width="959" height="239" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="46" font-size="20" font-weight="700" fill="#171310">Engines drop monthly as tagged releases.</text>
+
+  <!-- timeline -->
+  <line x1="60" y1="140" x2="900" y2="140" stroke="#D9CFC0" stroke-width="2"/>
+  <path d="M893 134 L903 140 L893 146" fill="none" stroke="#D9CFC0" stroke-width="2"/>
+
+  <!-- shipped region -->
+  <rect x="72" y="84" width="450" height="20" rx="10" fill="#E6F6EC"/>
+  <text x="297" y="98" font-size="10.5" font-weight="700" fill="#1E6B34" letter-spacing="1" text-anchor="middle">SHIPPED &#8212; SPECS IN THIS REPO</text>
+
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <circle cx="120" cy="140" r="7" fill="#E8590C"/>
+    <text x="120" y="168" fill="#C74E0B">H-MEM</text>
+    <text x="120" y="184" font-size="10" font-weight="400" fill="#9A9284">&#10003; spec + reference</text>
+
+    <circle cx="235" cy="140" r="7" fill="#3B5BDB"/>
+    <text x="235" y="168" fill="#3049B5">World Model</text>
+    <text x="235" y="184" font-size="10" font-weight="400" fill="#9A9284">&#10003; spec + reference</text>
+
+    <circle cx="350" cy="140" r="7" fill="#E03131"/>
+    <text x="350" y="168" fill="#C22525">Markovian</text>
+    <text x="350" y="184" font-size="10" font-weight="400" fill="#9A9284">&#10003; spec + reference</text>
+
+    <circle cx="465" cy="140" r="7" fill="#2B8A3E"/>
+    <text x="465" y="168" fill="#1E6B34">Scout Intent</text>
+    <text x="465" y="184" font-size="10" font-weight="400" fill="#9A9284">&#10003; spec + eval harness</text>
+
+    <!-- future -->
+    <circle cx="640" cy="140" r="7" fill="#FBF7F0" stroke="#7C4DE0" stroke-width="2" stroke-dasharray="3 3"/>
+    <text x="640" y="168" fill="#6A3FC7">swarm-orchestration</text>
+    <text x="640" y="184" font-size="10" font-weight="400" fill="#9A9284">target: August 2026</text>
+
+    <circle cx="770" cy="140" r="7" fill="#FBF7F0" stroke="#0FA97A" stroke-width="2" stroke-dasharray="3 3"/>
+    <text x="770" y="168" fill="#0B8560">runtime</text>
+    <text x="770" y="184" font-size="10" font-weight="400" fill="#9A9284">target: Q4 2026</text>
+
+    <circle cx="860" cy="140" r="7" fill="#FBF7F0" stroke="#9A9284" stroke-width="2" stroke-dasharray="3 3"/>
+    <text x="860" y="168" fill="#756D60">fulcrum</text>
+    <text x="860" y="184" font-size="10" font-weight="400" fill="#9A9284">planned</text>
+  </g>
+
+  <!-- node pings -->
+  <g fill="none" stroke-width="2">
+    <circle cx="120" cy="140" r="7" stroke="#E8590C" opacity="0">
+      <animate attributeName="r" values="7;16" keyTimes="0;1" dur="8s" begin="0.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0;0" keyTimes="0;0.12;1" dur="8s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="235" cy="140" r="7" stroke="#3B5BDB" opacity="0">
+      <animate attributeName="r" values="7;16" keyTimes="0;1" dur="8s" begin="1.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0;0" keyTimes="0;0.12;1" dur="8s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="140" r="7" stroke="#E03131" opacity="0">
+      <animate attributeName="r" values="7;16" keyTimes="0;1" dur="8s" begin="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0;0" keyTimes="0;0.12;1" dur="8s" begin="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="465" cy="140" r="7" stroke="#2B8A3E" opacity="0">
+      <animate attributeName="r" values="7;16" keyTimes="0;1" dur="8s" begin="2.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0;0" keyTimes="0;0.12;1" dur="8s" begin="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="640" cy="140" r="7" stroke="#7C4DE0" opacity="0">
+      <animate attributeName="r" values="7;16" keyTimes="0;1" dur="8s" begin="4.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0" keyTimes="0;0.12;1" dur="8s" begin="4.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="770" cy="140" r="7" stroke="#0FA97A" opacity="0">
+      <animate attributeName="r" values="7;16" keyTimes="0;1" dur="8s" begin="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0" keyTimes="0;0.12;1" dur="8s" begin="5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- traveling release pulse -->
+  <circle r="4" fill="#171310" opacity="0">
+    <set attributeName="opacity" to="0.8" begin="0s"/>
+    <animateMotion dur="8s" repeatCount="indefinite" path="M60 140 L900 140"/>
+  </circle>
+
+  <text x="40" y="220" font-size="11" fill="#9A9284">Targets, not promises &#8212; dates move, the cadence does not. A folder appears under engines/ on drop day with the full spec.</text>
+</svg>

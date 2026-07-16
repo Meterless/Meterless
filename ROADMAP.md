@@ -2,6 +2,8 @@
 
 Engines drop as new folders under `engines/`, each with a tagged release (`<engine>-v<semver>`) and its own announcement. Target cadence: monthly.
 
+<img src="docs/images/roadmap-cadence.svg" alt="Animated timeline: H-MEM, World Model, Markovian, and Scout Intent shipped; swarm-orchestration targets August 2026, runtime targets Q4 2026, fulcrum planned" width="820" />
+
 ## Shipped
 
 | Engine | Status |

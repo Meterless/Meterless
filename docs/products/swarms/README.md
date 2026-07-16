@@ -20,6 +20,8 @@ Download the latest desktop installer from [Releases](https://github.com/meterle
 
 Swarms adds verbalized sampling, ranking, reconciliation, and multi-pass refinement on top of the orchestration engine.
 
+<img src="images/swarms-fanout.svg" alt="Animated: a planner maps one prompt into distinct directions, parallel variants stream in as they finish, one fails alone while the rest continue, and results are ranked, reconciled, and refined" width="820" />
+
 ## Docs
 
 - [Getting started](getting-started.md)

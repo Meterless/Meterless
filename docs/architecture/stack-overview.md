@@ -2,6 +2,8 @@
 
 One architecture. Every Meterless product runs the same flow.
 
+<img src="../images/meterless-stack.svg" alt="Animated: a request flows from user event through Scout Intent, H-MEM and World Model, Markovian or Swarm, the Runtime Quality Layer, and the product surfaces to verified output — with memory written back" width="820" />
+
 ```text
 User / Event
    ↓

@@ -1,0 +1,80 @@
+<svg viewBox="0 0 960 330" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Swarms fan-out: one prompt is planned into distinct directions, run as parallel variants that arrive as they finish, one variant fails alone while the rest continue, then results are ranked, reconciled, and refined</title>
+
+  <rect x="0.5" y="0.5" width="959" height="329" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="46" font-size="20" font-weight="700" fill="#171310">One prompt. Many angles. At once.</text>
+  <text x="40" y="70" font-size="13" fill="#756D60">A planner maps distinct directions first &#8212; what comes back is different ideas, not the same idea reworded.</text>
+
+  <!-- prompt -->
+  <rect x="40" y="140" width="150" height="70" rx="11" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.5"/>
+  <text x="115" y="168" font-size="13" font-weight="700" fill="#171310" text-anchor="middle">Your prompt</text>
+  <text x="115" y="188" font-size="10.3" fill="#756D60" text-anchor="middle">one ask &#183; 2&#8211;500 variants</text>
+
+  <!-- planner -->
+  <line x1="190" y1="175" x2="236" y2="175" stroke="#D9CFC0" stroke-width="1.5"/>
+  <rect x="240" y="140" width="150" height="70" rx="11" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.5"/>
+  <text x="315" y="168" font-size="13" font-weight="700" fill="#7E22CE" text-anchor="middle">Planner</text>
+  <text x="315" y="188" font-size="10.3" fill="#756D60" text-anchor="middle">distinct directions, not dice</text>
+
+  <!-- fan-out lines -->
+  <g stroke="#D9CFC0" stroke-width="1.4" fill="none">
+    <path d="M390 160 C440 140 460 108 500 104"/>
+    <path d="M390 168 C440 160 460 146 500 144"/>
+    <path d="M390 175 L500 184"/>
+    <path d="M390 182 C440 190 460 220 500 224"/>
+    <path d="M390 190 C440 204 460 258 500 264"/>
+  </g>
+
+  <!-- variant cards: arrive as they finish (staggered) -->
+  <g font-size="11" font-weight="600">
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.18;0.23;1" dur="8s" repeatCount="indefinite"/>
+      <rect x="504" y="88" width="180" height="32" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.3"/>
+      <text x="520" y="108" fill="#3E3831">Variant 01 &#183; <tspan fill="#7E22CE">bold rebrand</tspan></text>
+    </g>
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3;0.35;1" dur="8s" repeatCount="indefinite"/>
+      <rect x="504" y="128" width="180" height="32" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.3"/>
+      <text x="520" y="148" fill="#3E3831">Variant 02 &#183; <tspan fill="#7E22CE">data-led story</tspan></text>
+    </g>
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.24;0.29;1" dur="8s" repeatCount="indefinite"/>
+      <rect x="504" y="168" width="180" height="32" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.3"/>
+      <text x="520" y="188" fill="#3E3831">Variant 03 &#183; <tspan fill="#7E22CE">minimalist cut</tspan></text>
+    </g>
+    <!-- the lone failure -->
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.38;0.43;1" dur="8s" repeatCount="indefinite"/>
+      <rect x="504" y="208" width="180" height="32" rx="8" fill="#FFF5F5" stroke="#C92A2A" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <text x="520" y="228" fill="#C92A2A">Variant 04 &#183; &#10007; fails alone</text>
+    </g>
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.44;0.49;1" dur="8s" repeatCount="indefinite"/>
+      <rect x="504" y="248" width="180" height="32" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.3"/>
+      <text x="520" y="268" fill="#3E3831">Variant 05 &#183; <tspan fill="#7E22CE">playful voice</tspan></text>
+    </g>
+  </g>
+  <text x="594" y="300" font-size="10" fill="#9A9284" text-anchor="middle">cards stream in as they finish &#8212; transient failures retry, the rest never stop</text>
+
+  <!-- merge lines -->
+  <g stroke="#D9CFC0" stroke-width="1.4" fill="none">
+    <path d="M684 104 C724 108 736 148 772 156"/>
+    <path d="M684 144 C724 148 736 160 772 164"/>
+    <path d="M684 184 L772 172"/>
+    <path d="M684 264 C724 258 736 188 772 180"/>
+  </g>
+
+  <!-- rank / reconcile / refine -->
+  <rect x="776" y="134" width="148" height="82" rx="11" fill="#7E22CE" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.16;0.06;0.16;0.06" keyTimes="0;0.55;0.62;0.75;0.88;1" dur="8s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="780" y="138" width="140" height="74" rx="10" fill="#FFFFFF" stroke="#7E22CE" stroke-width="1.6"/>
+  <text x="850" y="163" font-size="13" font-weight="700" fill="#7E22CE" text-anchor="middle">Rank &#183; reconcile</text>
+  <text x="850" y="180" font-size="13" font-weight="700" fill="#7E22CE" text-anchor="middle">&#183; refine</text>
+  <text x="850" y="200" font-size="10" fill="#756D60" text-anchor="middle">multi-pass synthesis</text>
+
+  <text x="40" y="252" font-size="11" fill="#9A9284">Most runs use 3&#8211;10 variants.</text>
+  <text x="40" y="270" font-size="11" fill="#9A9284">The intent chip (107 modes) routes</text>
+  <text x="40" y="288" font-size="11" fill="#9A9284">the right skills in before anything runs.</text>
+</svg>

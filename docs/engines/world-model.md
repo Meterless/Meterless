@@ -2,6 +2,8 @@
 
 User, task, and environment state modeling.
 
+<img src="../../engines/images/world-model-flow.svg" alt="Animated: documents, conversations, signals, and actions stream into an append-only canonical event log; graph, timeline, and search views derive from it" width="820" />
+
 Status: spec available. The engine is an AGENTS.md-driven implementation spec, not a runtime library.
 
 ## Focused clone

@@ -2,6 +2,8 @@
 
 Hierarchical memory and durable context. A knowledge graph that mines, retrieves, dreams, and audits.
 
+<img src="../../engines/images/hmem-lifecycle.svg" alt="Animated: a memory settles from short-term to long-term while capture, enrich, retrieve, dream, and sleep stages fire and the trust ledger appends" width="820" />
+
 Status: spec available. The engine is an AGENTS.md-driven implementation spec, not a runtime library.
 
 ## Focused clone

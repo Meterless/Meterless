@@ -1,0 +1,79 @@
+<svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>The agentathon starter notebook: remember, ask, audit, and sleep commands each route through a named H-MEM service, and the notebook persists across runs</title>
+
+  <rect x="0.5" y="0.5" width="959" height="299" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="46" font-size="20" font-weight="700" fill="#171310">Real H-MEM in a two-minute CLI.</text>
+  <text x="40" y="70" font-size="13" fill="#756D60">Every command routes through a named engine service &#8212; nothing is faked.</text>
+
+  <!-- terminal -->
+  <g>
+    <rect x="40" y="92" width="450" height="176" rx="12" fill="#171310"/>
+    <circle cx="62" cy="112" r="4.5" fill="#E0443E"/>
+    <circle cx="78" cy="112" r="4.5" fill="#E8A13C"/>
+    <circle cx="94" cy="112" r="4.5" fill="#2B8A3E"/>
+    <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="11">
+      <g>
+        <animate attributeName="opacity" values="0;1;1" keyTimes="0;0.06;1" dur="10s" repeatCount="indefinite"/>
+        <text x="60" y="140" fill="#D8D2C7">$ notebook remember "we deploy on green CI"</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.12;0.16;1" dur="10s" repeatCount="indefinite"/>
+        <text x="60" y="160" fill="#7BF0C6">&#10003; mined &#8594; stored as mem-7 &#183; ledger updated</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3;0.34;1" dur="10s" repeatCount="indefinite"/>
+        <text x="60" y="186" fill="#D8D2C7">$ notebook ask "when do we deploy"</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4;0.44;1" dur="10s" repeatCount="indefinite"/>
+        <text x="60" y="206" fill="#7BF0C6">&#8594; recalled mem-7 &#183; score 0.83 &#183; full trace shown</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.56;0.6;1" dur="10s" repeatCount="indefinite"/>
+        <text x="60" y="232" fill="#9A9284"># quit &#183; come back tomorrow &#183; it still remembers</text>
+      </g>
+      <text x="60" y="252" fill="#7BF0C6">&#9608;
+        <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.5;1" dur="1.2s" repeatCount="indefinite"/>
+      </text>
+    </g>
+  </g>
+
+  <!-- command -> service mapping -->
+  <g font-size="11.5">
+    <g>
+      <animate attributeName="opacity" values="0;1;1" keyTimes="0;0.08;1" dur="10s" repeatCount="indefinite"/>
+      <rect x="530" y="92" width="120" height="30" rx="8" fill="#171310"/>
+      <text x="590" y="111" fill="#FBF7F0" text-anchor="middle" font-family="ui-monospace, Consolas, monospace">remember</text>
+      <line x1="650" y1="107" x2="686" y2="107" stroke="#D9CFC0" stroke-width="1.4"/>
+      <rect x="690" y="92" width="230" height="30" rx="8" fill="#FFF4EA" stroke="#E8590C" stroke-width="1.3"/>
+      <text x="706" y="111" fill="#C74E0B" font-weight="600">MemoryMiningService <tspan fill="#B08968" font-weight="400">model-free</tspan></text>
+    </g>
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.32;0.36;1" dur="10s" repeatCount="indefinite"/>
+      <rect x="530" y="134" width="120" height="30" rx="8" fill="#171310"/>
+      <text x="590" y="153" fill="#FBF7F0" text-anchor="middle" font-family="ui-monospace, Consolas, monospace">ask</text>
+      <line x1="650" y1="149" x2="686" y2="149" stroke="#D9CFC0" stroke-width="1.4"/>
+      <rect x="690" y="134" width="230" height="30" rx="8" fill="#FFF4EA" stroke="#E8590C" stroke-width="1.3"/>
+      <text x="706" y="153" fill="#C74E0B" font-weight="600">MemoryRetrievalService <tspan fill="#B08968" font-weight="400">+ trace</tspan></text>
+    </g>
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.46;0.5;1" dur="10s" repeatCount="indefinite"/>
+      <rect x="530" y="176" width="120" height="30" rx="8" fill="#171310"/>
+      <text x="590" y="195" fill="#FBF7F0" text-anchor="middle" font-family="ui-monospace, Consolas, monospace">audit</text>
+      <line x1="650" y1="191" x2="686" y2="191" stroke="#D9CFC0" stroke-width="1.4"/>
+      <rect x="690" y="176" width="230" height="30" rx="8" fill="#FFF4EA" stroke="#E8590C" stroke-width="1.3"/>
+      <text x="706" y="195" fill="#C74E0B" font-weight="600">TrustLedgerService <tspan fill="#B08968" font-weight="400">append-only</tspan></text>
+    </g>
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6;0.64;1" dur="10s" repeatCount="indefinite"/>
+      <rect x="530" y="218" width="120" height="30" rx="8" fill="#171310"/>
+      <text x="590" y="237" fill="#FBF7F0" text-anchor="middle" font-family="ui-monospace, Consolas, monospace">sleep</text>
+      <line x1="650" y1="233" x2="686" y2="233" stroke="#D9CFC0" stroke-width="1.4"/>
+      <rect x="690" y="218" width="230" height="30" rx="8" fill="#FFF4EA" stroke="#E8590C" stroke-width="1.3"/>
+      <text x="706" y="237" fill="#C74E0B" font-weight="600">SleepCycleService <tspan fill="#B08968" font-weight="400">preview-first</tspan></text>
+    </g>
+  </g>
+
+  <text x="530" y="272" font-size="11" fill="#9A9284">Zero API keys &#183; .notebook/ persists across runs &#183; judges weight engine usage at 25%</text>
+</svg>

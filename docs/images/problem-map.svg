@@ -1,0 +1,73 @@
+<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Six agent failure modes mapped to the six Meterless layers that fix them: no durable memory to H-MEM, no world model to World Model, no reasoning compression to Markovian, same-y output to Swarms, no execution layer to Relay, no cost control to Runtime</title>
+
+  <rect x="0.5" y="0.5" width="959" height="399" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="46" font-size="22" font-weight="700" fill="#171310">Agents fail on thin context, not weak models.</text>
+  <text x="40" y="70" font-size="13" fill="#756D60">Six failure modes in most agent stacks today &#8212; and the layer that fixes each one.</text>
+
+  <!-- rows: problem card -> arrow -> answer chip -->
+  <!-- row template: y = 92 + i*48 -->
+  <g font-size="12.5">
+    <!-- 1 H-MEM -->
+    <g>
+      <animate attributeName="opacity" values="0;1;1" keyTimes="0;0.06;1" dur="9s" repeatCount="indefinite"/>
+      <rect x="40" y="92" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
+      <text x="58" y="115" fill="#3E3831">Forgets everything between sessions &#8212; <tspan fill="#9A9284">no durable memory</tspan></text>
+      <path d="M496 110 L544 110" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 105 L546 110 L539 115" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+      <rect x="552" y="92" width="368" height="36" rx="9" fill="#FFF4EA" stroke="#E8590C" stroke-width="1.4"/>
+      <text x="570" y="115" font-weight="700" fill="#C74E0B">H-MEM</text>
+      <text x="640" y="115" fill="#8A5A33">memory that mines, ranks, audits</text>
+    </g>
+    <!-- 2 World Model -->
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.06;0.12;1" dur="9s" repeatCount="indefinite"/>
+      <rect x="40" y="140" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
+      <text x="58" y="163" fill="#3E3831">No model of the user, task, or environment</text>
+      <path d="M496 158 L544 158" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 153 L546 158 L539 163" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+      <rect x="552" y="140" width="368" height="36" rx="9" fill="#EEF2FF" stroke="#3B5BDB" stroke-width="1.4"/>
+      <text x="570" y="163" font-weight="700" fill="#3049B5">World Model</text>
+      <text x="672" y="163" fill="#4A5580">event-sourced shared state</text>
+    </g>
+    <!-- 3 Markovian -->
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.12;0.18;1" dur="9s" repeatCount="indefinite"/>
+      <rect x="40" y="188" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
+      <text x="58" y="211" fill="#3E3831">Re-derives reasoning from scratch on every step</text>
+      <path d="M496 206 L544 206" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 201 L546 206 L539 211" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+      <rect x="552" y="188" width="368" height="36" rx="9" fill="#FFF0F0" stroke="#E03131" stroke-width="1.4"/>
+      <text x="570" y="211" font-weight="700" fill="#C22525">Markovian</text>
+      <text x="656" y="211" fill="#8A4444">bounded chunks, compressed state</text>
+    </g>
+    <!-- 4 Swarms -->
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.18;0.24;1" dur="9s" repeatCount="indefinite"/>
+      <rect x="40" y="236" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
+      <text x="58" y="259" fill="#3E3831">Produces same-y output &#8212; <tspan fill="#9A9284">no divergent generation</tspan></text>
+      <path d="M496 254 L544 254" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 249 L546 254 L539 259" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+      <rect x="552" y="236" width="368" height="36" rx="9" fill="#F4EFFC" stroke="#7C4DE0" stroke-width="1.4"/>
+      <text x="570" y="259" font-weight="700" fill="#6A3FC7">Swarms</text>
+      <text x="642" y="259" fill="#5F5380">many angles at once, then merge</text>
+    </g>
+    <!-- 5 Relay -->
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.24;0.30;1" dur="9s" repeatCount="indefinite"/>
+      <rect x="40" y="284" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
+      <text x="58" y="307" fill="#3E3831">Cannot touch the user&#8217;s actual computer</text>
+      <path d="M496 302 L544 302" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 297 L546 302 L539 307" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+      <rect x="552" y="284" width="368" height="36" rx="9" fill="#F4EFFC" stroke="#7C4DE0" stroke-width="1.4"/>
+      <text x="570" y="307" font-weight="700" fill="#6A3FC7">Relay</text>
+      <text x="626" y="307" fill="#5F5380">verified desktop execution</text>
+    </g>
+    <!-- 6 Runtime -->
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.30;0.36;1" dur="9s" repeatCount="indefinite"/>
+      <rect x="40" y="332" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
+      <text x="58" y="355" fill="#3E3831">Routes every token through expensive cloud inference</text>
+      <path d="M496 350 L544 350" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 345 L546 350 L539 355" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
+      <rect x="552" y="332" width="368" height="36" rx="9" fill="#FFFFFF" stroke="#0FA97A" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="570" y="355" font-weight="700" fill="#0B8560">Runtime</text>
+      <text x="646" y="355" fill="#55806F">quality &#183; cost &#183; latency routing &#183; Q4 2026</text>
+    </g>
+  </g>
+</svg>

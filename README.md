@@ -24,6 +24,11 @@ At 20 steps, the Markovian cost model saves 86% of input tokens vs naive history
 
 ## Architecture
 
+<img src="docs/images/meterless-stack.svg" alt="Animated: a request flows from user event through Scout Intent, H-MEM and World Model, Markovian or Swarm, the Runtime Quality Layer, and the product surfaces to verified output — with memory written back" width="820" />
+
+<details>
+<summary>Text version</summary>
+
 ```text
 User / Event
    ↓
@@ -39,6 +44,8 @@ Relay Execution / Gaia Interface / Swarms Output
    ↓
 Verified Output + Updated Memory
 ```
+
+</details>
 
 One architecture. Three product surfaces prove it. Read the full flow in [docs/architecture/stack-overview.md](docs/architecture/stack-overview.md).
 

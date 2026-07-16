@@ -80,6 +80,8 @@ Then the action runs. With the contract in hand, every step is auditable.
 
 Scout is a single library. It runs entirely client-side by default. It produces structured output. Downstream engines refuse to act on anything that doesn't carry a valid contract.
 
+<img src="../images/scout-pipeline.svg" alt="Animated: an input passes through sense, interpret, guard, route, and recommend stages; an injection attempt is blocked at guard and a signed execution contract is emitted" width="820" />
+
 ---
 
 ## Quickstart
@@ -116,6 +118,17 @@ Five-minute setup. Zero backend required.
 ## Architecture
 
 Scout's runtime is a five-stage pipeline. Each stage is documented in depth and individually replaceable:
+
+<table>
+  <tr>
+    <td><img src="images/Scout_Intent_Interpret.png" alt="Interpret what it means: turn raw input into resolved intent, entities and constraints, goal mapping, and context explanation" width="410" /></td>
+    <td><img src="images/Scout_Intent_Guard.png" alt="Guard what matters: run risk, safety, and policy checks before action — detect injection, enforce policy, block unsafe tool or model use, keep decisions auditable" width="410" /></td>
+  </tr>
+  <tr>
+    <td><img src="images/Scout_Intent_Route.png" alt="Route to the right tools: select the best model, tools, and workflow before execution, ranked by score" width="410" /></td>
+    <td><img src="images/Scout_Intent_Recommend.png" alt="Recommend with confidence: produce an execution contract with recommended action, rationale, expected outcome, and controls" width="410" /></td>
+  </tr>
+</table>
 
 | Stage | Job | Read |
 |---|---|---|

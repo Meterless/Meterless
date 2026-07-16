@@ -20,6 +20,8 @@ Download the latest installer from [Releases](https://github.com/meterless/relay
 
 Relay adds verification and human approval loops on top: actions are checked against expected outcomes before a workflow continues.
 
+<img src="images/relay-loop.svg" alt="Animated: an instruction becomes a plain-English plan, pauses at an amber approval gate, executes with screenshot and OS-level verification, and is remembered so the next run is faster" width="820" />
+
 ## Docs
 
 - [Getting started](getting-started.md)

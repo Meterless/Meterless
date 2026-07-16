@@ -19,6 +19,8 @@ Download the latest installer from [Releases](https://github.com/meterless/gaia/
 | [Markovian](../../../engines/markovian/) | Long-horizon chunked reasoning that carries compressed state forward instead of growing the prompt. |
 | Swarm orchestration | Bounded task decomposition for Gaia's swarm mode. Ships later as a flagship engine drop. |
 
+<img src="images/gaia-context.svg" alt="Animated: H-MEM, World Model, and Markovian feed the Gaia workspace, and remembered context carries from a Monday session to a Friday session" width="820" />
+
 ## Docs
 
 - [Getting started](getting-started.md)
