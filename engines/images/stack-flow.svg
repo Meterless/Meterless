@@ -1,0 +1,96 @@
+<svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>A request flowing through the Meterless engine stack: Scout Intent, then H-MEM and World Model, then Markovian, then verified output</title>
+
+  <!-- canvas -->
+  <rect x="0.5" y="0.5" width="959" height="299" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="52" font-size="26" font-weight="700" fill="#171310">One stack. Four engines.</text>
+  <text x="40" y="78" font-size="14" fill="#756D60">A request flows: sense &#8594; remember &amp; ground &#8594; reason &#8594; verified output.</text>
+
+  <!-- connectors -->
+  <g stroke="#D9CFC0" stroke-width="1.5" fill="none">
+    <path d="M146 180 L186 180"/>
+    <path d="M332 180 C372 180 372 138 412 138"/>
+    <path d="M332 180 C372 180 372 218 412 218"/>
+    <path d="M558 138 C598 138 598 180 638 180"/>
+    <path d="M558 218 C598 218 598 180 638 180"/>
+    <path d="M784 180 L844 180"/>
+  </g>
+
+  <!-- node halos (pulse as the request passes) -->
+  <rect x="180" y="142" width="158" height="76" rx="14" fill="#2B8A3E" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.30;0;0" keyTimes="0;0.18;0.24;0.32;1" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="406" y="106" width="158" height="64" rx="14" fill="#E8590C" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.30;0;0" keyTimes="0;0.44;0.505;0.58;1" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="406" y="186" width="158" height="64" rx="14" fill="#3B5BDB" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.30;0;0" keyTimes="0;0.44;0.505;0.58;1" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="632" y="142" width="158" height="76" rx="14" fill="#E03131" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.30;0;0" keyTimes="0;0.71;0.774;0.85;1" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="838" y="146" width="92" height="68" rx="14" fill="#18E299" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.35;0" keyTimes="0;0.92;0.975;1" dur="7s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- nodes -->
+  <g>
+    <rect x="36" y="152" width="110" height="56" rx="12" fill="#171310"/>
+    <text x="91" y="176" font-size="13.5" font-weight="600" fill="#FBF7F0" text-anchor="middle">User / Event</text>
+    <text x="91" y="193" font-size="10.5" fill="#B9B1A4" text-anchor="middle">anything inbound</text>
+  </g>
+  <g>
+    <rect x="186" y="148" width="146" height="64" rx="12" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.6"/>
+    <text x="259" y="174" font-size="15" font-weight="700" fill="#1E6B34" text-anchor="middle">Scout Intent</text>
+    <text x="259" y="192" font-size="10.5" fill="#756D60" text-anchor="middle">sense &#183; guard &#183; route</text>
+    <rect x="196" y="222" width="126" height="20" rx="10" fill="#E6F6EC" stroke="#2B8A3E" stroke-width="0.8"/>
+    <text x="259" y="235.5" font-size="10" font-weight="600" fill="#1E6B34" text-anchor="middle">execution contract &#10003;</text>
+  </g>
+  <g>
+    <rect x="412" y="112" width="146" height="52" rx="12" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.6"/>
+    <text x="485" y="134" font-size="14" font-weight="700" fill="#C74E0B" text-anchor="middle">H-MEM</text>
+    <text x="485" y="151" font-size="10.5" fill="#756D60" text-anchor="middle">remember</text>
+    <rect x="412" y="192" width="146" height="52" rx="12" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.6"/>
+    <text x="485" y="214" font-size="14" font-weight="700" fill="#3049B5" text-anchor="middle">World Model</text>
+    <text x="485" y="231" font-size="10.5" fill="#756D60" text-anchor="middle">ground state</text>
+  </g>
+  <g>
+    <rect x="638" y="148" width="146" height="64" rx="12" fill="#FFFFFF" stroke="#E03131" stroke-width="1.6"/>
+    <text x="711" y="174" font-size="15" font-weight="700" fill="#C22525" text-anchor="middle">Markovian</text>
+    <text x="711" y="192" font-size="10.5" fill="#756D60" text-anchor="middle">flat-cost reasoning</text>
+  </g>
+  <g>
+    <rect x="844" y="152" width="80" height="56" rx="12" fill="#FFFFFF" stroke="#0FA97A" stroke-width="1.6"/>
+    <text x="884" y="176" font-size="13" font-weight="700" fill="#0B8560" text-anchor="middle">Verified</text>
+    <text x="884" y="193" font-size="11" font-weight="700" fill="#0FA97A" text-anchor="middle">output &#10003;</text>
+  </g>
+
+  <!-- traveling request pulses -->
+  <g>
+    <circle r="9" fill="#18E299" opacity="0">
+      <set attributeName="opacity" to="0.25" begin="0s"/>
+      <animateMotion dur="7s" repeatCount="indefinite"
+        path="M60 180 L332 180 C372 180 372 138 412 138 L558 138 C598 138 598 180 638 180 L784 180 L884 180"/>
+    </circle>
+    <circle r="4.5" fill="#0FA97A" opacity="0">
+      <set attributeName="opacity" to="1" begin="0s"/>
+      <animateMotion dur="7s" repeatCount="indefinite"
+        path="M60 180 L332 180 C372 180 372 138 412 138 L558 138 C598 138 598 180 638 180 L784 180 L884 180"/>
+    </circle>
+  </g>
+  <g>
+    <circle r="9" fill="#18E299" opacity="0">
+      <set attributeName="opacity" to="0.2" begin="0.22s"/>
+      <animateMotion dur="7s" begin="0.22s" repeatCount="indefinite"
+        path="M60 180 L332 180 C372 180 372 218 412 218 L558 218 C598 218 598 180 638 180 L784 180 L884 180"/>
+    </circle>
+    <circle r="4.5" fill="#0FA97A" opacity="0">
+      <set attributeName="opacity" to="0.9" begin="0.22s"/>
+      <animateMotion dur="7s" begin="0.22s" repeatCount="indefinite"
+        path="M60 180 L332 180 C372 180 372 218 412 218 L558 218 C598 218 598 180 638 180 L784 180 L884 180"/>
+    </circle>
+  </g>
+
+  <text x="40" y="282" font-size="12" fill="#756D60">Scout signs an execution contract &#8212; downstream engines refuse unsigned plans.</text>
+</svg>

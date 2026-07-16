@@ -1,0 +1,105 @@
+<svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Scout Intent five-stage pipeline: sense, interpret, guard, route, recommend, ending in a signed execution contract; an injection attempt is blocked at the guard stage</title>
+
+  <rect x="0.5" y="0.5" width="959" height="299" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="52" font-size="24" font-weight="700" fill="#171310">Five stages between input and execution.</text>
+  <text x="40" y="76" font-size="13.5" fill="#756D60">Deterministic trigger scan in &lt; 16 ms &#8212; the decision happens before any model spins up.</text>
+
+  <!-- connectors -->
+  <g stroke="#D9CFC0" stroke-width="1.5">
+    <line x1="190" y1="146" x2="216" y2="146"/>
+    <line x1="366" y1="146" x2="392" y2="146"/>
+    <line x1="542" y1="146" x2="568" y2="146"/>
+    <line x1="718" y1="146" x2="744" y2="146"/>
+  </g>
+
+  <!-- stage halos -->
+  <g fill="#2B8A3E">
+    <rect x="34" y="98" width="162" height="96" rx="14" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.25;0;0" keyTimes="0;0.06;0.103;0.16;1" dur="6.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="210" y="98" width="162" height="96" rx="14" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.25;0;0" keyTimes="0;0.24;0.29;0.35;1" dur="6.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="386" y="98" width="162" height="96" rx="14" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.25;0;0" keyTimes="0;0.43;0.48;0.54;1" dur="6.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="562" y="98" width="162" height="96" rx="14" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.25;0;0" keyTimes="0;0.62;0.67;0.73;1" dur="6.5s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="738" y="98" width="162" height="96" rx="14" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.25;0;0" keyTimes="0;0.8;0.86;0.92;1" dur="6.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- stage cards -->
+  <g>
+    <rect x="40" y="104" width="150" height="84" rx="12" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.5"/>
+    <circle cx="60" cy="124" r="9" fill="#E6F6EC"/>
+    <text x="60" y="128" font-size="10.5" font-weight="700" fill="#1E6B34" text-anchor="middle">1</text>
+    <text x="76" y="129" font-size="14.5" font-weight="700" fill="#171310">Sense</text>
+    <text x="56" y="152" font-size="10.3" fill="#756D60">classify intent with</text>
+    <text x="56" y="167" font-size="10.3" fill="#756D60">confidence bands</text>
+
+    <rect x="216" y="104" width="150" height="84" rx="12" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.5"/>
+    <circle cx="236" cy="124" r="9" fill="#E6F6EC"/>
+    <text x="236" y="128" font-size="10.5" font-weight="700" fill="#1E6B34" text-anchor="middle">2</text>
+    <text x="252" y="129" font-size="14.5" font-weight="700" fill="#171310">Interpret</text>
+    <text x="232" y="152" font-size="10.3" fill="#756D60">bind entities &amp;</text>
+    <text x="232" y="167" font-size="10.3" fill="#756D60">parameters</text>
+
+    <rect x="392" y="104" width="150" height="84" rx="12" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.5"/>
+    <circle cx="412" cy="124" r="9" fill="#E6F6EC"/>
+    <text x="412" y="128" font-size="10.5" font-weight="700" fill="#1E6B34" text-anchor="middle">3</text>
+    <text x="428" y="129" font-size="14.5" font-weight="700" fill="#171310">Guard</text>
+    <text x="408" y="152" font-size="10.3" fill="#756D60">injection &#183; policy</text>
+    <text x="408" y="167" font-size="10.3" fill="#756D60">scope &#183; PII</text>
+
+    <rect x="568" y="104" width="150" height="84" rx="12" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.5"/>
+    <circle cx="588" cy="124" r="9" fill="#E6F6EC"/>
+    <text x="588" y="128" font-size="10.5" font-weight="700" fill="#1E6B34" text-anchor="middle">4</text>
+    <text x="604" y="129" font-size="14.5" font-weight="700" fill="#171310">Route</text>
+    <text x="584" y="152" font-size="10.3" fill="#756D60">capability graph</text>
+    <text x="584" y="167" font-size="10.3" fill="#756D60">&#8594; tool plan</text>
+
+    <rect x="744" y="104" width="150" height="84" rx="12" fill="#FFFFFF" stroke="#2B8A3E" stroke-width="1.5"/>
+    <circle cx="764" cy="124" r="9" fill="#E6F6EC"/>
+    <text x="764" y="128" font-size="10.5" font-weight="700" fill="#1E6B34" text-anchor="middle">5</text>
+    <text x="780" y="129" font-size="14.5" font-weight="700" fill="#171310">Recommend</text>
+    <text x="760" y="152" font-size="10.3" fill="#756D60">model profile &#183;</text>
+    <text x="760" y="167" font-size="10.3" fill="#756D60">cost ceiling</text>
+  </g>
+
+  <!-- traveling intent pulse -->
+  <circle r="8.5" fill="#18E299" opacity="0">
+    <set attributeName="opacity" to="0.25" begin="0s"/>
+    <animateMotion dur="6.5s" repeatCount="indefinite" path="M22 146 L938 146"/>
+  </circle>
+  <circle r="4.5" fill="#1E6B34" opacity="0">
+    <set attributeName="opacity" to="1" begin="0s"/>
+    <animateMotion dur="6.5s" repeatCount="indefinite" path="M22 146 L938 146"/>
+  </circle>
+
+  <!-- injection attempt bounced at Guard -->
+  <circle r="4.5" fill="#C92A2A" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.46;0.48;0.56;0.6;1" dur="6.5s" repeatCount="indefinite"/>
+    <animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.46;0.6;1"
+      path="M467 150 C480 190 502 226 528 248"/>
+  </circle>
+  <text x="540" y="258" font-size="10.5" font-weight="700" fill="#C92A2A" opacity="0">&#10007; injection blocked
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.53;0.62;0.68;1" dur="6.5s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- signed contract stamp -->
+  <g transform="translate(822,244)">
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.85;0.9;0.985;1" dur="6.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="scale" values="0.8;0.8;1;1;1" keyTimes="0;0.85;0.9;0.985;1" dur="6.5s" repeatCount="indefinite" additive="sum"/>
+      <rect x="-112" y="-20" width="224" height="40" rx="20" fill="#17753C"/>
+      <text x="0" y="5" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">EXECUTION CONTRACT &#10003; SIGNED</text>
+    </g>
+  </g>
+
+  <text x="40" y="262" font-size="11.5" fill="#756D60">Decisions are scored, not vibes &#8212; a locked regression set gates every release.</text>
+</svg>

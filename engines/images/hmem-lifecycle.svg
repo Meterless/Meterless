@@ -1,0 +1,114 @@
+<svg viewBox="0 0 960 340" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>H-MEM lifecycle: a memory is captured, enriched, retrieved, dreamed, and consolidated, with every mutation recorded in an append-only trust ledger</title>
+
+  <rect x="0.5" y="0.5" width="959" height="339" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="52" font-size="24" font-weight="700" fill="#171310">Memory with a lifecycle &#8212; and an audit trail.</text>
+  <text x="40" y="76" font-size="13.5" fill="#756D60">A fact settles from short-term to long-term. Every mutation lands in the trust ledger.</text>
+
+  <!-- ============ left: memory pyramid ============ -->
+  <g>
+    <!-- tier highlight overlays (pulse as the memory settles) -->
+    <polygon points="170,120 230,120 250,160 150,160" fill="#FDD3B2" stroke="#E8590C" stroke-width="1.2" stroke-opacity="0.55"/>
+    <polygon points="150,168 250,168 270,208 130,208" fill="#F9B27C" stroke="#E8590C" stroke-width="1.2" stroke-opacity="0.55"/>
+    <polygon points="130,216 270,216 290,256 110,256" fill="#F08C4B" stroke="#E8590C" stroke-width="1.2" stroke-opacity="0.55"/>
+    <polygon points="170,120 230,120 250,160 150,160" fill="#FFFFFF" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.45;0.45;0;0" keyTimes="0;0.13;0.16;0.33;0.38;1" dur="6s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="150,168 250,168 270,208 130,208" fill="#FFFFFF" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.45;0.45;0;0" keyTimes="0;0.48;0.51;0.68;0.73;1" dur="6s" repeatCount="indefinite"/>
+    </polygon>
+    <polygon points="130,216 270,216 290,256 110,256" fill="#FFFFFF" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.45;0.45;0" keyTimes="0;0.83;0.86;0.97;1" dur="6s" repeatCount="indefinite"/>
+    </polygon>
+    <text x="200" y="145" font-size="11" font-weight="700" fill="#7C3D0B" text-anchor="middle">SHORT-TERM</text>
+    <text x="200" y="193" font-size="11" font-weight="700" fill="#7C3D0B" text-anchor="middle">WORKING</text>
+    <text x="200" y="241" font-size="11" font-weight="700" fill="#FFF4EA" text-anchor="middle">LONG-TERM</text>
+
+    <!-- the settling memory -->
+    <circle r="10" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0.25;0.25;0" keyTimes="0;0.06;0.92;1" dur="6s" repeatCount="indefinite"/>
+      <animateMotion dur="6s" repeatCount="indefinite" calcMode="linear"
+        keyPoints="0;0.33;0.33;0.66;0.66;1" keyTimes="0;0.14;0.35;0.49;0.7;0.84"
+        path="M200 92 L200 140 L200 188 L200 236"/>
+    </circle>
+    <circle r="5" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.92;1" dur="6s" repeatCount="indefinite"/>
+      <animateMotion dur="6s" repeatCount="indefinite" calcMode="linear"
+        keyPoints="0;0.33;0.33;0.66;0.66;1" keyTimes="0;0.14;0.35;0.49;0.7;0.84"
+        path="M200 92 L200 140 L200 188 L200 236"/>
+    </circle>
+
+    <text x="200" y="284" font-size="11.5" fill="#756D60" text-anchor="middle" font-style="italic">reinforce what&#8217;s true &#183; forget what&#8217;s not</text>
+  </g>
+
+  <!-- ============ right: lifecycle chips ============ -->
+  <g>
+    <!-- halos -->
+    <rect x="355" y="115" width="114" height="50" rx="12" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.28;0;0" keyTimes="0;0.05;0.1;0.16;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="469" y="115" width="114" height="50" rx="12" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.28;0;0" keyTimes="0;0.23;0.28;0.34;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="583" y="115" width="114" height="50" rx="12" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.28;0;0" keyTimes="0;0.41;0.46;0.52;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="697" y="115" width="114" height="50" rx="12" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.28;0;0" keyTimes="0;0.59;0.64;0.7;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="811" y="115" width="114" height="50" rx="12" fill="#E8590C" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.28;0;0" keyTimes="0;0.77;0.82;0.88;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- chips -->
+    <g font-size="13.5" font-weight="700" fill="#C74E0B" text-anchor="middle">
+      <rect x="360" y="120" width="104" height="40" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/>
+      <text x="412" y="145">Capture</text>
+      <rect x="474" y="120" width="104" height="40" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/>
+      <text x="526" y="145">Enrich</text>
+      <rect x="588" y="120" width="104" height="40" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/>
+      <text x="640" y="145">Retrieve</text>
+      <rect x="702" y="120" width="104" height="40" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/>
+      <text x="754" y="145">Dream</text>
+      <rect x="816" y="120" width="104" height="40" rx="10" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/>
+      <text x="868" y="145">Sleep</text>
+    </g>
+    <g font-size="12" fill="#B9B1A4" text-anchor="middle">
+      <text x="469" y="144">&#8594;</text>
+      <text x="583" y="144">&#8594;</text>
+      <text x="697" y="144">&#8594;</text>
+      <text x="811" y="144">&#8594;</text>
+    </g>
+    <g font-size="9.8" fill="#756D60" text-anchor="middle">
+      <text x="412" y="176">chat &#183; files &#183; tasks</text>
+      <text x="526" y="176">entities &#183; relations</text>
+      <text x="640" y="176">8-signal ranking</text>
+      <text x="754" y="176">approved synthesis</text>
+      <text x="868" y="176">preview-first</text>
+    </g>
+  </g>
+
+  <!-- ============ trust ledger ============ -->
+  <g>
+    <rect x="360" y="204" width="560" height="104" rx="10" fill="#FFFFFF" stroke="#E9E1D4"/>
+    <text x="378" y="228" font-size="10.5" font-weight="700" fill="#9A9284" letter-spacing="1.2">TRUST LEDGER &#8212; APPEND-ONLY</text>
+    <g font-family="ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace" font-size="11" fill="#3E3831">
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1;0.14;1" dur="6s" repeatCount="indefinite"/>
+        <text x="378" y="252">12:04&#160;&#160;mined&#160;&#160;&#160;&#160;&#160;&#160;user-correction&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;conf 0.92</text>
+        <text x="904" y="252" fill="#2B8A3E" font-weight="700" text-anchor="end">&#10003;</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.44;0.48;1" dur="6s" repeatCount="indefinite"/>
+        <text x="378" y="274">12:04&#160;&#160;conflict&#160;&#160;beats stale value&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0.92 &gt; 0.55</text>
+        <text x="904" y="274" fill="#2B8A3E" font-weight="700" text-anchor="end">&#10003;</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.78;0.82;1" dur="6s" repeatCount="indefinite"/>
+        <text x="378" y="296">12:11&#160;&#160;retrieved&#160;&#160;score 0.81&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;marked helpful</text>
+        <text x="904" y="296" fill="#2B8A3E" font-weight="700" text-anchor="end">&#10003;</text>
+      </g>
+    </g>
+  </g>
+</svg>

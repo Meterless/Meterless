@@ -1,0 +1,148 @@
+<svg viewBox="0 0 960 340" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>World Model: documents, conversations, signals, and actions stream into one append-only canonical event log, from which graph, timeline, and search views are derived</title>
+
+  <rect x="0.5" y="0.5" width="959" height="339" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="52" font-size="24" font-weight="700" fill="#171310">Ingest anything. One log. Every view derived.</text>
+  <text x="40" y="76" font-size="13.5" fill="#756D60">Idempotent ingest &#8594; append-only canonical log &#8594; rebuildable projections.</text>
+
+  <!-- ============ sources ============ -->
+  <g font-size="12" font-weight="600" fill="#2F3B66">
+    <rect x="40" y="96" width="136" height="34" rx="9" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.2"/>
+    <circle cx="58" cy="113" r="3.5" fill="#3B5BDB"/>
+    <text x="72" y="117">Documents</text>
+    <rect x="40" y="146" width="136" height="34" rx="9" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.2"/>
+    <circle cx="58" cy="163" r="3.5" fill="#3B5BDB"/>
+    <text x="72" y="167">Conversations</text>
+    <rect x="40" y="196" width="136" height="34" rx="9" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.2"/>
+    <circle cx="58" cy="213" r="3.5" fill="#3B5BDB"/>
+    <text x="72" y="217">Signals</text>
+    <rect x="40" y="246" width="136" height="34" rx="9" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.2"/>
+    <circle cx="58" cy="263" r="3.5" fill="#3B5BDB"/>
+    <text x="72" y="267">Actions</text>
+  </g>
+
+  <!-- ingest dots -->
+  <g fill="#3B5BDB">
+    <circle r="4.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.05;0.07;0.21;0.23;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.05;0.23;1"
+        path="M176 113 C260 113 280 160 358 172"/>
+    </circle>
+    <circle r="4.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.23;0.25;0.39;0.41;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.23;0.41;1"
+        path="M176 163 C260 163 280 180 358 186"/>
+    </circle>
+    <circle r="4.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.41;0.43;0.57;0.59;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.41;0.59;1"
+        path="M176 213 C260 213 280 206 358 200"/>
+    </circle>
+    <circle r="4.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.61;0.75;0.77;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.59;0.77;1"
+        path="M176 263 C260 263 280 226 358 214"/>
+    </circle>
+  </g>
+
+  <!-- ============ canonical log ============ -->
+  <g>
+    <rect x="360" y="100" width="200" height="196" rx="12" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.6"/>
+    <text x="460" y="124" font-size="10.5" font-weight="700" fill="#3B5BDB" text-anchor="middle" letter-spacing="1.1">CANONICAL EVENT LOG</text>
+    <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="10" fill="#2F3B66">
+      <rect x="376" y="136" width="168" height="22" rx="6" fill="#EEF2FF"/>
+      <text x="386" y="151">evt_001  init world</text>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.24;0.27;1" dur="7.2s" repeatCount="indefinite"/>
+        <rect x="376" y="164" width="168" height="22" rx="6" fill="#EEF2FF"/>
+        <text x="386" y="179">evt_7f3a  upsert doc:spec</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.42;0.45;1" dur="7.2s" repeatCount="indefinite"/>
+        <rect x="376" y="192" width="168" height="22" rx="6" fill="#EEF2FF"/>
+        <text x="386" y="207">evt_9c21  merge person:ada</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6;0.63;1" dur="7.2s" repeatCount="indefinite"/>
+        <rect x="376" y="220" width="168" height="22" rx="6" fill="#EEF2FF"/>
+        <text x="386" y="235">evt_b774  observe sensor:3</text>
+      </g>
+      <g>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.78;0.81;1" dur="7.2s" repeatCount="indefinite"/>
+        <rect x="376" y="248" width="168" height="22" rx="6" fill="#EEF2FF"/>
+        <text x="386" y="263">evt_d0e8  act task:done</text>
+      </g>
+    </g>
+    <text x="460" y="316" font-size="10.5" fill="#756D60" text-anchor="middle">same input &#8594; same log &#183; replay-safe</text>
+  </g>
+
+  <!-- ============ derived views ============ -->
+  <g stroke="#D9CFC0" stroke-width="1.5" fill="none" stroke-dasharray="4 4">
+    <path d="M560 172 C600 172 610 134 648 131"/>
+    <path d="M560 198 C600 198 610 198 648 198"/>
+    <path d="M560 224 C600 224 610 262 648 265"/>
+  </g>
+  <!-- fan-out pulses (burst after the log fills) -->
+  <g fill="#3B5BDB">
+    <circle r="4" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.84;0.86;0.94;0.96;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.84;0.96;1" path="M560 172 C600 172 610 134 648 131"/>
+    </circle>
+    <circle r="4" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.84;0.86;0.94;0.96;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.84;0.96;1" path="M560 198 C600 198 610 198 648 198"/>
+    </circle>
+    <circle r="4" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.84;0.86;0.94;0.96;1" dur="7.2s" repeatCount="indefinite"/>
+      <animateMotion dur="7.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.84;0.96;1" path="M560 224 C600 224 610 262 648 265"/>
+    </circle>
+  </g>
+
+  <g>
+    <!-- view halos -->
+    <rect x="644" y="100" width="284" height="62" rx="12" fill="#3B5BDB" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.18;0" keyTimes="0;0.94;0.975;1" dur="7.2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="644" y="167" width="284" height="62" rx="12" fill="#3B5BDB" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.18;0" keyTimes="0;0.94;0.975;1" dur="7.2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="644" y="234" width="284" height="62" rx="12" fill="#3B5BDB" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.18;0" keyTimes="0;0.94;0.975;1" dur="7.2s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- graph view -->
+    <rect x="648" y="104" width="276" height="54" rx="10" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.3"/>
+    <g stroke="#3B5BDB" stroke-width="1.3">
+      <line x1="672" y1="124" x2="694" y2="138"/>
+      <line x1="694" y1="138" x2="672" y2="146"/>
+      <circle cx="672" cy="124" r="4" fill="#3B5BDB"/>
+      <circle cx="694" cy="138" r="4" fill="#BAC8FF" stroke-width="1.2"/>
+      <circle cx="672" cy="146" r="4" fill="#BAC8FF" stroke-width="1.2"/>
+    </g>
+    <text x="716" y="128" font-size="13.5" font-weight="700" fill="#3049B5">Graph</text>
+    <text x="716" y="146" font-size="10.5" fill="#756D60">entities &amp; relationships</text>
+
+    <!-- timeline view -->
+    <rect x="648" y="171" width="276" height="54" rx="10" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.3"/>
+    <g stroke="#3B5BDB" stroke-width="1.3">
+      <line x1="666" y1="198" x2="700" y2="198"/>
+      <circle cx="671" cy="198" r="3.2" fill="#3B5BDB"/>
+      <circle cx="683" cy="198" r="3.2" fill="#BAC8FF"/>
+      <circle cx="695" cy="198" r="3.2" fill="#3B5BDB"/>
+    </g>
+    <text x="716" y="195" font-size="13.5" font-weight="700" fill="#3049B5">Timeline</text>
+    <text x="716" y="213" font-size="10.5" fill="#756D60">what happened, when, and why</text>
+
+    <!-- search view -->
+    <rect x="648" y="238" width="276" height="54" rx="10" fill="#FFFFFF" stroke="#3B5BDB" stroke-width="1.3"/>
+    <g stroke="#3B5BDB" stroke-width="1.6" fill="none">
+      <circle cx="678" cy="261" r="7"/>
+      <line x1="683.5" y1="266.5" x2="692" y2="275"/>
+    </g>
+    <text x="716" y="262" font-size="13.5" font-weight="700" fill="#3049B5">Search</text>
+    <text x="716" y="280" font-size="10.5" fill="#756D60">grounded answers across the world</text>
+  </g>
+
+  <text x="40" y="316" font-size="10.5" fill="#9A9284">stable IDs survive merges &amp; re-imports &#183; views rebuild from the log</text>
+</svg>

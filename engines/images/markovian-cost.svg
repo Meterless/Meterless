@@ -1,0 +1,72 @@
+<svg viewBox="0 0 960 340" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Markovian cost model: naive history accumulation grows quadratically while Markovian bounded state stays flat, saving 86 percent of input tokens at 20 steps</title>
+
+  <rect x="0.5" y="0.5" width="959" height="339" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <text x="40" y="52" font-size="24" font-weight="700" fill="#171310">The cost curve changes.</text>
+  <text x="40" y="76" font-size="13.5" fill="#756D60">Naive agents re-send the whole transcript every step. Markovian carries bounded state forward.</text>
+
+  <!-- ============ chart ============ -->
+  <g>
+    <!-- grid -->
+    <g stroke="#F0E8DA" stroke-width="1">
+      <line x1="64" y1="240" x2="560" y2="240"/>
+      <line x1="64" y1="192" x2="560" y2="192"/>
+      <line x1="64" y1="144" x2="560" y2="144"/>
+    </g>
+    <!-- axes -->
+    <g stroke="#C9BFAE" stroke-width="1.5" fill="none">
+      <line x1="64" y1="288" x2="560" y2="288"/>
+      <line x1="64" y1="288" x2="64" y2="96"/>
+    </g>
+    <text x="64" y="112" font-size="11" fill="#9A9284">cumulative input tokens</text>
+    <text x="560" y="306" font-size="11" fill="#9A9284" text-anchor="end">steps &#8594;</text>
+
+    <!-- the gap between the curves = your bill -->
+    <path d="M64 284 C230 278 420 240 556 108 L556 258 C420 266 230 276 64 284 Z" fill="#E03131" opacity="0.07">
+      <animate attributeName="opacity" values="0;0;0.07;0.07" keyTimes="0;0.56;0.62;1" dur="9s" repeatCount="indefinite"/>
+    </path>
+    <text x="400" y="215" font-size="12.5" font-style="italic" fill="#A6494E" opacity="0.9" text-anchor="middle">the gap is your bill
+      <animate attributeName="opacity" values="0;0;0.9;0.9" keyTimes="0;0.6;0.66;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+
+    <!-- naive curve: quadratic (base state fully drawn so static renderers show it) -->
+    <path d="M64 284 C230 278 420 240 556 108" fill="none" stroke="#6B655C" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="536" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" values="536;0;0" keyTimes="0;0.5;1" dur="9s" repeatCount="indefinite"/>
+    </path>
+    <!-- markovian: flat -->
+    <path d="M64 284 C230 276 420 266 556 258" fill="none" stroke="#E03131" stroke-width="3.5" stroke-linecap="round"
+          stroke-dasharray="494" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" values="494;0;0" keyTimes="0;0.5;1" dur="9s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- end markers + labels -->
+    <circle cx="556" cy="108" r="4.5" fill="#6B655C">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.53;1" dur="9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="556" cy="258" r="4.5" fill="#E03131">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.53;1" dur="9s" repeatCount="indefinite"/>
+    </circle>
+    <text x="544" y="124" font-size="12" font-weight="600" fill="#6B655C" text-anchor="end">full history &#183; grows every step
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.58;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+    <text x="544" y="248" font-size="12" font-weight="700" fill="#C22525" text-anchor="end">Markovian &#183; bounded state, flat
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.58;1" dur="9s" repeatCount="indefinite"/>
+    </text>
+  </g>
+
+  <!-- ============ stat panel ============ -->
+  <g transform="translate(764,186)">
+    <g>
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6;0.68;1" dur="9s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="scale" values="0.85;0.85;1;1" keyTimes="0;0.6;0.68;1" dur="9s" repeatCount="indefinite" additive="sum"/>
+      <text x="0" y="-26" font-size="58" font-weight="800" fill="#E03131" text-anchor="middle">86%</text>
+      <text x="0" y="2" font-size="14.5" font-weight="600" fill="#171310" text-anchor="middle">of input tokens saved at 20 steps</text>
+      <text x="0" y="24" font-size="10.5" fill="#9A9284" text-anchor="middle">modeled &#8212; worked example in the docs</text>
+    </g>
+    <rect x="-140" y="44" width="280" height="28" rx="8" fill="#171310"/>
+    <text x="0" y="62" font-size="11" fill="#7BF0C6" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Consolas, monospace">npx tsx scripts/measured-run.ts</text>
+    <text x="0" y="92" font-size="10.5" fill="#9A9284" text-anchor="middle">measure it on your machine</text>
+  </g>
+</svg>
