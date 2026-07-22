@@ -1,0 +1,225 @@
+<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Animated: Relay compiles one mission into 8 desktop windows, two agent cursors execute them in parallel with vision verification, and the risky final step halts at an amber approval gate</title>
+  <rect x="0.5" y="0.5" width="959" height="399" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <!-- header -->
+  <text x="40" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" letter-spacing="1.5" fill="#756D60">RELAY &#183; <tspan fill="#0D8048" font-weight="700">mission_q3_close</tspan></text>
+  
+  <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" text-anchor="end">
+    <circle cx="828" cy="26" r="3" fill="#0D8048"><animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/></circle>
+    <text x="920" y="30" fill="#756D60" letter-spacing="1">EXECUTING<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.7464;0.7564;1" dur="14s" repeatCount="indefinite"/></text>
+    <text x="920" y="30" fill="#B45309" letter-spacing="1" opacity="0">GATED<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7464;0.7564;1" dur="14s" repeatCount="indefinite"/></text>
+  </g>
+  <line x1="0" y1="44" x2="960" y2="44" stroke="#E7DFD3"/>
+
+  <!-- mission prompt -->
+  <rect x="40" y="56" width="880" height="30" rx="8" fill="#FFFFFF" stroke="#E7DFD3"/>
+  <rect x="48" y="62" width="58" height="18" rx="5" fill="#E6F2EC"/>
+  <text x="77" y="75" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9" font-weight="700" fill="#0D8048" text-anchor="middle">MISSION</text>
+  <text x="116" y="76" font-size="12" fill="#171310">Close the books for Q3, reconcile ledgers, update the model, draft the memo, notify finance.</text>
+  <rect x="726" y="64" width="6" height="14" fill="#171310"><animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/></rect>
+
+  <!-- 8 windows -->
+  
+  <g>
+    <rect x="40" y="100" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.1929;0.2107;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="54" cy="115" r="2.6" fill="#E8B4B0"/>
+    <circle cx="64" cy="115" r="2.6" fill="#EFD9A7"/>
+    <circle cx="74" cy="115" r="2.6" fill="#BFD8C2"/>
+    <text x="86" y="119" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">IB Trader</text>
+    <line x1="40" y1="126" x2="250" y2="126" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="54" y="146" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">reconcile positions</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="54" y="164" fill="#0D8048">&#10003; 42 rows &#183; reconciled<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1929;0.2107;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="54" y="172" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="54" y="172" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.0857;0.1929;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="264" y="100" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.2357;0.2536;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="278" cy="115" r="2.6" fill="#E8B4B0"/>
+    <circle cx="288" cy="115" r="2.6" fill="#EFD9A7"/>
+    <circle cx="298" cy="115" r="2.6" fill="#BFD8C2"/>
+    <text x="310" y="119" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">positions.csv</text>
+    <line x1="264" y1="126" x2="474" y2="126" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="278" y="146" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">export CSV</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="278" y="164" fill="#0D8048">&#10003; positions.csv &#183; 4.1 KB<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.2357;0.2536;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="278" y="172" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="278" y="172" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.1286;0.2357;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="488" y="100" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.3571;0.3750;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="502" cy="115" r="2.6" fill="#E8B4B0"/>
+    <circle cx="512" cy="115" r="2.6" fill="#EFD9A7"/>
+    <circle cx="522" cy="115" r="2.6" fill="#BFD8C2"/>
+    <text x="534" y="119" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Excel</text>
+    <line x1="488" y1="126" x2="698" y2="126" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="502" y="146" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">update Q3 model</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="502" y="164" fill="#0D8048">&#10003; model_v4.xlsx &#183; saved<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3571;0.3750;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="502" y="172" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="502" y="172" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.2500;0.3571;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="712" y="100" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.4000;0.4179;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="726" cy="115" r="2.6" fill="#E8B4B0"/>
+    <circle cx="736" cy="115" r="2.6" fill="#EFD9A7"/>
+    <circle cx="746" cy="115" r="2.6" fill="#BFD8C2"/>
+    <text x="758" y="119" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Docs</text>
+    <line x1="712" y1="126" x2="922" y2="126" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="726" y="146" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">draft memo</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="726" y="164" fill="#0D8048">&#10003; memo_q3.docx &#183; 420 words<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4000;0.4179;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="726" y="172" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="726" y="172" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.2929;0.4000;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="40" y="202" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.5214;0.5393;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="54" cy="217" r="2.6" fill="#E8B4B0"/>
+    <circle cx="64" cy="217" r="2.6" fill="#EFD9A7"/>
+    <circle cx="74" cy="217" r="2.6" fill="#BFD8C2"/>
+    <text x="86" y="221" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Stripe</text>
+    <line x1="40" y1="228" x2="250" y2="228" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="54" y="248" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">pull payouts</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="54" y="266" fill="#0D8048">&#10003; payouts &#183; $1.34M<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5214;0.5393;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="54" y="274" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="54" y="274" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.4143;0.5214;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="264" y="202" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.5643;0.5821;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="278" cy="217" r="2.6" fill="#E8B4B0"/>
+    <circle cx="288" cy="217" r="2.6" fill="#EFD9A7"/>
+    <circle cx="298" cy="217" r="2.6" fill="#BFD8C2"/>
+    <text x="310" y="221" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Slack</text>
+    <line x1="264" y1="228" x2="474" y2="228" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="278" y="248" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">notify #finance</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="278" y="266" fill="#0D8048">&#10003; posted to #finance<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5643;0.5821;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="278" y="274" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="278" y="274" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.4571;0.5643;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="488" y="202" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#0D8048;#0D8048" keyTimes="0;0.6857;0.7036;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="502" cy="217" r="2.6" fill="#E8B4B0"/>
+    <circle cx="512" cy="217" r="2.6" fill="#EFD9A7"/>
+    <circle cx="522" cy="217" r="2.6" fill="#BFD8C2"/>
+    <text x="534" y="221" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Drive</text>
+    <line x1="488" y1="228" x2="698" y2="228" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="502" y="248" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">archive /Q3</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="502" y="266" fill="#0D8048">&#10003; /Q3 &#183; 4 files uploaded<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6857;0.7036;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="502" y="274" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="502" y="274" width="182" height="4" rx="2" fill="#0D8048" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.5786;0.6857;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <g>
+    <rect x="712" y="202" width="210" height="88" rx="10" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1.3">
+      <animate attributeName="stroke" values="#E7DFD3;#E7DFD3;#B45309;#B45309" keyTimes="0;0.7286;0.7464;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="726" cy="217" r="2.6" fill="#E8B4B0"/>
+    <circle cx="736" cy="217" r="2.6" fill="#EFD9A7"/>
+    <circle cx="746" cy="217" r="2.6" fill="#BFD8C2"/>
+    <text x="758" y="221" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Outlook</text>
+    <line x1="712" y1="228" x2="922" y2="228" stroke="#E7DFD3" stroke-width="1"/>
+    <text x="726" y="248" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#3E3831">email ops (gated)</text>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+      <text x="726" y="266" fill="#B45309">&#9208; halt &#183; awaiting approval<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7286;0.7464;1" dur="14s" repeatCount="indefinite"/></text>
+    </g>
+    <rect x="726" y="274" width="182" height="4" rx="2" fill="#EFE9DD"/>
+    <rect x="726" y="274" width="182" height="4" rx="2" fill="#B45309" opacity="0.85">
+      <animate attributeName="width" values="0;0;182;182" keyTimes="0;0.6214;0.7286;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- agent cursors -->
+  
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="90 210;171 150;171 150;619 150;619 150;171 252;171 252;619 252;619 252;619 252" keyTimes="0.0000;0.0607;0.1929;0.2250;0.3571;0.3893;0.5214;0.5536;0.6857;1.0000" dur="14s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <path d="M0 0 L0 15 L4.4 11.6 L7 18.4 L9.6 17.4 L7 10.6 L13 10.6 Z" fill="#141311" stroke="#FFFFFF" stroke-width="1.1"/>
+    <text x="16" y="16" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" font-weight="700" fill="#141311">AGENT_A</text>
+  </g>
+  
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="830 210;395 150;395 150;843 150;843 150;395 252;395 252;843 252;843 252;843 252" keyTimes="0.0000;0.1036;0.2357;0.2679;0.4000;0.4321;0.5643;0.5964;0.7286;1.0000" dur="14s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <path d="M0 0 L0 15 L4.4 11.6 L7 18.4 L9.6 17.4 L7 10.6 L13 10.6 Z" fill="#0D8048" stroke="#FFFFFF" stroke-width="1.1"/>
+    <text x="16" y="16" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" font-weight="700" fill="#0D8048">AGENT_B</text>
+  </g>
+
+  <!-- footer: trace log + dispatch map -->
+  <line x1="0" y1="312" x2="960" y2="312" stroke="#E7DFD3"/>
+  <text x="40" y="330" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.2" fill="#9A9284">RELAY TRACE &#183; /.relay/missions/q3_close.log</text>
+  
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.0214;0.0429;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="341" fill="#0D8048" font-weight="700">BOOT</text>
+      <text x="106" y="341" fill="#3E3831">relay daemon · win32 hooks attached</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.0643;0.0857;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="352.5" fill="#0D8048" font-weight="700">PLAN</text>
+      <text x="106" y="352.5" fill="#3E3831">compiled &#8594; 8 windows · 2 agents in parallel</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3643;0.3857;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="364" fill="#0D8048" font-weight="700">VISION</text>
+      <text x="106" y="364" fill="#3E3831">verify(Excel) · ok</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5786;0.6000;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="375.5" fill="#0D8048" font-weight="700">DONE</text>
+      <text x="106" y="375.5" fill="#3E3831">Slack · posted to #finance</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7429;0.7643;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="387" fill="#B45309" font-weight="700">GATE</text>
+      <text x="106" y="387" fill="#3E3831">Outlook · halt · awaiting approval</text>
+    </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+    <text x="640" y="330" font-size="8.5" letter-spacing="1.2" fill="#9A9284">PARALLEL DISPATCH</text>
+    <text x="640" y="348" fill="#171310" font-weight="700">AGENT_A</text>
+    <text x="712" y="348" fill="#3E3831">W1 &#8594; W3 &#8594; W5 &#8594; W7</text>
+    <text x="640" y="364" fill="#0D8048" font-weight="700">AGENT_B</text>
+    <text x="712" y="364" fill="#3E3831">W2 &#8594; W4 &#8594; W6 &#8594; W8</text>
+    <rect x="640" y="374" width="180" height="5" rx="2.5" fill="#EFE9DD"/>
+    <rect x="640" y="374" width="0" height="5" rx="2.5" fill="#0D8048">
+      <animate attributeName="width" values="0;22.5;45.0;67.5;90.0;112.5;135.0;157.5;157.5" keyTimes="0;0.2107;0.2536;0.3750;0.4179;0.5393;0.5821;0.7036;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <text x="832" y="381" fill="#756D60">7/8<tspan fill="#B45309"> &#183; W8 gated</tspan><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7464;0.7664;1" dur="14s" repeatCount="indefinite"/></text>
+  </g>
+</svg>

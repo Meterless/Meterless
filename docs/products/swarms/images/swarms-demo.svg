@@ -1,0 +1,485 @@
+<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Animated: Swarms forks one prompt into 32 parallel variants that stream in as they finish, then critiques, ranks, and reconciles them down to a best result</title>
+  <rect x="0.5" y="0.5" width="959" height="399" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <!-- header -->
+  <text x="40" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" letter-spacing="1.5" fill="#756D60">SWARMS &#183; <tspan fill="#7928CA" font-weight="700">batch_9f2a</tspan> &#183; RUNNING</text>
+  <circle cx="806" cy="26" r="3" fill="#7928CA"><animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/></circle>
+  
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#756D60" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.24;0.245;1" dur="14s" repeatCount="indefinite"/>FORKING</text>
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#756D60" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.24;0.245;0.58;0.585;1" dur="14s" repeatCount="indefinite"/>GENERATING</text>
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#756D60" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.58;0.585;0.84;0.845;1" dur="14s" repeatCount="indefinite"/>CRITIQUING</text>
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#7928CA" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.84;0.845;1;1;1" dur="14s" repeatCount="indefinite"/>RANKED</text>
+  <line x1="0" y1="44" x2="960" y2="44" stroke="#E7DFD3"/>
+
+  <!-- prompt -->
+  <rect x="40" y="56" width="880" height="30" rx="8" fill="#FFFFFF" stroke="#E7DFD3"/>
+  <rect x="48" y="62" width="58" height="18" rx="5" fill="#F1E8FA"/>
+  <text x="77" y="75" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9" font-weight="700" fill="#7928CA" text-anchor="middle">PROMPT</text>
+  <text x="116" y="76" font-size="12" fill="#171310">Generate 32 variants of a minimalist landing page for &#8220;Atlas.&#8221;</text>
+  <rect x="520" y="64" width="6" height="14" fill="#171310"><animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/></rect>
+
+  <!-- 32 variant tiles -->
+  
+  <g>
+    <rect x="40" y="108" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1143;0.1357;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="40" y="108" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="50" cy="117" r="2.5" fill="hsl(20 55% 66%)"/>
+      <rect x="102" y="115.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="125" width="54" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="48" y="133" width="40" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="141" width="16" height="6" rx="3" fill="hsl(20 55% 66%)"/>
+      <text x="128" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.50</text>
+    </g>
+  </g>
+  <g>
+    <rect x="144" y="108" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1568;0.1782;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="144" y="108" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="154" cy="117" r="2.5" fill="hsl(41 55% 48%)"/>
+      <rect x="206" y="115.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="125" width="47" height="4" rx="2" fill="#4A4438"/>
+      <rect x="152" y="133" width="21" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="141" width="16" height="6" rx="3" fill="hsl(41 55% 48%)"/>
+      <text x="232" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.67</text>
+    </g>
+  </g>
+  <g>
+    <rect x="248" y="108" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1962;0.2176;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="248" y="108" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="258" cy="117" r="2.5" fill="hsl(146 55% 48%)"/>
+      <rect x="310" y="115.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="125" width="40" height="4" rx="2" fill="#4A4438"/>
+      <rect x="256" y="133" width="46" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="141" width="16" height="6" rx="3" fill="hsl(146 55% 48%)"/>
+      <text x="336" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.57</text>
+    </g>
+  </g>
+  <g>
+    <rect x="352" y="108" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1945;0.2159;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="352" y="108" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="362" cy="117" r="2.5" fill="hsl(167 55% 48%)"/>
+      <rect x="414" y="115.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="125" width="61" height="4" rx="2" fill="#4A4438"/>
+      <rect x="360" y="133" width="27" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="141" width="16" height="6" rx="3" fill="hsl(167 55% 48%)"/>
+      <text x="440" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.74</text>
+    </g>
+  </g>
+  <g>
+    <rect x="456" y="108" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.2338;0.2553;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="456" y="108" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="466" cy="117" r="2.5" fill="hsl(52 55% 66%)"/>
+      <rect x="518" y="115.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="125" width="58" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="464" y="133" width="32" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="141" width="16" height="6" rx="3" fill="hsl(52 55% 66%)"/>
+      <text x="544" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.64</text>
+    </g>
+  </g>
+  <g>
+    <rect x="560" y="108" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.2286;0.2500;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="560" y="108" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="570" cy="117" r="2.5" fill="hsl(157 55% 48%)"/>
+      <rect x="622" y="115.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="125" width="51" height="4" rx="2" fill="#4A4438"/>
+      <rect x="568" y="133" width="57" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="141" width="16" height="6" rx="3" fill="hsl(157 55% 48%)"/>
+      <text x="648" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.53</text>
+    </g>
+  </g>
+  <g>
+    <rect x="664" y="108" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.2715;0.2929;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="664" y="108" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="674" cy="117" r="2.5" fill="hsl(178 55% 48%)"/>
+      <rect x="726" y="115.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="125" width="44" height="4" rx="2" fill="#4A4438"/>
+      <rect x="672" y="133" width="38" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="141" width="16" height="6" rx="3" fill="hsl(178 55% 48%)"/>
+      <text x="752" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.71</text>
+    </g>
+  </g>
+  <g>
+    <rect x="768" y="108" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3104;0.3319;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="768" y="108" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="778" cy="117" r="2.5" fill="hsl(63 55% 48%)"/>
+      <rect x="830" y="115.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="125" width="41" height="4" rx="2" fill="#4A4438"/>
+      <rect x="776" y="133" width="43" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="141" width="16" height="6" rx="3" fill="hsl(63 55% 48%)"/>
+      <text x="856" y="147" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.60</text>
+    </g>
+  </g>
+  <g>
+    <rect x="40" y="160" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3087;0.3302;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="40" y="160" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="50" cy="169" r="2.5" fill="hsl(84 55% 66%)"/>
+      <rect x="102" y="167.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="177" width="34" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="48" y="185" width="24" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="193" width="16" height="6" rx="3" fill="hsl(84 55% 66%)"/>
+      <text x="128" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.78</text>
+    </g>
+  </g>
+  <g>
+    <rect x="144" y="160" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3481;0.3696;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="144" y="160" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="154" cy="169" r="2.5" fill="hsl(189 55% 48%)"/>
+      <rect x="206" y="167.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="177" width="55" height="4" rx="2" fill="#4A4438"/>
+      <rect x="152" y="185" width="49" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="193" width="16" height="6" rx="3" fill="hsl(189 55% 48%)"/>
+      <text x="232" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.67</text>
+    </g>
+  </g>
+  <g>
+    <rect x="248" y="160" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3429;0.3643;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="248" y="160" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="258" cy="169" r="2.5" fill="hsl(74 55% 48%)"/>
+      <rect x="310" y="167.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="177" width="52" height="4" rx="2" fill="#4A4438"/>
+      <rect x="256" y="185" width="54" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="193" width="16" height="6" rx="3" fill="hsl(74 55% 48%)"/>
+      <text x="336" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.57</text>
+    </g>
+  </g>
+  <g>
+    <rect x="352" y="160" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3858;0.4072;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="352" y="160" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="362" cy="169" r="2.5" fill="hsl(95 55% 48%)"/>
+      <rect x="414" y="167.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="177" width="45" height="4" rx="2" fill="#4A4438"/>
+      <rect x="360" y="185" width="35" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="193" width="16" height="6" rx="3" fill="hsl(95 55% 48%)"/>
+      <text x="440" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.74</text>
+    </g>
+  </g>
+  <g>
+    <rect x="456" y="160" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4252;0.4466;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="456" y="160" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="466" cy="169" r="2.5" fill="hsl(200 55% 66%)"/>
+      <rect x="518" y="167.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="177" width="38" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="464" y="185" width="20" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="193" width="16" height="6" rx="3" fill="hsl(200 55% 66%)"/>
+      <text x="544" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.64</text>
+    </g>
+  </g>
+  <g>
+    <rect x="560" y="160" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4195;0.4409;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="560" y="160" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="570" cy="169" r="2.5" fill="hsl(85 55% 48%)"/>
+      <rect x="622" y="167.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="177" width="35" height="4" rx="2" fill="#4A4438"/>
+      <rect x="568" y="185" width="25" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="193" width="16" height="6" rx="3" fill="hsl(85 55% 48%)"/>
+      <text x="648" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.53</text>
+    </g>
+  </g>
+  <g>
+    <rect x="664" y="160" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4624;0.4838;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="664" y="160" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="674" cy="169" r="2.5" fill="hsl(106 55% 48%)"/>
+      <rect x="726" y="167.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="177" width="56" height="4" rx="2" fill="#4A4438"/>
+      <rect x="672" y="185" width="46" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="193" width="16" height="6" rx="3" fill="hsl(106 55% 48%)"/>
+      <text x="752" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.71</text>
+    </g>
+  </g>
+  <g>
+    <rect x="768" y="160" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4571;0.4786;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="768" y="160" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="778" cy="169" r="2.5" fill="hsl(211 55% 48%)"/>
+      <rect x="830" y="167.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="177" width="49" height="4" rx="2" fill="#4A4438"/>
+      <rect x="776" y="185" width="31" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="193" width="16" height="6" rx="3" fill="hsl(211 55% 48%)"/>
+      <text x="856" y="199" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.60</text>
+    </g>
+  </g>
+  <g>
+    <rect x="40" y="212" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5001;0.5215;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="40" y="212" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="50" cy="221" r="2.5" fill="hsl(232 55% 66%)"/>
+      <rect x="102" y="219.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="229" width="42" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="48" y="237" width="52" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="245" width="16" height="6" rx="3" fill="hsl(232 55% 66%)"/>
+      <text x="128" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.78</text>
+    </g>
+  </g>
+  <g>
+    <rect x="144" y="212" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5395;0.5609;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="144" y="212" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="154" cy="221" r="2.5" fill="hsl(117 55% 48%)"/>
+      <rect x="206" y="219.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="229" width="39" height="4" rx="2" fill="#4A4438"/>
+      <rect x="152" y="237" width="57" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="245" width="16" height="6" rx="3" fill="hsl(117 55% 48%)"/>
+      <text x="232" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.68</text>
+    </g>
+  </g>
+  <g>
+    <rect x="248" y="212" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5342;0.5556;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="248" y="212" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="258" cy="221" r="2.5" fill="hsl(222 55% 48%)"/>
+      <rect x="310" y="219.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="229" width="60" height="4" rx="2" fill="#4A4438"/>
+      <rect x="256" y="237" width="42" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="245" width="16" height="6" rx="3" fill="hsl(222 55% 48%)"/>
+      <text x="336" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.57</text>
+    </g>
+  </g>
+  <g>
+    <rect x="352" y="212" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5771;0.5986;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="352" y="212" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="362" cy="221" r="2.5" fill="hsl(23 55% 48%)"/>
+      <rect x="414" y="219.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="229" width="57" height="4" rx="2" fill="#4A4438"/>
+      <rect x="360" y="237" width="43" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="245" width="16" height="6" rx="3" fill="hsl(23 55% 48%)"/>
+      <text x="440" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.75</text>
+    </g>
+  </g>
+  <g>
+    <rect x="456" y="212" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5714;0.5929;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="456" y="212" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="466" cy="221" r="2.5" fill="hsl(128 55% 66%)"/>
+      <rect x="518" y="219.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="229" width="50" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="464" y="237" width="28" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="245" width="16" height="6" rx="3" fill="hsl(128 55% 66%)"/>
+      <text x="544" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.64</text>
+    </g>
+  </g>
+  <g>
+    <rect x="560" y="212" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6144;0.6358;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="560" y="212" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#7928CA" stroke-width="1.6"/>
+      <circle cx="570" cy="221" r="2.5" fill="hsl(149 55% 48%)"/>
+      <rect x="622" y="219.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="229" width="43" height="4" rx="2" fill="#4A4438"/>
+      <rect x="568" y="237" width="49" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="245" width="16" height="6" rx="3" fill="hsl(149 55% 48%)"/>
+      <text x="648" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#7928CA" text-anchor="end">0.82</text>
+    </g>
+  </g>
+  <g>
+    <rect x="664" y="212" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6537;0.6752;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="664" y="212" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="674" cy="221" r="2.5" fill="hsl(34 55% 48%)"/>
+      <rect x="726" y="219.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="229" width="40" height="4" rx="2" fill="#4A4438"/>
+      <rect x="672" y="237" width="54" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="245" width="16" height="6" rx="3" fill="hsl(34 55% 48%)"/>
+      <text x="752" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.71</text>
+    </g>
+  </g>
+  <g>
+    <rect x="768" y="212" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6485;0.6699;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="768" y="212" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="778" cy="221" r="2.5" fill="hsl(139 55% 48%)"/>
+      <rect x="830" y="219.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="229" width="61" height="4" rx="2" fill="#4A4438"/>
+      <rect x="776" y="237" width="39" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="245" width="16" height="6" rx="3" fill="hsl(139 55% 48%)"/>
+      <text x="856" y="251" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.61</text>
+    </g>
+  </g>
+  <g>
+    <rect x="40" y="264" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6914;0.7129;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="40" y="264" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="50" cy="273" r="2.5" fill="hsl(160 55% 66%)"/>
+      <rect x="102" y="271.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="281" width="54" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="48" y="289" width="20" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="48" y="297" width="16" height="6" rx="3" fill="hsl(160 55% 66%)"/>
+      <text x="128" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.78</text>
+    </g>
+  </g>
+  <g>
+    <rect x="144" y="264" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6862;0.7076;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="144" y="264" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="154" cy="273" r="2.5" fill="hsl(45 55% 48%)"/>
+      <rect x="206" y="271.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="281" width="51" height="4" rx="2" fill="#4A4438"/>
+      <rect x="152" y="289" width="25" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="152" y="297" width="16" height="6" rx="3" fill="hsl(45 55% 48%)"/>
+      <text x="232" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.68</text>
+    </g>
+  </g>
+  <g>
+    <rect x="248" y="264" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7251;0.7465;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="248" y="264" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="258" cy="273" r="2.5" fill="hsl(150 55% 48%)"/>
+      <rect x="310" y="271.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="281" width="44" height="4" rx="2" fill="#4A4438"/>
+      <rect x="256" y="289" width="50" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="256" y="297" width="16" height="6" rx="3" fill="hsl(150 55% 48%)"/>
+      <text x="336" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.57</text>
+    </g>
+  </g>
+  <g>
+    <rect x="352" y="264" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7680;0.7895;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="352" y="264" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="362" cy="273" r="2.5" fill="hsl(171 55% 48%)"/>
+      <rect x="414" y="271.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="281" width="37" height="4" rx="2" fill="#4A4438"/>
+      <rect x="360" y="289" width="31" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="360" y="297" width="16" height="6" rx="3" fill="hsl(171 55% 48%)"/>
+      <text x="440" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.75</text>
+    </g>
+  </g>
+  <g>
+    <rect x="456" y="264" width="96" height="44" rx="7" fill="#1B1622" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7628;0.7842;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="456" y="264" width="96" height="44" rx="7" fill="#241E2E" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="466" cy="273" r="2.5" fill="hsl(56 55% 66%)"/>
+      <rect x="518" y="271.5" width="26" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="281" width="34" height="4" rx="2" fill="#EDE6F5"/>
+      <rect x="464" y="289" width="36" height="2.5" rx="1.25" fill="#5E5570"/>
+      <rect x="464" y="297" width="16" height="6" rx="3" fill="hsl(56 55% 66%)"/>
+      <text x="544" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.64</text>
+    </g>
+  </g>
+  <g>
+    <rect x="560" y="264" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8057;0.8271;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="560" y="264" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="570" cy="273" r="2.5" fill="hsl(77 55% 48%)"/>
+      <rect x="622" y="271.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="281" width="55" height="4" rx="2" fill="#4A4438"/>
+      <rect x="568" y="289" width="57" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="568" y="297" width="16" height="6" rx="3" fill="hsl(77 55% 48%)"/>
+      <text x="648" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.82</text>
+    </g>
+  </g>
+  <g>
+    <rect x="664" y="264" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8004;0.8219;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="664" y="264" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="674" cy="273" r="2.5" fill="hsl(182 55% 48%)"/>
+      <rect x="726" y="271.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="281" width="48" height="4" rx="2" fill="#4A4438"/>
+      <rect x="672" y="289" width="42" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="672" y="297" width="16" height="6" rx="3" fill="hsl(182 55% 48%)"/>
+      <text x="752" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.71</text>
+    </g>
+  </g>
+  <g>
+    <rect x="768" y="264" width="96" height="44" rx="7" fill="#F4EEE3" opacity="0.5"/>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8398;0.8613;1" dur="14s" repeatCount="indefinite"/>
+      <rect x="768" y="264" width="96" height="44" rx="7" fill="#FFFFFF" stroke="#E7DFD3" stroke-width="1"/>
+      <circle cx="778" cy="273" r="2.5" fill="hsl(67 55% 48%)"/>
+      <rect x="830" y="271.5" width="26" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="281" width="45" height="4" rx="2" fill="#4A4438"/>
+      <rect x="776" y="289" width="47" height="2.5" rx="1.25" fill="#D9CFC0"/>
+      <rect x="776" y="297" width="16" height="6" rx="3" fill="hsl(67 55% 48%)"/>
+      <text x="856" y="303" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="7.5" fill="#756D60" text-anchor="end">0.61</text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <line x1="0" y1="312" x2="960" y2="312" stroke="#E7DFD3"/>
+  <text x="40" y="330" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.2" fill="#9A9284">SWARM STREAM &#183; /.swarms/batch_9f2a/run.log</text>
+  
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.0357;0.0571;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="341" fill="#7928CA" font-weight="700">SPAWN</text>
+      <text x="110" y="341" fill="#3E3831">batch_9f2a · 32-way parallel fork initiated</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.3000;0.3214;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="352.5" fill="#7928CA" font-weight="700">GEN</text>
+      <text x="110" y="352.5" fill="#3E3831">#07 · 1,842 tok</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5286;0.5500;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="364" fill="#7928CA" font-weight="700">MERGE</text>
+      <text x="110" y="364" fill="#3E3831">#14 &#8596; #21 · reconciling</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7286;0.7500;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="375.5" fill="#7928CA" font-weight="700">CRITIC</text>
+      <text x="110" y="375.5" fill="#3E3831">#29 · scored 0.94</text>
+    </g>
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8684;0.8898;1" dur="14s" repeatCount="indefinite"/>
+      <text x="56" y="387" fill="#7928CA" font-weight="700">DONE</text>
+      <text x="110" y="387" fill="#3E3831">best=#21 · score=0.82</text>
+    </g>
+
+  <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5">
+    <text x="640" y="330" font-size="8.5" letter-spacing="1.2" fill="#9A9284">TELEMETRY</text>
+    <text x="640" y="350" fill="#756D60">done</text>
+    <rect x="640" y="358" width="180" height="5" rx="2.5" fill="#EFE9DD"/>
+    <rect x="640" y="358" width="0" height="5" rx="2.5" fill="#7928CA">
+      <animate attributeName="width" values="0;5.6;11.3;16.9;22.5;28.1;33.8;39.4;45.0;50.6;56.3;61.9;67.5;73.1;78.8;84.4;90.0;95.6;101.3;106.9;112.5;118.1;123.8;129.4;135.0;140.6;146.3;151.9;157.5;163.1;168.8;174.4;180.0;180" keyTimes="0;0.1143;0.1568;0.1945;0.1962;0.2286;0.2338;0.2715;0.3087;0.3104;0.3429;0.3481;0.3858;0.4195;0.4252;0.4571;0.4624;0.5001;0.5342;0.5395;0.5714;0.5771;0.6144;0.6485;0.6537;0.6862;0.6914;0.7251;0.7628;0.7680;0.8004;0.8057;0.8398;1" dur="14s" repeatCount="indefinite"/>
+    </rect>
+    <text x="832" y="364" fill="#756D60">32/32<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8398;0.8613;1" dur="14s" repeatCount="indefinite"/></text>
+    <text x="640" y="381" fill="#756D60" opacity="0">best <tspan fill="#7928CA" font-weight="700">#21 &#183; 0.82</tspan> &#183; ranked, reconciled, refined<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8684;0.8898;1" dur="14s" repeatCount="indefinite"/></text>
+  </g>
+</svg>

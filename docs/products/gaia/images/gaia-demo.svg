@@ -1,0 +1,168 @@
+<svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Animated: the Gaia cognitive kernel boots — a core wakes, four rings of specialist brains come online and orbit it, and the workspace reports memory, goals, decisions, and artifacts linked across sessions</title>
+  <defs>
+    <radialGradient id="gaiaCore" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#7FB7FF"/>
+      <stop offset="55%" stop-color="#0A72EF"/>
+      <stop offset="100%" stop-color="#0A4FA8"/>
+    </radialGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="959" height="459" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+
+  <!-- header -->
+  <text x="40" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" letter-spacing="1.5" fill="#756D60">GAIA &#183; <tspan fill="#0A72EF" font-weight="700">COGNITIVE KERNEL</tspan> &#183; 12 BRAINS</text>
+  <circle cx="806" cy="26" r="3" fill="#0A72EF"><animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/></circle>
+  
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#756D60" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.26;0.265;1" dur="18s" repeatCount="indefinite"/>WAKING</text>
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#756D60" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.26;0.265;0.62;0.625;1" dur="18s" repeatCount="indefinite"/>LINKING</text>
+    <text x="920" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="1" fill="#0A72EF" text-anchor="end" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.62;0.625;1;1;1" dur="18s" repeatCount="indefinite"/>ONLINE</text>
+  <line x1="0" y1="44" x2="960" y2="44" stroke="#E7DFD3"/>
+
+  <text x="40" y="70" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.6" fill="#9A9284">GAIA OS &#183; NEURAL MESH</text>
+
+  <!-- orbital mesh -->
+  
+  <circle cx="430" cy="222" r="52" fill="none" stroke="#4A90E2" stroke-width="1" opacity="0">
+    <animate attributeName="opacity" values="0;0.45" begin="0.6s" dur="0.6s" fill="freeze"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 430 222" to="360 430 222" dur="26s" repeatCount="indefinite"/>
+    
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="1s" dur="0.5s" fill="freeze"/>
+      <circle cx="482.0" cy="222.0" r="9" fill="#4A90E2" opacity="0.18"/>
+      <circle cx="482.0" cy="222.0" r="4.2" fill="#4A90E2"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="1.25s" dur="0.5s" fill="freeze"/>
+      <circle cx="404.0" cy="267.0" r="9" fill="#4A90E2" opacity="0.18"/>
+      <circle cx="404.0" cy="267.0" r="4.2" fill="#4A90E2"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="1.5s" dur="0.5s" fill="freeze"/>
+      <circle cx="404.0" cy="177.0" r="9" fill="#4A90E2" opacity="0.18"/>
+      <circle cx="404.0" cy="177.0" r="4.2" fill="#4A90E2"/>
+    </g>
+  </g>
+  <circle cx="430" cy="222" r="87" fill="none" stroke="#50E3C2" stroke-width="1" opacity="0">
+    <animate attributeName="opacity" values="0;0.45" begin="1.5s" dur="0.6s" fill="freeze"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 430 222" to="-360 430 222" dur="34s" repeatCount="indefinite"/>
+    
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="1.9s" dur="0.5s" fill="freeze"/>
+      <circle cx="491.5" cy="283.5" r="9" fill="#50E3C2" opacity="0.18"/>
+      <circle cx="491.5" cy="283.5" r="4.2" fill="#50E3C2"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="2.15s" dur="0.5s" fill="freeze"/>
+      <circle cx="346.0" cy="244.5" r="9" fill="#50E3C2" opacity="0.18"/>
+      <circle cx="346.0" cy="244.5" r="4.2" fill="#50E3C2"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="2.4s" dur="0.5s" fill="freeze"/>
+      <circle cx="452.5" cy="138.0" r="9" fill="#50E3C2" opacity="0.18"/>
+      <circle cx="452.5" cy="138.0" r="4.2" fill="#50E3C2"/>
+    </g>
+  </g>
+  <circle cx="430" cy="222" r="122" fill="none" stroke="#F5A623" stroke-width="1" opacity="0">
+    <animate attributeName="opacity" values="0;0.45" begin="2.4s" dur="0.6s" fill="freeze"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 430 222" to="360 430 222" dur="44s" repeatCount="indefinite"/>
+    
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="2.8s" dur="0.5s" fill="freeze"/>
+      <circle cx="430.0" cy="344.0" r="9" fill="#F5A623" opacity="0.18"/>
+      <circle cx="430.0" cy="344.0" r="4.2" fill="#F5A623"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="3.05s" dur="0.5s" fill="freeze"/>
+      <circle cx="324.3" cy="161.0" r="9" fill="#F5A623" opacity="0.18"/>
+      <circle cx="324.3" cy="161.0" r="4.2" fill="#F5A623"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="3.3s" dur="0.5s" fill="freeze"/>
+      <circle cx="535.7" cy="161.0" r="9" fill="#F5A623" opacity="0.18"/>
+      <circle cx="535.7" cy="161.0" r="4.2" fill="#F5A623"/>
+    </g>
+  </g>
+  <circle cx="430" cy="222" r="157" fill="none" stroke="#BD10E0" stroke-width="1" opacity="0">
+    <animate attributeName="opacity" values="0;0.45" begin="3.3000000000000003s" dur="0.6s" fill="freeze"/>
+  </circle>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 430 222" to="-360 430 222" dur="56s" repeatCount="indefinite"/>
+    
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="3.7s" dur="0.5s" fill="freeze"/>
+      <circle cx="319.0" cy="333.0" r="9" fill="#BD10E0" opacity="0.18"/>
+      <circle cx="319.0" cy="333.0" r="4.2" fill="#BD10E0"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="3.95s" dur="0.5s" fill="freeze"/>
+      <circle cx="389.4" cy="70.3" r="9" fill="#BD10E0" opacity="0.18"/>
+      <circle cx="389.4" cy="70.3" r="4.2" fill="#BD10E0"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;1" begin="4.2s" dur="0.5s" fill="freeze"/>
+      <circle cx="581.7" cy="262.6" r="9" fill="#BD10E0" opacity="0.18"/>
+      <circle cx="581.7" cy="262.6" r="4.2" fill="#BD10E0"/>
+    </g>
+  </g>
+
+  <!-- core -->
+  <circle cx="430" cy="222" r="34" fill="#0A72EF" opacity="0.14">
+    <animate attributeName="r" values="30;40;30" dur="3.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="430" cy="222" r="21" fill="url(#gaiaCore)">
+    <animate attributeName="r" values="20;22.5;20" dur="3.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- legend -->
+  
+    <g transform="translate(700 120)">
+      <circle cx="0" cy="-4" r="4" fill="#4A90E2"/>
+      <text x="14" y="0" font-size="12.5" font-weight="700" fill="#171310">Execution</text>
+      <text x="14" y="17" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Forge &#183; Runtime &#183; Scribe</text>
+    </g>
+    <g transform="translate(700 178)">
+      <circle cx="0" cy="-4" r="4" fill="#50E3C2"/>
+      <text x="14" y="0" font-size="12.5" font-weight="700" fill="#171310">Perception</text>
+      <text x="14" y="17" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Scout &#183; Librarian &#183; Sentinel</text>
+    </g>
+    <g transform="translate(700 236)">
+      <circle cx="0" cy="-4" r="4" fill="#F5A623"/>
+      <text x="14" y="0" font-size="12.5" font-weight="700" fill="#171310">Intelligence</text>
+      <text x="14" y="17" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Oracle &#183; Weaver &#183; Miner</text>
+    </g>
+    <g transform="translate(700 294)">
+      <circle cx="0" cy="-4" r="4" fill="#BD10E0"/>
+      <text x="14" y="0" font-size="12.5" font-weight="700" fill="#171310">Autonomy</text>
+      <text x="14" y="17" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Commander &#183; Healer &#183; Wanderer</text>
+    </g>
+  <text x="700" y="368" font-size="11" fill="#9A9284">Every brain writes into one shared</text>
+  <text x="700" y="384" font-size="11" fill="#9A9284">context &#8212; independent of the model</text>
+  <text x="700" y="400" font-size="11" fill="#9A9284">that created it.</text>
+
+  <!-- status -->
+  
+  <g text-anchor="middle" opacity="0">
+    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.26;0.268;1" dur="18s" repeatCount="indefinite"/>
+    <text x="430" y="416" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="11.5" letter-spacing="2" fill="#171310" font-weight="700">INITIALIZING NEURAL MESH</text>
+    <text x="430" y="434" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.4" fill="#756D60">KERNEL WAKE</text>
+  </g>
+  <g text-anchor="middle" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.26;0.268;0.62;0.628;1" dur="18s" repeatCount="indefinite"/>
+    <text x="430" y="416" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="11.5" letter-spacing="2" fill="#171310" font-weight="700">12 BRAINS ONLINE</text>
+    <text x="430" y="434" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.4" fill="#756D60">EXECUTION &#183; PERCEPTION &#183; INTELLIGENCE &#183; AUTONOMY</text>
+  </g>
+  <g text-anchor="middle" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.62;0.628;1;1;1" dur="18s" repeatCount="indefinite"/>
+    <text x="430" y="416" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="11.5" letter-spacing="2" fill="#171310" font-weight="700">CONTEXT LINKED</text>
+    <text x="430" y="434" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.4" fill="#756D60">MEMORY &#183; GOALS &#183; DECISIONS &#183; ARTIFACTS &#183; CARRIED FORWARD</text>
+  </g>
+</svg>
