@@ -5,8 +5,8 @@
 // 3. Root AGENTS.md stays under 100 lines (it is a router, not a manual).
 // 4. Banned strings: old org paths, meterless-ai, workspace tooling files.
 // 5. No package.json at repo root (spec v2 prohibition; engine-local is fine).
-// 6. No em dashes in the root-authored file set (tone rule; migrated engine
-//    prose is exempt and the list below is therefore an explicit include list).
+// 6. No em dashes in any Markdown, text or SVG file (tone rule). Generated
+//    eval reports are exempt because the eval runner writes them.
 // Exit 0 = clean, exit 1 = violations found.
 
 import fs from "node:fs";
@@ -66,27 +66,26 @@ function walkText(dir) {
 }
 walkText(ROOT);
 
-// Em-dash check: explicit include list of root-authored files only.
-const EM_DASH_FILES = [
-  "README.md", "AGENTS.md", "CONTRIBUTING.md", "ROADMAP.md", "CHANGELOG.md",
-  "SECURITY.md", "CODE_OF_CONDUCT.md", "llms.txt", "docs/index.md",
-  "docs/architecture/why-meterless.md", "docs/architecture/stack-overview.md",
-  "docs/architecture/local-first-agentic-context.md",
-  "docs/engines/hmem.md", "docs/engines/world-model.md", "docs/engines/markovian.md",
-  "docs/agent-ready/using-with-claude-code.md", "docs/agent-ready/using-with-cursor.md",
-  "docs/community/hackathon-guide.md",
-  "docs/products/gaia/README.md", "docs/products/relay/README.md", "docs/products/swarms/README.md",
-];
-for (const rel of EM_DASH_FILES) {
-  const p = path.join(ROOT, rel);
-  if (!fs.existsSync(p)) continue;
-  const text = fs.readFileSync(p, "utf-8");
-  const idx = text.indexOf("—");
-  if (idx !== -1) {
-    const line = text.slice(0, idx).split("\n").length;
-    problems.push(`em dash in ${rel}:${line} (tone rule: root-authored prose uses no em dashes)`);
+// Em-dash check: every Markdown, text and SVG file, except generated eval reports.
+const EM_DASH_EXT = new Set([".md", ".txt", ".svg"]);
+const EM_DASH_SKIP = [path.join("evals", "reports") + path.sep];
+function walkEmDash(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (SKIP_DIRS.has(e.name)) continue;
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) { walkEmDash(p); continue; }
+    if (!EM_DASH_EXT.has(path.extname(e.name))) continue;
+    const rel = path.relative(ROOT, p);
+    if (EM_DASH_SKIP.some((s) => rel.includes(s))) continue;
+    const text = fs.readFileSync(p, "utf-8");
+    const m = text.match(/—|&#8212;/);
+    if (m) {
+      const line = text.slice(0, m.index).split("\n").length;
+      problems.push(`em dash in ${rel}:${line} (tone rule: no em dashes in prose)`);
+    }
   }
 }
+walkEmDash(ROOT);
 
 if (problems.length) {
   console.error(`check-conventions: ${problems.length} violation(s):`);

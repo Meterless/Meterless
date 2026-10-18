@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-[`03-mine-from-document`](../03-mine-from-document/README.md) mines one small file. Real document memory means **corpora**: large files that must be chunked, documents that get re-imported when they change, and source material that must never leak verbatim into a prompt.
+[`03-mine-from-document`](../03-mine-from-document/README.md) mines one small file. Real document memory means corpora: large files that must be chunked, documents that get re-imported when they change, and source material that must never leak verbatim into a prompt.
 
 Prerequisite reading: [`docs/mining-pipeline.md`](../../docs/mining-pipeline.md), [`docs/privacy-and-local-first.md`](../../docs/privacy-and-local-first.md).
 
@@ -25,7 +25,7 @@ for (const [i, chunk] of chunks.entries()) {
 }
 ```
 
-Every memory mined from any chunk is tagged `source:doc:architecture-spec.md` — provenance is per *document*, not per chunk, so a later trace points at the file, not an internal offset.
+Every memory mined from any chunk is tagged `source:doc:architecture-spec.md`. Provenance is per document, not per chunk, so a later trace points at the file instead of an internal offset.
 
 ## Re-ingest when the document changes
 
@@ -58,8 +58,8 @@ This is why document memories carry a stable `source:doc:` tag: re-ingest can re
 ## Why it matters
 
 - **Provenance survives chunking.** An operator asking "where did this requirement come from?" gets the document, never an opaque chunk id.
-- **Re-ingest is reconciliation, not re-insert.** Documents change. Treating re-import as a fresh mine is a primary source of memory rot; similarity-checking against the source tag is the fix.
-- **Documents are private by default.** Imported files are treated as sensitive source material. The mined *fact* can be reused; the raw text cannot be reinjected without redaction.
+- **Re-ingest reconciles instead of re-inserting.** Documents change. Treating re-import as a fresh mine is a primary source of memory rot; similarity-checking against the source tag is the fix.
+- **Documents are private by default.** Imported files are treated as sensitive source material. The mined fact can be reused; the raw text cannot be reinjected without redaction.
 
 ## Related
 

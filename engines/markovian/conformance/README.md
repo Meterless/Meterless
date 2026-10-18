@@ -9,7 +9,7 @@ cd ../reference && npm install   # once
 npx tsx ../conformance/runner.ts
 ```
 
-## Run against YOUR implementation
+## Run against your implementation
 
 ```bash
 MARKOVIAN_IMPL=/abs/path/to/your/index.ts npx tsx runner.ts

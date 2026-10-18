@@ -2,9 +2,7 @@
 
 # Meterless Scout Intent
 
-### **Choose the right move before you act.**
-
-Intent sensing. Risk checks. Tool routing. Recommended action.
+Scout senses intent, checks risk, routes tools, and recommends an action before your agent acts.
 
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-black.svg?style=flat-square)](./LICENSE)
 [![Local-first](https://img.shields.io/badge/local--first-✓-black.svg?style=flat-square)](#why-scout)
@@ -29,26 +27,26 @@ Then open the folder in Claude Code or another coding agent and follow this fold
 
 | You get | You build |
 |---|---|
-| The full spec ([`AGENTS.md`](AGENTS.md)), 9 deep-dive docs, 11 examples, 4 workshops, a REAL runnable eval harness with a locked regression set | The engine itself, in your stack; verify it with `SCOUT_IMPL=<path> npm run evals` |
+| The full spec ([`AGENTS.md`](AGENTS.md)), 9 deep-dive docs, 11 examples, 4 workshops, a runnable eval harness with a locked regression set | The engine itself, in your stack; verify it with `SCOUT_IMPL=<path> npm run evals` |
 
 ---
 
 
-> **Status: implementation spec.** This repository is the canonical specification for Scout — the pipeline docs, contract schema, policy-pack design, examples, and eval harness. **`@meterless/scout` is not published to npm; there is no `src/` directory, by design.** The code samples throughout show the specified API surface an implementation must satisfy; the eval harness (fixtures, thresholds, runner) is real and runs against your implementation via `SCOUT_IMPL`.
+> **Status: implementation spec.** This repository is the canonical specification for Scout: the pipeline docs, contract schema, policy-pack design, examples, and eval harness. `@meterless/scout` is not published to npm, and there is no `src/` directory by design. The code samples show the specified API surface an implementation must satisfy. The eval harness (fixtures, thresholds, runner) is real and runs against your implementation via `SCOUT_IMPL`.
 
 ## The problem
 
-Every agent stack eventually grows a second nervous system bolted to the side of the LLM call: routing tables, tool filters, prompt-injection guards, model selectors, confidence thresholds, retry policies. It starts as three `if` statements. It ends as the buggiest layer in the codebase, sitting between the user and every action the agent ever takes.
+Every agent stack eventually grows a second decision layer bolted to the side of the LLM call: routing tables, tool filters, prompt-injection guards, model selectors, confidence thresholds, retry policies. It starts as three `if` statements. It ends as the buggiest layer in the codebase, sitting between the user and every action the agent takes.
 
-Scout is that layer, **built as a first-class engine** instead of accumulated as glue.
+Scout is that layer, built as a first-class engine instead of accumulated glue.
 
 Before any model runs, before any tool fires, before any swarm spins up, Scout:
 
-1. **Senses** the user's intent — structured, scored, multi-label
-2. **Checks risk** — prompt injection, policy violations, scope drift
-3. **Routes tools** — the right capability for this intent, this user, this context
-4. **Selects a model** — the right model profile for cost, latency, capability
-5. **Emits an execution contract** — a single signed object the downstream system can verify
+1. **Senses** the user's intent: structured, scored, multi-label
+2. **Checks risk**: prompt injection, policy violations, scope drift
+3. **Routes tools**: the right capability for this intent, this user, this context
+4. **Selects a model**: the right model profile for cost, latency, capability
+5. **Emits an execution contract**: a single signed object the downstream system can verify
 
 Then the action runs. With the contract in hand, every step is auditable.
 
@@ -86,7 +84,7 @@ Scout is a single library. It runs entirely client-side by default. It produces 
 
 ## Quickstart
 
-This is the specified API. `@meterless/scout` is **not yet published** — you cannot `npm install` it today; the snippet below is the surface a conforming implementation exposes.
+This is the specified API. No package is published to npm, so you cannot `npm install` it. `@meterless/scout` in the snippet below names your implementation, and the snippet shows the surface a conforming implementation exposes.
 
 ```ts
 import { Scout } from "@meterless/scout";
@@ -109,7 +107,7 @@ console.log(decision.toolPlan);          // [{ tool: "world.query", ... }, { too
 console.log(decision.executionContract); // signed object the downstream engines accept
 ```
 
-Five-minute setup. Zero backend required.
+A conforming implementation needs no backend.
 
 [Full quickstart →](./docs/architecture.md#quickstart)
 
@@ -122,7 +120,7 @@ Scout's runtime is a five-stage pipeline. Each stage is documented in depth and 
 <table>
   <tr>
     <td><img src="images/Scout_Intent_Interpret.png" alt="Interpret what it means: turn raw input into resolved intent, entities and constraints, goal mapping, and context explanation" width="410" /></td>
-    <td><img src="images/Scout_Intent_Guard.png" alt="Guard what matters: run risk, safety, and policy checks before action — detect injection, enforce policy, block unsafe tool or model use, keep decisions auditable" width="410" /></td>
+    <td><img src="images/Scout_Intent_Guard.png" alt="Guard what matters: run risk, safety, and policy checks before action. Detect injection, enforce policy, block unsafe tool or model use, keep decisions auditable" width="410" /></td>
   </tr>
   <tr>
     <td><img src="images/Scout_Intent_Route.png" alt="Route to the right tools: select the best model, tools, and workflow before execution, ranked by score" width="410" /></td>
@@ -141,21 +139,21 @@ Scout's runtime is a five-stage pipeline. Each stage is documented in depth and 
 
 Operations:
 
-- [Eval harness](./docs/eval-harness.md) — the locked regression set and the metrics that gate releases
-- [Telemetry and learning](./docs/telemetry-and-learning.md) — what gets logged, how the system improves
+- [Eval harness](./docs/eval-harness.md): the locked regression set and the metrics that gate releases
+- [Telemetry and learning](./docs/telemetry-and-learning.md): what gets logged, how the system improves
 
 ---
 
 ## Evals
 
-**This is the unique asset of this repo.** Scout's whole job is making decisions. If you can't measure decision quality, you don't have an intent layer — you have a rubber stamp.
+The eval harness is the most important part of this folder. Scout's job is making decisions, so decision quality has to be measured. An intent layer without evals approves whatever it is given.
 
 Scout ships with a complete evaluation harness:
 
-- **Locked regression set** — versioned `prompt → expected intent / risk / tool plan` fixtures (v1 is a 32-example smoke set; ≥ 50 per intent family is the growth target before the thresholds count as measured)
-- **Gated metrics** — intent top-1, intent top-3 recall, injection detection precision/recall, tool selection precision, clarification rate, user override frequency
-- **Slice reports** — performance broken down by surface, user role, intent family, risk class
-- **Drift detection** — alert when distribution shifts beyond a threshold (planned, see [roadmap](./ROADMAP.md))
+- **Locked regression set**: versioned `prompt → expected intent / risk / tool plan` fixtures (v1 is a 32-example smoke set; ≥ 50 per intent family is the growth target before the thresholds count as measured)
+- **Gated metrics**: intent top-1, intent top-3 recall, injection detection precision/recall, tool selection precision, clarification rate, user override frequency
+- **Slice reports**: performance broken down by surface, user role, intent family, risk class
+- **Drift detection**: alert when distribution shifts beyond a threshold (planned, see [roadmap](./ROADMAP.md))
 
 Run it against your implementation of the spec:
 
@@ -194,17 +192,17 @@ See [`evals/`](./evals) and [`docs/eval-harness.md`](./docs/eval-harness.md).
 
 **Signed execution contracts.** Downstream engines refuse to act on unsigned plans. That single property eliminates an entire class of bug where agents wander outside their declared scope.
 
-**Locked regression set.** Every change to the intent registry, scoring pipeline, or policy pack runs against versioned fixtures. Releases are gated by metrics, not vibes.
+**Locked regression set.** Every change to the intent registry, scoring pipeline, or policy pack runs against versioned fixtures. Metrics gate every release.
 
-**Glass-box decisions.** Every decision emits structured telemetry — what was scored, what was blocked, what was routed where, with confidence. Downstream replay is trivial.
+**Glass-box decisions.** Every decision emits structured telemetry: what was scored, what was blocked, what was routed where, with confidence. Downstream replay is straightforward.
 
-**Local-first.** The classifier, the guard, and the router run client-side by default. Models can be local (WebLLM) or remote (BYOK). The decision layer is yours.
+**Local-first.** The classifier, the guard, and the router run client-side by default. Models can be local (WebLLM) or remote (BYOK). You own the decision layer.
 
 ---
 
 ## Compose with the Meterless engine stack
 
-Scout is one of five engines. They compose:
+Scout is one of the Meterless engines. They compose:
 
 ```
 User / Event
@@ -222,9 +220,11 @@ Verified Output / Action / Updated Memory
 - **World Model** gives applications shared state.
 - **Scout Intent** decides what should happen next.
 - **Markovian Engine** handles long work in bounded chunks.
-- **Agent Orchestration** coordinates many agents into governed outcomes.
+- **Agent Orchestration** coordinates many agents into governed outcomes. Its swarm-orchestration spec is next on the [repo roadmap](../../ROADMAP.md).
 
 Scout sits at the front. Every other engine is downstream of its execution contract. See [`examples/route-to-markovian`](./examples/route-to-markovian), [`examples/scout-to-swarm`](./examples/scout-to-swarm), and [`examples/query-hmem-before-action`](./examples/query-hmem-before-action) for the integration patterns.
+
+Meterless's flagship product is Nightshift, which turns a Mac or DGX Spark into an AI hotspot. Gaia, Relay and Swarms are free apps, and the engines are the open context layer underneath them. Scout runs in [Relay](../../docs/products/relay/README.md), which tags intent as you type and matches verified skills, and in [Swarms](../../docs/products/swarms/README.md), which classifies what kind of work a prompt is.
 
 ---
 
@@ -244,18 +244,18 @@ Scout sits at the front. Every other engine is downstream of its execution contr
 
 Education-first, in the spirit of 12-Factor Agents:
 
-- [Workshop 01 — Build your first intent registry](./workshops/01-build-an-intent-registry.md)
-- [Workshop 02 — Block your first injection](./workshops/02-block-an-injection.md)
-- [Workshop 03 — Route to the right downstream engine](./workshops/03-route-downstream.md)
-- [Workshop 04 — Lock in evals and ship safely](./workshops/04-lock-in-evals.md)
+- [Workshop 01: Build your first intent registry](./workshops/01-build-an-intent-registry.md)
+- [Workshop 02: Block your first injection](./workshops/02-block-an-injection.md)
+- [Workshop 03: Route to the right downstream engine](./workshops/03-route-downstream.md)
+- [Workshop 04: Lock in evals and ship safely](./workshops/04-lock-in-evals.md)
 
 ---
 
 ## Contributing
 
-- 🐛 [Report a bug](https://github.com/meterless/meterless/issues)
-- 💡 [Propose an intent or policy](https://github.com/meterless/meterless/issues)
-- 📖 [Contributor guide](./CONTRIBUTING.md)
+- [Report a bug](https://github.com/meterless/meterless/issues)
+- [Propose an intent or policy](https://github.com/meterless/meterless/issues)
+- [Contributor guide](./CONTRIBUTING.md)
 
 ---
 
@@ -266,8 +266,6 @@ Apache 2.0.
 ---
 
 <div align="center">
-
-**Choose the right move before you act.**
 
 Part of the [Meterless engine stack](https://github.com/meterless/meterless) · [meterless.ai](https://www.meterless.ai)
 

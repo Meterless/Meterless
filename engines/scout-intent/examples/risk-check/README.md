@@ -1,6 +1,6 @@
-# 03 — Risk check
+# 03: Risk check
 
-The guard stage. Scout runs every prompt through policy, scope, PII, and injection checks **before** context assembly — so a malicious retrieval cannot poison the check that is supposed to catch it.
+This example covers the guard stage. Scout runs every prompt through policy, scope, PII, and injection checks before context assembly, so a malicious retrieval cannot poison the check that is supposed to catch it.
 
 Prerequisite reading: [`docs/risk-and-policy.md`](../../docs/risk-and-policy.md).
 
@@ -12,7 +12,7 @@ Four prompts through the same guard stack: one clean, one with PII, one scope-cr
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Scout } from "@meterless/scout";
@@ -35,8 +35,8 @@ for (const prompt of prompts) {
 ## Run it
 
 ```bash
-# The @meterless packages are not yet published — this repository is the
-# implementation spec. With a spec-conforming implementation on your import path:
+# No @meterless package is published. @meterless/scout names your own
+# spec-conforming implementation. With it on your import path:
 npx tsx ./index.ts
 ```
 
@@ -56,11 +56,11 @@ block  flags=["injection.instruction_override"] mitigations=["block"]
 | clean summarize | low | none | proceeds normally |
 | email + SSN | medium | `redact` | PII masked before it reaches any model; logged |
 | cross-tenant dump | medium | `require_confirmation` | pipeline pauses for explicit user/operator approval |
-| instruction override | block | `block` | **terminal** — no context, no tools, no model. Refused. A `block` from any guard layer sets `level: "block"` and can never be overridden by a later stage. |
+| instruction override | block | `block` | terminal: no context, no tools, no model. Refused. A `block` from any guard layer sets `level: "block"` and can never be overridden by a later stage. |
 
 ## The four threat classes the guard scans
 
-`instruction_override` · `role_confusion` · `data_exfiltration` · `tool_abuse` — plus `context_poisoning` and `indirect_injection`, which are re-scanned on retrieved snippets *after* context assembly (a second pass — see [`prompt-injection-block`](../prompt-injection-block/README.md)).
+`instruction_override` · `role_confusion` · `data_exfiltration` · `tool_abuse`, plus `context_poisoning` and `indirect_injection`, which are re-scanned on retrieved snippets after context assembly (a second pass; see [`prompt-injection-block`](../prompt-injection-block/README.md)).
 
 ## Redaction is structural, not a string replace
 
@@ -69,17 +69,17 @@ in:  "...about his SSN 123-45-6789"
 out: "...about his SSN [REDACTED:pii.ssn]"   ← the model never sees the digits
 ```
 
-The redaction is recorded on the contract's `risk.redactions[]` so an auditor can later confirm *what* was masked without ever storing the secret.
+The redaction is recorded on the contract's `risk.redactions[]` so an auditor can later confirm what was masked without ever storing the secret.
 
 ---
 
 ## Why it matters
 
-- **Guard runs before retrieval — order is the safety model.** Threat detection on raw input *first* means a poisoned document pulled into context cannot disable the very check meant to catch it. Reordering this stage is a safety bypass, not a refactor.
-- **`block` is terminal; the others are graduated.** A clean prompt flows; PII redacts; scope-creep pauses for confirmation; an injection is refused outright. The response is proportional to the threat class, not binary.
+- **Guard runs before retrieval, and that order is the safety model.** Threat detection on raw input first means a poisoned document pulled into context cannot disable the very check meant to catch it. Reordering this stage bypasses the safety model.
+- **`block` is terminal; the others are graduated.** A clean prompt flows; PII redacts; scope-creep pauses for confirmation; an injection is refused outright. The response is proportional to the threat class.
 - **Every mitigation is on the record.** `flags`, `mitigations`, and `redactions` ride on the execution contract. "Why was this paused?" / "what was masked?" are contract queries, not log archaeology.
 
 ## Next
 
-- [`prompt-injection-block`](../prompt-injection-block/README.md) — the injection path in depth, including the post-retrieval snippet pass.
-- [`04 — generate-execution-contract`](../generate-execution-contract/README.md) — how risk verdicts get sealed into the signed contract.
+- [`prompt-injection-block`](../prompt-injection-block/README.md): the injection path in depth, including the post-retrieval snippet pass.
+- [`04: generate-execution-contract`](../generate-execution-contract/README.md): how risk verdicts get sealed into the signed contract.

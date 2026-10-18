@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-[`07-conflict-resolution`](../07-conflict-resolution/README.md) walks one contradiction end to end. This scenario covers the operational reality: conflict detection is a **scheduled batch job** over the whole store, most resolutions are automatic, and the few ambiguous ones must escalate cleanly.
+[`07-conflict-resolution`](../07-conflict-resolution/README.md) walks one contradiction end to end. This scenario covers the operational reality: conflict detection is a scheduled batch job over the whole store, most resolutions are automatic, and the few ambiguous ones must escalate cleanly.
 
 Prerequisite reading: [`docs/conflict-resolution.md`](../../docs/conflict-resolution.md).
 
@@ -40,13 +40,13 @@ for (const c of detected) {
 | --- | --- | --- |
 | `conflict_a` | `keep_b` (newer correction) conf 0.90 | auto-resolved |
 | `conflict_b` | `keep_b` (newer, plan_completion source) conf 0.84 | auto-resolved |
-| `conflict_c` | formal vs casual, no clear winner, conf 0.52 | **escalated** |
-| `conflict_d` | likely *not* a real conflict, conf 0.44 | **escalated** |
+| `conflict_c` | formal vs casual, no clear winner, conf 0.52 | escalated |
+| `conflict_d` | likely not a real conflict, conf 0.44 | escalated |
 
 ## The two escalations are different
 
-- **`conflict_c`** is a *genuine* contradiction with no automatic winner — recency and source are tied. A human must pick; their choice is ledgered with `actor`.
-- **`conflict_d`** is a likely **false positive**: two standups for two teams. The correct human decision is `keep_both`. The scanner's confidence modifiers (shared entities raise confidence, explicit relations lower false positives) kept this one *below* threshold precisely so it would not auto-resolve into data loss.
+- **`conflict_c`** is a genuine contradiction with no automatic winner: recency and source are tied. A human must pick; their choice is ledgered with `actor`.
+- **`conflict_d`** is a likely false positive: two standups for two teams. The correct human decision is `keep_both`. The scanner's confidence modifiers (shared entities raise confidence, explicit relations lower false positives) kept this one below threshold so it would not auto-resolve into data loss.
 
 ## Ledger output
 
@@ -66,9 +66,9 @@ Every scan and decision is auditable:
 
 ## Why it matters
 
-- **Auto-resolve only above a confidence threshold; queue the rest.** Aggressive auto-resolution is how a memory store quietly destroys correct data. The threshold is a safety valve, not a tuning knob to crank toward "less human work."
+- **Auto-resolve only above a confidence threshold; queue the rest.** Aggressive auto-resolution is how a memory store quietly destroys correct data. The threshold is a safety valve. Do not lower it just to reduce human work.
 - **False positives must escalate, not resolve.** `conflict_d` shows why low confidence routes to a human: the safe answer (`keep_both`) is one a naive auto-decider would get wrong.
-- **The schedule matters.** Run daily. Stale contradictions that sit unresolved are exactly the first agent-memory failure mode in slow motion.
+- **The schedule matters.** Run daily. Stale contradictions that sit unresolved are the first agent-memory failure mode, building up slowly.
 
 ## Related
 

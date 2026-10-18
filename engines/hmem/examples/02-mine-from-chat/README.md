@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-Example [01](../01-add-memory/README.md) hand-built a record. Real systems do not get hand-built records — they get conversation. This example extracts a reusable memory from a raw chat turn using an event-specific extraction prompt, with a no-model fallback so input is never dropped.
+Example [01](../01-add-memory/README.md) hand-built a record. Real systems receive conversation instead of hand-built records. This example extracts a reusable memory from a raw chat turn using an event-specific extraction prompt, with a no-model fallback so input is never dropped.
 
 Prerequisite reading: [`docs/mining-pipeline.md`](../../docs/mining-pipeline.md).
 
@@ -71,7 +71,7 @@ await mining.ingest(
 
 ## The no-model fallback
 
-If the generator is unavailable, **do not drop the turn**. Capture a truncated short-term summary instead, so continuity is preserved and a later run can re-mine it.
+If the generator is unavailable, do not drop the turn. Capture a truncated short-term summary instead, so continuity is preserved and a later run can re-mine it.
 
 ```ts
 async function ingestWithFallback(event) {
@@ -127,4 +127,4 @@ On fallback the entry instead reads:
 
 ## Next
 
-[`03-mine-from-document`](../03-mine-from-document/README.md) — extraction from a file instead of a turn, with document provenance tags.
+[`03-mine-from-document`](../03-mine-from-document/README.md: extraction from a file instead of a turn, with document provenance tags.

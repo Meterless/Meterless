@@ -1,8 +1,8 @@
 # Architecture
 
-Scout is a five-stage decision pipeline that runs **before** every meaningful action your system takes. Its output is a single signed object — the execution contract — that downstream engines verify before they do anything.
+Scout is a five-stage decision pipeline that runs before every meaningful action your system takes. Its output is a single signed object, the execution contract, which downstream engines verify before they do anything.
 
-This document is the map. Each stage has its own doc going deeper.
+This document gives the overview. Each stage has its own doc with more detail.
 
 ## The shape
 
@@ -39,7 +39,7 @@ This document is the map. Each stage has its own doc going deeper.
 
 ### 1. Sense
 
-Classify intent from the raw input in two stages: a **Stage-1 deterministic trigger scan** over the full registry (always on, < 16 ms with a startup self-test) plus an optional **Stage-2 hybrid rescoring** with a small local model and contextual signals. Produces a **top-k list of scored intents**, not a single label.
+Classify intent from the raw input in two stages: a Stage-1 deterministic trigger scan over the full registry (always on, < 16 ms with a startup self-test) plus an optional Stage-2 hybrid rescoring with a small local model and contextual signals. The output is a top-k list of scored intents rather than a single label.
 
 Output:
 
@@ -72,10 +72,10 @@ Output:
 
 Run the request through the policy stack:
 
-- **Injection detection** — known patterns, model-based detection, role-confusion heuristics
-- **Policy gates** — RBAC, scope checks, per-tool allowlists
-- **Scope drift** — does this intent fit this user, this surface, this session?
-- **PII / sensitivity** — redact or block based on data class
+- **Injection detection**: known patterns, model-based detection, role-confusion heuristics
+- **Policy gates**: RBAC, scope checks, per-tool allowlists
+- **Scope drift**: does this intent fit this user, this surface, this session?
+- **PII / sensitivity**: redact or block based on data class
 
 Output:
 
@@ -90,7 +90,7 @@ See [`risk-and-policy.md`](./risk-and-policy.md).
 
 ### 4. Route
 
-Walk the **capability graph** to assemble a tool plan. Each intent declares the capabilities it needs; capabilities resolve to specific tools at runtime based on availability, permissions, and context.
+Walk the capability graph to assemble a tool plan. Each intent declares the capabilities it needs; capabilities resolve to specific tools at runtime based on availability, permissions, and context.
 
 Output:
 
@@ -105,7 +105,7 @@ See [`capability-graph.md`](./capability-graph.md).
 
 ### 5. Recommend
 
-Pick the **model profile** — cheap fast model for classification, capable model for synthesis, local model for sensitive data. Bundle the whole decision into a signed execution contract.
+Pick the model profile: a cheap fast model for classification, a capable model for synthesis, a local model for sensitive data. Bundle the whole decision into a signed execution contract.
 
 Output: see [`execution-contract.md`](./execution-contract.md).
 
@@ -113,10 +113,10 @@ Output: see [`execution-contract.md`](./execution-contract.md).
 
 The contract is the only thing downstream engines accept. It is:
 
-- **Structured** — schema-versioned, typed
-- **Signed** — HMAC over the canonical encoding
-- **Replayable** — every decision can be reconstructed from telemetry
-- **Auditable** — every contract has a trace ID and lineage
+- **Structured**: schema-versioned, typed
+- **Signed**: HMAC over the canonical encoding
+- **Replayable**: every decision can be reconstructed from telemetry
+- **Auditable**: every contract has a trace ID and lineage
 
 Engines refuse to act without a valid, fresh, scope-matching contract.
 
@@ -146,11 +146,11 @@ const result = await runDownstream(decision.executionContract);
 
 ## What's next
 
-- [Intent registry](./intent-registry.md) — declaring what your system can do
-- [Scoring](./scoring.md) — how candidate intents are ranked
-- [Risk and policy](./risk-and-policy.md) — guards, gates, and refusals
-- [Capability graph](./capability-graph.md) — intents → tools
-- [Model routing](./model-routing.md) — picking the right model
-- [Execution contract](./execution-contract.md) — the handoff format
-- [Eval harness](./eval-harness.md) — how releases are gated
-- [Telemetry and learning](./telemetry-and-learning.md) — the feedback loop
+- [Intent registry](./intent-registry.md): declaring what your system can do
+- [Scoring](./scoring.md): how candidate intents are ranked
+- [Risk and policy](./risk-and-policy.md): guards, gates, and refusals
+- [Capability graph](./capability-graph.md): intents → tools
+- [Model routing](./model-routing.md): picking the right model
+- [Execution contract](./execution-contract.md): the handoff format
+- [Eval harness](./eval-harness.md): how releases are gated
+- [Telemetry and learning](./telemetry-and-learning.md): the feedback loop

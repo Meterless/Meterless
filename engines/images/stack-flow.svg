@@ -92,5 +92,5 @@
     </circle>
   </g>
 
-  <text x="40" y="282" font-size="12" fill="#756D60">Scout signs an execution contract &#8212; downstream engines refuse unsigned plans.</text>
+  <text x="40" y="282" font-size="12" fill="#756D60">Scout signs an execution contract. Downstream engines refuse unsigned plans.</text>
 </svg>

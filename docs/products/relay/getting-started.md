@@ -1,38 +1,57 @@
-# Getting started
+# Getting started with Relay
 
-This walks you from "I just downloaded the installer" to "Relay just did a real thing on my computer" in about five minutes. No prior setup needed.
+This guide takes you from a fresh download to your first verified run on your own computer in about five minutes. No prior setup is needed.
 
-## 1. Install it
+<img src="images/relay-loop.svg" alt="The Relay loop: a plain-language instruction becomes a plan, pauses at an approval gate for sensitive steps, runs with verification, and is remembered so the next run is faster" width="100%" />
 
-Run the installer you downloaded from the [releases page](https://github.com/meterless/relay/releases) — either the `.msi` or the NSIS setup `.exe`. It's a normal Windows installer, the kind that asks where to put the app and then puts it there. Click through. The app will land in your Start menu under **Meterless Relay**.
+## What you need
 
-First time you launch it, give it a minute. Relay is unpacking some things and getting its local storage in order. After the first launch, it opens in a couple of seconds.
+- Windows 10 or 11.
+- A model. Bring an API key for a cloud provider, or run models locally through the Meterless Runtime.
+- Relay itself. It is free.
 
-If Windows SmartScreen pops up and tells you it's an unrecognized app, click **More info** and then **Run anyway**. SmartScreen builds reputation for new apps over time. We mention this in the troubleshooting page too.
+## 1. Download and install
 
-## 2. Add an API key
+Relay is a free Windows app with a 3.3 MB installer. The current version is v0.8.8. Get it from either place:
 
-Relay does the thinking by calling out to an AI model. You bring the key for whichever model you want to use. Out of the box, Relay supports Google Gemini, Anthropic, OpenAI, OpenCode Go, and OpenRouter.
+- [meterless.ai/relay](https://meterless.ai/relay.html)
+- [GitHub releases](https://github.com/meterless/relay/releases/latest)
 
-Click the gear icon in the top right of the app. Pick **Models**. Paste your key into the box for the provider you want to use. Click **Test connection**. If you see a green check, you're set.
+Want all three free Meterless apps? The Meterless Suite installer bundles Gaia, Relay and Swarms with the engines preconfigured. Get it from the [free tools page](https://www.meterless.ai/tools.html).
 
-If you don't have a key, the easiest one to get started with is a free Gemini API key from Google AI Studio. It takes about a minute to sign up.
+Run the installer. GitHub releases offer an `.msi` and an NSIS setup `.exe`. Either works. It is a standard Windows installer that asks where to put the app, so you can click through. The app lands in your Start menu under Meterless Relay.
+
+The first launch can take a little longer while Relay sets up its local storage. After that, it opens in a couple of seconds.
+
+If Windows SmartScreen says it is an unrecognized app, click More info and then Run anyway. SmartScreen builds reputation for new releases over time. The [troubleshooting page](troubleshooting.md) covers this too.
+
+## 2. Connect a model
+
+Relay does its thinking with an AI model you choose. Open Settings and go to the API Keys tab.
+
+**Option A: a cloud API key.** Relay supports Google Gemini, Anthropic, OpenAI, OpenCode Go and OpenRouter. Paste your key into the box for the provider you want and click Test connection. A green check means you are set. If you do not have a key, a free Gemini API key from Google AI Studio is the easiest start. It takes about a minute.
+
+**Option B: local models.** If you run [Nightshift](../nightshift/README.md) on a Mac or DGX edition, Relay can use its [hotspot](../nightshift/hotspot.md). Configure it under API Keys → Meterless Runtime. The default address is `http://127.0.0.1:8088/v1`. Then open Model Routing and pick a preset. Private (on-device) pins every task to local, so nothing leaves the machine.
+
+You can mix the two. Model Routing lets you pick a model per task: desktop planning, vision analysis and deep reasoning.
+
+<img src="media/tour-routing.webp" alt="Relay Settings open on Model Routing, with Meterless Runtime presets and a model for each of desktop planning, vision analysis and deep reasoning" width="720" />
 
 ## 3. Track a window
 
-This is the part that makes Relay different from other automation tools, and it's also the part new users skip and then wonder why nothing works. Take thirty seconds and do this properly.
+Window tracking sets Relay apart from other automation tools. New users often skip this step and then wonder why nothing works. Take thirty seconds and do it properly.
 
-Open the app you want Relay to control. Anything counts. A browser. Excel. QuickBooks. Your CRM. Whatever you actually use.
+Open the app you want Relay to control. It can be a browser, Excel, QuickBooks, your CRM, or whatever else you use.
 
-In Relay, click the **Tracked Windows** panel on the left. Click **Add window**. A list of every open window on your computer appears. Find the one you just opened and click it. It now shows up in the tracked windows panel with a little preview thumbnail.
+In Relay, open the Tracked Windows panel on the left. Click Add window. A list of every open window appears. Click the one you just opened. It now shows in the tracked windows panel with a preview thumbnail.
 
-You can track up to eight windows at the same time. Most useful workflows use two or three.
+You can track up to eight windows at once. Most useful workflows use two or three.
 
-## 4. Describe what you want done
+## 4. Describe the job
 
-Click the big text box in the middle. Type what you want, in normal English. Don't try to write it like a script. The more it sounds like something you'd say to a coworker, the better Relay handles it.
+Click the big text box in the middle. Type what you want in plain language. Do not write it like a script. The more it sounds like something you would say to a coworker, the better Relay handles it.
 
-Some examples that work well:
+Examples that work well:
 
 > *Open Notepad and write a one-line note that says "Reviewed at 3pm."*
 
@@ -40,36 +59,63 @@ Some examples that work well:
 
 > *Open the spreadsheet on my second monitor, copy the values in column B, and paste them into a new email in Outlook.*
 
-When you're ready, press **Enter** or click the send arrow.
+As you type, Relay tags the intent (a loop, a URL, an email) and shows a skill match if it has done this job before. A verified skill runs with one click and no re-planning.
 
-## 5. Look at the plan before you run it
+<img src="media/stage-01-describe.webp" alt="Relay goal box with intent chips for loop, open URL and email compose, and a verified skill match" width="360" />
 
-Relay does not jump straight to clicking. It takes a moment to research, look at your tracked windows, and write a plan. The plan appears in a panel on the right side of the app, broken into numbered phases like *open the app*, *find the chart*, *capture the screenshot*.
+When you are ready, press Enter or click the send arrow.
 
-Read it. If anything looks wrong, click **Cancel** and try rewording your goal. If it looks right, click **Run**.
+## 5. Read the plan before you run it
 
-This step is worth the few seconds it takes. It's the difference between automation that you trust and automation you have to babysit.
+Before it clicks anything, Relay snapshots your tracked windows, adds what it already knows about them, and compiles a mission. The mission is broken into phases, with targets, steps, failure policies and approval gates.
+
+<img src="media/stage-02-plan.webp" alt="Relay compiled mission with phases, steps, tracked windows and an approval gate" width="720" />
+
+Read it. If a step looks wrong, edit it inline. If the whole plan looks wrong, click Cancel and reword your goal. If it looks right, click Run.
+
+A few seconds of review here is how you build trust in the automation, so later runs need less watching.
 
 ## 6. Watch the first run
 
-While Relay runs, your mouse will move on its own. Don't fight it. If you need to stop, use the pause control in Relay — the workflow engine pauses cleanly between steps and you can resume when you're ready.
+While Relay runs, your mouse moves on its own. Do not fight it. Relay uses native clicks and keystrokes in your real apps, and each step targets a control by name. If you need to stop, use the pause control in Relay. The workflow engine pauses cleanly between steps, and you can resume when you are ready.
 
-When a phase needs your approval (this happens by default for anything that sends, posts, pays, or deletes), Relay will pause, surface a screenshot of what it's about to do, and wait for you to click **Continue** or **Cancel**.
+<img src="media/stage-03-run.webp" alt="Relay executing native clicks and keystrokes across the browser, Explorer, spreadsheet and mail" width="720" />
 
-When the run is done, anything Relay captured along the way lives in the **Workspace** tab. Files, screenshots, extracted data. It's all there, sorted by mission.
+## 7. Approve what matters
 
-## 7. Now do it again, faster
+When the plan reaches an approval gate, Relay pauses with the result on screen and waits. Gates are on by default for anything that sends, posts, pays or deletes. Approve and it finishes. Cancel and nothing happens.
 
-Go back to the goal box and press **Ctrl+↑**. Your previous goal is right there. You can edit it, submit it, and run a variation. Or you can click any past plan in your history and rerun it as-is.
+<img src="media/stage-04-approve.webp" alt="Relay paused at an approval gate with an email draft on screen" width="720" />
 
-The third or fourth time you run a similar workflow, you'll notice Relay's plans get shorter and faster. That's procedural memory kicking in. You don't have to do anything to turn it on. It just happens.
+If a step fails and its failure policy says to ask, Relay stops and asks you instead of guessing.
+
+## 8. Check the verdicts
+
+When the run ends, read the run report. Every step has a verdict. Relay checks with cheap UI Automation probes first and uses vision only when needed. The report shows what passed, what was skipped, and why.
+
+<img src="media/stage-05-verified.webp" alt="Relay run report with 16 steps passed, 1 skipped and 17 verified steps" width="720" />
+
+Values the run captured go to the Data Vault, where later runs and watches can use them. Files and screenshots go to your local workspace, grouped by mission.
+
+## 9. Keep what works
+
+A verified run can become a skill. Relay shows you a review diff first, and nothing is saved until you accept it. Next time, the skill replays deterministically and calls a model only to repair a step that drifted.
+
+<img src="media/tour-skills.webp" alt="Relay Skills list with deterministic execution ratio, cost per run and repair counts for each skill" width="360" />
+
+From there you can:
+
+- **Run it again.** Press Ctrl+↑ in the goal box to bring back your last goal, or open History and rerun any past plan.
+- **Schedule it.** Run it every weekday at 4:30, with window-readiness checks before each run.
+- **Watch a value.** Fire a mission when a captured value changes.
+
+Similar jobs also get shorter and faster on their own as procedural memory builds up. You do not have to turn that on.
 
 ---
 
 ## Where to go next
 
-- The full list of things Relay can do is in [features.md](features.md).
-- Keyboard shortcuts that will save you time are in [shortcuts.md](shortcuts.md).
-- If something isn't working, [troubleshooting.md](troubleshooting.md) probably has it.
-
-Welcome aboard.
+- Everything Relay can do is in [features.md](features.md).
+- Keyboard shortcuts, including Ctrl + K for the command palette, are in [shortcuts.md](shortcuts.md).
+- What stays on your machine is in [privacy.md](privacy.md).
+- If something is not working, check [troubleshooting.md](troubleshooting.md).

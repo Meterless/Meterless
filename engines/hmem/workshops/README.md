@@ -2,7 +2,7 @@
 
 Five hands-on labs that build a working H-MEM mental model from the data contract up to forensic operations. Each lab has an outcome, exercises with checkpoints, and a discussion that surfaces the design tension behind the feature.
 
-These are language-agnostic. Do the exercises in TypeScript, Python, Rust, or pseudocode — the contracts do not change.
+These are language-agnostic. Do the exercises in TypeScript, Python, Rust, or pseudocode. The contracts do not change.
 
 ---
 
@@ -10,7 +10,7 @@ These are language-agnostic. Do the exercises in TypeScript, Python, Rust, or ps
 
 | Lab | Title | You can, by the end | Builds on |
 | --- | --- | --- | --- |
-| [01](01-build-the-record.md) | Build the Record and Store | Capture, persist, and audit a memory record across tiers | — |
+| [01](01-build-the-record.md) | Build the Record and Store | Capture, persist, and audit a memory record across tiers | none |
 | [02](02-mine-and-enrich.md) | Mine and Enrich | Turn raw interactions into enriched memories with a no-model fallback | 01 |
 | [03](03-retrieve-and-reinject.md) | Retrieve and Reinject | Implement the hybrid ranker and grouped reinjection with trace | 02 |
 | [04](04-dream-and-sleep.md) | Dream and Sleep | Generate reviewed proposals and run preview-first maintenance | 03 |
@@ -39,7 +39,7 @@ Do not skip Lab 01. Every later lab assumes the ledger-on-every-mutation invaria
 ## Facilitator notes
 
 - Each lab is ~45–90 minutes depending on language and depth.
-- The discussion question at the end of each lab is the point — it exposes *why* the design is the way it is. Do not cut it for time.
+- The discussion question at the end of each lab is the point. It exposes why the design is the way it is. Do not cut it for time.
 - A correct lab solution should hold up against the matching eval category in [`evals/tests`](../evals/tests/README.md).
 
 Start with [`01-build-the-record.md`](01-build-the-record.md).

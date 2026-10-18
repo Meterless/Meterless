@@ -14,6 +14,12 @@ npx degit meterless/meterless/engines/scout-intent my-scout-intent
 
 Then open the folder in your coding agent and follow its AGENTS.md.
 
+## Where it runs today
+
+- [Relay](../products/relay/README.md) tags intent as you type (a loop, a URL, an email) and matches it to verified skills before any planning.
+- [Swarms](../products/swarms/README.md) classifies what kind of work a prompt is before it designs the swarm.
+- Harden your own app with it: the injection prompt in the [prompt library](../agent-ready/prompt-library.md) runs the guard against its own precision and recall targets.
+
 ## Links
 
 - Spec folder: [`engines/scout-intent/`](../../engines/scout-intent/)

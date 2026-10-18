@@ -18,10 +18,10 @@ This document codifies a production-ready Human Memory (H-MEM) architecture that
 
 ## 1) Core Design Principles
 
-- Treat memory as a **living knowledge graph**, not a flat note list.
-- Separate **what is remembered** from **how it is used in prompts**.
+- Treat memory as a linked knowledge graph rather than a flat note list.
+- Separate what is remembered from how it is used in prompts.
 - Keep provenance on every inferred memory (`source`, `derivedFrom`, `supersedes`, `relatedTo`).
-- Use a **human approval boundary** for high-impact synthesis (dream outputs).
+- Use a human approval boundary for high-impact synthesis (dream outputs).
 - Make every mutation auditable through a trust ledger.
 - Favor graceful degradation: when AI extraction is unavailable, fall back to direct capture.
 
@@ -36,9 +36,9 @@ Each memory record should contain:
 - `timestamp`, `lastAccessed`, `accessCount`
 - `tags`
 - Retrieval fields: lightweight `embedding`, runtime `score`
-- Reliability fields: `confidence`, `source` — **both mandatory**; a record with no `source` must be rejected by construction
-- Provenance: `provenance` object (`origin` enum, `learnedAt`, human-readable `label`, optional refs) — mandatory for new writes, derived for legacy rows
-- Scoping fields: `chatId`, `missionId`, `goalRunId` — chat-scoped and goal-run-isolated recall
+- Reliability fields: `confidence`, `source`. Both are mandatory. A record with no `source` must be rejected by construction.
+- Provenance: `provenance` object (`origin` enum, `learnedAt`, human-readable `label`, optional refs). Mandatory for new writes, derived for legacy rows.
+- Scoping fields: `chatId`, `missionId`, `goalRunId`, used for chat-scoped and goal-run-isolated recall
 - Hierarchy fields: `domain`, `namespace`
 - Graph fields:
   - `entities[]` (normalized entities with entity type; cap 10)
@@ -93,7 +93,7 @@ For each event type:
 
 1. Build an extraction prompt specialized to that event.
 2. Ask background model for strict JSON array of memory strings.
-3. Parse robustly (strip markdown fences, tolerate minor format noise).
+3. Parse tolerantly (strip markdown fences, tolerate minor format noise).
 4. Validate (string, minimum length).
 5. Add each item as memory with event-derived `type`, `tags`, and `source`.
 
@@ -136,7 +136,7 @@ Use bidirectional linking for related nodes where possible.
 
 ## 6) Reinjection (Retrieval -> Prompt Context)
 
-Reinjection is the operational heart of H-MEM.
+Reinjection is the path by which stored memory reaches model prompts.
 
 ### 6.1 Retrieval Ranking
 
@@ -186,7 +186,7 @@ This makes memory influence explicit, inspectable, and reusable across products.
 
 ## 7) Dreaming System (Constructive Synthesis)
 
-Dreaming is not cleanup; it is **new knowledge generation**.
+Dreaming generates new knowledge from existing memories. Cleanup belongs to the sleep cycle.
 
 ### 7.1 Inputs and Preparation
 
@@ -265,7 +265,7 @@ Trust is enforced by append-only audit behavior and feedback loops.
 
 ### 9.1 Audit Ledger
 
-Log every significant action — the canonical 17 types:
+Log every significant action. These are the canonical 17 types:
 
 `create, read, update, delete, feedback, promote, demote, merge, conflict_detected, conflict_resolved, sleep_consolidate, sleep_archive, sleep_synthesize, dream_proposed, dream_approved, dream_rejected, restore`
 
@@ -339,7 +339,7 @@ Implement as composable services:
 - `MemoryRetrievalService` (ranking, context packaging, trace metadata)
 - `DreamingService` (clustering + proposal generation + approval handling)
 - `SleepCycleService` (preview + execution + backup/report)
-- `TrustLedgerService` (audit ingest/query/stats/export; append-only, never destructively pruned — constrained clients archive-export and record `ledger_rotated` before trimming)
+- `TrustLedgerService` (audit ingest/query/stats/export; append-only and never destructively pruned; constrained clients archive-export and record `ledger_rotated` before trimming)
 - `ConflictDetectionService` (scan, classify, resolve, auto-decide)
 
 
@@ -382,7 +382,7 @@ Tune these per domain and user behavior.
 - [ ] Define canonical memory schema with lineage fields.
 - [ ] Implement tiered persistence and migration-safe loading.
 - [ ] Add acquisition hooks for all key event types.
-- [ ] Build extraction prompts + robust JSON parsing fallback.
+- [ ] Build extraction prompts + tolerant JSON parsing fallback.
 - [ ] Implement enrichment (domain, namespace, entities, relations).
 - [ ] Implement hybrid retrieval scoring and reinjection formatter.
 - [ ] Add memory trace metadata and feedback loop.

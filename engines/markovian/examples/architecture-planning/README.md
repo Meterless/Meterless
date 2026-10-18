@@ -2,9 +2,9 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`) — see [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
+> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`). See [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
 
-Long-form migration planning where the **decisions** are the payload. The counterpart to [`long-research-chain`](../long-research-chain/README.md): research accumulates findings; architecture planning accumulates *commitments that later steps must not contradict*. That makes carryover discipline the whole game.
+Long-form migration planning where the decisions are the payload. This is the counterpart to [`long-research-chain`](../long-research-chain/README.md). Research accumulates findings. Architecture planning accumulates commitments that later steps must not contradict, so carryover discipline decides whether the plan holds together.
 
 Prerequisite reading: [`long-research-chain`](../long-research-chain/README.md), [`docs/chunk-config.md`](../../docs/chunk-config.md), [`docs/reflection.md`](../../docs/reflection.md).
 
@@ -17,11 +17,11 @@ Goal: "Plan the migration of our analytics warehouse to Apache Iceberg.
        15 checkpoints: format, catalog, phasing, backfill, cutover, rollback."
 ```
 
-The danger in a decision-heavy chain: step 11 quietly re-litigates a choice made in step 3 because that decision fell out of carryover. The fix is decision-heavy carryover + a ratify reflection.
+The danger in a decision-heavy chain: step 11 quietly re-litigates a choice made in step 3 because that decision fell out of carryover. The fix is decision-heavy carryover plus a ratify reflection.
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian } from "@meterless/markovian";
@@ -40,7 +40,7 @@ After each checkpoint emit:
 DECISIONS:        <every committed choice, terse, NEVER drop one>
 OPEN_QUESTIONS:   <unresolved, with the step that must close it>
 CONSTRAINTS:      <hard constraints discovered so far>
-CHECKPOINT: X of ~15 — <name>
+CHECKPOINT: X of ~15: <name>
 </CARRYOVER>
 
 A DECISION, once in carryover, must be carried forward verbatim until the plan is done.
@@ -65,12 +65,12 @@ console.log(run.output);
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
 
-## Expected output (illustrative — modeled numbers, not a recorded run)
+## Expected output (illustrative; modeled numbers, not a recorded run)
 
 ```text
 15 chunks · 86% saved · reflection: ratified
@@ -94,17 +94,17 @@ checkpoint 12 DECISIONS: [..., rollback]                         ← nothing dro
 reflection    cross-checks: does the final plan honor every DECISION? → ratified
 ```
 
-If `DECISIONS` had been allowed to compress lossily, checkpoint 12's rollback plan might assume Delta Lake — contradicting checkpoint 1. The framing instruction *"carry decisions verbatim"* + a ratify pass is what prevents that.
+If `DECISIONS` had been allowed to compress lossily, checkpoint 12's rollback plan might assume Delta Lake and contradict checkpoint 1. The framing instruction "carry decisions verbatim" plus a ratify pass prevents that.
 
 ---
 
 ## Why it matters
 
-- **Decisions are not summarizable.** Findings can be compressed; a *commitment* cannot be paraphrased without risking contradiction 9 steps later. This is the case where you deliberately spend a larger `carryoverTokens` budget and instruct verbatim retention — the [`02 — custom-chunk-config`](../custom-chunk-config/README.md) trade-off, applied with intent.
-- **Ratify reflection is the integrity check, not a rewrite.** The chain never saw all 15 checkpoints at once. One read-only pass confirms the final plan honors every decision it committed to — the exact drift a bounded chain risks.
-- **86% saved, but feasibility is still the point.** A 15-checkpoint plan with full decision history would be a large, growing prompt. Flat cost is why this runs predictably; the decision discipline is why it runs *correctly*.
+- **Decisions must be carried verbatim.** Findings can be compressed. A commitment cannot be paraphrased without risking contradiction 9 steps later. Here you deliberately spend a larger `carryoverTokens` budget and instruct verbatim retention. This is the [02: `custom-chunk-config`](../custom-chunk-config/README.md) trade-off, applied on purpose.
+- **Ratify reflection is a read-only integrity check.** The chain never saw all 15 checkpoints at once. One read-only pass confirms the final plan honors every decision it committed to. That is the drift a bounded chain risks.
+- **86% saved, and the run stays feasible.** A 15-checkpoint plan with full decision history would be a large, growing prompt. Flat cost makes this run predictable. The decision discipline keeps it correct.
 
 ## Next
 
-- [`long-research-chain`](../long-research-chain/README.md) — the findings-heavy counterpart.
-- [`07 — reflection-pass`](../reflection-pass/README.md) — ratify vs refine vs branch-and-converge in depth.
+- [`long-research-chain`](../long-research-chain/README.md): the findings-heavy counterpart.
+- [07: `reflection-pass`](../reflection-pass/README.md): ratify vs refine vs branch-and-converge in depth.

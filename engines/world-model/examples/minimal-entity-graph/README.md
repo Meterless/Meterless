@@ -31,7 +31,7 @@ import { WorldModel } from "@meterless/world-model";
 
 const world = new WorldModel({ storage: "local", namespace: "minimal-graph" });
 
-// 1. Three entities. IDs are derived from the canonical key — not assigned.
+// 1. Three entities. IDs are derived from the canonical key, not assigned.
 await world.upsertEntity({
   type: "company",
   externalKey: { system: "domain", id: "acme.com" },
@@ -58,7 +58,7 @@ for (const id of ["ada", "grace"]) {
   });
 }
 
-// 3. Query the graph view — never the canonical store directly.
+// 3. Query the graph view, never the canonical store directly.
 const employees = await world.view("graph").neighborsOf("company:domain:acme.com", {
   via: "works-at",
   direction: "incoming",
@@ -70,7 +70,7 @@ console.log(employees.map((e) => e.attrs.name));
 
 ## Run it
 
-This repo is an implementation spec — `@meterless/world-model` is not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` is the name of your implementation, not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -94,10 +94,10 @@ Stable IDs collapse the duplicate writes at the boundary. This is the property e
 ## Why it matters
 
 - **IDs are derived, not assigned.** `person:email:ada@acme.com` is the same ID on every machine, every re-run, every backfill. No coordination, no renumbering.
-- **You query a view, not the store.** `view("graph")` is a rebuildable projection. Throw it away and re-project from the event log — the canonical store never changes.
+- **You query a view, not the store.** `view("graph")` is a rebuildable projection. Throw it away and re-project from the event log. The canonical store never changes.
 - **25 lines is the floor, not a toy.** This exact shape scales to the CRM, narrative, and news examples; only the entity types and views differ.
 
 ## Next
 
-- [`timeline-of-snapshots`](../timeline-of-snapshots/README.md) — add time: query the world as it was on a past date.
-- [`stream-clustered-facts`](../stream-clustered-facts/README.md) — add scale: ingest a messy stream and resolve entities online.
+- [`timeline-of-snapshots`](../timeline-of-snapshots/README.md): add time, query the world as it was on a past date.
+- [`stream-clustered-facts`](../stream-clustered-facts/README.md): add scale, ingest a messy stream and resolve entities online.

@@ -6,15 +6,15 @@ H-MEM is a hierarchical human-memory architecture for agents: short-term, workin
 
 ## Hero line
 
-> **Memory that remembers, learns, and evolves. Private. Local-first. Auditable.**
+> **H-MEM is a local-first, auditable memory architecture that learns from use.**
 
 ## The problem (one sentence)
 
-Every agent that ships to real users hits the same three walls — stale facts, black-box recall, and memory rot — and none of them is fixed by a better embedding model.
+Every agent that ships to real users hits the same three walls: stale facts, black-box recall, and memory rot. A better embedding model fixes none of them.
 
 ## Why now
 
-Agents moved from demos to production. Production needs memory that is **correctable** (a user fix sticks), **explainable** (you can answer "why did it know that?"), and **maintainable** (quality does not decay as the store grows). Vector recall alone delivers none of these.
+Agents moved from demos to production. Production needs memory that is correctable (a user fix sticks), explainable (you can answer "why did it know that?"), and maintainable (quality does not decay as the store grows). Vector recall alone delivers none of these.
 
 ## What is different
 
@@ -30,7 +30,7 @@ Agents moved from demos to production. Production needs memory that is **correct
 
 ## Proof point
 
-"Why did the agent say March 14?" → a five-line ledger trace: mined from a user correction, conflicted with the stale value, resolved by a named human, retrieved at a known score, marked helpful, consolidated with a backup id. Nothing hidden, nothing unattributed.
+"Why did the agent say March 14?" → a five-line ledger trace: mined from a user correction, conflicted with the stale value, resolved by a named human, retrieved at a known score, marked helpful, consolidated with a backup id. Every step is attributed.
 
 ## Adoption path
 
@@ -48,6 +48,6 @@ top-N 5 · threshold 0.35 · consolidate at 7d no access · archive at ≥30d, �
 
 ## One-line close
 
-> Memory should not just remember. It should learn, evolve, and explain itself.
+> Agent memory should learn from use, change over time, and explain itself.
 
 Architecture: [`docs/architecture.md`](../docs/architecture.md) · Demo: [`demos/memory-lifecycle-visual`](../demos/memory-lifecycle-visual/README.md) · Path: [`docs/practical-how-to.md`](../docs/practical-how-to.md)

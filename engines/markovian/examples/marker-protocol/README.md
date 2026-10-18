@@ -1,12 +1,12 @@
-# 03 — Marker protocol
+# 03: Marker protocol
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-Carryover between chunks is not free-form prose — it is structured markers the model emits and the engine reads. This example shows the parser handling every marker, a tool round-trip, and a malformed marker.
+Carryover between chunks uses structured markers that the model emits and the engine reads. This example shows the parser handling every marker, a tool round-trip, and a malformed marker.
 
 Prerequisite reading: [`docs/marker-protocol.md`](../../docs/marker-protocol.md).
 
-> **Note:** the canonical wire format is the bracket protocol (`[STATE_CHECKPOINT]`, `[TASK_COMPLETE]`, `[NEEDS_TOOL ...]`, `[NEEDS_CLARIFICATION]`). This example uses the documented **XML alternate mapping** (`<CARRYOVER>`, `<DONE>`, ...) for readability — the parser normalizes both to the same wire format.
+> **Note:** the canonical wire format is the bracket protocol (`[STATE_CHECKPOINT]`, `[TASK_COMPLETE]`, `[NEEDS_TOOL ...]`, `[NEEDS_CLARIFICATION]`). This example uses the documented XML alternate mapping (`<CARRYOVER>`, `<DONE>`, ...) for readability. The parser normalizes both to the same wire format.
 
 ---
 
@@ -24,7 +24,7 @@ A research chain that emits all five markers across its life:
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian } from "@meterless/markovian";
@@ -62,7 +62,7 @@ for (const c of run.chunks) {
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
@@ -83,10 +83,10 @@ run.output: "team:bengals is active, owned by team-x. ..."
 | --- | --- |
 | `<carryover>` lowercase, extra whitespace | accepted (tolerant) |
 | `<DONE/>` void with trailing slash | accepted |
-| prose wrapped around the markers | accepted — markers extracted |
-| `<CARRYOVER>` unclosed tag | **typed error**, recorded in run history |
+| prose wrapped around the markers | accepted; markers extracted |
+| `<CARRYOVER>` unclosed tag | typed error, recorded in run history |
 | carryover exceeding `carryoverTokens` | truncated + warning, run continues |
-| chunk emits **no** `<CARRYOVER>` | engine falls back to the [compression cascade](../compression-cascade/README.md) |
+| chunk emits no `<CARRYOVER>` | engine falls back to the [compression cascade](../compression-cascade/README.md) |
 
 ## The tool round-trip
 
@@ -96,17 +96,17 @@ engine:         pauses chunk scheduling → calls tools["world.query"] → gets 
 chunk 3:        receives result at the input slot (state.toolResult), continues
 ```
 
-The chain never ships the tool plumbing in its prompt — the result is injected as data into the next bounded chunk.
+The chain never ships the tool plumbing in its prompt. The result is injected as data into the next bounded chunk.
 
 ---
 
 ## Why it matters
 
-- **Structure survives compression; prose does not.** A model that writes "we discussed phases then the catalog choice…" is *summarizing* (drifts). A model that fills `DECISIONS:`/`OPEN_QUESTIONS:` is *structuring* — that is what survives the carryover boundary intact.
-- **The parser is tolerant on shape, strict on validity.** Whitespace, case, and surrounding prose are fine; unclosed tags are a typed error on the record, not a silent corruption. Failures are observable.
-- **Tools and clarifications are first-class pauses.** `<NEEDS_TOOL>` / `<NEEDS_CLARIFICATION>` let a bounded chunk reach outside itself without bloating its context — the engine handles the round-trip and resumes.
+- **Structured fields survive compression better than prose.** A model that writes "we discussed phases then the catalog choice…" is summarizing, and summaries drift. A model that fills `DECISIONS:`/`OPEN_QUESTIONS:` is structuring. Structured state crosses the carryover boundary intact.
+- **The parser is tolerant on shape, strict on validity.** Whitespace, case, and surrounding prose are fine. Unclosed tags become a typed error on the record instead of silent corruption. Failures are observable.
+- **Tools and clarifications are first-class pauses.** `<NEEDS_TOOL>` / `<NEEDS_CLARIFICATION>` let a bounded chunk reach outside itself without bloating its context. The engine handles the round-trip and resumes.
 
 ## Next
 
-- [`04 — compression-cascade`](../compression-cascade/README.md) — what happens when the model emits no marker, or one too big.
-- [`05 — streaming-progress`](../streaming-progress/README.md) — surfacing `<PROGRESS>` to a live UI.
+- [04: `compression-cascade`](../compression-cascade/README.md): what happens when the model emits no marker, or one too big.
+- [05: `streaming-progress`](../streaming-progress/README.md): surfacing `<PROGRESS>` to a live UI.

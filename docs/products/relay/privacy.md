@@ -1,16 +1,22 @@
-# Privacy
+# Relay privacy
 
-Most of what Relay does happens on your computer. Some of it doesn't, and it's worth being specific about which is which, because the difference matters.
+Relay runs on your machine with the models you choose. Most of what it does happens on your computer. Some of it does not, and the difference matters, so this page is specific about which is which.
 
 ## What stays on your machine
 
-- **Your tracked windows.** The list of windows you've told Relay to pay attention to. Never sent anywhere.
-- **Your past goals.** Every instruction you've ever typed. Saved in a local file. Never sent anywhere except as part of a model call you initiate.
-- **Your past plans.** The structured workflows Relay generated for you. Saved locally. Never sent on their own.
-- **Your procedural memory.** The notes Relay takes about workflows that succeeded. Local file.
-- **Your workspace artifacts.** Everything Relay has captured from your screen for you, including screenshots, extracted text, files it produced. Local folder.
-- **Your API keys.** The keys you've pasted for Gemini, Anthropic, OpenAI, OpenCode Go, or OpenRouter. Stored only in the local Tauri Store on desktop (localStorage in browser-only dev) and never bundled with the app. Sent only to that provider's servers when Relay calls them on your behalf.
-- **Your settings.** Your model routing preferences and everything else in the settings panel. Local.
+| Data | What it is | Where it goes |
+|---|---|---|
+| Tracked windows | The windows you told Relay to pay attention to. | Never sent anywhere. |
+| Past goals | Every instruction you typed. | Saved locally. Sent only as part of a model call you start. |
+| Past plans | The missions Relay compiled for you. | Saved locally. Never sent on their own. |
+| Skills and recordings | Distilled skills, macro recordings and their revisions. | Local. |
+| Data Vault | Values your runs captured, with their history. | Local. |
+| Schedules and watches | Your scheduled jobs and data watches. | Local. |
+| Procedural memory and world model | The notes Relay keeps about what worked, per app, and its model of your desktop. | Local. |
+| Tailor corpus | Documents you give Tailor. | Stored as text in Relay's local app data. |
+| Workspace artifacts | Everything Relay captured from your screen for you: screenshots, extracted text, files it produced. | Local. |
+| API keys | The keys you pasted for Gemini, Anthropic, OpenAI, OpenCode Go or OpenRouter. | Stored only in the local Tauri Store on desktop (localStorage in browser-only dev) and never bundled with the app. Sent only to that provider's servers when Relay calls them for you. |
+| Settings | Model routing, agent bridge tiers and everything else in Settings. | Local. |
 
 All of this lives in Relay's local store on your machine, under keys like:
 
@@ -26,43 +32,58 @@ meterless_relay_skills_v1
 meterless_relay_step_verdicts_v1
 ```
 
-## What gets sent to an AI provider when you use Relay
+## What gets sent to a model provider
 
-When you type a goal and hit send, Relay puts together a request and sends it to whichever model provider you've configured. That request contains:
+When you send a goal, Relay builds a request for the model provider you configured. That request contains:
 
 - The text of your goal.
-- A text description of your tracked windows (their titles, the apps they belong to, their rough sizes and positions).
-- A short summary of relevant past plans, if any apply to this goal.
-- For vision verification steps, the actual screenshot of the tracked window that's being checked.
-- The schema the model is supposed to fill in (which is the same every time and doesn't contain anything personal).
+- A text description of your tracked windows (titles, the apps they belong to, rough sizes and positions).
+- A short summary of relevant past plans and procedural memory, if any apply.
+- For a vision check, the screenshot of the tracked window being checked.
+- The schema the model fills in. It is the same every time and holds nothing personal.
 
-That's it. Relay doesn't send a continuous feed of your screen. It doesn't send your file system. It doesn't send your other open apps that aren't being tracked. It doesn't send your typing keystrokes outside of what's in the goal box.
+That is all. Relay does not send a continuous feed of your screen. It does not send your file system. It does not send apps you have not tracked. It does not send keystrokes outside the goal box.
 
-The provider you picked (Google, Anthropic, OpenAI, OpenCode Go, or OpenRouter) handles that data according to their own policy. Relay's network access is deliberately narrow: its content security policy is locked down to a limited set of model and loopback endpoints.
+Much of Relay's work sends nothing at all. Step verification runs cheap UI Automation probes on your machine first, with no model in the loop. Vision is used only when needed. A skill replay takes the deterministic path and calls a model only to repair a step that drifted.
+
+The provider you picked (Google, Anthropic, OpenAI, OpenCode Go or OpenRouter) handles that data under its own policy. Relay's network access is deliberately narrow. Its content security policy is locked to a limited set of model and loopback endpoints.
+
+## Keeping model calls on your machine
+
+You can keep model calls local. Relay can use the Meterless Runtime, which [Nightshift](../nightshift/README.md) serves as a [hotspot](../nightshift/hotspot.md) on `http://127.0.0.1:8088/v1` by default. The Private (on-device) routing preset pins every task to local, so nothing leaves the machine.
+
+If you point Relay at a hotspot on another machine on your network, requests go to that machine instead.
+
+## Coding agents and the agent bridge
+
+The agent bridge lets coding agents such as Claude Code, Cursor, Codex, VS Code or Gemini CLI list windows, read text, click named controls and run your saved skills. The bridge runs on your machine, and you set each agent's tier.
+
+Keep in mind that text an agent reads through the bridge goes into that agent's context. What the agent does with it, including sending it to its own model provider, is governed by that agent and its provider. Grant each agent only the tier it needs. Consequential steps still wait for you, whoever started the run.
 
 ## What is never sent anywhere
 
-- Files on your computer that Relay didn't open as part of a mission you started.
-- Windows or apps you haven't tracked.
-- Keystrokes you type outside of the Relay goal box.
-- Your microphone or camera feeds. (The optional Speak dictation button uses your platform's Web Speech API and is hidden when the platform doesn't expose it.)
-- Telemetry about how you use Relay. We don't ship Relay with crash analytics or usage analytics. There's nothing phoning home in the background.
+- Files on your computer that Relay did not open as part of a mission you started.
+- Windows or apps you have not tracked.
+- Keystrokes you type outside the Relay goal box.
+- Your microphone or camera feeds. (The optional Speak dictation button uses your platform's Web Speech API and is hidden when the platform does not expose it.)
+- Telemetry about how you use Relay. Relay ships with no crash analytics or usage analytics. Nothing phones home in the background.
 
-Passwords get special handling: password fields are captured as masked steps with a secret reference — never plaintext — so credentials never land in saved recordings, and masked values are re-prompted at replay time.
+Passwords get special handling. Password fields are captured as masked steps with a secret reference instead of plaintext, so credentials never land in saved recordings. Masked values are re-prompted at replay time.
 
 ## What you control
 
-- **You can wipe your local data at any time.** Everything Relay stores lives in its local store on your machine, and deleting it resets Relay fresh.
-- **You can delete individual past goals, plans, or artifacts** from your history and workspace.
-- **You can switch to a different provider** for any reason, at any time. Your local data isn't tied to a provider.
-- **You choose the model for every task.** Per-task routing lets you send planning, vision, and reasoning to different providers, or force everything onto one model you trust.
+- Wipe your local data at any time. Everything Relay stores lives in its local store on your machine. Deleting it resets Relay.
+- Delete individual items. Remove past goals, plans, skills, recordings, Data Vault values or artifacts from their lists.
+- Switch providers at any time, for any reason. Your local data is not tied to a provider.
+- Choose the model for every task. Route planning, vision and reasoning to different providers, force everything onto one model you trust, or keep everything local.
+- Set each coding agent's tier in the agent bridge settings.
 
-## A note on what we'd like to keep doing
+## Our commitment
 
-We don't add analytics later as a surprise. If a future release of Relay changes anything about what does or doesn't leave your machine, we'll say so in the changelog, on launch the first time you open that version, and in a paragraph at the top of this page.
+We will not add analytics later as a surprise. If a future release changes what does or does not leave your machine, we will say so in the changelog, on first launch of that version, and at the top of this page.
 
-If we ever can't keep that promise (say, a future feature genuinely requires sending more data and we can't make it optional), we'll be clear about it and you'll have the choice to update or not.
+If a future feature ever needs to send more data and cannot be made optional, we will say so clearly, and you can choose whether to update.
 
 ---
 
-If you have a specific question that isn't answered here, send it to us. The contact info is in the [Relay overview](README.md). We'd rather over-explain than have you wondering.
+Have a question this page does not answer? Open an issue at [github.com/meterless/relay/issues](https://github.com/meterless/relay/issues), or see the [Relay overview](README.md). We would rather over-explain than leave you wondering.

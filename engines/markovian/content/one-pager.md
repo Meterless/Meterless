@@ -1,6 +1,6 @@
-# Markovian Engine — One-Pager
+# Markovian Engine one-pager
 
-**Think in steps. Win at scale.** Bounded-context reasoning for long-horizon work.
+Bounded-context reasoning for long-horizon work.
 
 ## What it is
 
@@ -8,19 +8,19 @@ A reasoning engine that breaks long work into bounded chunks and carries only co
 
 ## What it solves
 
-Long agent runs blow up. Every step appends to history. By step 30 you're shipping the full transcript on every call. Bigger context windows delay the problem; they don't fix it. Markovian fixes it.
+Long agent runs blow up. Every step appends to history. By step 30 you're shipping the full transcript on every call. Bigger context windows delay the problem. Markovian removes it by keeping per-step context bounded.
 
 ## Five core capabilities
 
-1. **Chunk manager** — schedules bounded-context calls
-2. **Marker protocol** — structured signals (`[STATE_CHECKPOINT]`, `[TASK_COMPLETE]`, pause markers) the engine reads
-3. **Compression cascade** — preserves decisions and entities; drops prose
-4. **Run history** — per-step records for replay, inspection, diffs
-5. **Reflection** — optional self-review at the end of long runs
+1. **Chunk manager:** schedules bounded-context calls
+2. **Marker protocol:** structured signals (`[STATE_CHECKPOINT]`, `[TASK_COMPLETE]`, pause markers) the engine reads
+3. **Compression cascade:** preserves decisions and entities; drops prose
+4. **Run history:** per-step records for replay, inspection, diffs
+5. **Reflection:** optional self-review at the end of long runs
 
-## The unique asset
+## Token economics demo
 
-**Token economics demo** — an interactive chart in the repo. Drag the sliders. Watch the naive curve grow quadratically. Watch the Markovian curve stay flat. That's the entire pitch.
+The repo includes an interactive chart. Drag the sliders to see the naive curve grow quadratically while the Markovian curve stays flat. This chart is the main argument for the engine.
 
 ## Composes with the Meterless stack
 
@@ -33,13 +33,13 @@ Long agent runs blow up. Every step appends to history. By step 30 you're shippi
 
 - Flat per-step cost in step count; linear run cost instead of quadratic
 - Markers are typed data, not prose summaries
-- Bounded blast radius — a confused step affects one chunk
+- Bounded blast radius: a confused step affects one chunk
 - Inspectable runs with full per-chunk history
-- Apache 2.0-licensed. Yours forever.
+- Apache 2.0-licensed
 
 ## Adopt it
 
-This repo is the implementation spec — no npm package is published. Clone it and let your coding agent build it into your stack:
+This repo is the implementation spec. No npm package is published. Clone it and let your coding agent build it into your stack:
 
 ```bash
 npx degit meterless/meterless/engines/markovian my-markovian

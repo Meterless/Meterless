@@ -1,6 +1,6 @@
 # Model profile routing
 
-The Recommend stage's other half. Scout picks a **model profile**, never a concrete model — cheap for classification, capable for synthesis, **local** when the data is sensitive. Your provider layer resolves the profile to an actual model.
+This example covers the other half of the Recommend stage. Scout picks a model profile, never a concrete model: cheap for classification, capable for synthesis, local when the data is sensitive. Your provider layer resolves the profile to an actual model.
 
 Prerequisite reading: [`docs/model-routing.md`](../../docs/model-routing.md).
 
@@ -18,7 +18,7 @@ Three requests, three different right answers:
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Scout } from "@meterless/scout";
@@ -57,8 +57,8 @@ for (const c of cases) {
 ## Run it
 
 ```bash
-# The @meterless packages are not yet published — this repository is the
-# implementation spec. With a spec-conforming implementation on your import path:
+# No @meterless package is published. @meterless/scout names your own
+# spec-conforming implementation. With it on your import path:
 npx tsx ./index.ts
 ```
 
@@ -84,11 +84,11 @@ else                                                   → low_cost_chat
 | --- | --- | --- |
 | refund classify | `low_cost_chat` | trivial; a premium model is waste |
 | migration architecture | `high_reasoning` | deep multi-step synthesis earns the premium tier |
-| confidential contract | `local_confidential` | **data class wins** — sensitive data never leaves the device, even if a cloud model would be "better" |
+| confidential contract | `local_confidential` | data class wins; sensitive data never leaves the device, even if a cloud model would be "better" |
 
 ## Two hard constraints
 
-- **Cost ceiling is enforced, not advisory.** The chosen profile's budget is written into `scope.budget.costMaxUSD`. A downstream engine that would exceed it refuses the step — the ceiling rides on the signed contract.
+- **Cost ceiling is enforced, not advisory.** The chosen profile's budget is written into `scope.budget.costMaxUSD`. A downstream engine that would exceed it refuses the step. The ceiling rides on the signed contract.
 - **`confidential` forces local, full stop.** No cost or capability score can override a data-class downgrade to a local model. Sensitive data leaving the device is a policy violation, not a routing trade-off.
 
 ## Fallback
@@ -98,7 +98,7 @@ low_cost_chat + low_confidence  → escalate to high_precision
 high_reasoning + tool_failed    → fall back to high_precision
 ```
 
-Low confidence escalates to a *safer* profile, not a cheaper one — when Scout is unsure, it spends more, not less.
+Low confidence escalates to a safer profile, not a cheaper one. When Scout is unsure, it spends more.
 
 ---
 
@@ -110,5 +110,5 @@ Low confidence escalates to a *safer* profile, not a cheaper one — when Scout 
 
 ## Next
 
-- [`tool-plan-generation`](../tool-plan-generation/README.md) — the capability side of the same Route/Recommend stage.
-- [`route-to-markovian`](../route-to-markovian/README.md) — when the profile decision is "this is long-horizon."
+- [`tool-plan-generation`](../tool-plan-generation/README.md): the capability side of the same Route/Recommend stage.
+- [`route-to-markovian`](../route-to-markovian/README.md): when the profile decision is "this is long-horizon."

@@ -1,6 +1,6 @@
 # Demo · Preview-First Sleep Cycle
 
-A guided walkthrough of the operator-safety property that makes sleep trustworthy: **preview → review → backup → execute → (restore if wrong)**. Execution never discovers new work. If it was not in the preview, it does not happen.
+A guided walkthrough of the operator-safety property that makes sleep trustworthy: preview → review → backup → execute → (restore if wrong). Execution never discovers new work. If it was not in the preview, it does not happen.
 
 ```mermaid
 flowchart LR
@@ -36,12 +36,12 @@ sleep.preview()
 
 | Action | Memory | Reason | conf/access/age | Guardrail |
 | --- | --- | --- | --- | --- |
-| consolidate | `mem_tmp_deadline` | earned its keep | 0.8 / 4 / 8d | ✅ pass |
-| archive | `mem_old_noise` | stale, unused | 0.3 / 0 / 45d | ✅ pass |
-| synthesize | `mem_pnpm_a/b/c` | duplicate group | high sim | ⚠️ needs approval |
-| skip archive | `mem_project_hub` | relationship hub | 11 links | ⛔ **blocked** |
+| consolidate | `mem_tmp_deadline` | earned its keep | 0.8 / 4 / 8d | pass |
+| archive | `mem_old_noise` | stale, unused | 0.3 / 0 / 45d | pass |
+| synthesize | `mem_pnpm_a/b/c` | duplicate group | high sim | needs approval |
+| skip archive | `mem_project_hub` | relationship hub | 11 links | blocked |
 
-The preview carries: memory id, content preview, proposed action, reason, confidence/access/age, guardrail status, affected relationships, and the expected ledger action — everything the operator needs to judge without running anything.
+The preview carries: memory id, content preview, proposed action, reason, confidence/access/age, guardrail status, affected relationships, and the expected ledger action. That is everything the operator needs to judge the plan without running anything.
 
 ## Stage 3 · Operator review
 
@@ -52,7 +52,7 @@ The preview carries: memory id, content preview, proposed action, reason, confid
 ⛔ mem_project_hub                → blocked by guardrail, operator cannot override casually
 ```
 
-Policy: for personal or high-impact memory, **synthesis and archival require explicit approval**; consolidation may auto-approve when thresholds are met.
+Policy: for personal or high-impact memory, synthesis and archival require explicit approval. Consolidation may auto-approve when thresholds are met.
 
 ## Stage 4 · Backup, then execute
 
@@ -78,15 +78,15 @@ restored to pre-sleep snapshot
 ledger: restore backup_sleep_001 · actor=operator
 ```
 
-Restore reverses consolidation, archival, and synthesis — **and writes its own ledger entry**. The original sleep report and all prior ledger history remain intact. The bad run stays auditable; the data comes back.
+Restore reverses consolidation, archival, and synthesis, and it writes its own ledger entry. The original sleep report and all prior ledger history remain intact. The bad run stays auditable; the data comes back.
 
 ---
 
 ## What this demo proves
 
-- **Preview is a contract.** Execute applies *only* the approved preview. No surprises at execution time.
-- **Guardrails are not advisory.** `mem_project_hub` cannot be archived just because it is old — losing a relationship hub silently corrupts the graph.
-- **Backup + restore is the recovery story.** Destructive maintenance is safe only because every run is snapshotted and every action — including the undo — is on the record.
+- **Preview is a contract.** Execute applies only the approved preview. No surprises at execution time.
+- **Guardrails are enforced.** `mem_project_hub` cannot be archived just because it is old. Losing a relationship hub silently corrupts the graph.
+- **Backup + restore is the recovery story.** Destructive maintenance is safe only because every run is snapshotted and every action, including the undo, is on the record.
 
 ## See also
 

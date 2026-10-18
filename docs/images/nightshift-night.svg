@@ -1,0 +1,129 @@
+<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>One Nightshift night: a brief and an acceptance bar go in, local model lanes race many attempts, scribes read every attempt, similar attempts form clusters, judges and checks score them, the Outcome Contract settles the night with signed receipts, and the strongest cluster is distilled so the next night starts from it</title>
+
+  <rect x="0.5" y="0.5" width="959" height="399" rx="16" fill="#14111C" stroke="#2A2438"/>
+
+  <text x="36" y="44" font-size="20" font-weight="700" fill="#F4EFE6">One night, start to finish.</text>
+  <text x="36" y="66" font-size="12" fill="#A79FB8">Every attempt is kept. Agreement is a signal, not proof. A check that could not run never counts as a pass.</text>
+
+  <!-- stage halos -->
+  <g>
+    <rect x="31" y="96" width="118" height="150" rx="12" fill="#F2C14E" opacity="0"><animate attributeName="opacity" values="0;0.2;0;0" keyTimes="0;0.04;0.12;1" dur="10s" repeatCount="indefinite"/></rect>
+    <rect x="161" y="96" width="118" height="150" rx="12" fill="#9B8CFF" opacity="0"><animate attributeName="opacity" values="0;0;0.22;0;0" keyTimes="0;0.1;0.16;0.24;1" dur="10s" repeatCount="indefinite"/></rect>
+    <rect x="291" y="96" width="118" height="150" rx="12" fill="#E7DFD3" opacity="0"><animate attributeName="opacity" values="0;0;0.16;0;0" keyTimes="0;0.22;0.28;0.36;1" dur="10s" repeatCount="indefinite"/></rect>
+    <rect x="421" y="96" width="118" height="150" rx="12" fill="#5CC8FF" opacity="0"><animate attributeName="opacity" values="0;0;0.2;0;0" keyTimes="0;0.34;0.4;0.48;1" dur="10s" repeatCount="indefinite"/></rect>
+    <rect x="551" y="96" width="118" height="150" rx="12" fill="#FF8A5B" opacity="0"><animate attributeName="opacity" values="0;0;0.2;0;0" keyTimes="0;0.46;0.52;0.6;1" dur="10s" repeatCount="indefinite"/></rect>
+    <rect x="681" y="96" width="118" height="150" rx="12" fill="#18E299" opacity="0"><animate attributeName="opacity" values="0;0;0.2;0;0" keyTimes="0;0.58;0.64;0.72;1" dur="10s" repeatCount="indefinite"/></rect>
+    <rect x="811" y="96" width="118" height="150" rx="12" fill="#F2C14E" opacity="0"><animate attributeName="opacity" values="0;0;0.2;0;0" keyTimes="0;0.7;0.76;0.84;1" dur="10s" repeatCount="indefinite"/></rect>
+  </g>
+
+  <!-- stage cards -->
+  <g font-size="10.5" fill="#CFC7DC">
+    <rect x="31" y="96" width="118" height="150" rx="12" fill="none" stroke="#F2C14E" stroke-width="1.4"/>
+    <text x="45" y="120" font-size="10" font-weight="700" fill="#F2C14E" letter-spacing="1">01</text>
+    <text x="45" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Brief + bar</text>
+    <text x="45" y="162">Say what you need</text>
+    <text x="45" y="177">and what good</text>
+    <text x="45" y="192">looks like. The</text>
+    <text x="45" y="207">Outcome Contract</text>
+    <text x="45" y="222">commits first.</text>
+
+    <rect x="161" y="96" width="118" height="150" rx="12" fill="none" stroke="#9B8CFF" stroke-width="1.4"/>
+    <text x="175" y="120" font-size="10" font-weight="700" fill="#B7ABFF" letter-spacing="1">02</text>
+    <text x="175" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Race</text>
+    <text x="175" y="162">A lane per model.</text>
+    <text x="175" y="177">Personas and</text>
+    <text x="175" y="192">temperatures vary,</text>
+    <text x="175" y="207">so no two attempts</text>
+    <text x="175" y="222">are the same.</text>
+
+    <rect x="291" y="96" width="118" height="150" rx="12" fill="none" stroke="#E7DFD3" stroke-width="1.4"/>
+    <text x="305" y="120" font-size="10" font-weight="700" fill="#E7DFD3" letter-spacing="1">03</text>
+    <text x="305" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Scribes</text>
+    <text x="305" y="162">A reading crew</text>
+    <text x="305" y="177">summarizes and</text>
+    <text x="305" y="192">tags every attempt,</text>
+    <text x="305" y="207">so the whole night</text>
+    <text x="305" y="222">is searchable.</text>
+
+    <rect x="421" y="96" width="118" height="150" rx="12" fill="none" stroke="#5CC8FF" stroke-width="1.4"/>
+    <text x="435" y="120" font-size="10" font-weight="700" fill="#5CC8FF" letter-spacing="1">04</text>
+    <text x="435" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Clusters</text>
+    <text x="435" y="162">Similar answers</text>
+    <text x="435" y="177">gather into</text>
+    <text x="435" y="192">directions you can</text>
+    <text x="435" y="207">compare and</text>
+    <text x="435" y="222">synthesize.</text>
+
+    <rect x="551" y="96" width="118" height="150" rx="12" fill="none" stroke="#FF8A5B" stroke-width="1.4"/>
+    <text x="565" y="120" font-size="10" font-weight="700" fill="#FF8A5B" letter-spacing="1">05</text>
+    <text x="565" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Judge + check</text>
+    <text x="565" y="162">A judge lane</text>
+    <text x="565" y="177">scores finalists.</text>
+    <text x="565" y="192">Validators, a</text>
+    <text x="565" y="207">browser sandbox and</text>
+    <text x="565" y="222">media gates test.</text>
+
+    <rect x="681" y="96" width="118" height="150" rx="12" fill="none" stroke="#18E299" stroke-width="1.4"/>
+    <text x="695" y="120" font-size="10" font-weight="700" fill="#18E299" letter-spacing="1">06</text>
+    <text x="695" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Settle</text>
+    <text x="695" y="162">Accepted.</text>
+    <text x="695" y="177">Not accepted.</text>
+    <text x="695" y="192">Not yet decided.</text>
+    <text x="695" y="207">Every answer has</text>
+    <text x="695" y="222">a signed receipt.</text>
+
+    <rect x="811" y="96" width="118" height="150" rx="12" fill="none" stroke="#F2C14E" stroke-width="1.4"/>
+    <text x="825" y="120" font-size="10" font-weight="700" fill="#F2C14E" letter-spacing="1">07</text>
+    <text x="825" y="140" font-size="13" font-weight="700" fill="#F4EFE6">Distill</text>
+    <text x="825" y="162">The strongest</text>
+    <text x="825" y="177">cluster becomes an</text>
+    <text x="825" y="192">insight pack. What</text>
+    <text x="825" y="207">keeps winning is a</text>
+    <text x="825" y="222">Method or Skill.</text>
+  </g>
+
+  <!-- connectors -->
+  <g stroke="#3A3350" stroke-width="1.5">
+    <line x1="149" y1="171" x2="161" y2="171"/><line x1="279" y1="171" x2="291" y2="171"/><line x1="409" y1="171" x2="421" y2="171"/>
+    <line x1="539" y1="171" x2="551" y2="171"/><line x1="669" y1="171" x2="681" y2="171"/><line x1="799" y1="171" x2="811" y2="171"/>
+  </g>
+
+  <!-- continue loop -->
+  <path d="M870 246 L870 290 Q870 304 856 304 L234 304 Q220 304 220 290 L220 246" fill="none" stroke="#F2C14E" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.6"/>
+  <path d="M214 254 L220 244 L226 254" fill="none" stroke="#F2C14E" stroke-width="1.5" opacity="0.6"/>
+  <text x="545" y="296" font-size="11" fill="#E9C46A" text-anchor="middle">Continue run: tonight's attempts grow from last night's pack, not a blank prompt. Nothing is retrained.</text>
+
+  <!-- attempt sparks in the race card -->
+  <g fill="#B7ABFF">
+    <circle cx="190" cy="236" r="2.2" opacity="0"><animate attributeName="opacity" values="0;0;1;0.4;0" keyTimes="0;0.12;0.16;0.3;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle cx="214" cy="232" r="2.2" opacity="0"><animate attributeName="opacity" values="0;0;1;0.4;0" keyTimes="0;0.14;0.18;0.32;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle cx="238" cy="237" r="2.2" opacity="0"><animate attributeName="opacity" values="0;0;1;0.4;0" keyTimes="0;0.16;0.2;0.34;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle cx="258" cy="233" r="2.2" opacity="0"><animate attributeName="opacity" values="0;0;1;0.4;0" keyTimes="0;0.18;0.22;0.36;1" dur="10s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- traveling work pulse -->
+  <circle r="4.5" fill="#F4EFE6" opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.02;0.8;0.82;1" dur="10s" repeatCount="indefinite"/>
+    <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.8;1" path="M90 171 L870 171"/>
+  </circle>
+  <!-- return pulse -->
+  <circle r="4" fill="#F2C14E" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.82;0.84;0.98;1" dur="10s" repeatCount="indefinite"/>
+    <animateMotion dur="10s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.82;0.98;1" path="M870 246 L870 290 Q870 304 856 304 L234 304 Q220 304 220 290 L220 246"/>
+  </circle>
+
+  <!-- receipts strip -->
+  <rect x="31" y="324" width="898" height="48" rx="10" fill="#1E1A2A" stroke="#2A2438"/>
+  <text x="47" y="344" font-size="10" font-weight="700" fill="#A79FB8" letter-spacing="1">A REAL NIGHT · SEP 7 TO 8, 2026 · DGX SPARK · LOCAL ONLY</text>
+  <g font-size="12" font-weight="700" fill="#F4EFE6">
+    <text x="47" y="362">202 attempts</text>
+    <text x="160" y="362">2 clusters</text>
+    <text x="252" y="362">20 finalists</text>
+    <text x="350" y="362">12 judged</text>
+    <text x="440" y="362" fill="#18E299">1 accepted</text>
+    <text x="536" y="362">5h 15m unattended</text>
+    <text x="684" y="362">72 lane errors survived</text>
+    <text x="852" y="362" fill="#18E299">$0.00 cloud</text>
+  </g>
+</svg>

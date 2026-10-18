@@ -63,7 +63,7 @@
       <animateTransform attributeName="transform" type="scale" values="0.85;0.85;1;1" keyTimes="0;0.6;0.68;1" dur="9s" repeatCount="indefinite" additive="sum"/>
       <text x="0" y="-26" font-size="58" font-weight="800" fill="#E03131" text-anchor="middle">86%</text>
       <text x="0" y="2" font-size="14.5" font-weight="600" fill="#171310" text-anchor="middle">of input tokens saved at 20 steps</text>
-      <text x="0" y="24" font-size="10.5" fill="#9A9284" text-anchor="middle">modeled &#8212; worked example in the docs</text>
+      <text x="0" y="24" font-size="10.5" fill="#9A9284" text-anchor="middle">modeled: worked example in the docs</text>
     </g>
     <rect x="-140" y="44" width="280" height="28" rx="8" fill="#171310"/>
     <text x="0" y="62" font-size="11" fill="#7BF0C6" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Consolas, monospace">npx tsx scripts/measured-run.ts</text>

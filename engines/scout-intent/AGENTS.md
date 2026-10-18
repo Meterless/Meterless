@@ -25,7 +25,7 @@ Every number in this guide is traceable to a file in `docs/`. Where the docs lea
 - **If an intent is not in the registry, it cannot be acted on.** The registry is the system's entire surface area; this is the property that prevents scope drift.
 - **Deterministic floor, optional intelligence.** Stage-1 scoring is pure rules and always available; Stage-2 model rescoring is an upgrade, never a dependency.
 - **Refuse at the boundary.** Scope violations are refused by the executor verifying the contract, not politely discouraged by a wrapper.
-- **Clarify when unsure, but clarification is a cost.** The clarification rate has a hard ceiling in the eval gates; a system that always asks is failing, not being safe.
+- **Clarify when unsure, but clarification is a cost.** The clarification rate has a hard ceiling in the eval gates; a system that always asks fails that gate.
 - **Every decision is replayable.** Contracts carry trace IDs; telemetry reconstructs any decision after the fact.
 
 ---
@@ -259,7 +259,7 @@ The learning loop: every clarification, override, and operator correction is log
 
 ---
 
-## 10) Eval Gates (releases are gated, not vibes)
+## 10) Eval Gates (metrics gate releases)
 
 The eval harness (`evals/`, `docs/eval-harness.md`) runs the regression set against any implementation and scores per metric and per slice. Canonical thresholds (`evals/config/thresholds.yaml`):
 
@@ -337,4 +337,4 @@ npm install
 SCOUT_IMPL=/abs/path/to/your/scout/index.js npm run evals
 ```
 
-The runner (`evals/runner/`) loads the regression set (`evals/regression-set/v1/`), runs each example through your `Scout` (constructor options `{ intentRegistry, policyPack }`, async `decide()`), and reports per-metric scores and per-slice breakdowns against `evals/config/thresholds.yaml`. A release-quality implementation clears every hard floor and ceiling. Disagree with a threshold? Open an engine-spec-feedback issue with historical comparison.
+The runner (`evals/runner/`) loads the regression set (`evals/regression-set/v1/`), runs each example through your `Scout` (constructor options `{ intentRegistry, policyPack }`, async `decide()`), and reports per-metric scores and per-slice breakdowns against `evals/config/thresholds.yaml`. A release-quality implementation clears every hard floor and ceiling. To dispute a threshold, open an engine-spec-feedback issue with historical comparison.

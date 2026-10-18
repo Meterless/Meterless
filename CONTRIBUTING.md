@@ -1,6 +1,6 @@
 # Contributing to Meterless
 
-Thanks for helping build the local-first context stack for agentic AI.
+Thanks for helping build the open core of Meterless: the engines, docs and benchmarks under Nightshift.
 
 A contributor should be able to make a useful first contribution in under five minutes.
 
@@ -10,7 +10,9 @@ A contributor should be able to make a useful first contribution in under five m
 |---|---|
 | Give feedback on an engine spec | Open an engine-spec-feedback issue |
 | Improve an engine spec, example, or workshop | `engines/<name>/` |
-| Fix or improve product docs | `docs/products/<name>/` |
+| Fix or improve product docs, including Nightshift | `docs/products/<name>/` |
+| Improve an experiment page | `docs/experiments/<name>/` |
+| Correct a benchmark summary | `docs/benchmarks/` (cite the published report) |
 | Improve architecture or narrative docs | `docs/architecture/` |
 | Add or improve a starter template | `templates/<name>/` (must run; see templates/README.md) |
 | Report a product bug | The per-app repo's issue tracker |
@@ -19,7 +21,7 @@ A contributor should be able to make a useful first contribution in under five m
 
 This repo contains specs and docs, not application code. The engines are AGENTS.md-driven implementation specs. You implement them in your own stack with a coding agent. Feedback from real implementations is the most valuable contribution there is: what was ambiguous, what was missing, what broke.
 
-Product binaries are proprietary and ship from the per-app repos (`meterless/gaia`, `meterless/relay`, `meterless/swarms`). Product documentation lives here and is Apache 2.0.
+App installers ship from the per-app repos (`meterless/gaia`, `meterless/relay`, `meterless/swarms`, `meterless/dataplant` and others) and from meterless.ai. Product documentation lives here and is Apache 2.0.
 
 ## How to submit
 
@@ -35,3 +37,5 @@ Some engines carry their own `CONTRIBUTING.md` (for example `engines/hmem/CONTRI
 2. No empty folders. A folder exists only when it has real content.
 3. Lowercase kebab-case names everywhere.
 4. Short declarative sentences in docs. No em dashes. No exclamation points.
+5. Benchmark numbers name their machine, build and date, and keep failures in the denominator.
+6. Media goes in a `media/` folder beside the doc that uses it. Keep videos under 2 MB.

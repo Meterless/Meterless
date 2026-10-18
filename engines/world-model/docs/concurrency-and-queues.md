@@ -38,10 +38,10 @@ Two writers update the same attribute in overlapping pipeline runs. Both events 
 
 Resolution strategies (configurable per attribute):
 
-- `most-recent-wins` — later event materializes.
-- `highest-confidence-wins` — fact with higher confidence materializes.
-- `source-priority` — fixed source ranking decides.
-- `manual` — both facts visible; operator picks.
+- `most-recent-wins`: later event materializes.
+- `highest-confidence-wins`: fact with higher confidence materializes.
+- `source-priority`: fixed source ranking decides.
+- `manual`: both facts visible; operator picks.
 
 No write is ever dropped. Conflict resolution affects only the **derived view**.
 
@@ -55,9 +55,9 @@ source ──▶ extract queue ──▶ normalize queue ──▶ resolve queue
 
 Each queue is:
 
-- **Bounded** — backpressure stops upstream when downstream is slow.
-- **Checkpointed** — workers persist their position.
-- **At-least-once** — restarting a worker replays from the last checkpoint; idempotency catches the duplicates.
+- **Bounded**: backpressure stops upstream when downstream is slow.
+- **Checkpointed**: workers persist their position.
+- **At-least-once**: restarting a worker replays from the last checkpoint; idempotency catches the duplicates.
 
 The append stage is the **only** stage that is exactly-once, because it's the only stage that mutates the canonical store.
 
@@ -78,7 +78,7 @@ Append is serialized within a namespace to preserve total ordering. If you need 
 
 ## Reader consistency
 
-By default, reads from a view return **eventually consistent** results — the view may be a few events behind the log.
+By default, reads from a view return **eventually consistent** results. The view may be a few events behind the log.
 
 For tighter consistency:
 

@@ -1,6 +1,6 @@
 # Chunk config
 
-The chunk configuration is the entire budget profile for a run. Get this right and the engine flies. Get it wrong and you either run out of context or spend tokens on nothing.
+The chunk configuration is the entire budget profile for a run. A config sized too small runs out of context. A config sized too large spends tokens on nothing.
 
 ## The shape
 
@@ -24,7 +24,7 @@ Two engine constants participate in validation but are not user knobs: `framingT
 | `chunkSize` | **8000** | 1000 | 128000 | 1000 |
 | `maxChunks` | **24** | 1 | 32 | 1 |
 | `carryoverTokens` | **800** | 128 | 32768 | 128 |
-| `overlapTokens` | **0** | 0 | 4096 | — |
+| `overlapTokens` | **0** | 0 | 4096 | n/a |
 
 These work for most mid-size-context models with reasonable headroom. Scale them to your model.
 
@@ -32,7 +32,7 @@ These work for most mid-size-context models with reasonable headroom. Scale them
 
 ### `chunkSize`
 
-Set this to **60-75% of your model's context window**. Leave headroom for output, framing variance, and any unexpected tool returns.
+Set this to 60-75% of your model's context window. Leave headroom for output, framing variance, and any unexpected tool returns.
 
 | Model context | Recommended `chunkSize` |
 |---|---|
@@ -47,7 +47,7 @@ Larger isn't automatically better. Bigger chunks mean fewer chunks for the same 
 
 The single most consequential knob. It controls how much state crosses chunk boundaries.
 
-Rule of thumb: **carryover should be 10-15% of `chunkSize`** (the default 800/8000 is exactly 10%). Smaller than that and important state gets lost in compression. Larger than that and you're paying for state that should have been compressed.
+Rule of thumb: carryover should be 10-15% of `chunkSize` (the default 800/8000 is exactly 10%). Smaller than that and important state gets lost in compression. Larger than that and you're paying for state that should have been compressed.
 
 | Task shape | Recommended carryover ratio |
 |---|---|
@@ -59,13 +59,13 @@ Rule of thumb: **carryover should be 10-15% of `chunkSize`** (the default 800/80
 
 The goal, system instructions, and any persistent context. This is paid every chunk, so it grows the bill.
 
-Keep framing **tight and stable**. A 200-token goal beats a 1200-token system prompt with options the model rarely uses.
+Keep framing tight and stable. A 200-token goal beats a 1200-token system prompt with options the model rarely uses.
 
 ### `overlapTokens`
 
-Optional. Some tasks benefit from a small overlap between chunks: when `overlapTokens > 0`, the final `overlapTokens` (× 4 chars) of chunk N's **cleaned output** are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover — a "where we just were" hint independent of compressed carryover.
+Optional. Some tasks benefit from a small overlap between chunks: when `overlapTokens > 0`, the final `overlapTokens` (× 4 chars) of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. This gives a "where we just were" hint independent of compressed carryover.
 
-An implementation MUST either implement this semantics or **reject** a non-zero value with a typed error. Accepting and silently ignoring the field is a contract violation.
+An implementation MUST either implement this semantics or reject a non-zero value with a typed error. Accepting and silently ignoring the field is a contract violation.
 
 Set this to 0 for most tasks. Set it to 100-300 for tasks where continuity matters more than savings (long-form writing, code reasoning).
 
@@ -73,13 +73,13 @@ Set this to 0 for most tasks. Set it to 100-300 for tasks where continuity matte
 
 A hard stop. Prevents runaway runs from spending budget on a stuck loop.
 
-Default 24, bounded at 32. Tune down for tighter chains (8-15). Work that genuinely needs more steps should be chained as multiple runs (or delegated via Swarm) rather than raising the cap — a run that hits `maxChunks` stops with `status: "max-chunks"` and a structured warning, never a silent truncation.
+Default 24, bounded at 32. Tune down for tighter chains (8-15). Work that needs more steps should be chained as multiple runs (or delegated via Swarm) rather than raising the cap. A run that hits `maxChunks` stops with `status: "max-chunks"` and a structured warning, never a silent truncation.
 
 ### Output budget (engine constant, ≈1200)
 
 Estimated per-step output size, used for cost accounting and budget projection.
 
-Doesn't enforce — the model still emits what it emits — but the engine uses it to flag "this run is going to exceed the chunk budget if outputs keep growing."
+It does not enforce a limit, and the model still emits what it emits. The engine uses it to flag "this run is going to exceed the chunk budget if outputs keep growing."
 
 ## Per-task overrides
 
@@ -105,6 +105,6 @@ A config that doesn't budget enough for output produces a typed error at load ti
 
 ## What's next
 
-- [Marker protocol](./marker-protocol.md) — what the model emits
-- [Compression cascade](./compression-cascade.md) — how carryover gets produced
-- [Efficiency model](./efficiency-model.md) — the math behind the budget
+- [Marker protocol](./marker-protocol.md): what the model emits
+- [Compression cascade](./compression-cascade.md): how carryover gets produced
+- [Efficiency model](./efficiency-model.md): the math behind the budget

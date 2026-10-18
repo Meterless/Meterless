@@ -65,7 +65,7 @@ Because confidence multiplies the final retrieval score, feedback directly moves
 
 ## Pruning policy
 
-The ledger is **never destructively pruned**. If a constrained client must cap storage, it exports the oldest segment to an archive artifact and records a `ledger_rotated` entry before trimming. A silent cap (e.g. dropping entries past N) is a contract violation.
+The ledger is never destructively pruned. If a constrained client must cap storage, it exports the oldest segment to an archive artifact and records a `ledger_rotated` entry before trimming. A silent cap (e.g. dropping entries past N) is a contract violation.
 
 ## Example
 

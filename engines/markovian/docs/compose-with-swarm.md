@@ -5,7 +5,7 @@ Markovian and Swarm solve different problems:
 - **Swarm** coordinates *many* tasks in parallel through a governed DAG.
 - **Markovian** runs *one* task across many bounded chunks.
 
-The natural composition: **Markovian runs inside a Swarm task** when that task needs long-horizon reasoning.
+The natural composition: Markovian runs inside a Swarm task when that task needs long-horizon reasoning.
 
 ## The picture
 
@@ -25,11 +25,11 @@ The natural composition: **Markovian runs inside a Swarm task** when that task n
               merge & verify
 ```
 
-Task A and B are short — single LLM calls. Task C needs a 20-step plan, so internally it spawns a Markovian chain. The swarm sees one task with one output; Markovian handles the bounded-context reasoning behind it.
+Task A and B are short, single LLM calls. Task C needs a 20-step plan, so internally it spawns a Markovian chain. The swarm sees one task with one output; Markovian handles the bounded-context reasoning behind it.
 
 ## The delegation gate
 
-Delegation is cost, not default. A swarm task delegates to Markovian only when it is genuinely long-horizon:
+Delegation costs tokens, so it is opt-in. A swarm task delegates to Markovian only when it is long-horizon:
 
 - `task.estimatedTokens > 4000` → Markovian; otherwise a single-shot LLM call.
 - Mode by role: `task.role === "researcher" ? "RESEARCH" : "ARCHITECT"`.
@@ -37,7 +37,7 @@ Delegation is cost, not default. A swarm task delegates to Markovian only when i
 
 ## The handshake
 
-Swarm passes its task input and signed Scout contract to Markovian via `runFromContract` — the contract is verified **once at run start** (signature, expiry, `markovian.chain` ∈ scope capabilities), never re-checked per chunk:
+Swarm passes its task input and signed Scout contract to Markovian via `runFromContract`. The contract is verified once at run start (signature, expiry, `markovian.chain` ∈ scope capabilities), never re-checked per chunk:
 
 ```ts
 swarm.registerTaskKind("plan-migration", async ({ input, contract }) => {
@@ -45,7 +45,7 @@ swarm.registerTaskKind("plan-migration", async ({ input, contract }) => {
     secret: SHARED_SECRET,
     goal: input.goal,
     // Reference chunk config on the contract path (tokensPerChunk is a 1:1
-    // alias for the canonical chunkSize — see chunk-config.md):
+    // alias for the canonical chunkSize; see chunk-config.md):
     chunkConfig: { tokensPerChunk: 6000, carryoverTokens: 800 },
     stepFn: async ({ goal, carryover, step }) => {
       const out = await llm.complete(`${goal}\n${carryover}\nNext step:`);
@@ -59,13 +59,13 @@ swarm.registerTaskKind("plan-migration", async ({ input, contract }) => {
 });
 ```
 
-Swarm gets one output back. Verification happens at the swarm boundary, not per-chunk. Telemetry records `{ kind: "markovian_delegated", taskId, markovianRunId, chunks }`. A run that needs more time than the contract allows calls `scout.replan({ parent })` for a fresh contract on the same `traceId` — TTLs are never extended in place.
+Swarm gets one output back. Verification happens at the swarm boundary, not per-chunk. Telemetry records `{ kind: "markovian_delegated", taskId, markovianRunId, chunks }`. A run that needs more time than the contract allows calls `scout.replan({ parent })` for a fresh contract on the same `traceId`. TTLs are never extended in place.
 
 ## When *not* to do this
 
 - The task is short and fits in one model call → use a plain LLM step inside the swarm task, skip Markovian.
 - The work needs multiple specialists in parallel → use Swarm with multiple tasks, each potentially short.
-- The work needs both — fan out across specialists, *and* each specialist needs long reasoning → use Swarm with multiple Markovian-backed tasks.
+- The work needs both (fan out across specialists, and each specialist needs long reasoning) → use Swarm with multiple Markovian-backed tasks.
 
 ## H-MEM in the loop
 
@@ -97,5 +97,5 @@ A misrouted contract or expired contract gets refused at either boundary.
 
 ## What's next
 
-- [Run history](./run-history.md) — Markovian's history inside a swarm task
-- [Streaming UI](./streaming-ui.md) — surfacing per-chunk progress to swarm telemetry
+- [Run history](./run-history.md): Markovian's history inside a swarm task
+- [Streaming UI](./streaming-ui.md): surfacing per-chunk progress to swarm telemetry

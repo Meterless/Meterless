@@ -1,6 +1,6 @@
 # Read surface
 
-The canonical store is for writing. Reads come from **views** — derived, rebuildable, projection-shaped surfaces optimized for specific access patterns.
+The canonical store is for writing. Reads come from **views**: derived, rebuildable, projection-shaped surfaces optimized for specific access patterns.
 
 > Readable ids in the snippets below (`team:bengals`, `season:145`) are display labels; canonical stable ids follow the grammar in [`stable-ids.md`](./stable-ids.md).
 
@@ -74,7 +74,7 @@ Backed by event-log fold up to a given timestamp.
 
 ## Custom projections
 
-Most production deployments need a domain-specific projection — a CRM dashboard view, a roster page, a campaign analytics view.
+Most production deployments need a domain-specific projection: a CRM dashboard view, a roster page, a campaign analytics view.
 
 ```ts
 world.registerView("roster", {
@@ -123,7 +123,7 @@ Subscriptions push diffs, not full states. Used by the control plane and by long
 
 ## What views are *not*
 
-Views are not databases. They are derivations.
+Views are derivations of the canonical store.
 
 - **Don't write to a view.** Writes go to the canonical store.
 - **Don't trust a stale view.** Rebuild it.

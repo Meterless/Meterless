@@ -51,7 +51,7 @@ H-MEM detects and resolves contradictions between memory records.
 
 ## Auto-resolution gate
 
-Auto-resolve only when the decision confidence is **≥ 0.70**; otherwise queue the conflict for human review. On resolution the losing record is marked `supersededBy` — kept for audit, ranked down by the −0.20 retrieval penalty, never deleted. Run the scan daily.
+Auto-resolve only when the decision confidence is ≥ 0.70; otherwise queue the conflict for human review. On resolution the losing record is marked `supersededBy`. It is kept for audit, ranked down by the −0.20 retrieval penalty, and never deleted. Run the scan daily.
 
 ## Audit rule
 

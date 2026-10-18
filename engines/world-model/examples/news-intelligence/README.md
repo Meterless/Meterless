@@ -8,7 +8,7 @@ Article ingest → entity extraction → event clustering. A working news world 
 
 - Article ingest with provenance from RSS-style sources
 - Person and organization extraction during normalize
-- **Event clustering** — many articles about one Fed rate decision land under a single `event` entity
+- **Event clustering**: many articles about one Fed rate decision land under a single `event` entity
 - Incident-window **context scoping**
 
 Prerequisite reading: [`docs/ingest-pipeline.md`](../../docs/ingest-pipeline.md), [`examples/stream-clustered-facts`](../stream-clustered-facts/README.md).
@@ -54,7 +54,7 @@ const feed = [
     mentions: ["Jerome Powell", "Federal Reserve"] }, // duplicate re-send
 ];
 
-// The event aggregate is itself an entity — clustering stays inside the
+// The event aggregate is itself an entity; clustering stays inside the
 // five write primitives: upsertEntity + relate. No special cluster operation.
 await world.upsertEntity({
   type: "event",
@@ -121,7 +121,7 @@ console.log("articles mentioning Powell:", powellCoverage.length);
 
 ## Run it
 
-This repo is an implementation spec — `@meterless/world-model` is not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` is the name of your implementation, not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -136,12 +136,12 @@ Four feed items, but the Reuters re-send collapses on its URL-derived ID → **3
 
 ## Why it matters
 
-- **Duplicate re-sends are free.** A feed double-sending `reuters.com/a1` produces zero new article state — the URL is the canonical key. News feeds *will* double-send; idempotency is not optional here.
+- **Duplicate re-sends are free.** A feed double-sending `reuters.com/a1` produces zero new article state, because the URL is the canonical key. News feeds *will* double-send; idempotency is not optional here.
 - **Entities outlive articles.** The canonical Powell entity is one entity referenced by many articles across publishers. Coverage analysis ("how many outlets covered Powell this week?") is a graph query, not a join over scraped text.
-- **The event is a derived aggregate.** The event's member count is recomputed from `member-of` edges, never hand-incremented — so re-ingesting the feed cannot corrupt the count.
+- **The event is a derived aggregate.** The event's member count is recomputed from `member-of` edges, never hand-incremented, so re-ingesting the feed cannot corrupt the count.
 - **Window context scopes analysis.** Every `mentions` edge is tagged with the news-window context, so the same entities can participate in a later Fed decision without cross-contaminating this one's coverage stats.
 
 ## Next
 
-- [`stream-clustered-facts`](../stream-clustered-facts/README.md) — the resolver mechanics (exact → alias → probabilistic, banded thresholds).
-- [`crm-account-world`](../crm-account-world/README.md) — the same ingest shape for sales data instead of news.
+- [`stream-clustered-facts`](../stream-clustered-facts/README.md): the resolver mechanics (exact → alias → probabilistic, banded thresholds).
+- [`crm-account-world`](../crm-account-world/README.md): the same ingest shape for sales data instead of news.

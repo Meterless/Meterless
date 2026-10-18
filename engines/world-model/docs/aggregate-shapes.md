@@ -1,6 +1,6 @@
 # Aggregate shapes
 
-This is the canonical write surface. Five shapes. Strict. Versioned.
+This is the canonical write surface. It has five shapes, and each one is strict and versioned.
 
 ## Entity
 
@@ -87,7 +87,7 @@ type Provenance = {
   at: ISODate;
   url?: string;
   checksum?: string;
-  runId?: string;            // ingest/replay run identifier — joins events to a run
+  runId?: string;            // ingest/replay run identifier; joins events to a run
 };
 ```
 
@@ -110,7 +110,7 @@ type Event = {
 
 The state is a fold over events. Views are projections of the fold.
 
-`tombstone`, `alias`, and `view-rebuild` are emitted by the engine and the control plane — an
+`tombstone`, `alias`, and `view-rebuild` are emitted by the engine and the control plane: an
 `alias` event commits a merge (and its inverse commits an unmerge), a `tombstone` is the delete,
 and a `view-rebuild` records an operator-triggered projection rebuild. They are event kinds in
 the log, not additions to the five-primitive write surface.

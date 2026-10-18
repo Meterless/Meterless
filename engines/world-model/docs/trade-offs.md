@@ -24,11 +24,11 @@ The event log is append-only and ordered. Analytics queries (group-by, percentil
 
 Your `orders` table belongs in Postgres. Your `payments` table belongs in Postgres. Money belongs in a transactional database with ACID guarantees.
 
-World Model is for the **derived domain model** that agents and UIs consume — accounts, threads, players, articles, incidents. The transactional system of record stays where it is. World Model ingests from it.
+World Model is for the **derived domain model** that agents and UIs consume: accounts, threads, players, articles, incidents. The transactional system of record stays where it is. World Model ingests from it.
 
 ### Not a message queue
 
-World Model is for state, not for transient messages. If you have a stream of events that don't need to persist as part of the domain (clicks, telemetry, log lines), use a message queue or stream processor. World Model can ingest aggregates from that stream — it should not be the stream.
+World Model is for state, not for transient messages. If you have a stream of events that don't need to persist as part of the domain (clicks, telemetry, log lines), use a message queue or stream processor. World Model can ingest aggregates from that stream, but it should not be the stream.
 
 ## When to use it
 
@@ -62,7 +62,7 @@ Mitigation: snapshot + compact. Take periodic snapshots, prune events older than
 
 ### Idempotency requires canonical keys
 
-You have to declare a canonical key for each entity type. Bad canonical keys lead to bad merges. Good canonical keys are *boring* — they're the natural identifier of the thing.
+You have to declare a canonical key for each entity type. Bad canonical keys lead to bad merges. Good canonical keys are *boring*: they're the natural identifier of the thing.
 
 If your domain has no natural identifier, content hashing falls back to attribute hashing, which means any attribute change creates a new ID. That's a sign the type is wrong: split it into a stable entity plus a fact stream.
 
@@ -72,7 +72,7 @@ Every team that adopts World Model in anger eventually needs operator workflows 
 
 ### Schema migrations are explicit
 
-You don't get to "just change the schema." A schema change is a migration with a version bump and a replay strategy. This is by design — silent schema drift is the failure mode this whole architecture exists to prevent.
+You don't get to "just change the schema." A schema change is a migration with a version bump and a replay strategy. This is by design. Silent schema drift is the failure mode this whole architecture exists to prevent.
 
 If "just change the schema" is what you want, you don't want a canonical store, you want a key-value cache. Use that instead.
 
@@ -89,4 +89,4 @@ If "just change the schema" is what you want, you don't want a canonical store, 
 | Real-time graph algorithms | ⚠ | ✗ | ✓ | ✗ |
 | Schema versioning + replay | ✓ | ⚠ | ⚠ | ✗ |
 
-Use the right tool. World Model is the right tool for one specific layer of your AI stack — the domain model that agents and applications share.
+Use the right tool. World Model is the right tool for one specific layer of your AI stack: the domain model that agents and applications share.

@@ -4,7 +4,7 @@
   <rect x="0.5" y="0.5" width="959" height="299" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
 
   <text x="40" y="46" font-size="20" font-weight="700" fill="#171310">Real H-MEM in a two-minute CLI.</text>
-  <text x="40" y="70" font-size="13" fill="#756D60">Every command routes through a named engine service &#8212; nothing is faked.</text>
+  <text x="40" y="70" font-size="13" fill="#756D60">Every command routes through a named engine service in the H-MEM reference.</text>
 
   <!-- terminal -->
   <g>

@@ -4,7 +4,7 @@ Thanks for being here. World Model is an Apache 2.0-licensed engine in the Meter
 
 ## Ways to help
 
-- **Use it and report bugs.** A working bug report with a minimal repro is the highest-leverage contribution.
+- **Use it and report bugs.** A working bug report with a minimal repro is the most useful contribution.
 - **Improve docs.** If something in `/docs` or `/workshops` confused you, fix it. Doc PRs are merged fast.
 - **Add an example.** Examples in `/examples` are the front door for new users.
 - **Build a custom view library.** Domain-specific views (CRM, fintech, gaming) are great as separate packages that build on the World Model contract.

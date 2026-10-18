@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-A long-running agent that survives a process restart. The agent process is **stateless** — all of its run state lives in the World Model. Kill it mid-task, restart, and it picks up exactly where it left off.
+A long-running agent that survives a process restart. The agent process is **stateless**. All of its run state lives in the World Model. Kill it mid-task, restart, and it picks up exactly where it left off.
 
 ## What it shows
 
@@ -21,7 +21,7 @@ Prerequisite reading: [`docs/aggregate-shapes.md`](../../docs/aggregate-shapes.m
 
 A "task" is a `run` context. Each step appends an event under it. Resume = read the run's current state and continue from the last completed step. No local file, no in-memory checkpoint to lose.
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { WorldModel } from "@meterless/world-model";
@@ -52,7 +52,7 @@ async function step() {
     source: agent,
   });
 
-  // Advance the run pointer. This is the durable "where am I" — not a local var.
+  // Advance the run pointer. This is the durable "where am I", not a local var.
   await world.upsertContext({
     type: "run",
     externalKey: { system: "agent", id: RUN },
@@ -67,7 +67,7 @@ async function resume() {
   if (!run) return console.log("no such run");
 
   const steps = await world.view("graph").contextChildren(`run:agent:${RUN}`, { type: "step" });
-  console.log(`resuming "${run.attrs.task}" — ${run.attrs.lastStep}/3 steps complete`);
+  console.log(`resuming "${run.attrs.task}": ${run.attrs.lastStep}/3 steps complete`);
   console.log("completed:", steps.map((s) => s.attrs.result));
 
   if (run.attrs.lastStep >= 3) {
@@ -87,15 +87,15 @@ const cmd = process.argv[2];
 
 ## Run it
 
-This repo is an implementation spec — `@meterless/world-model` is not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md); point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then walk the crash/resume flow:
+This repo is an implementation spec. `@meterless/world-model` is the name of your implementation, not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md); point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then walk the crash/resume flow:
 
 ```bash
-# First run — start a task, do two steps, then "crash" (process exits)
+# First run: start a task, do two steps, then "crash" (process exits)
 npx tsx ./index.ts start
 npx tsx ./index.ts step
 npx tsx ./index.ts step
 
-# Simulate a process restart — a brand-new process, zero local state
+# Simulate a process restart: a brand-new process, zero local state
 npx tsx ./index.ts resume
 ```
 
@@ -105,7 +105,7 @@ npx tsx ./index.ts resume
 run started: data-migration-2026-05
 step 1 done
 step 2 done
-resuming "Migrate 3 datasets" — 2/3 steps complete
+resuming "Migrate 3 datasets": 2/3 steps complete
 completed: ["dataset-1 migrated", "dataset-2 migrated"]
 step 3 done
 ```
@@ -117,11 +117,11 @@ Each `npx tsx` invocation is a **fresh process** with no shared memory. The thir
 ## Why it matters
 
 - **Crash recovery is free, not engineered.** There is no checkpoint file to write, fsync, or corrupt. "Where was I?" is a snapshot-view read of the run context.
-- **The process is disposable.** Scale agents horizontally, kill them on deploy, run them as Lambdas — state lives in shared, queryable, audited storage.
+- **The process is disposable.** Scale agents horizontally, kill them on deploy, run them as Lambdas. State lives in shared, queryable, audited storage.
 - **Every step is provenanced.** `source: { kind: "agent", by: "migrator-v3" }` on every write means an operator can later ask "which agent version did step 2, and when?"
 - **Idempotent re-runs.** Re-running `step` for an already-completed index is a no-op (stable step ID), so an at-least-once scheduler cannot double-migrate.
 
 ## Next
 
-- [`world-to-hmem-sync`](../world-to-hmem-sync/README.md) — the agent *remembering* world events in personal memory.
-- [`swarm-planning-with-world-context`](../swarm-planning-with-world-context/README.md) — many agents planning over one shared world.
+- [`world-to-hmem-sync`](../world-to-hmem-sync/README.md): the agent *remembering* world events in personal memory.
+- [`swarm-planning-with-world-context`](../swarm-planning-with-world-context/README.md): many agents planning over one shared world.

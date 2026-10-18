@@ -1,6 +1,6 @@
 # How to Use Markovian Engine
 
-A practical walkthrough of wiring up a Markovian chunked-reasoning runtime. Code samples in **TypeScript**, **Python**, and **Rust**.
+A practical walkthrough of wiring up a Markovian chunked-reasoning runtime. Code samples are in TypeScript, Python, and Rust.
 
 This guide assumes you have read the architecture overview. If you have not, start there. This document is about wiring it up.
 
@@ -26,7 +26,7 @@ This guide assumes you have read the architecture overview. If you have not, sta
 
 ## 1. Install and configure
 
-Markovian is a runtime, not a library lock-in. You implement the orchestrator. The reference defaults below are the recommended starting point.
+Markovian is a runtime pattern that you implement yourself, including the orchestrator. There is no published package to install. The reference defaults below are the recommended starting point.
 
 ### TypeScript
 
@@ -83,11 +83,11 @@ let engine = Markovian::new(ChunkConfig {
 | `chunkSize` | 8000 | 1000 | 128000 | 1000 |
 | `maxChunks` | 24 | 1 | 32 | 1 |
 | `carryoverTokens` | 800 | 128 | 32768 | 128 |
-| `overlapTokens` | 0 | 0 | 4096 | — |
+| `overlapTokens` | 0 | 0 | 4096 | n/a |
 
 Configs are validated at load time (typed error, not silent truncation): `chunkSize >= framingTokens + carryoverTokens + outputBudget`, where `framingTokens ≈ 400` and `outputBudget ≈ 1200` are engine constants; `carryoverTokens > 0`; and the total must fit the model's context window.
 
-`overlapTokens` semantics: when `> 0`, the final `overlapTokens` (× 4 chars) of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. Implement this or reject non-zero values — never accept-and-ignore.
+`overlapTokens` semantics: when `> 0`, the final `overlapTokens` (× 4 chars) of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. Implement this or reject non-zero values. Never accept and ignore them.
 
 ---
 
@@ -295,7 +295,7 @@ pub struct GenerateOutput {
 
 ### Routing strategy
 
-Choose your provider and model **upstream** of Markovian. Long-form workloads route to the orchestrator. Short-form workloads bypass Markovian and call the provider directly.
+Choose your provider and model upstream of Markovian. Long-form workloads route to the orchestrator. Short-form workloads bypass Markovian and call the provider directly.
 
 ```ts
 async function dispatch(prompt: string) {
@@ -519,7 +519,7 @@ pub async fn extract_carryover(prev_state: &str, chunk_output: &str, cfg: &Chunk
 }
 ```
 
-Marker-state acceptance threshold is **≥ 24 chars** — anything shorter falls through the cascade. Ask the compressor to return the structured carryover block rather than free-form prose:
+The marker-state acceptance threshold is ≥ 24 chars. Anything shorter falls through the cascade. Ask the compressor to return the structured carryover block rather than free-form prose:
 
 ```
 COMPLETED: <what was done>
@@ -667,7 +667,7 @@ Server-side recommendations:
 
 - Use a real database (Postgres, SQLite, whatever). IndexedDB is for the browser reference.
 - Store `prompt` truncated (the reference truncates for storage).
-- Persist the **`chunkConfig` snapshot** on every run record — this is **required**, not optional. Historical efficiency must be recomputed against the run's own config; recomputing against the current config produces dishonest numbers the moment anyone changes a slider.
+- Persist the `chunkConfig` snapshot on every run record. This is required. Historical efficiency must be recomputed against the run's own config. Recomputing against the current config produces wrong numbers as soon as anyone changes a slider.
 
 ---
 
@@ -675,7 +675,7 @@ Server-side recommendations:
 
 ### Per-chunk savings (streaming estimate)
 
-For chunk `i` (**1-based** — the first chunk is `i = 1`, so it carries no history):
+For chunk `i` (1-based: the first chunk is `i = 1`, so it carries no history):
 
 ```ts
 // TypeScript
@@ -743,7 +743,7 @@ function runEfficiency(chunks: ChunkInfo[], cfg: ChunkConfig) {
 }
 ```
 
-Compute full-run efficiency with **the run's own persisted `chunkConfig`** (`run.chunkConfig`), never the current live config.
+Compute full-run efficiency with the run's own persisted `chunkConfig` (`run.chunkConfig`), never the current live config.
 
 Token accounting: prefer provider-reported usage (`usage.input_tokens` / `output_tokens`) when the provider returns it; `ceil(chars / 4)` is the fallback estimate only. Label every reported number as `measured` or `estimated`.
 
@@ -795,7 +795,7 @@ CONTEXT: <entities, open questions, constraints needed to continue>
 
 ### Attachment policy
 
-Chunk 0 receives full attachments and memory context. Continuation chunks receive **no attachments by default**. The compressed carryover and truncated goal maintain continuity.
+Chunk 0 receives full attachments and memory context. Continuation chunks receive no attachments by default. The compressed carryover and truncated goal maintain continuity.
 
 ```ts
 // TypeScript
@@ -815,7 +815,7 @@ function buildChunkPrompt(i: number, run: RunRequest, carryover: string) {
 
 ### Abort
 
-Honor the abort signal **before each chunk and before compression**.
+Honor the abort signal before each chunk and before compression.
 
 ```ts
 // TypeScript
@@ -918,7 +918,7 @@ async function execute(task: Task) {
 }
 ```
 
-This is how you get O(1) per-step context **inside** a governed multi-agent system. Each agent gets chunked reasoning. The swarm orchestrator gets bounded tasks.
+This pattern gives O(1) per-step context inside a governed multi-agent system. Each agent gets chunked reasoning. The swarm orchestrator gets bounded tasks.
 
 ---
 
@@ -937,7 +937,7 @@ This is how you get O(1) per-step context **inside** a governed multi-agent syst
 
 ## Repository structure
 
-The companion reference spec lives in the [`Markovian-Engine`](https://github.com/meterless/meterless/tree/main/engines/markovian) repository. It is documentation-first: the engine contracts are specified before the code, so the layout maps concepts.
+The companion reference spec lives in [`engines/markovian`](https://github.com/meterless/meterless/tree/main/engines/markovian) in the Meterless repository. It is documentation-first: the engine contracts are specified before the code, so the layout maps concepts.
 
 ```text
 Markovian-Engine/
@@ -961,14 +961,15 @@ Markovian-Engine/
 │   └── markovian-with-hmem, markovian-inside-swarm   Cross-engine integration
 ├── token-economics-demo/   Runnable side-by-side cost chart (index.html + package.json)
 ├── workshops/           Four-lab track (run → size chunks → tune compression → reflect/resume)
-├── src/                 Reserved for your implementation (the runtime is provider-agnostic)
+├── reference/           Minimal runnable TypeScript reference (the runtime is provider-agnostic)
+├── conformance/         Conformance runner for your implementation
 └── content/             Launch post, one-pager, comparison
 ```
 
-Read order for a new implementer: `README.md` → `docs/architecture.md` → `docs/chunk-config.md` → `docs/marker-protocol.md` → `examples/run-first-chain` → the rest → `token-economics-demo/` to see the flat-cost claim proven. `src/` is intentionally empty — the repo specifies the contract; you bring the generator. The two cross-engine examples show the Markovian side of each pairing; their reciprocals live in the sibling engine repos.
+Read order for a new implementer: `README.md` → `docs/architecture.md` → `docs/chunk-config.md` → `docs/marker-protocol.md` → `examples/run-first-chain` → the rest → `token-economics-demo/` to see the flat-cost claim demonstrated. There is no `src/` folder. The spec defines the contract, a minimal runnable reference lives in `reference/`, and you bring the generator. The two cross-engine examples show the Markovian side of each pairing. Their reciprocals live in the sibling engine folders under `engines/`.
 
 ---
 
 ## License
 
-Apache 2.0. Use it. Fork it. Ship it.
+Apache 2.0.

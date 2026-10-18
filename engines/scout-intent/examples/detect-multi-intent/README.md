@@ -1,8 +1,8 @@
-# 02 — Detect multi-intent
+# 02: Detect multi-intent
 
-Real prompts are rarely one intent. "Pull the Q2 numbers **and** draft a board email" is two. Scout returns a *composed plan* with an execution mode — it does not silently pick one and drop the other.
+Real prompts often carry more than one intent. "Pull the Q2 numbers and draft a board email" is two. Scout returns a composed plan with an execution mode. It does not silently pick one and drop the other.
 
-Prerequisite reading: [`01 — classify-simple-intent`](../classify-simple-intent/README.md), [`docs/scoring.md`](../../docs/scoring.md).
+Prerequisite reading: [`01: classify-simple-intent`](../classify-simple-intent/README.md), [`docs/scoring.md`](../../docs/scoring.md).
 
 ---
 
@@ -12,11 +12,11 @@ Prerequisite reading: [`01 — classify-simple-intent`](../classify-simple-inten
 "Pull the Q2 revenue numbers and draft a board email summarizing them."
 ```
 
-This is `data.query` **then** `email.draft` — and the email depends on the numbers, so they cannot run in parallel.
+This is `data.query` then `email.draft`. The email depends on the numbers, so they cannot run in parallel.
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Scout } from "@meterless/scout";
@@ -40,8 +40,8 @@ for (const i of [decision.primary, ...decision.secondary]) {
 ## Run it
 
 ```bash
-# The @meterless packages are not yet published — this repository is the
-# implementation spec. With a spec-conforming implementation on your import path:
+# No @meterless package is published. @meterless/scout names your own
+# spec-conforming implementation. With it on your import path:
 npx tsx ./index.ts
 ```
 
@@ -67,7 +67,7 @@ are they independent?
 single intent only → "single_step"
 ```
 
-The email references *"them"* (the numbers), so they are **not** independent → `plan_then_execute`. Each intent carries a **span**: the slice of the prompt that produced it, so a downstream planner knows which words map to which step.
+The email references "them" (the numbers), so they are not independent → `plan_then_execute`. Each intent carries a span: the slice of the prompt that produced it, so a downstream planner knows which words map to which step.
 
 ## What the composed plan becomes
 
@@ -78,17 +78,17 @@ contract A  intent=data.query   → produces the Q2 figures
 contract B  intent=email.draft  parentId=A  → drafts using A's result
 ```
 
-Run [`04`](../generate-execution-contract/README.md) to see the contract shape; the multi-intent case simply emits a chain instead of a single contract.
+Run [`04`](../generate-execution-contract/README.md) to see the contract shape; the multi-intent case emits a chain instead of a single contract.
 
 ---
 
 ## Why it matters
 
-- **Composing beats choosing.** Picking only `data.query` and dropping the email silently does half the user's request — the most common multi-intent failure. Scout surfaces *all* intents above threshold and lets the mode decide ordering.
-- **Span attribution makes the plan auditable.** "Why did `email.draft` run?" → because the span *"draft a board email…"* scored it. The decision is traceable to the exact words, not a black box.
-- **Dependence picks the mode, not the agent.** `parallel` vs `plan_then_execute` is decided at the intent layer from whether the intents reference each other — the orchestrator just executes the mode it is handed.
+- **Composing beats choosing.** Picking only `data.query` and dropping the email silently does half the user's request, which is the most common multi-intent failure. Scout surfaces all intents above threshold and lets the mode decide ordering.
+- **Span attribution makes the plan auditable.** "Why did `email.draft` run?" → because the span "draft a board email…" scored it. The decision is traceable to the exact words.
+- **Dependence picks the mode, not the agent.** `parallel` vs `plan_then_execute` is decided at the intent layer from whether the intents reference each other. The orchestrator executes the mode it is handed.
 
 ## Next
 
-- [`03 — risk-check`](../risk-check/README.md) — running a prompt through the guard stack.
-- [`scout-to-swarm`](../scout-to-swarm/README.md) — when a multi-intent plan needs parallel specialists.
+- [`03: risk-check`](../risk-check/README.md): running a prompt through the guard stack.
+- [`scout-to-swarm`](../scout-to-swarm/README.md): when a multi-intent plan needs parallel specialists.

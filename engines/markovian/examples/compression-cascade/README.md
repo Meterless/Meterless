@@ -1,10 +1,10 @@
-# 04 — Compression cascade
+# 04: Compression cascade
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`) — see [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
+> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`). See [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
 
-When a chunk does not emit a clean `<CARRYOVER>` — or emits one too big — the engine does not give up and it does not blow the budget. It runs a **four-strategy cascade**, each falling through to the next on failure. This example makes the cascade visible.
+When a chunk emits no clean `<CARRYOVER>`, or emits one that is too big, the engine keeps running within the budget. It runs a four-strategy cascade, and each strategy falls through to the next on failure. This example makes the cascade visible.
 
 Prerequisite reading: [`docs/compression-cascade.md`](../../docs/compression-cascade.md), [`docs/marker-protocol.md`](../../docs/marker-protocol.md).
 
@@ -19,11 +19,11 @@ Prerequisite reading: [`docs/compression-cascade.md`](../../docs/compression-cas
 4. Absolute fallback          tail-truncate to carryoverTokens
 ```
 
-Each strategy only runs if the previous one failed. The run is **never** unbounded and **never** crashes on a bad chunk.
+Each strategy only runs if the previous one failed. The run is never unbounded and never crashes on a bad chunk.
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian } from "@meterless/markovian";
@@ -48,7 +48,7 @@ for (const c of run.chunks) {
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
@@ -74,7 +74,7 @@ console.log(diffCarryover(run.chunks[2].carryoverOut, run.chunks[3].carryoverOut
 // - stale NEXT_STEP line dropped
 ```
 
-You can see *what state crossed the boundary* — decisions added, questions resolved, stale lines dropped — which is exactly what a healthy chain should show.
+You can see what state crossed the boundary: decisions added, questions resolved, stale lines dropped. A healthy chain shows this pattern.
 
 ## A custom cascade for code-heavy tasks
 
@@ -92,12 +92,12 @@ new Markovian({
 
 ## Why it matters
 
-- **A missing marker is not a failure.** Strategy 2 (model compression) catches the common "model forgot the marker" case automatically. The chain keeps its O(1) property even when the model is sloppy.
-- **The cascade is robust under model/API instability.** If the compressor call itself errors, strategy 2 falls to the deterministic regex extractor (strategy 3), then to a hard tail-truncate (strategy 4). There is always a bounded carryover — the run cannot wedge.
-- **The model knows the task better than the generic compressor.** That is why strategy 1 (the model's own `<CARRYOVER>`) is preferred. The cascade is a safety net, not the primary path — encouraging good markers ([`03`](../marker-protocol/README.md)) still wins.
-- **Cascade choice is on the record.** `chunk.cascadeStrategyUsed` tells you per step whether the marker held or a fallback fired — a quiet drift toward `heuristic` means the framing needs work.
+- **A missing marker is recoverable.** Strategy 2 (model compression) catches the common "model forgot the marker" case automatically. The chain keeps its O(1) property even when the model is sloppy.
+- **The cascade keeps working when the model or API fails.** If the compressor call itself errors, strategy 2 falls to the deterministic regex extractor (strategy 3), then to a hard tail-truncate (strategy 4). There is always a bounded carryover, so the run cannot wedge.
+- **The model knows the task better than the generic compressor.** That is why strategy 1 (the model's own `<CARRYOVER>`) is preferred. The cascade is the fallback. Encouraging good markers ([`03`](../marker-protocol/README.md)) is still the primary path.
+- **Cascade choice is on the record.** `chunk.cascadeStrategyUsed` tells you per step whether the marker held or a fallback fired. A gradual drift toward `heuristic` means the framing needs work.
 
 ## Next
 
-- [`06 — run-history-and-stats`](../run-history-and-stats/README.md) — every cascade decision is in the per-chunk record.
-- [`02 — custom-chunk-config`](../custom-chunk-config/README.md) — sizing the budget the cascade compresses into.
+- [06: `run-history-and-stats`](../run-history-and-stats/README.md): every cascade decision is in the per-chunk record.
+- [02: `custom-chunk-config`](../custom-chunk-config/README.md): sizing the budget the cascade compresses into.

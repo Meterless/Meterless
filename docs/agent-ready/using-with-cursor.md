@@ -18,3 +18,9 @@ The engine's AGENTS.md carries the full contract: architecture, service boundari
 ## Work on this repo itself
 
 Start from the root [AGENTS.md](../../AGENTS.md). It routes by task type to a single folder. Keep context small: one engine folder at a time, and skip the other engines unless the task spans them.
+
+## Run Cursor against your own machine
+
+Add Meterless as an OpenAI-compatible provider in Cursor and its requests land on the [Nightshift hotspot](../products/nightshift/hotspot.md) on your Mac or DGX Spark. The full contract is in [add-meterless-provider.md](add-meterless-provider.md). Nightshift can also pick up work you already start in Cursor and keep it running overnight.
+
+Starter prompts for every engine are in [prompt-library.md](prompt-library.md).

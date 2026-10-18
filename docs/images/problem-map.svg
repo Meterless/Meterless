@@ -4,7 +4,7 @@
   <rect x="0.5" y="0.5" width="959" height="399" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
 
   <text x="40" y="46" font-size="22" font-weight="700" fill="#171310">Agents fail on thin context, not weak models.</text>
-  <text x="40" y="70" font-size="13" fill="#756D60">Six failure modes in most agent stacks today &#8212; and the layer that fixes each one.</text>
+  <text x="40" y="70" font-size="13" fill="#756D60">Six failure modes in most agent stacks today, and the layer that fixes each one.</text>
 
   <!-- rows: problem card -> arrow -> answer chip -->
   <!-- row template: y = 92 + i*48 -->
@@ -13,7 +13,7 @@
     <g>
       <animate attributeName="opacity" values="0;1;1" keyTimes="0;0.06;1" dur="9s" repeatCount="indefinite"/>
       <rect x="40" y="92" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
-      <text x="58" y="115" fill="#3E3831">Forgets everything between sessions &#8212; <tspan fill="#9A9284">no durable memory</tspan></text>
+      <text x="58" y="115" fill="#3E3831">Forgets everything between sessions: <tspan fill="#9A9284">no durable memory</tspan></text>
       <path d="M496 110 L544 110" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 105 L546 110 L539 115" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
       <rect x="552" y="92" width="368" height="36" rx="9" fill="#FFF4EA" stroke="#E8590C" stroke-width="1.4"/>
       <text x="570" y="115" font-weight="700" fill="#C74E0B">H-MEM</text>
@@ -43,7 +43,7 @@
     <g>
       <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.18;0.24;1" dur="9s" repeatCount="indefinite"/>
       <rect x="40" y="236" width="450" height="36" rx="9" fill="#FFFFFF" stroke="#E7DFD3"/>
-      <text x="58" y="259" fill="#3E3831">Produces same-y output &#8212; <tspan fill="#9A9284">no divergent generation</tspan></text>
+      <text x="58" y="259" fill="#3E3831">Produces same-y output: <tspan fill="#9A9284">no divergent generation</tspan></text>
       <path d="M496 254 L544 254" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 249 L546 254 L539 259" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
       <rect x="552" y="236" width="368" height="36" rx="9" fill="#F4EFFC" stroke="#7C4DE0" stroke-width="1.4"/>
       <text x="570" y="259" font-weight="700" fill="#6A3FC7">Swarms</text>
@@ -67,7 +67,7 @@
       <path d="M496 350 L544 350" stroke="#D9CFC0" stroke-width="1.5"/><path d="M539 345 L546 350 L539 355" fill="none" stroke="#D9CFC0" stroke-width="1.5"/>
       <rect x="552" y="332" width="368" height="36" rx="9" fill="#FFFFFF" stroke="#0FA97A" stroke-width="1.4" stroke-dasharray="5 4"/>
       <text x="570" y="355" font-weight="700" fill="#0B8560">Runtime</text>
-      <text x="646" y="355" fill="#55806F">quality &#183; cost &#183; latency routing &#183; Q4 2026</text>
+      <text x="646" y="355" fill="#55806F">quality &#183; cost &#183; latency routing &#183; in Nightshift</text>
     </g>
   </g>
 </svg>

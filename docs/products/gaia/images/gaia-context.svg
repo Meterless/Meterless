@@ -63,7 +63,7 @@
 
     <rect x="800" y="92" width="128" height="72" rx="10" fill="#FFFFFF" stroke="#E7DFD3"/>
     <text x="864" y="114" font-size="11" font-weight="700" fill="#3E3831" text-anchor="middle">Session &#183; Friday</text>
-    <text x="864" y="132" font-size="10" fill="#756D60" text-anchor="middle">still knows it &#8212;</text>
+    <text x="864" y="132" font-size="10" fill="#756D60" text-anchor="middle">still knows it,</text>
     <text x="864" y="145" font-size="10" fill="#756D60" text-anchor="middle">no re-explaining</text>
     <circle cx="864" cy="154" r="3.5" fill="#E8590C" opacity="0.25">
       <animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0;0.72;0.76;1" dur="7s" repeatCount="indefinite"/>
@@ -86,5 +86,5 @@
   </circle>
 
   <text x="356" y="262" font-size="11.5" fill="#756D60">Gaia coordinates the engines so you never manage memory, state, or context by hand.</text>
-  <text x="356" y="282" font-size="10.5" fill="#9A9284">Same engines, same architecture as Relay and Swarms &#8212; proven three ways.</text>
+  <text x="356" y="282" font-size="10.5" fill="#9A9284">Same engines, same architecture as Relay and Swarms. Proven three ways.</text>
 </svg>

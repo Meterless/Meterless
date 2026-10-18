@@ -10,13 +10,13 @@ Reference: [`docs/retrieval-ranking.md`](../docs/retrieval-ranking.md), [`docs/r
 
 ---
 
-## Exercise 1 — Query preparation
+## Exercise 1: Query preparation
 
 Given a query string, produce: embedding, keywords, inferred domain, entities, and a strategy label (`minimal` | `personal` | `comprehensive`).
 
 **Checkpoint:** `"Prepare the frontend install instructions."` → domain `tech/frontend`, entities include `frontend`, `install`.
 
-## Exercise 2 — The hybrid ranker
+## Exercise 2: The hybrid ranker
 
 Implement the eight-signal scorer with the confidence multiplier:
 
@@ -32,7 +32,7 @@ Persist the weight profile (e.g. `weights@2026-07`) so quality changes correlate
 
 **Checkpoint:** a `long_term` pnpm rule outranks a `working` Node-version note for an install query; an off-domain memory falls below `threshold=0.35` and is excluded.
 
-## Exercise 3 — Grouped reinjection
+## Exercise 3: Grouped reinjection
 
 Format kept memories grouped by domain, with layer markers and entities:
 
@@ -41,15 +41,15 @@ Format kept memories grouped by domain, with layer markers and entities:
 [tech/frontend] (working)   The project targets Node 18. {entities: Node}
 ```
 
-**Checkpoint:** grouping is by domain; the model is never told "this came from memory" — structure carries that.
+**Checkpoint:** grouping is by domain; the model is never told "this came from memory"; structure carries that.
 
-## Exercise 4 — Trace + safety filter
+## Exercise 4: Trace + safety filter
 
 Emit trace: `traceId`, `retrievalReason`, `strategy`, query domain/entities, per-memory score, ranker version, suppressed-superseded count. Before formatting, drop `review`/`wrong`-tagged memories and apply redaction to `private`/`pii`.
 
-**Checkpoint:** a `wrong`-tagged memory that scores high is **not** in the prompt context but its suppression is visible in the trace; `read` writes a ledger entry.
+**Checkpoint:** a `wrong`-tagged memory that scores high is not in the prompt context but its suppression is visible in the trace; `read` writes a ledger entry.
 
-## Exercise 5 — Discussion
+## Exercise 5: Discussion
 
 1. Pure cosine similarity would rank two frontend memories nearly equally. Which signals break the tie correctly here, and why is layer weight worth only 0.05 while confidence multiplies the whole score?
 2. Trace goes to the operator; content goes to the model. What breaks if you put the trace in the prompt? If you hide it from the operator?
@@ -67,4 +67,4 @@ Validate against the **Retrieval quality** and **Reinjection quality** eval cate
 
 ## Next
 
-[`04-dream-and-sleep.md`](04-dream-and-sleep.md) — let memory evolve and stay healthy, safely.
+[`04-dream-and-sleep.md`](04-dream-and-sleep.md): let memory evolve and stay healthy, safely.

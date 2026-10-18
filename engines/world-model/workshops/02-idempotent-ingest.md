@@ -1,4 +1,4 @@
-# Workshop 02 — Idempotent ingest
+# Workshop 02: Idempotent ingest
 
 **Time:** 45 minutes
 **You'll leave with:** an ingest pipeline that you can run as many times as you want without corrupting the store.
@@ -11,9 +11,9 @@ World Model's invariant: **the same input produces the same event log**.
 
 ## Setup
 
-Start from Workshop 01's project — your implementation of the World Model contract wired in (see the setup note in [Workshop 01](./01-build-your-first-world.md); `@meterless/world-model` is not a published package).
+Start from Workshop 01's project, with your implementation of the World Model contract wired in (see the setup note in [Workshop 01](./01-build-your-first-world.md); `@meterless/world-model` is not a published package).
 
-## Step 1 — A naive ingest (10 min)
+## Step 1: A naive ingest (10 min)
 
 ```ts
 import { WorldModel } from "@meterless/world-model";
@@ -45,7 +45,7 @@ console.log("Entities:", (await world.entities()).length);
 
 Expected: 3 events (every upsert appends), 1 entity (stable ID collapses duplicates), and the final title is `"Sapiens: A Brief History"` (latest fact supersedes).
 
-## Step 2 — Re-run the pipeline (5 min)
+## Step 2: Re-run the pipeline (5 min)
 
 Run the same loop a second time. Now check again.
 
@@ -53,7 +53,7 @@ Expected: still 3 entity events for this content (the dedupe stage at the bounda
 
 This is the test. **The second run produces zero new events.**
 
-## Step 3 — Add provenance and replay (15 min)
+## Step 3: Add provenance and replay (15 min)
 
 ```ts
 const ingestRun = `run-${Date.now()}`;
@@ -80,7 +80,7 @@ const runEvents = await world.events({ source: { runId: ingestRun } });
 console.log(runEvents.length, "events from this run");
 ```
 
-## Step 4 — Replay after a bug fix (15 min)
+## Step 4: Replay after a bug fix (15 min)
 
 Simulate a bug: your old extractor capitalized titles wrong. The fix is in. Replay just that source's events:
 
@@ -105,4 +105,4 @@ Original events are preserved. New events supersede. Audit trail shows what the 
 
 ## Next
 
-[Workshop 03 — Rebuilding a view from scratch →](./03-rebuild-a-view.md)
+[Workshop 03: Rebuilding a view from scratch →](./03-rebuild-a-view.md)

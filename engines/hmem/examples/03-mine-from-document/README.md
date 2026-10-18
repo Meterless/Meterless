@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-Chat mining ([02](../02-mine-from-chat/README.md)) extracts from a turn. Document mining extracts durable knowledge from imported files — policies, specs, runbooks — and keeps file provenance so any mined fact traces back to its source line of origin.
+Chat mining ([02](../02-mine-from-chat/README.md)) extracts from a turn. Document mining extracts durable knowledge from imported files (policies, specs, runbooks) and keeps file provenance so any mined fact traces back to its source line of origin.
 
 Prerequisite reading: [`docs/mining-pipeline.md`](../../docs/mining-pipeline.md), [`docs/privacy-and-local-first.md`](../../docs/privacy-and-local-first.md).
 
@@ -21,7 +21,7 @@ All onboarding tasks must be finished within the first 10 business days.
 The buddy program is optional but recommended.
 ```
 
-We want the reusable, durable rules — not the prose, not the optional fluff.
+We want the reusable, durable rules. The prose and the optional recommendation are skipped.
 
 ---
 
@@ -37,7 +37,7 @@ await mining.ingestDocument({
 });
 ```
 
-The document extraction prompt asks for **reusable facts, preferences, and technical knowledge** — not a summary:
+The document extraction prompt asks for reusable facts, preferences, and technical knowledge instead of a summary:
 
 ```text
 SYSTEM: Extract durable, reusable facts and policies from this document.
@@ -73,7 +73,7 @@ await mining.ingest_document(
    type=factual  layer=working  tags=source:doc:onboarding-policy.md, policy:onboarding
 ```
 
-The "buddy program is optional but recommended" line is **not** stored — it is a recommendation, not a durable rule.
+The "buddy program is optional but recommended" line is not stored, because it is a recommendation rather than a durable rule.
 
 ## Expected ledger entries
 
@@ -99,4 +99,4 @@ The "buddy program is optional but recommended" line is **not** stored — it is
 
 ## Next
 
-[`04-retrieve-and-reinject`](../04-retrieve-and-reinject/README.md) — putting these mined memories back into a prompt with trace metadata.
+[`04-retrieve-and-reinject`](../04-retrieve-and-reinject/README.md: putting these mined memories back into a prompt with trace metadata.

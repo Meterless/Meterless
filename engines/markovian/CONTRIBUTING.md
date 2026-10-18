@@ -1,17 +1,17 @@
 # Contributing to Markovian
 
-Thanks for being here. Markovian is an Apache 2.0-licensed engine in the Meterless stack and contributions are very welcome.
+Thanks for being here. Markovian is an Apache 2.0-licensed engine in the Meterless stack. Contributions are welcome.
 
 ## Ways to help
 
-- **Use it and report bugs.** Especially efficiency bugs — "I expected flat per-step cost and got linear growth." Include the chunk config, the carryover sample, and the run history. File issues at <https://github.com/meterless/meterless/issues>.
-- **Add a custom compression cascade.** Domain-specific cascades (code, research, CRM) are great as separate packages implementing the cascade interface from [`docs/compression-cascade.md`](docs/compression-cascade.md).
+- **Use it and report bugs.** Efficiency bugs matter most, for example: "I expected flat per-step cost and got linear growth." Include the chunk config, the carryover sample, and the run history. File issues at <https://github.com/meterless/meterless/issues>.
+- **Add a custom compression cascade.** Domain-specific cascades (code, research, CRM) work well as separate packages implementing the cascade interface from [`docs/compression-cascade.md`](docs/compression-cascade.md).
 - **Improve the token economics demo.** Better visualizations, model-specific presets, side-by-side mode for real model costs.
 - **Add workshops.** Real-world tasks framed as Markovian chains help adoption more than another README pass.
 
 ## Getting set up
 
-This repo is documentation-first — the engine contracts live in `AGENTS.md` and `docs/`; `src/` is intentionally empty (no root `package.json`, no test suite to run).
+This folder is documentation-first. The engine contracts live in `AGENTS.md` and `docs/`. There is no `src/` folder and no root `package.json`. The runnable reference implementation and its tests live in `reference/`, and the conformance suite lives in `conformance/`.
 
 ```bash
 npx degit meterless/meterless/engines/markovian my-markovian
@@ -24,7 +24,7 @@ The token economics demo doubles as a smoke test for the math:
 cd token-economics-demo
 npm install
 npm run dev
-# or just open token-economics-demo/index.html in a browser — no build step needed
+# or open token-economics-demo/index.html in a browser (no build step needed)
 ```
 
 ## PR conventions

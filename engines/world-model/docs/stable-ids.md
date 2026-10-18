@@ -49,7 +49,7 @@ Type-specific canonical keys are declared in your schema and **versioned**. Chan
 id = hash(type + canonicalKey(attrs) + parent?)
 ```
 
-Same shape, but a context's ID includes its parent — so `week:14` under `season:145` is a different ID than `week:14` under `season:144`.
+Same shape, but a context's ID includes its parent, so `week:14` under `season:145` is a different ID than `week:14` under `season:144`.
 
 ### Relationships
 
@@ -73,7 +73,7 @@ type Alias = {
 };
 ```
 
-Old references to the alias ID **still resolve** — the read surface follows alias pointers transparently. The event log preserves both, so an unmerge is a one-step rollback.
+Old references to the alias ID **still resolve**. The read surface follows alias pointers transparently. The event log preserves both, so an unmerge is a one-step rollback.
 
 ## Externalized IDs
 
@@ -88,13 +88,13 @@ await world.upsertEntity({
 });
 ```
 
-The ID is then `account:salesforce:0015g00000A1b2cAAA` — the literal externally-keyed form — and stays consistent across every system that knows about that account.
+The ID is then `account:salesforce:0015g00000A1b2cAAA` (the literal externally-keyed form) and stays consistent across every system that knows about that account.
 
 ## Why content hashes, not UUIDs
 
 UUIDs make ingest non-idempotent: re-ingesting the same article generates a new ID. Content-addressed IDs collapse duplicates at the boundary, which is the property you want at the canonical-store layer.
 
-If you need opaque external IDs for users to copy-paste, expose them through a separate handle layer — don't compromise the canonical ID strategy to make URLs prettier.
+If you need opaque external IDs for users to copy-paste, expose them through a separate handle layer. Don't compromise the canonical ID strategy to make URLs prettier.
 
 ## When IDs change
 

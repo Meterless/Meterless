@@ -30,11 +30,11 @@ markovian.on("run.complete", (e) => ui.markDone(e.stats));
 A horizontal or vertical step list with one entry per chunk:
 
 ```
-✓ Step 1 — researched candidates       400ms · 1.2k tok
-✓ Step 2 — narrowed to top 3           520ms · 1.4k tok
-● Step 3 — evaluating top 3...
-○ Step 4 — pending
-○ Step 5 — pending
+✓ Step 1: researched candidates        400ms · 1.2k tok
+✓ Step 2: narrowed to top 3            520ms · 1.4k tok
+● Step 3: evaluating top 3...
+○ Step 4: pending
+○ Step 5: pending
 ```
 
 The active step shows live `chunk.progress` messages; completed steps show stats.
@@ -49,7 +49,7 @@ When debugging or for high-trust workflows, surface the carryover diff between s
 - (none)
 ```
 
-This is the surface that makes Markovian's behavior **inspectable in real time**, not just after the fact.
+This surface makes Markovian's behavior inspectable in real time as well as after the fact.
 
 ### Token budget gauge
 
@@ -61,7 +61,7 @@ A running gauge showing tokens consumed vs. the projected total. Helps users see
 
 ## Human-in-the-loop hooks
 
-Markovian can pause for human input via `[NEEDS_CLARIFICATION]` (or its XML alternate — see [`marker-protocol.md`](./marker-protocol.md)). The streaming UI shows the question; the host posts the answer back:
+Markovian can pause for human input via `[NEEDS_CLARIFICATION]` (or its XML alternate; see [`marker-protocol.md`](./marker-protocol.md)). The streaming UI shows the question; the host posts the answer back:
 
 ```ts
 markovian.on("chunk.clarification", async ({ runId, step, question }) => {
@@ -70,7 +70,7 @@ markovian.on("chunk.clarification", async ({ runId, step, question }) => {
 });
 ```
 
-This is what turns long runs from "fire and forget" into **collaborative long-horizon work**.
+With this hook, a long run can stop and take human input instead of running unattended to the end.
 
 ## Approval gates
 
@@ -92,5 +92,5 @@ The streaming UI is where approvals happen. The contract specifies that they're 
 
 ## What's next
 
-- [Reflection](./reflection.md) — post-run self-review
-- [Compose with Swarm](./compose-with-swarm.md) — streaming inside a swarm task
+- [Reflection](./reflection.md): post-run self-review
+- [Compose with Swarm](./compose-with-swarm.md): streaming inside a swarm task

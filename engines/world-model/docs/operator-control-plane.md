@@ -1,14 +1,12 @@
 # Operator control plane
 
-The library is not enough. Real World Model deployments need a place where humans can **inspect, merge, edit, rebuild, and repair** the store.
-
-That place is the control plane.
+Real World Model deployments need more than the library. They need a place where humans can inspect, merge, edit, rebuild, and repair the store. That place is the control plane.
 
 ## What it is
 
-A browser-native operator UI, specified here as acceptance criteria for any implementation. The five capabilities below — inspect, merge, edit, rebuild, repair — plus the audit browser and the three roles are the contract.
+A browser-native operator UI, specified here as acceptance criteria for any implementation. The five capabilities below (inspect, merge, edit, rebuild, repair), plus the audit browser and the three roles, are the contract.
 
-This repo ships an **illustrative single-file mock (see also [`control-plane/live.html`](../control-plane/live.html), which runs the actual reference implementation in-browser)** at [`control-plane/index.html`](../control-plane/index.html) (hard-coded sample entities; the Merge/Edit/Repair panels are placeholder states). It shows what the surface looks like; it is not a working operator tool. See [`control-plane/README.md`](../control-plane/README.md).
+This repo ships an illustrative single-file mock at [`control-plane/index.html`](../control-plane/index.html) (hard-coded sample entities; the Merge/Edit/Repair panels are placeholder states). It shows what the surface looks like; it is not a working operator tool. The live version, [`control-plane/live.html`](../control-plane/live.html), runs the actual reference implementation in the browser. See [`control-plane/README.md`](../control-plane/README.md).
 
 ## The five operator capabilities
 
@@ -45,10 +43,10 @@ Correct a fact. Update an attribute. Add a missing relationship.
 Every edit:
 
 - Is recorded as a new event with operator provenance (`{ kind: "manual", by: operatorId }`).
-- Supersedes — never overwrites — the prior fact.
+- Supersedes the prior fact. It never overwrites it.
 - Is reversible by reverting the supersession.
 
-If you find yourself wanting to "fix" the canonical store by editing past events directly, you don't want an edit — you want a **replay** (see Repair).
+If you find yourself wanting to "fix" the canonical store by editing past events directly, you need a **replay** (see Repair), not an edit.
 
 ### 4. Rebuild
 
@@ -64,7 +62,7 @@ Rebuilds are always safe. The canonical store is untouched.
 
 ### 5. Repair
 
-Something is wrong with a source. A bug in the extractor produced bad facts for a week. The fix is in. Now what?
+Something is wrong with a source. A bug in the extractor produced bad facts for a week. The fix is in, and the bad facts need to be corrected.
 
 **Replay**:
 
@@ -91,9 +89,9 @@ This is the answer to "how did the store get into this state?" The answer is alw
 
 The control plane has three roles:
 
-- **Viewer** — inspect only.
-- **Editor** — inspect + edit + merge.
-- **Admin** — all of the above, plus rebuild and repair.
+- **Viewer**: inspect only.
+- **Editor**: inspect + edit + merge.
+- **Admin**: all of the above, plus rebuild and repair.
 
 Permissions are enforced at the event-append layer. A viewer trying to commit an edit gets rejected at the boundary, not in the UI.
 

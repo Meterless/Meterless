@@ -1,6 +1,6 @@
 # How to Use H-MEM
 
-A practical walkthrough of building and operating an H-MEM instance. Code samples in **TypeScript**, **Python**, and **Rust**.
+A practical walkthrough of building and operating an H-MEM instance. Code samples are in TypeScript, Python, and Rust.
 
 This guide assumes you have read the architecture overview. If you have not, start there. This document is about wiring it up.
 
@@ -149,7 +149,7 @@ export interface MemoryProvenance {
 }
 ```
 
-`confidence` and `source` are **mandatory** — a record without `source` must be rejected by construction. The same v2 extension fields (`provenance`, `chatId`/`missionId`/`goalRunId`, `supersededBy`) apply identically to the Python and Rust shapes below; they are omitted there for brevity. See [`docs/memory-record.md`](docs/memory-record.md) for the full contract.
+`confidence` and `source` are mandatory. A record without `source` must be rejected by construction. The same v2 extension fields (`provenance`, `chatId`/`missionId`/`goalRunId`, `supersededBy`) apply identically to the Python and Rust shapes below; they are omitted there for brevity. See [`docs/memory-record.md`](docs/memory-record.md) for the full contract.
 
 ### Python
 
@@ -380,7 +380,7 @@ pub async fn ingest(&self, event: InteractionEvent) -> anyhow::Result<()> {
 
 ### The no-model fallback
 
-If your generator is unavailable, **do not drop the input**. Capture it as a short-term summary instead.
+If your generator is unavailable, do not drop the input. Capture it as a short-term summary instead.
 
 ```ts
 // TypeScript
@@ -435,7 +435,7 @@ mining.ingest_document(DocumentIngest {
 }).await?;
 ```
 
-The extraction prompt for documents asks for **reusable facts, preferences, and technical knowledge**. Tag each mined memory with `source:doc:<filename>` so you can trace back.
+The extraction prompt for documents asks for reusable facts, preferences, and technical knowledge. Tag each mined memory with `source:doc:<filename>` so you can trace back.
 
 ---
 
@@ -748,7 +748,7 @@ for c in detected {
 
 ### Manual resolution
 
-Auto-resolve only when the decision confidence is **≥ 0.70**. Below that, surface the conflict to a human.
+Auto-resolve only when the decision confidence is ≥ 0.70. Below that, surface the conflict to a human.
 
 ```ts
 // TypeScript
@@ -759,7 +759,7 @@ await conflicts.resolve(conflict.id, {
 });
 ```
 
-The resolution **always writes to the ledger**, with `previousState` and `newState` for the affected memories.
+The resolution always writes to the ledger, with `previousState` and `newState` for the affected memories.
 
 ---
 
@@ -835,7 +835,7 @@ Scheduling recommendations:
 - **Dreaming.** Daily or weekly. Surface proposals in a review queue, do not auto-approve.
 - **Sleep.** Weekly. Run preview daily for observability, execute weekly.
 - **Conflict scan.** Daily. Auto-resolve only at decision confidence ≥0.70; queue the rest.
-- **Ledger pruning.** Never destructive. The ledger is append-only and never destructively pruned. If a constrained client must cap storage, export the oldest segment to an archive artifact and record a `ledger_rotated` entry before trimming — a silent cap is a contract violation.
+- **Ledger pruning.** Never destructive. The ledger is append-only and never destructively pruned. If a constrained client must cap storage, export the oldest segment to an archive artifact and record a `ledger_rotated` entry before trimming. A silent cap is a contract violation.
 
 ---
 
@@ -858,7 +858,7 @@ plan output → mining.ingest (event: "plan_completion")
 
 ### With Markovian Engine
 
-H-MEM's reinjected context becomes Markovian's `memoryContext` parameter, which the Markovian runtime injects into the first chunk only — re-injecting per chunk would defeat the O(1) property. Continuation chunks rely on Markovian's compressed carryover. If a lower layer of your generator also auto-augments prompts with memory, pass `skipSemanticMemoryAugmentation: true` down so retrieval does not happen twice. The two engines compose cleanly.
+H-MEM's reinjected context becomes Markovian's `memoryContext` parameter, which the Markovian runtime injects into the first chunk only. Re-injecting per chunk would defeat the O(1) property. Continuation chunks rely on Markovian's compressed carryover. If a lower layer of your generator also auto-augments prompts with memory, pass `skipSemanticMemoryAugmentation: true` down so retrieval does not happen twice. The two engines compose cleanly.
 
 ```ts
 const { memories } = await hmem.query({ text: userPrompt, topN: 5 });
@@ -886,7 +886,7 @@ await markovian.run({
 
 ## Repository structure
 
-This repository ([github.com/meterless/meterless/tree/main/engines/hmem](https://github.com/meterless/meterless/tree/main/engines/hmem)) is documentation-first: every service contract is written down before any code, so the layout below is a map of *concepts*, not a build tree.
+This repository ([github.com/meterless/meterless/tree/main/engines/hmem](https://github.com/meterless/meterless/tree/main/engines/hmem)) is documentation-first. Every service contract is written down, and `reference/` holds a minimal runnable implementation of those contracts. The layout below is a map of concepts, not a build tree.
 
 ```text
 H-MEM/
@@ -904,6 +904,8 @@ H-MEM/
 │   ├── conflict-resolution.md   Detection, scoring, audited resolution
 │   ├── privacy-and-local-first.md
 │   └── how-to-use.md / practical-how-to.md   Wiring guides (this document's repo twin)
+├── reference/           Minimal runnable reference implementation
+├── conformance/         Conformance suite for checking your implementation
 ├── examples/            Runnable walkthroughs
 │   ├── 01-add-memory … 08-trust-ledger      The numbered learning path
 │   ├── chat-memory, document-memory, …      Scenario deep-dives
@@ -918,10 +920,10 @@ H-MEM/
 └── content/             Launch post, one-pager, comparison, demo script
 ```
 
-Read order for a new implementer: `README.md` → `docs/architecture.md` → `docs/memory-record.md` → the numbered `examples/` in order → `workshops/`. The `examples/markovian-handoff`, `world-model-sync`, and `scout-grounded-recall` folders show H-MEM's side of each cross-engine pairing; their reciprocals live in the sibling engine repos: [Markovian Engine](https://github.com/meterless/meterless/tree/main/engines/markovian), [World Model](https://github.com/meterless/meterless/tree/main/engines/world-model), and [Scout Intent](https://github.com/meterless/meterless/tree/main/engines/scout-intent).
+Read order for a new implementer: `README.md` → `docs/architecture.md` → `docs/memory-record.md` → the numbered `examples/` in order → `workshops/`. The `examples/markovian-handoff`, `world-model-sync`, and `scout-grounded-recall` folders show H-MEM's side of each cross-engine pairing; their reciprocals live in the sibling engine folders: [Markovian Engine](https://github.com/meterless/meterless/tree/main/engines/markovian), [World Model](https://github.com/meterless/meterless/tree/main/engines/world-model), and [Scout Intent](https://github.com/meterless/meterless/tree/main/engines/scout-intent).
 
 ---
 
 ## License
 
-Apache 2.0. Use it. Fork it. Ship it.
+Apache 2.0.

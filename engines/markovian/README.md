@@ -4,7 +4,7 @@
   
 # Meterless Markovian Engine
 
-**Long reasoning in bounded chunks. Flat per-step context cost instead of O(n²) cumulative growth. Provider-agnostic implementation spec.**
+**A provider-agnostic implementation spec for running long reasoning in bounded chunks, with flat per-step context cost instead of O(n²) cumulative growth.**
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Architecture](https://img.shields.io/badge/architecture-provider--agnostic-purple.svg)](docs/architecture.md)
@@ -39,7 +39,7 @@ Long reasoning tasks blow up your context window.
 
 A single prompt of "build me the thing" becomes a 30,000-token prompt by step 8. Every step pays the cost of every prior step. Costs grow with the square of chain length. You get truncation, rate limits, latency cliffs, and quality drift.
 
-Markovian fixes this.
+Markovian bounds every step to fix this.
 
 ---
 
@@ -51,20 +51,20 @@ A chunked reasoning runtime that runs long tasks as a sequence of bounded steps.
 - A compressed **carryover state** from the previous step
 - Optional first-step context (memory, attachments, workspace)
 
-That's it. Per-step context is effectively constant. Naive full-history prompting is O(n²). Markovian is O(1) per step relative to chain length.
+Per-step context is effectively constant. Naive full-history prompting is O(n²). Markovian is O(1) per step relative to chain length.
 
 Two modes ship in the reference implementation:
 
 - `ARCHITECT` for build, plan, implement tasks
 - `RESEARCH` for recursive analytical work
 
-The runtime is **provider-agnostic**. You inject a generator function. The runtime does the rest.
+The runtime is provider-agnostic. You inject a generator function, and the runtime handles the loop.
 
 ---
 
 ## The math
 
-<img src="images/Markovian_Engine_Cost_Curve.png" alt="Meterless Markovian Engine Hero Image" width="100%" />
+<img src="images/Markovian_Engine_Cost_Curve.png" alt="Meterless Markovian Engine cost curve" width="100%" />
 
 The reference savings model, applied per chunk `i`:
 
@@ -75,36 +75,36 @@ markovianChunkCost    = carryoverTokens + chunkTokens
 chunkSavings          = max(0, standardChunkCost - markovianChunkCost)
 ```
 
-The standard approach is **quadratic in chain length**. The Markovian approach is **flat**. That single difference is the entire thesis.
+The standard approach is quadratic in chain length. The Markovian approach is flat. The rest of the design follows from that difference.
 
-At the reference defaults — `chunkSize = 8000`, `carryoverTokens = 800`, `maxChunks = 24` — a full 24-chunk run **modeled at full chunks** costs the standard approach a cumulative **~2,400,000 tokens** (`8000 × 24 × 25 / 2`). Markovian pays roughly **24 × (800 + 8000) ≈ 211,000 tokens** to work through **~192K tokens of reasoning** at 10% carryover compression. Same work. **~91% modeled savings.**
+At the reference defaults (`chunkSize = 8000`, `carryoverTokens = 800`, `maxChunks = 24`), a full 24-chunk run modeled at full chunks costs the standard approach a cumulative ~2,400,000 tokens (`8000 × 24 × 25 / 2`). Markovian pays roughly 24 × (800 + 8000) ≈ 211,000 tokens to work through ~192K tokens of reasoning at 10% carryover compression. The work is the same, and the modeled savings are ~91%.
 
-> **These numbers are modeled, not measured.** They come from the symbolic cost model in [`docs/efficiency-model.md`](docs/efficiency-model.md). Real accounting should use provider-reported usage (`usage.input_tokens` / `output_tokens`) when available and fall back to a `chars/4` estimate only when it isn't — and every published number should say which one it is. Three different figures appear in these docs (91% here, 86% at N=20 in the worked example, ~73% at the interactive demo defaults); they use different N and constants, and [`docs/efficiency-model.md`](docs/efficiency-model.md) reconciles them. For numbers from an actual engine run on your machine: `cd reference && npx tsx scripts/measured-run.ts`.
+> **These numbers are modeled, not measured.** They come from the symbolic cost model in [`docs/efficiency-model.md`](docs/efficiency-model.md). Real accounting should use provider-reported usage (`usage.input_tokens` / `output_tokens`) when available and fall back to a `chars/4` estimate only when it isn't. Every published number should say which one it is. Three different figures appear in these docs (91% here, 86% at N=20 in the worked example, ~73% at the interactive demo defaults); they use different N and constants, and [`docs/efficiency-model.md`](docs/efficiency-model.md) reconciles them. For numbers from an actual engine run on your machine: `cd reference && npx tsx scripts/measured-run.ts`.
 
-Chunk size is the knob — turn it, and the engine moves through three distinct regimes (modeled addressable context at the default `maxChunks = 24`, carryover at the 10–15% sizing rule):
+Chunk size is the main knob. As it grows, the engine moves through three regimes (modeled addressable context at the default `maxChunks = 24`, carryover at the 10–15% sizing rule):
 
 | Chunk size | Carryover (10–15%) | Modeled addressable context | Regime |
 |---|---|---|---|
-| 8K (default) | 800–1,200 | ~192K | **Cost optimization** |
-| 32K | 3,200–4,800 | ~768K | **Capability extension** |
-| 64K | 6,400–9,600 | ~1.5M | **Capability extension** |
-| 128K (max) | 12,800–19,200 | ~3M | **Architectural advantage** |
+| 8K (default) | 800–1,200 | ~192K | Cost optimization |
+| 32K | 3,200–4,800 | ~768K | Capability extension |
+| 64K | 6,400–9,600 | ~1.5M | Capability extension |
+| 128K (max) | 12,800–19,200 | ~3M | Architectural advantage |
 
-Save money or extend your reach:
+Each regime either saves money or extends reach:
 
-- **Work that fits a native window** — models can already do it in one or a few calls. Markovian just makes it cheaper.
-- **Work past a 200K-class window** — Markovian extends models beyond their native ceiling. Native windows still have better in-window coherence; Markovian wins on reach.
-- **Work past any native window** — the architectural advantage zone. Chained bounded steps address reasoning surfaces no single call can hold, on any provider, at predictable cost.
+- **Work that fits a native window:** models can already do it in one or a few calls. Markovian makes it cheaper.
+- **Work past a 200K-class window:** Markovian extends models beyond their native ceiling. Native windows still have better in-window coherence. Markovian has more reach.
+- **Work past any native window:** this is the architectural advantage zone. Chained bounded steps address reasoning surfaces no single call can hold, on any provider, at predictable cost.
 
-Every other approach to long reasoning fights the same quadratic growth — bigger windows, smarter compression, smarter eviction. They buy time; they don't change the curve. Markovian changes the curve: chain depth and chunk size become knobs you turn instead of walls you hit.
+Other approaches to long reasoning (bigger windows, smarter compression, smarter eviction) still face quadratic growth. They delay it. Markovian keeps per-step cost flat, so chain depth and chunk size become settings you choose.
 
-Pick the chunk size that matches your workload's total context, latency tolerance, and cost ceiling. The [Engine tab](docs/engine-tab.md) plots both curves live so you can watch the gap open in real time.
+Pick the chunk size that matches your workload's total context, latency tolerance, and cost ceiling. The [Engine tab](docs/engine-tab.md) plots both curves live so you can see the gap grow as the chain runs.
 
 ---
 
 ## Quickstart
 
-This repo is the implementation spec, not a runtime library — `src/` is intentionally empty and there is **no installable npm package**. You can download the `AGENTS.md` alone. Or clone the repo, open it in your coding agent, and let `AGENTS.md` guide the build into your stack.
+This folder is an implementation spec. It has no `src/` folder and there is no installable npm package. You can download the `AGENTS.md` alone. Or clone the repo, open it in your coding agent, and let `AGENTS.md` guide the build into your stack.
 
 ```bash
 npx degit meterless/meterless/engines/markovian my-markovian
@@ -116,7 +116,7 @@ Then prompt your agent: *"Implement the Markovian engine in this project followi
 
 ### Run something right now
 
-A minimal deterministic reference implementation ships in [`reference/`](reference/). It is not a production library; it is the spec made executable.
+A minimal deterministic reference implementation ships in [`reference/`](reference/). It makes the spec executable. It is not meant for production use.
 
 ```bash
 cd reference && npm install && npm test
@@ -124,7 +124,7 @@ npx tsx scripts/measured-run.ts               # naive vs markovian cost, labeled
 npx tsx ../examples/run-first-chain/index.ts  # a full chain with a mock LLM
 ```
 
-Every example in [`examples/`](examples/) runs against it. One cross-engine example (markovian-inside-swarm) waits on the swarm orchestration engine drop and says so in its README.
+Every example in [`examples/`](examples/) runs against it. One cross-engine example (markovian-inside-swarm) waits on the swarm-orchestration spec, which is next on the [roadmap](../../ROADMAP.md). Its README says so.
 
 The agent will pick your chunk config (chunk size, carryover budget, max chunks), wire up the marker protocol, scaffold the compression cascade, stand up run history and telemetry, and leave reflection and resume as opt-in stages you can grow into. Architectural reference in `/docs`.
 
@@ -132,7 +132,7 @@ The agent will pick your chunk config (chunk size, carryover budget, max chunks)
 
 ## Architecture
 
-<img src="images/Markovian_Engine_Chunks.png" alt="Meterless Markovian Engine Hero Image" width="100%" />
+<img src="images/Markovian_Engine_Chunks.png" alt="Meterless Markovian Engine chunk chain" width="100%" />
 
 ```mermaid
 flowchart LR
@@ -176,12 +176,12 @@ When extracting carryover state, the engine tries strategies in order, falling t
 3. **Heuristic extraction.** Regex capture of key phrases (`Therefore`, `Key insight`, `Status`). Compress to semicolon-delimited summary.
 4. **Tail truncation.** Last resort. Truncate words to the carryover token budget.
 
-Robust against model instability, API errors, and weird outputs.
+The cascade keeps carryover extraction working through model instability, API errors, and malformed outputs.
 
 ---
 
 ## Example for use
-<img src="images/Markovian_Engine_Stack.png" alt="Meterless Markovian Engine Hero Image" width="100%" />
+<img src="images/Markovian_Engine_Stack.png" alt="Meterless Markovian Engine stack" width="100%" />
 Wire up a generator function with this conceptual signature:
 
 ```ts
@@ -204,7 +204,7 @@ Default config:
 | `chunkSize` | 8000 | 1000 | 128000 | 1000 |
 | `maxChunks` | 24 | 1 | 32 | 1 |
 | `carryoverTokens` | 800 | 128 | 32768 | 128 |
-| `overlapTokens` | 0 | 0 | 4096 | — |
+| `overlapTokens` | 0 | 0 | 4096 | n/a |
 
 Configs are validated at load time (typed error, not silent truncation): `chunkSize ≥ framingTokens (≈400) + carryoverTokens + outputBudget (≈1200)`, `carryoverTokens > 0`, and the total must fit the model's context window.
 
@@ -224,7 +224,7 @@ Configs are validated at load time (typed error, not silent truncation): `chunkS
 
 ## Performance reporting
 
-<img src="images/Markovian_Engine_Telemetry.png" alt="Meterless Markovian Engine Hero Image" width="100%" />
+<img src="images/Markovian_Engine_Telemetry.png" alt="Meterless Markovian Engine telemetry" width="100%" />
 
 The Engine tab ships two chart modes.
 
@@ -241,18 +241,18 @@ Auto-switches to actual mode when one or more historical runs exist.
 - Not a wrapper around any one provider.
 - Not a chain-of-thought prompt template.
 - Not a memory system. It accepts external memory context but does not store memories itself. Pair it with [H-MEM](https://github.com/meterless/meterless/tree/main/engines/hmem) if you want both.
-- Not magic. Token accounting uses provider-reported usage when available and a `chars / 4` estimate as fallback only — label reported numbers as measured vs estimated.
+- Not an exact token counter. Token accounting uses provider-reported usage when available and a `chars / 4` estimate as fallback only. Label reported numbers as measured vs estimated.
 
 ---
 
 ## Known limitations
 
-These are documented honestly in the reference:
+The reference documents these limitations:
 
 - Token estimation falls back to `chars/4` when provider usage is unavailable; it is not tokenizer-precise. Prefer provider-reported usage and label numbers accordingly.
-- `overlapTokens` has defined semantics: when non-zero, the final `overlapTokens` of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. An implementation must either implement this or reject a non-zero value — accepting and ignoring the field is a contract violation.
-- Output validation ships as the conclusion/reflection pass (`ratify` / `refine` modes) — see [`docs/reflection.md`](docs/reflection.md).
-- Every run record **must** carry its own `chunkConfig` snapshot; historical efficiency is computed against the run's own config, never the current one.
+- `overlapTokens` has defined semantics: when non-zero, the final `overlapTokens` of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. An implementation must either implement this or reject a non-zero value. Accepting and ignoring the field is a contract violation.
+- Output validation ships as the conclusion/reflection pass (`ratify` / `refine` modes). See [`docs/reflection.md`](docs/reflection.md).
+- Every run record must carry its own `chunkConfig` snapshot; historical efficiency is computed against the run's own config, never the current one.
 
 ---
 
@@ -260,7 +260,13 @@ These are documented honestly in the reference:
 
 Markovian sits behind any provider stack. Cloud API, local model, gateway, or hybrid.
 
-Route long-form modes to the orchestrator. Route short-form requests to single-shot generation. Pick your model upstream. The runtime does not care.
+Route long-form modes to the orchestrator. Route short-form requests to single-shot generation. Pick your model upstream. The runtime works the same with any of them.
+
+---
+
+## Used in production
+
+Markovian runs in Nightshift and in the Meterless City experiment. [Nightshift](../../docs/products/nightshift/job-modes.md), the flagship product that turns a Mac or DGX Spark into an AI hotspot, uses it as the `deliberate` job kind: one long chain of chunks, where each chunk carries a compressed summary forward and checkpoints. [Meterless City](../../docs/experiments/meterless-city/README.md) uses it for its characters. Each character keeps a bounded state plus the last four turns.
 
 ---
 
@@ -298,8 +304,8 @@ Details in [`conformance/`](conformance/).
 
 ## License
 
-Apache 2.0. Use it. Fork it. Ship it.
+Apache 2.0. You can use, fork, and ship it.
 
 ---
 
-Part of the [Meterless](https://www.meterless.ai) stack · [github.com/meterless/meterless](https://github.com/meterless/meterless)
+Part of [Meterless](https://www.meterless.ai). The engines are the open context layer under Nightshift and the free Gaia, Relay and Swarms apps. · [github.com/meterless/meterless](https://github.com/meterless/meterless)

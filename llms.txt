@@ -1,20 +1,23 @@
 # Meterless
 
-> The local-first context stack for agentic AI. This repository contains engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, product documentation, and the project narrative. Everything here is Apache 2.0. Product application binaries are proprietary and live in per-app repos.
+> Meterless turns the computer you already own into an AI hotspot. Nightshift, the flagship product, runs on a Mac or NVIDIA DGX Spark: by day it serves AI to every connected app over one OpenAI-compatible provider; when you step away it races hundreds of attempts at queued jobs, then reads, clusters, judges and checks them. Gaia, Relay and Swarms are free apps. Meterless City, Sitcomify and DataPlant are experiments. This repository is the open core: engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, benchmark summaries, product documentation, and the project narrative. Everything here is Apache 2.0. App installers live in per-app repos and on meterless.ai.
 
 ## Folder map
 
+- /docs/products/nightshift/ : Nightshift, the flagship. How it works, job modes, the hotspot, editions and hardware, gallery.
+- /docs/benchmarks/ : summaries of every published benchmark, failures included: real nights, 3D, agent frameworks, knowledge work, job modes, Mac M5, hardware card.
+- /docs/products/gaia/ : Gaia, the free persistent AI workspace.
+- /docs/products/relay/ : Relay, the free desktop workflow app. Describe the job, watch it get done, replay it with no model calls.
+- /docs/products/swarms/ : Swarms, the free auto-generated agent swarm that runs in the browser.
+- /docs/experiments/ : Meterless City (game), Sitcomify (photo to sitcom pilot), DataPlant (local customer-success platform).
+- /docs/architecture/ : why Meterless exists, the stack, local-first context, learnings from the benchmarks.
+- /docs/agent-ready/ : Claude Code and Cursor guides, the prompt library, and the Meterless provider contract.
+- /docs/engines/ : one overview page per engine, linking into the spec folders.
+- /docs/community/ : hackathon guide.
 - /engines/hmem/ : H-MEM, hierarchical memory and durable context. Self-contained spec with AGENTS.md, docs, examples, evals, workshops.
 - /engines/world-model/ : World Model, user/task/environment state modeling. Self-contained spec.
 - /engines/markovian/ : Markovian, reasoning compression and next-action logic. Self-contained spec.
 - /engines/scout-intent/ : Scout Intent, intent detection, risk guarding, routing, signed execution contracts. Self-contained spec with a runnable eval harness.
-- /docs/architecture/ : why Meterless exists, local-first agentic context, stack overview.
-- /docs/engines/ : one overview page per engine, linking into the spec folders.
-- /docs/products/gaia/ : Gaia documentation. Gaia is the personal agent workspace.
-- /docs/products/relay/ : Relay documentation. Relay is the agent execution layer.
-- /docs/products/swarms/ : Swarms documentation. Swarms is the divergent generation layer.
-- /docs/agent-ready/ : using this repo with Claude Code and Cursor.
-- /docs/community/ : hackathon guide.
 - /examples/memory-compounding-research/ : runnable cross-engine demo (H-MEM + Markovian, mock LLM, no keys).
 - /templates/agentathon-starter/ : hackathon starter, a memory notebook agent on the H-MEM reference.
 
@@ -22,15 +25,26 @@
 
 - https://github.com/meterless/meterless/blob/main/README.md
 - https://github.com/meterless/meterless/blob/main/AGENTS.md
+- https://github.com/meterless/meterless/blob/main/docs/products/nightshift/README.md
+- https://github.com/meterless/meterless/blob/main/docs/benchmarks/README.md
 - https://github.com/meterless/meterless/blob/main/docs/architecture/why-meterless.md
 - https://github.com/meterless/meterless/blob/main/docs/architecture/stack-overview.md
+- https://github.com/meterless/meterless/blob/main/docs/architecture/learnings.md
+- https://github.com/meterless/meterless/blob/main/docs/agent-ready/add-meterless-provider.md
 - https://github.com/meterless/meterless/blob/main/ROADMAP.md
 
-## Products (installers, proprietary)
+## Products
 
-- https://github.com/meterless/gaia/releases/latest
-- https://github.com/meterless/relay/releases/latest
-- https://github.com/meterless/swarms/releases/latest
+- Nightshift web edition (free): https://meterless.ai/Nightshift/WEB/
+- Nightshift for Mac (preorder, $199, Q4 2026): https://www.meterless.ai/mac.html
+- Nightshift for DGX Spark (on request): https://www.meterless.ai/dgx-spark.html
+- Free tools (Gaia, Relay, Swarms, browser utilities): https://www.meterless.ai/tools.html
+- Benchmarks: https://www.meterless.ai/benchmarks.html
+- Model library: https://www.meterless.ai/models.html
+
+## Meterless provider
+
+OpenAI-compatible. Default base URL http://127.0.0.1:8088/v1. Bearer token from <stateDir>/proxy-token. Model ids are routing modes: meterless/auto, fast, deep, cheap, local, fusion, meterless/<class>, meterless/<class>.<disposition>.
 
 ## Focused clone of one engine
 

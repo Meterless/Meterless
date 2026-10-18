@@ -2,11 +2,11 @@
 
 > Engine drops and dates live in the [flagship roadmap](../../ROADMAP.md). This file tracks spec versions for this engine only.
 
-What's specified, what's in flight, what's planned.
+This file lists what is specified, what is in flight, and what is planned.
 
-> This repository is the Scout implementation **spec** — there is no `src/` directory, by design. "Now" below means *specified and covered by the docs, examples, and eval harness in this repo*, not shipped as an npm package.
+> This repository is the Scout implementation spec. There is no `src/` directory, by design. "Now" below means *specified and covered by the docs, examples, and eval harness in this repo*, not shipped as an npm package.
 
-## Now (v0.1 — specified)
+## Now (v0.1, specified)
 
 - Five-stage decision pipeline (sense → interpret → guard → route → recommend)
 - Intent registry with category, parameters, capabilities, risk class
@@ -43,6 +43,6 @@ What's specified, what's in flight, what's planned.
 
 - Cross-organization shared policy packs (signed, versioned)
 - Federated drift detection (aggregates only, never raw prompts)
-- Eval marketplace — community-contributed adversarial corpora
+- Eval marketplace: community-contributed adversarial corpora
 
 [Suggest priorities →](https://github.com/meterless/meterless/issues)

@@ -1,6 +1,6 @@
 # Reinjection
 
-Reinjection is the operational heart of H-MEM. It transforms retrieved memory into explicit prompt context and trace metadata.
+Reinjection is the path by which stored memory reaches model prompts. It transforms retrieved memory into explicit prompt context and trace metadata.
 
 ## Context format
 

@@ -42,7 +42,7 @@ Use these entities as the portable contract.
 - `chunkSize`: target generation budget per chunk
 - `maxChunks`: recursion cap / max chain depth
 - `carryoverTokens`: target carryover state budget
-- `overlapTokens`: overlap window between chunks. When `> 0`, the final `overlapTokens` (× 4 chars) of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. An implementation MUST either implement this or reject a non-zero value — accepting and ignoring the field is a contract violation.
+- `overlapTokens`: overlap window between chunks. When `> 0`, the final `overlapTokens` (× 4 chars) of chunk N's cleaned output are prepended to chunk N+1's prompt in an `[OVERLAP]` block, after the carryover. An implementation MUST either implement this or reject a non-zero value. Accepting and ignoring the field is a contract violation.
 
 Default reference values:
 - `chunkSize = 8000`
@@ -76,7 +76,7 @@ Load-time validation (typed error, not silent truncation):
 - `timestamp`
 - `prompt` (truncated for storage)
 - `mode`
-- `chunkConfig` — **MANDATORY** per-run config snapshot. Historical efficiency is always computed against the run's own config, never the current one.
+- `chunkConfig`: MANDATORY per-run config snapshot. Historical efficiency is always computed against the run's own config, never the current one.
 - `chunks[]`
 - `totalTokensUsed`
 - `totalTokensSaved`
@@ -111,8 +111,8 @@ Backward-compatible detection markers (optional):
 - final: `@@@FINAL@@@`, `[FINAL]`, `---FINAL---`
 
 Optional pause markers (bracket form is canonical; semantics in `docs/marker-protocol.md`):
-- `[NEEDS_TOOL tool="..." input="..."]` — run pauses, host fulfills the tool call, resumes with the result injected
-- `[NEEDS_CLARIFICATION] ...` — run pauses for human input, resumes with the answer
+- `[NEEDS_TOOL tool="..." input="..."]`: run pauses, host fulfills the tool call, resumes with the result injected
+- `[NEEDS_CLARIFICATION] ...`: run pauses for human input, resumes with the answer
 
 Rules:
 - model should end each non-final chunk with state marker + concise state summary
@@ -120,7 +120,7 @@ Rules:
 - exactly one marker per chunk; the model never narrates markers
 - UI rendering should strip markers and internal control text from user-visible content
 
-Canonical carryover shape (structured, not free-form) — the compressor and prompt templates request this labeled block:
+Canonical carryover shape. The carryover is a structured block, not free-form text. The compressor and prompt templates request this labeled block:
 
 ```
 COMPLETED: <what was done>
@@ -170,7 +170,7 @@ Compression cascade (strict order):
 1. **Explicit override via marker in chunk output**
    - parse text after state marker
    - sanitize marker artifacts
-   - accept iff length **≥ 24 chars** and within budget
+   - accept iff length ≥ 24 chars and within budget
 2. **LLM-based compression**
    - call injected `compressorFn(prompt, systemPrompt)`
    - include previous state + current chunk preview (last 2000 chars)
@@ -181,7 +181,7 @@ Compression cascade (strict order):
 4. **Absolute fallback**
    - tail-truncate words to carryover token budget
 
-This makes compression robust even during model/API instability.
+This keeps compression working during model/API instability.
 
 ## 4.4 Prompt Builder
 
@@ -291,7 +291,7 @@ Practical meaning:
 
 ## 6.1 During streaming (estimate)
 
-For chunk `i` (chunks are **1-based**):
+For chunk `i` (chunks are 1-based):
 - `chunkTokens = ceil(currentChunkText.length / 4)`
 - `historySize = (i - 1) * chunkSize` (reference estimator)
 - `standardChunkCost = historySize + chunkTokens`
@@ -480,10 +480,10 @@ This allows one Markovian runtime to sit behind any provider stack (cloud API, l
 
 ## 14) Accounting and Fidelity Rules
 
-- Token accounting: prefer **provider-reported usage** (`usage.input_tokens` / `output_tokens`) when available; use `ceil(chars / 4)` as fallback only. Label every reported number with its source (`measured` vs `estimated`).
+- Token accounting: prefer provider-reported usage (`usage.input_tokens` / `output_tokens`) when available; use `ceil(chars / 4)` as fallback only. Label every reported number with its source (`measured` vs `estimated`).
 - `overlapTokens`: implement the `[OVERLAP]` window semantics (§2.1) or reject non-zero values. Never accept-and-ignore.
-- Output validation is wired as the conclusion/reflection pass (`ratify` / `refine` modes) — see §7 and `docs/reflection.md`.
-- Historical "actual performance" computes Markovian step cost as `carryoverTokens + chunk.tokens` using **the run's own persisted `chunkConfig`**. The per-run config snapshot is mandatory (§2.3).
+- Output validation is wired as the conclusion/reflection pass (`ratify` / `refine` modes). See §7 and `docs/reflection.md`.
+- Historical "actual performance" computes Markovian step cost as `carryoverTokens + chunk.tokens` using the run's own persisted `chunkConfig`. The per-run config snapshot is mandatory (§2.3).
 
 These rules keep the implementation resilient, provider-portable, and its efficiency numbers honest.
 

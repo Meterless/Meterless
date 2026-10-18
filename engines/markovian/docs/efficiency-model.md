@@ -1,6 +1,6 @@
 # Efficiency model
 
-The math behind "flat memory cost, not linear." This doc shows the formulas, the worked examples, and where the approximations are.
+This doc covers the math behind flat per-step memory cost. It shows the formulas, the worked examples, and where the approximations are.
 
 ## The two baselines
 
@@ -44,7 +44,7 @@ naive_total = sum from i=1 to N of (F + G + (i-1)*O + S)
             = N*(F + G + S) + O * N*(N-1)/2
 ```
 
-That's `O(N²)` — quadratic in step count.
+That's `O(N²)`: quadratic in step count.
 
 **Markovian total:**
 
@@ -52,7 +52,7 @@ That's `O(N²)` — quadratic in step count.
 markovian_total = N * (F + G + C + S)
 ```
 
-That's `O(N)` — linear in step count.
+That's `O(N)`: linear in step count.
 
 ## Efficiency
 
@@ -67,11 +67,11 @@ For large `N`, the `O * N²/2` term dominates the numerator, and the denominator
 efficiency → 1 - 2C / (O*N)
 ```
 
-That is: **the longer the run, the more dramatic the savings**. At fixed C and O, efficiency rises with N.
+The longer the run, the larger the savings. At fixed C and O, efficiency rises with N.
 
 ## Worked examples
 
-Defaults: `F=400, G=200, S=300, O=1200, C=800`. All figures below are **modeled** from these constants, not measured runs — when you report real numbers, use provider-reported usage where available (`chars/4` is the fallback estimate only) and label the source.
+Defaults: `F=400, G=200, S=300, O=1200, C=800`. All figures below are modeled from these constants, not measured runs. When you report real numbers, use provider-reported usage where available (`chars/4` is the fallback estimate only) and label the source.
 
 | N | Naive total | Markovian total | Savings | Efficiency |
 |---|---|---|---|---|
@@ -114,20 +114,20 @@ For tasks where C is intentionally large (e.g., 4000 tokens) and O is small (e.g
 ## Where the approximation is loose
 
 - **`O` isn't constant.** Output sizes vary. Use `outputBudget` as the projection and accept ±20%.
-- **Naive doesn't actually run forever.** Naive baselines fail at the context limit — but they fail by exceeding context, not by costing more, which is a different failure mode the math doesn't capture.
+- **Naive doesn't actually run forever.** Naive baselines fail at the context limit. They fail by exceeding context, not by costing more, which is a different failure mode the math doesn't capture.
 - **Carryover compression isn't free.** The compression cascade itself spends tokens (in the model call's output generating the marker). That cost is accounted for in `O`, but you can see it explicitly in `chunk.cascade_levels_used`.
 - **Tool calls aren't in this math.** They appear in the prompt of the next chunk as injected results, which adds variable cost. Account for them in `S` averages.
 
 ## The qualitative case
 
-The efficiency number is real, but the **bigger argument** isn't cost — it's feasibility.
+The efficiency number matters, and feasibility matters more.
 
-Naive baselines have a ceiling. They run until the context window is full, then they stop being able to add steps. The ceiling is the same shape for everyone, and bigger models just delay it.
+Naive baselines have a ceiling. They run until the context window is full, then they stop being able to add steps. The ceiling is the same shape for everyone, and bigger models only delay it.
 
-Markovian has **no such ceiling**. A 1000-step run costs roughly 1000× a single step. Whether your model has 8K or 200K context, the math doesn't change. The engine is what makes long-horizon agents tractable, not the model.
+Markovian has no such ceiling. A 1000-step run costs roughly 1000× a single step. Whether your model has 8K or 200K context, the math doesn't change. Bounded per-step context, not model size, is what makes long-horizon agents tractable.
 
 ## What's next
 
-- [Token economics demo](../token-economics-demo) — runnable proof, side-by-side
-- [Chunk config](./chunk-config.md) — picking the constants
-- [Telemetry](./telemetry.md) — measuring efficiency in your runs
+- [Token economics demo](../token-economics-demo): runnable proof, side-by-side
+- [Chunk config](./chunk-config.md): picking the constants
+- [Telemetry](./telemetry.md): measuring efficiency in your runs

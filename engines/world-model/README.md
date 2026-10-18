@@ -4,7 +4,7 @@
   
 # Meterless World Model
 
-**A persistent, queryable, evolving graph of entities, contexts, and relationships. Domain-agnostic. Append-friendly. Idempotent.**
+A persistent, queryable, evolving graph of entities, contexts, and relationships. It is domain-agnostic, append-friendly, and idempotent.
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Architecture](https://img.shields.io/badge/architecture-domain--agnostic-purple.svg)](docs/architecture.md)
@@ -62,13 +62,11 @@ If your product needs to **remember things, reason about them, and display them*
 
 A canonical store for the entities, contexts, and relationships your agents need to share. Idempotent ingest, stable IDs, schema-versioned storage, derived views that can be rebuilt from the log, and an operator surface for inspecting and repairing the model.
 
-That's the mechanics. The reason it matters is bigger.
+Most AI systems today forget between sessions. They re-discover the same accounts, the same characters, and the same world in every conversation. Memory is per-session, so nothing accumulates. Larger models do not fix this, because the system still has no shared world to work from.
 
-Most AI systems today are amnesiac. They re-discover the same accounts, the same characters, the same world every conversation. Memory is per-session; understanding is shallow; nothing accumulates. You can scale parameters all you want — without a shared world, the system never becomes situated in anything.
+A world model gives agents a persistent picture of the world they operate in: the people in it, their histories, their relationships, and the situations they are in. Agents then reason from grounded state instead of guessing. Continuity replaces context-stuffing, and stable identity replaces inference.
 
-World Model is the substrate for agents that *know where they are*. A persistent, queryable, evolving picture of the world the system operates in — the people in it, the histories they carry, the relationships they hold, the situations they're inside. Once that exists, agents stop guessing and start reasoning from grounded state. Continuity replaces context-stuffing. Identity replaces inference. Behavior gets uncannier — not because the model got smarter, but because for the first time it has somewhere to *stand*.
-
-That's the unlock. The mechanics are how you build it. The world is what you get.
+Meterless's flagship product, Nightshift, turns a Mac or DGX Spark into an AI hotspot. Gaia, Relay and Swarms are free apps, and the engines in this repo are the open context layer underneath them. World models already run in [Relay](../../docs/products/relay/README.md), which uses one to remember your desktop. In the [Sitcomify](../../docs/experiments/sitcomify/README.md) experiment, every character and prop has one canonical description in a world model. [Meterless City](../../docs/experiments/meterless-city/README.md) keeps an event log with provenance of who said what.
 
 ---
 
@@ -94,7 +92,7 @@ npx tsx scripts/idempotency-check.ts          # the core invariant, proven
 npx tsx ../examples/minimal-entity-graph/index.ts
 ```
 
-Every example in [`examples/`](examples/) runs against it (two cross-engine examples wait on future engine drops and say so). The operator control plane has a live version at [`control-plane/live.html`](control-plane/live.html), running the real implementation in your browser from a double-click.
+Every example in [`examples/`](examples/) runs against it (two cross-engine examples need a Scout or swarm-orchestration implementation and say so). The operator control plane has a live version at [`control-plane/live.html`](control-plane/live.html), running the real implementation in your browser from a double-click.
 
 The agent will pick your aggregate shape (timeline or stream), help you define entity types, scaffold the pipeline, build the read surface, and wire up the control plane. Architectural reference in `/docs`.
 
@@ -165,9 +163,9 @@ Every observation runs the same six-stage write path:
 5. **Append.** New event in the append-only log. The only exactly-once stage.
 6. **Project.** Recompute derived views. Latest maps, canonical merged entities, sparklines.
 
-Batch and streaming ingests wrap this per-observation path in a 10-step aggregate cycle (reconcile → cluster → … → rebuild aggregates → mark stale) — see [`AGENTS.md`](AGENTS.md) §4.1 and [`docs/ingest-pipeline.md`](docs/ingest-pipeline.md). Enrichment runs as bounded per-entity jobs alongside; one failure does not block others.
+Batch and streaming ingests wrap this per-observation path in a 10-step aggregate cycle (reconcile → cluster → … → rebuild aggregates → mark stale). See [`AGENTS.md`](AGENTS.md) §4.1 and [`docs/ingest-pipeline.md`](docs/ingest-pipeline.md). Enrichment runs as bounded per-entity jobs alongside; one failure does not block others.
 
-Re-running on the same input produces the same world. **Idempotent by construction.**
+Re-running on the same input produces the same world. The pipeline is idempotent by construction.
 
 ---
 
@@ -199,13 +197,11 @@ Append-friendly storage tolerates concurrent writes naturally. The model recomme
 
 <img src="images/World_Model_Single_Source.png" alt="Meterless World Model Single Source" width="100%" />
 
-A world model needs a control plane, not just an API.
+A world model needs an operator control plane as well as an API.
 
 Operators inspect entities, contexts, and relationships. They merge duplicates. They split conflated entities. They mark canonical preferences. They trigger re-enrichment.
 
-The control plane writes back into the canonical store **the same way the pipeline does**. There is no privileged path.
-
-That is how the model stays trustworthy.
+The control plane writes back into the canonical store the same way the pipeline does. There is no privileged path, which keeps the model trustworthy.
 
 ---
 
@@ -237,7 +233,7 @@ If you only adopt three things from this repo:
 2. **Append-only canonical store. Recomputed derived views.** No silent mutations.
 3. **Bounded blast radius on enrichment.** One worker per entity. Failures isolated.
 
-Those three principles take a system from "works in demo" to "survives production."
+Those three principles do most of the work of making a demo system hold up in production.
 
 ---
 
@@ -288,4 +284,4 @@ Details in [`conformance/`](conformance/).
 
 ## License
 
-Apache 2.0. Use it. Fork it. Ship it.
+Apache 2.0. You can use, fork, and ship it.

@@ -1,6 +1,6 @@
 # Telemetry and learning
 
-Every decision Scout makes emits structured telemetry. That telemetry is the feedback loop that keeps the system honest.
+Every decision Scout makes emits structured telemetry. That telemetry is the feedback loop that keeps decisions accountable.
 
 ## What gets logged
 
@@ -40,7 +40,7 @@ override.intent contract=... from=deal.recover to=deal.query by=u-123
 override.tool   contract=... from=email.draft to=email.send by=u-123 (with-approval)
 ```
 
-## What's *not* logged
+## What's not logged
 
 By default, Scout never logs:
 
@@ -49,7 +49,7 @@ By default, Scout never logs:
 - Tool inputs and outputs
 - API keys, credentials, PII
 
-The telemetry is **shape data**, not content. You can answer "is the classifier accurate," "are users overriding deal intents more this month," "is the injection detector firing on new patterns" — without the content of any single user's request.
+The telemetry is shape data, not content. You can answer "is the classifier accurate," "are users overriding deal intents more this month," and "is the injection detector firing on new patterns" without the content of any single user's request.
 
 Configurable: deployments that want fuller logging (with proper compliance) can flip flags per data class.
 
@@ -59,9 +59,9 @@ Telemetry is local-first by default. It writes to a local store and stays there 
 
 Options:
 
-- **Local-only** — telemetry stays on the device, queryable via the local dashboard (planned — see below)
-- **Local + redacted aggregate** — daily aggregates ship to a backend; per-request data stays local
-- **Centralized** — all telemetry ships to a backend (with explicit user consent)
+- **Local-only**: telemetry stays on the device, queryable via the local dashboard (planned, see below)
+- **Local + redacted aggregate**: daily aggregates ship to a backend; per-request data stays local
+- **Centralized**: all telemetry ships to a backend (with explicit user consent)
 
 The default is local-only. Switching modes requires explicit configuration.
 
@@ -89,11 +89,11 @@ production telemetry
    eval gate       ──▶ ship or reject
 ```
 
-The loop is **opt-in per deployment**. Local-only deployments don't ship anything. Deployments that opt in ship aggregates and a curation queue, never raw prompts.
+The loop is opt-in per deployment. Local-only deployments don't ship anything. Deployments that opt in ship aggregates and a curation queue, never raw prompts.
 
 ## Overrides as gold labels
 
-User overrides are the single most valuable signal. When a user changes Scout's decision, they're labeling a hard example for free.
+User overrides are the most valuable signal. When a user changes Scout's decision, they're labeling a hard example for free.
 
 Override events get higher curation priority. Patterns of overrides (same intent, same user role, repeated wrong direction) become candidates for:
 
@@ -114,16 +114,16 @@ Every Scout installation should be able to render its own telemetry locally. A r
 - Risk-level breakdown
 - Slow stages (latency drill-down)
 
-This is the operator surface for understanding what your Scout deployment is actually doing. No telemetry leaves the machine.
+This is the operator surface for understanding what your Scout deployment is doing. No telemetry leaves the machine.
 
 ## Anti-patterns
 
-- **Logging the prompt by default.** Even with consent. The system has to *not need it* to be safe.
+- **Logging the prompt by default.** Even with consent. The system must be safe without it.
 - **Treating telemetry as a database.** Telemetry is for analysis and improvement. It's not the source of truth for any user-facing state.
 - **Tightening thresholds based on aggregate metrics.** Use slice reports; aggregates lie.
 - **Skipping the eval gate when the learning loop improves a metric.** The gate is the gate. Improved metrics still need full slice review.
 
 ## What's next
 
-- [Eval harness](./eval-harness.md) — where curated examples go
-- [Architecture](./architecture.md) — the overall picture
+- [Eval harness](./eval-harness.md): where curated examples go
+- [Architecture](./architecture.md): the overall picture

@@ -1,15 +1,15 @@
-# Workshop 04 — Lock in evals and ship safely
+# Workshop 04: Lock in evals and ship safely
 
 **Time:** 45 minutes
 **You'll leave with:** a regression set tied to your intent registry, thresholds gating your CI, and the muscle memory to add new examples every time you ship.
 
 ## The discipline
 
-Every behavior change to Scout — new intent, new pattern, new policy, new scoring weight — runs against a versioned regression set before merging. No exceptions.
+Every behavior change to Scout (new intent, new pattern, new policy, new scoring weight) runs against a versioned regression set before merging. There are no exceptions.
 
-If you don't have this discipline, the system gets dumber every quarter and nobody can tell you when it happened.
+Without this discipline, the system degrades every quarter and nobody can tell when it happened.
 
-## Step 1 — Seed the corpus (10 min)
+## Step 1: Seed the corpus (10 min)
 
 For every intent in your registry, write 5-10 examples in JSONL:
 
@@ -25,7 +25,7 @@ mkdir -p evals/regression-set/v1/intents
 
 Each example: a unique ID, the prompt, optional user/surface, expected intent + risk + tool plan.
 
-## Step 2 — Set thresholds (10 min)
+## Step 2: Set thresholds (10 min)
 
 `evals/config/thresholds.yaml`:
 
@@ -39,7 +39,7 @@ metrics:
 
 Start permissive. Tighten as the corpus grows. Lowering a threshold to make a failing build pass is the one move that's banned.
 
-## Step 3 — Run it (10 min)
+## Step 3: Run it (10 min)
 
 ```bash
 npm run evals
@@ -47,7 +47,7 @@ npm run evals
 
 Watch metrics print. Watch the report appear in `evals/reports/latest.md`. The first run is the baseline.
 
-## Step 4 — Wire CI (10 min)
+## Step 4: Wire CI (10 min)
 
 `.github/workflows/scout-evals.yml`:
 
@@ -70,13 +70,13 @@ jobs:
 
 A PR that drops a metric below floor fails the build. A PR that surfaces a near-miss prints a watch-list. Reviewers see both before merging.
 
-## Step 5 — Add an example with every behavior change (5 min)
+## Step 5: Add an example with every behavior change (5 min)
 
 A new intent → 5+ new examples.
 A new pattern → 3+ adversarial examples.
 A bug fix → an example that fails without the fix and passes with it.
 
-This single discipline is what keeps the system from regressing as it grows.
+This discipline keeps the system from regressing as it grows.
 
 ## What you learned
 
@@ -89,6 +89,6 @@ This single discipline is what keeps the system from regressing as it grows.
 
 You've completed the Scout workshop series. Next steps:
 
-- Wire Scout into your actual stack — see [`examples/scout-to-swarm`](../examples/scout-to-swarm) for the pattern.
-- Subscribe to drift detection — see [`docs/telemetry-and-learning.md`](../docs/telemetry-and-learning.md).
+- Wire Scout into your stack. See [`examples/scout-to-swarm`](../examples/scout-to-swarm) for the pattern.
+- Subscribe to drift detection. See [`docs/telemetry-and-learning.md`](../docs/telemetry-and-learning.md).
 - Compose with the rest of the [Meterless engine stack](https://github.com/meterless/meterless).

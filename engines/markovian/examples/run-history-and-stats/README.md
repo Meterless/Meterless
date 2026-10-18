@@ -1,4 +1,4 @@
-# 06 — Run history and stats
+# 06: Run history and stats
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
@@ -14,7 +14,7 @@ A migration-planning run completed yesterday with id `run_8f3a`. We want to: loa
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian, diffCarryover } from "@meterless/markovian";
@@ -47,12 +47,12 @@ console.log(`${agg.totalRuns} runs · avg efficiency ${agg.averageEfficiency}%`)
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
 
-## Expected output (illustrative — modeled numbers, not a recorded run)
+## Expected output (illustrative; modeled numbers, not a recorded run)
 
 ```text
 step 1: 900 in / 1180 out · 2100ms · markers=[CARRYOVER,PROGRESS] · cascade=marker
@@ -70,7 +70,7 @@ Markovian: 21,400  ·  Naive: 96,200  ·  78% saved
 
 | Capability | Use |
 | --- | --- |
-| `history.get(id)` | Replay a run exactly — it is a JSON load, not a re-execution |
+| `history.get(id)` | Replay a run exactly from a JSON load, with no re-execution |
 | per-chunk `tokensIn/Out`, `latencyMs` | find the slow/expensive step |
 | `markersEmitted`, `cascadeStrategyUsed` | spot a chain drifting toward fallback compression |
 | `diffCarryover(a, b)` | prove which decisions/questions crossed between any two steps |
@@ -78,17 +78,17 @@ Markovian: 21,400  ·  Naive: 96,200  ·  78% saved
 
 ## Note on efficiency fidelity
 
-Every run record carries its own `chunkConfig` snapshot — this is **mandatory** — and `run.stats.efficiency` is always recomputed against that snapshot, never the current live config. Recomputing against current config produces dishonest numbers the moment anyone changes a slider. See [`docs/efficiency-model.md`](../../docs/efficiency-model.md) and [`docs/run-history.md`](../../docs/run-history.md).
+Every run record must carry its own `chunkConfig` snapshot, and `run.stats.efficiency` is always recomputed against that snapshot, never the current live config. Recomputing against current config produces dishonest numbers the moment anyone changes a slider. See [`docs/efficiency-model.md`](../../docs/efficiency-model.md) and [`docs/run-history.md`](../../docs/run-history.md).
 
 ---
 
 ## Why it matters
 
-- **A run is data, not a transcript.** Because every step is a structured record, replay is a `history.get()` away — you can audit a decision made 40 steps ago without re-running the model.
+- **A run is structured data.** Because every step is a structured record, replay is one `history.get()` call. You can audit a decision made 40 steps ago without re-running the model.
 - **Drift is detectable after the fact.** A chain whose `cascadeStrategyUsed` slid from `marker` → `heuristic` over its life had weak framing. The history is where you catch that and fix it for next time.
-- **Efficiency is measured, not asserted.** `naiveTokensIn` vs `totalTokensIn` in the record is the receipt for the flat-cost claim — per run, and aggregated across all runs.
+- **Efficiency is measured from the record.** `naiveTokensIn` vs `totalTokensIn` in the record is the evidence for the flat-cost claim, per run and aggregated across all runs.
 
 ## Next
 
-- [`token-savings-demo`](../token-savings-demo/README.md) — the same numbers, computed live, side-by-side with the naive baseline.
-- [`07 — reflection-pass`](../reflection-pass/README.md) — the optional synthesis step recorded at the end of a run.
+- [`token-savings-demo`](../token-savings-demo/README.md): the same numbers, computed live, side-by-side with the naive baseline.
+- [07: `reflection-pass`](../reflection-pass/README.md): the optional synthesis step recorded at the end of a run.

@@ -1,10 +1,10 @@
 # Scout to Swarm
 
-When Scout detects work that needs multiple specialists in parallel, it routes to [Agent Orchestration](https://github.com/meterless/meterless/blob/main/ROADMAP.md). The execution contract becomes the swarm's **scope boundary**: the DAG may only use the tools the contract allows.
+When Scout detects work that needs multiple specialists in parallel, it routes to [Agent Orchestration](https://github.com/meterless/meterless/blob/main/ROADMAP.md). The execution contract becomes the swarm's scope boundary: the DAG may only use the tools the contract allows.
 
-> This is the Scout side of Swarm's world-model planning integration — Scout is what hands the swarm its grounded, scoped contract.
+> This is the Scout side of Swarm's world-model planning integration. Scout hands the swarm its grounded, scoped contract.
 
-Prerequisite reading: [`04 — generate-execution-contract`](../generate-execution-contract/README.md), [Agent Orchestration](https://github.com/meterless/meterless/blob/main/ROADMAP.md).
+Prerequisite reading: [`04: generate-execution-contract`](../generate-execution-contract/README.md), [Agent Orchestration](https://github.com/meterless/meterless/blob/main/ROADMAP.md).
 
 ---
 
@@ -14,11 +14,11 @@ Prerequisite reading: [`04 — generate-execution-contract`](../generate-executi
 "Audit this codebase for security, performance, and test gaps, then summarize."
 ```
 
-This is `code.audit` — an intent declaring `swarm.run`. It needs several reviewers working in parallel: that is a DAG, not a single agent.
+This is `code.audit`, an intent declaring `swarm.run`. It needs several reviewers working in parallel, which calls for a DAG instead of a single agent.
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Scout } from "@meterless/scout";
@@ -46,8 +46,8 @@ console.log("run:", run.status, "·", run.blackboard["__merged__"]?.slice(0, 60)
 ## Run it
 
 ```bash
-# The @meterless packages are not yet published — this repository is the
-# implementation spec. With a spec-conforming implementation on your import path:
+# No @meterless package is published. @meterless/scout names your own
+# spec-conforming implementation. With it on your import path:
 npx tsx ./index.ts
 ```
 
@@ -56,8 +56,8 @@ npx tsx ./index.ts
 ```text
 intent: code.audit
 scoped tools: ["repo.read", "security.scan", "swarm.run"]
-swarm: contract verified — building DAG within scope
-run: complete · # Audit Summary — 6 findings (1 critical, 2 high) ...
+swarm: contract verified, building DAG within scope
+run: complete · # Audit Summary: 6 findings (1 critical, 2 high) ...
 ```
 
 ## How the contract scopes the DAG
@@ -72,7 +72,7 @@ Swarm.startFromContract: verify sig + expiry, then PLAN
    a task that tries repo.WRITE → refused at the executor boundary (not in scope)
 ```
 
-Scout decided *what is allowed*; the swarm decided *how to parallelize within that*. Neither overrules the other: the contract is the ceiling, the DAG is the plan under it.
+Scout decided what is allowed; the swarm decided how to parallelize within that. Neither overrules the other: the contract is the ceiling, the DAG is the plan under it.
 
 ## The result flows back referenced
 
@@ -87,11 +87,11 @@ Everything the swarm did traces to the `code.audit` contract that authorized it.
 
 ## Why it matters
 
-- **The contract is the swarm's scope ceiling.** A swarm task that tries a tool outside `scope.capabilities` is refused by the executor — not by a wrapper, not by a prompt instruction. Scout's scope decision is *enforced*, not advisory.
+- **The contract is the swarm's scope ceiling.** A swarm task that tries a tool outside `scope.capabilities` is refused by the executor itself, not by a wrapper or a prompt instruction. Scout's scope decision is enforced.
 - **Two layers, clean boundary.** Scout: which capabilities, which model profile, what risk posture. Swarm: how to decompose and parallelize within that envelope. The handoff is one signed object.
-- **Grounded, not hallucinated, parallelism.** The swarm plans *under* a contract that already encodes intent and allowed tools — it cannot invent a step Scout did not authorize. That is the difference between governed orchestration and "spawn N agents."
+- **Parallelism stays grounded.** The swarm plans under a contract that already encodes intent and allowed tools, so it cannot invent a step Scout did not authorize. That separates governed orchestration from "spawn N agents."
 
 ## Next
 
-- [`route-to-markovian`](../route-to-markovian/README.md) — the long-horizon (not parallel) handoff.
+- [`route-to-markovian`](../route-to-markovian/README.md): the long-horizon (not parallel) handoff.
 - Swarm's grounded-planning view: the [swarm orchestration engine (a future flagship engine drop; link goes to the roadmap)](https://github.com/meterless/meterless/blob/main/ROADMAP.md).

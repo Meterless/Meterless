@@ -56,7 +56,7 @@ Recommended initial defaults:
 Memories carry optional `chatId` / `missionId` / `goalRunId` scoping fields:
 
 - Chat-turn recall filters to the active `chatId` scope.
-- Goal-run recall is isolated per `goalRunId` — memories from one run never leak into another.
+- Goal-run recall is isolated per `goalRunId`. Memories from one run never leak into another.
 - `includeUnscoped` defaults to `true` so pre-scoping legacy records never silently disappear.
 
 ## Superseded records

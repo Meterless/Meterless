@@ -4,9 +4,9 @@ Intents declare *what* needs to happen. The capability graph resolves *how*.
 
 ## The principle
 
-Intents don't reference tools directly. They reference **capabilities** — abstract verbs like `world.query`, `memory.recall`, `swarm.run`, `email.send`. The capability graph maps each capability to one or more concrete tools at runtime, picking based on availability, permissions, and context.
+Intents don't reference tools directly. They reference capabilities: abstract verbs like `world.query`, `memory.recall`, `swarm.run`, `email.send`. The capability graph maps each capability to one or more concrete tools at runtime, picking based on availability, permissions, and context.
 
-This indirection is what lets you swap a tool implementation without rewriting your intents. It's also what lets a single intent run on a phone (local tools), a laptop (mixed), or an air-gapped deployment (local only) without changing the registry.
+This indirection lets you swap a tool implementation without rewriting your intents. It also lets a single intent run on a phone (local tools), a laptop (mixed), or an air-gapped deployment (local only) without changing the registry.
 
 ## Shape of the graph
 
@@ -34,13 +34,13 @@ When Scout's router sees an intent like `deal.recover` (capabilities: `world.que
 
 Selection rules, in priority order:
 
-1. **Required permissions** — drop tools the user can't use.
-2. **Availability** — drop tools that are offline or rate-limited.
-3. **Surface preference** — chat surface prefers conversational tools; inbox prefers email-first.
-4. **Cost / latency budget** — pick the cheapest tool that meets the latency target.
-5. **Tie-break** — prefer local tools over remote (local-first default).
+1. **Required permissions**: drop tools the user can't use.
+2. **Availability**: drop tools that are offline or rate-limited.
+3. **Surface preference**: chat surface prefers conversational tools; inbox prefers email-first.
+4. **Cost / latency budget**: pick the cheapest tool that meets the latency target.
+5. **Tie-break**: prefer local tools over remote (local-first default).
 
-The output is a **tool plan**:
+The output is a tool plan:
 
 ```ts
 [
@@ -70,7 +70,7 @@ scout.capabilities.register({
 });
 ```
 
-A capability with no registered tools is **unresolvable**. Intents that depend on it can't run; Scout returns a structured "unavailable capability" error instead of failing silently.
+A capability with no registered tools is unresolvable. Intents that depend on it can't run; Scout returns a structured "unavailable capability" error instead of failing silently.
 
 ## Capability families
 
@@ -83,7 +83,7 @@ reason/    swarm.run, markovian.chain
 act/       email.send, calendar.create, slack.post
 ```
 
-Risk policies can scope by family — "this user can only do `read/` operations, no `act/`."
+Risk policies can scope by family, for example "this user can only do `read/` operations, no `act/`."
 
 ## Dynamic capabilities
 
@@ -123,10 +123,10 @@ swarm.run     needs  [memory.recall, markovian.chain]
 
 The router walks transitively. An intent that declares `swarm.run` automatically depends on whatever `swarm.run` resolves to plus its dependencies.
 
-This is also what makes the graph **testable**. You can ask: "Given user U in session S, can intent I run end-to-end?" — and get a structured answer with the resolved tool plan or the first missing capability.
+The graph structure also makes routing testable. You can ask "Given user U in session S, can intent I run end-to-end?" and get a structured answer with the resolved tool plan or the first missing capability.
 
 ## What's next
 
-- [Model routing](./model-routing.md) — picking the model that backs each tool
-- [Execution contract](./execution-contract.md) — packaging the plan for downstream
-- [Eval harness](./eval-harness.md) — testing tool selection precision
+- [Model routing](./model-routing.md): picking the model that backs each tool
+- [Execution contract](./execution-contract.md): packaging the plan for downstream
+- [Eval harness](./eval-harness.md): testing tool selection precision

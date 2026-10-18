@@ -1,4 +1,4 @@
-# Workshop 04 — Merging duplicate entities
+# Workshop 04: Merging duplicate entities
 
 **Time:** 30 minutes
 **You'll leave with:** experience merging two entities, inspecting the audit trail, and reversing the merge if you change your mind.
@@ -15,7 +15,7 @@ import { WorldModel } from "@meterless/world-model";
 const world = new WorldModel({ storage: "local", namespace: "merge-demo" });
 ```
 
-## Step 1 — Create two entities that should be one (5 min)
+## Step 1: Create two entities that should be one (5 min)
 
 ```ts
 await world.upsertEntity({
@@ -35,7 +35,7 @@ await world.upsertEntity({
 
 Two persons, two IDs. They're the same human.
 
-## Step 2 — Add relationships to each (5 min)
+## Step 2: Add relationships to each (5 min)
 
 ```ts
 await world.upsertEntity({
@@ -62,7 +62,7 @@ await world.relate({
 
 The article now "mentions" two different person entities for the same human.
 
-## Step 3 — Merge (10 min)
+## Step 3: Merge (10 min)
 
 ```ts
 await world.merge({
@@ -85,7 +85,7 @@ console.log(mentions);
 
 Both old relationships still resolve. The alias system follows the pointer.
 
-## Step 4 — Inspect the audit (5 min)
+## Step 4: Inspect the audit (5 min)
 
 ```ts
 const aliasEvents = await world.events({ kind: "alias" });
@@ -93,7 +93,7 @@ console.log(aliasEvents);
 // Includes who merged, when, the reason, both IDs
 ```
 
-## Step 5 — Unmerge (5 min)
+## Step 5: Unmerge (5 min)
 
 You changed your mind. Maybe they really are different people.
 
@@ -101,7 +101,7 @@ You changed your mind. Maybe they really are different people.
 await world.unmerge({
   alias: "person:rss:j-powell-fed",
   by: "operator-1",
-  reason: "Discovered they're different — Jerome and Jay Powell are brothers",
+  reason: "Discovered they're different: Jerome and Jay Powell are brothers",
 });
 ```
 

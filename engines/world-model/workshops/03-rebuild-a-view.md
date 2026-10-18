@@ -1,11 +1,11 @@
-# Workshop 03 — Rebuilding a view from scratch
+# Workshop 03: Rebuilding a view from scratch
 
 **Time:** 20 minutes
 **You'll leave with:** confidence that throwing away a view and re-projecting from the event log is a safe, normal operation.
 
 ## The principle
 
-The canonical store is the truth. Every view is rebuildable from it. If a view ever drifts — bad projection logic, schema migration, partial failure — you wipe it and re-project.
+The canonical store is the truth. Every view is rebuildable from it. If a view ever drifts (bad projection logic, schema migration, partial failure), you wipe it and re-project.
 
 This workshop proves it.
 
@@ -17,7 +17,7 @@ import { WorldModel } from "@meterless/world-model";
 const world = new WorldModel({ storage: "local", namespace: "rebuild-demo" });
 ```
 
-## Step 1 — Build some state (5 min)
+## Step 1: Build some state (5 min)
 
 Add a few entities and a custom view:
 
@@ -51,7 +51,7 @@ console.log(await world.view("authors-by-book-count").get());
 // { Harari: 2, Hawking: 1 }
 ```
 
-## Step 2 — Corrupt the view on purpose (5 min)
+## Step 2: Corrupt the view on purpose (5 min)
 
 ```ts
 // Pretend a bug doubled the count
@@ -62,7 +62,7 @@ console.log(await world.view("authors-by-book-count").get());
 
 In production this is the kind of state you discover three days later.
 
-## Step 3 — Rebuild (5 min)
+## Step 3: Rebuild (5 min)
 
 ```ts
 await world.rebuild("authors-by-book-count");
@@ -72,7 +72,7 @@ console.log(await world.view("authors-by-book-count").get());
 
 The view is correct again. The canonical store didn't change.
 
-## Step 4 — Inspect the audit trail (5 min)
+## Step 4: Inspect the audit trail (5 min)
 
 ```ts
 const rebuilds = await world.events({ kind: "view-rebuild" });
@@ -90,4 +90,4 @@ Every rebuild is itself an event. You can see when a view was rebuilt, by whom, 
 
 ## Next
 
-[Workshop 04 — Merging duplicate entities →](./04-merge-entities.md)
+[Workshop 04: Merging duplicate entities →](./04-merge-entities.md)

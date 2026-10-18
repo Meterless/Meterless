@@ -2,9 +2,9 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`) — see [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
+> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`). See [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
 
-A 30-step research run, end to end. This is the example where Markovian stops being a nicety and becomes the *only* way the work runs at all — a 30-step naive chain exhausts the context window before it finishes.
+A 30-step research run, end to end. In this example Markovian is the only way the work runs at all. A 30-step naive chain exhausts the context window before it finishes.
 
 Prerequisite reading: the numbered path [`01`](../run-first-chain/README.md)–[`07`](../reflection-pass/README.md), [`docs/efficiency-model.md`](../../docs/efficiency-model.md).
 
@@ -17,11 +17,11 @@ Goal: "Produce a competitive landscape report on the vector-database market:
        8 vendors, pricing, architecture, benchmarks, and a recommendation."
 ```
 
-This is genuinely ~30 steps of recursive analysis with periodic web/tool lookups. Naively, by step ~18 the prompt is the whole research transcript and you hit the model's context ceiling. With Markovian, step 30 costs the same as step 3.
+This is ~30 steps of recursive analysis with periodic web/tool lookups. Naively, by step ~18 the prompt is the whole research transcript and you hit the model's context ceiling. With Markovian, step 30 costs the same as step 3.
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian } from "@meterless/markovian";
@@ -71,12 +71,12 @@ console.log(run.output);
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
 
-## Expected output (illustrative — modeled numbers, not a recorded run)
+## Expected output (illustrative; modeled numbers, not a recorded run)
 
 ```text
 31 chunks · 94% saved
@@ -99,18 +99,18 @@ step 30  >> synthesize recommendation      <CARRYOVER> ... <DONE>
 step 31  reflection (ratify) → "consistent, all 8 covered"
 ```
 
-Every step's prompt is goal + ~1400-token carryover + maybe one tool result. **Never** the prior 29 steps.
+Every step's prompt is goal + ~1400-token carryover + maybe one tool result. It never includes the prior 29 steps.
 
 ---
 
 ## Why it matters
 
-- **This run does not exist without Markovian.** The qualitative point from the efficiency model: naive baselines have a *ceiling*, not just a cost. A 30-step research transcript exceeds context around step 18 — a bigger model just moves the ceiling, it does not remove it. Bounded carryover removes it.
-- **94% saved is the floor at this length, not the headline.** Efficiency rises with N (see [`docs/efficiency-model.md`](../../docs/efficiency-model.md)). The headline is feasibility: 30 steps, then 100, then 500, all at flat per-step cost.
-- **Tools keep chunks bounded too.** A `web.search` result is injected into the *next* chunk as data — the research does not accumulate raw search dumps in an ever-growing prompt.
-- **Ratify reflection is the safety check.** One pass confirms all 8 vendors were actually covered before the report ships — catching anything a bounded step dropped.
+- **This run does not exist without Markovian.** The qualitative point from the efficiency model: naive baselines have a context ceiling as well as a cost. A 30-step research transcript exceeds context around step 18. A bigger model moves the ceiling but does not remove it. Bounded carryover removes it.
+- **94% saved is the floor at this length.** Efficiency rises with N (see [`docs/efficiency-model.md`](../../docs/efficiency-model.md)). The main result is feasibility: 30 steps, then 100, then 500, all at flat per-step cost.
+- **Tools keep chunks bounded too.** A `web.search` result is injected into the next chunk as data. The research does not accumulate raw search dumps in an ever-growing prompt.
+- **Ratify reflection is the safety check.** One pass confirms all 8 vendors were covered before the report ships. It catches anything a bounded step dropped.
 
 ## Next
 
-- [`architecture-planning`](../architecture-planning/README.md) — the decision-heavy long-run counterpart.
-- [`token-savings-demo`](../token-savings-demo/README.md) — this run's economics, side-by-side with naive.
+- [`architecture-planning`](../architecture-planning/README.md): the decision-heavy long-run counterpart.
+- [`token-savings-demo`](../token-savings-demo/README.md): this run's economics, side-by-side with naive.

@@ -2,7 +2,7 @@
 
 The spec in [`../AGENTS.md`](../AGENTS.md), made executable. Deterministic, zero runtime dependencies. It exists so every example in [`../examples/`](../examples/) runs, and so the efficiency claims in the docs come with a script you can run instead of a chart you have to trust.
 
-What it is NOT: a production library. The generator is injected (mock by default), history persists to a JSON file, and token counts are `ceil(chars/4)` labeled `estimated`. Your implementation swaps in a real provider and real accounting; the contracts stay the same.
+It is not a production library. The generator is injected (mock by default), history persists to a JSON file, and token counts are `ceil(chars/4)` labeled `estimated`. Your implementation swaps in a real provider and real accounting; the contracts stay the same.
 
 ## Run it
 

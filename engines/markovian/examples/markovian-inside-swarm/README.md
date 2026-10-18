@@ -1,10 +1,10 @@
 # Markovian inside Swarm
 
-> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`) — see [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
+> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`). See [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
 
-A [Agent Orchestration](https://github.com/meterless/meterless/blob/main/ROADMAP.md) task that runs a Markovian chain for its long-horizon reasoning. **Swarm sees one task; Markovian handles the chunking inside it.** Two governance layers, cleanly nested.
+An agent orchestration task that runs a Markovian chain for its long-horizon reasoning. Swarm sees one task, and Markovian handles the chunking inside it. The two governance layers nest without overlap.
 
-> This is the same integration as the `swarm-with-markovian` example in the [swarm orchestration engine (a future flagship engine drop; link goes to the roadmap)](https://github.com/meterless/meterless/blob/main/ROADMAP.md), seen from the Markovian side.
+> This is the same integration as the `swarm-with-markovian` example planned for the swarm orchestration spec, seen from the Markovian side. The swarm-orchestration and runtime specs are next on the [roadmap](../../../../ROADMAP.md).
 
 Prerequisite reading: [`docs/compose-with-swarm.md`](../../docs/compose-with-swarm.md), [`long-research-chain`](../long-research-chain/README.md).
 
@@ -24,7 +24,7 @@ Task level             Markovian: chunk 1 → 2 → … → joined output
 
 The scheduler governs *tasks* (readiness, concurrency, retries). Markovian governs *context within a task* (bounded chunks). Neither reaches into the other.
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian } from "@meterless/markovian";
@@ -58,7 +58,7 @@ async function execute(task /*: SwarmTask */) {
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
@@ -80,20 +80,20 @@ DAG view: architect_task = 1 task, 1 attempt, 1 artifact  (chunking invisible to
 | Boundary | Contract |
 | --- | --- |
 | Swarm → Markovian | task prompt in; bounded chunks run internally |
-| Markovian → Swarm | **one** joined artifact out; `markovianRunId` in telemetry |
+| Markovian → Swarm | one joined artifact out; `markovianRunId` in telemetry |
 | Audit | the Swarm run telemetry links to the inner Markovian run id for end-to-end reconstruction |
 
-A small task (`≤ 4000` tokens) skips Markovian entirely — delegation is a cost paid only where it earns its keep.
+A small task (`≤ 4000` tokens) skips Markovian entirely. Delegation has a cost, so it only happens where the task is large enough to need it.
 
 ---
 
 ## Why it matters
 
-- **The scheduler stays simple.** It never reasons about token windows; it governs tasks. Pushing bounded-context concerns *down* into the task keeps the DAG layer small and correct — the same reason Markovian pushes history concerns down into carryover.
-- **One artifact, one contract.** Markovian's N chunks become a single task artifact before merge/verify/resume ever see it. No special-casing in the orchestrator.
-- **Two nested governances, both auditable.** Swarm bounds *how many agents and how they connect*; Markovian bounds *how much context one agent reasons over at once*. The `markovianRunId` link stitches the two audit trails into one.
+- **The scheduler stays simple.** It never reasons about token windows; it governs tasks. Pushing bounded-context concerns down into the task keeps the DAG layer small and correct. Markovian pushes history concerns down into carryover for the same reason.
+- **One artifact, one contract.** Markovian's N chunks become a single task artifact before merge/verify/resume ever see it. The orchestrator needs no special cases.
+- **Two nested governances, both auditable.** Swarm bounds how many agents run and how they connect. Markovian bounds how much context one agent reasons over at once. The `markovianRunId` link stitches the two audit trails into one.
 
 ## Next
 
-- [`markovian-with-hmem`](../markovian-with-hmem/README.md) — the memory composition seam.
-- Swarm side of this integration: the `swarm-with-markovian` example in the [swarm orchestration engine (a future flagship engine drop; link goes to the roadmap)](https://github.com/meterless/meterless/blob/main/ROADMAP.md).
+- [`markovian-with-hmem`](../markovian-with-hmem/README.md): the memory composition seam.
+- Swarm side of this integration: the `swarm-with-markovian` example, planned for the swarm orchestration spec. That spec and the runtime spec are next on the [roadmap](../../../../ROADMAP.md).

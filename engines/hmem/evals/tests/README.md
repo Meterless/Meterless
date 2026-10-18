@@ -6,9 +6,9 @@ This folder is for community-created evals, benchmarks, and regression tests for
 
 If you are testing H-MEM on a real project, agent workflow, codebase, knowledge system, customer workspace, research corpus, or long-running chat history, this is the place to share what you learned.
 
-The goal is simple:
+The goal:
 
-> Build a shared eval library that shows how H-MEM performs in the real world, not just in synthetic demos.
+> Build a shared eval library that shows how H-MEM performs on real projects as well as in synthetic demos.
 
 We welcome small tests, messy edge cases, failure reports, benchmark writeups, comparison runs, and full regression suites.
 
@@ -259,7 +259,7 @@ We are especially interested in evals that:
 
 H-MEM should not be evaluated only by its creators.
 
-This folder exists so builders can test it on the kinds of messy, long-running, real-world workflows where memory actually matters.
+This folder exists so builders can test it on the kinds of messy, long-running, real-world workflows where memory matters.
 
 If H-MEM fails, share the eval.
 

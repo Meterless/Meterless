@@ -4,7 +4,7 @@ H-MEM is a hierarchical human-memory architecture for agents. It combines tiered
 
 ## Design principles
 
-- Treat memory as a living knowledge graph, not a flat note list.
+- Treat memory as a linked knowledge graph rather than a flat note list.
 - Separate what is remembered from how it is reinjected into prompts.
 - Preserve provenance on inferred memory through `source`, `derivedFrom`, `supersedes`, and `relatedTo`.
 - Require human approval for high-impact synthesis.

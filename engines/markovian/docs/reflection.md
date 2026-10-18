@@ -18,23 +18,23 @@ Skip it for:
 
 Three canonical modes, picked at config time:
 
-### Mode 0 — Conclude (default)
+### Mode 0: Conclude (default)
 
-Synthesize the accumulated reasoning into one final answer. The reference instruction: *"Synthesize a final review. Highlight what was accomplished, what was deferred, and what should be tested first."* Input: original prompt + final carryover + full content (**truncated to 30,000 chars**) + a code-artifact summary (count/language/size of code blocks).
+Synthesize the accumulated reasoning into one final answer. The reference instruction: *"Synthesize a final review. Highlight what was accomplished, what was deferred, and what should be tested first."* Input: original prompt + final carryover + full content (truncated to 30,000 chars) + a code-artifact summary (count/language/size of code blocks).
 
-### Mode 1 — Ratify
+### Mode 1: Ratify
 
 The cheapest. Reflection reads the final output and the marker trail and emits a verdict:
 
 ```
-RATIFIED — output coherent with goal, no contradictions found
+RATIFIED: output coherent with goal, no contradictions found
 or
-FLAGGED — found N issues, see notes
+FLAGGED: found N issues, see notes
 ```
 
 Used as a downstream signal. The host decides what to do with flagged runs.
 
-### Mode 2 — Refine
+### Mode 2: Refine
 
 Reflection identifies issues and produces a refined final output:
 
@@ -45,13 +45,13 @@ refined_output: ...
 
 The original output is always preserved as `reflection.originalOutput`. The host can accept the refinement, accept the original, or escalate.
 
-### Optional extension — Branch and converge
+### Optional extension: Branch and converge
 
-Beyond the three canonical modes, some hosts add a branch-and-converge pass: reflection spawns a small second chain that addresses the issues, then merges with the original. More expensive; useful when refinement requires actual work, not just rewording.
+Beyond the three canonical modes, some hosts add a branch-and-converge pass: reflection spawns a small second chain that addresses the issues, then merges with the original. More expensive; useful when refinement requires new work beyond rewording.
 
 ## How it works
 
-Reflection is itself a Markovian chain — bounded chunks, structured markers — but with a different goal:
+Reflection is itself a Markovian chain (bounded chunks, structured markers) with a different goal:
 
 ```
 goal: "Review the prior run's final output and marker trail; identify
@@ -61,7 +61,7 @@ input: run history (markers only, not full chunk transcripts)
 
 It's bounded, fast (typically 1-3 chunks), and produces a structured verdict.
 
-Reflection runs only when the run has ≥ 1 chunk, completed, and was not aborted. And the hard rule: **reflection failure must never fail the run** — a reflection error degrades to a skipped verdict; the chain's real output is returned regardless.
+Reflection runs only when the run has ≥ 1 chunk, completed, and was not aborted. The hard rule: reflection failure must never fail the run. A reflection error degrades to a skipped verdict, and the chain's real output is returned regardless.
 
 ## Wiring
 
@@ -79,19 +79,19 @@ console.log(run.output);               // refined or original
 
 ## What reflection won't fix
 
-- A fundamentally wrong goal — reflection can't notice that you asked for the wrong thing.
-- A carryover that lost critical state ten chunks ago — reflection sees markers, not the lost detail.
-- Tool-output errors that cascaded — reflection can flag inconsistency but can't re-fetch.
+- A fundamentally wrong goal. Reflection can't notice that you asked for the wrong thing.
+- A carryover that lost critical state ten chunks ago. Reflection sees markers, not the lost detail.
+- Tool-output errors that cascaded. Reflection can flag inconsistency but can't re-fetch.
 
-For those failure modes, you want **resume from checkpoint** or **re-plan via Scout**, not reflection.
+For those failure modes, use resume from checkpoint or re-plan via Scout instead of reflection.
 
 ## Cost
 
-Reflection typically costs 1.5-3x a normal chunk. Modes 1 and 2 are bounded by the existing carryover and a small reflection-specific framing. Mode 3 spawns a sub-chain and is bounded by `maxChunks` on the sub-chain.
+Reflection typically costs 1.5-3x a normal chunk. The three canonical modes (Mode 0: Conclude, Mode 1: Ratify, Mode 2: Refine) are bounded by the existing carryover and a small reflection-specific framing. The optional branch-and-converge extension spawns a sub-chain and is bounded by `maxChunks` on that sub-chain.
 
-The cost is **predictable and capped**. It's not a recursive verification cascade.
+The cost is predictable and capped. Reflection never recurses into further verification passes.
 
 ## What's next
 
-- [Run history](./run-history.md) — what reflection reads
-- [Compose with Swarm](./compose-with-swarm.md) — when to skip reflection (Swarm already verifies)
+- [Run history](./run-history.md): what reflection reads
+- [Compose with Swarm](./compose-with-swarm.md): when to skip reflection (Swarm already verifies)

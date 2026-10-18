@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-The **stream-cluster aggregate shape**: raw items arrive continuously from many sources, and meaning emerges from grouping them. The resolver does the hard part — deciding *"is this the same entity we already know about?"* — online, as facts stream in.
+The **stream-cluster aggregate shape**: raw items arrive continuously from many sources, and meaning emerges from grouping them. The resolver does the hard part: it decides *"is this the same entity we already know about?"* online, as facts stream in.
 
 ## What it shows
 
@@ -37,7 +37,7 @@ const world = new WorldModel({
   namespace: "stream-demo",
   conflictPolicy: "most-recent-wins",
   // Banded resolver thresholds (the canonical scheme):
-  //   ≥ 0.92        auto-merge — always recorded as an alias event
+  //   ≥ 0.92        auto-merge; always recorded as an alias event
   //   0.82 – 0.92   queue for operator review, never auto-merge
   //   < 0.82        create a new entity
   resolver: { strategy: ["exact", "alias", "probabilistic"], autoMergeAt: 0.92, reviewBand: [0.82, 0.92] },
@@ -59,7 +59,7 @@ for (const item of stream) {
   });
   powellRef = person.id; // name-keyed canonical id: ent_<sha256 hash> (docs/stable-ids.md)
 
-  // The title claim is a Fact — assertFact is the canonical write primitive.
+  // The title claim is a Fact; assertFact is the canonical write primitive.
   await world.assertFact({
     about: person.id,
     predicate: "title",
@@ -79,7 +79,7 @@ console.log((await world.facts({ about: powellRef })).length);
 
 ## Run it
 
-This repo is an implementation spec — `@meterless/world-model` is not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` is the name of your implementation, not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -97,19 +97,19 @@ One entity. Three aliases. Three facts retained. Current title `"Fed Chair"` bec
 
 | Item | Strategy that matched | Result |
 | --- | --- | --- |
-| "Jerome Powell" | exact (first sight) | creates the Powell entity (emerging) — name-keyed id `ent_…` |
+| "Jerome Powell" | exact (first sight) | creates the Powell entity (emerging), name-keyed id `ent_…` |
 | "Jerome H. Powell" | probabilistic (0.94 ≥ 0.92) | auto-merge → alias event, same entity |
 | "Jay Powell" | probabilistic (0.93 ≥ 0.92) | auto-merge → alias event, same entity |
 
-A match in the **review band (0.82–0.92)** would not auto-merge — it queues for operator review (see [`docs/operator-control-plane.md`](../../docs/operator-control-plane.md)); below 0.82 a new entity is created. Probabilistic merges always write an **alias event**, never a destructive overwrite, so an operator can undo them.
+A match in the **review band (0.82–0.92)** would not auto-merge. It queues for operator review (see [`docs/operator-control-plane.md`](../../docs/operator-control-plane.md)); below 0.82 a new entity is created. Probabilistic merges always write an **alias event**, never a destructive overwrite, so an operator can undo them.
 
 ## Why it matters
 
-- **No fact is ever lost.** All three title claims are retained as Facts. The entity's `title` is a *derivation* under the conflict policy, not an overwrite. Switch the policy to `highest-confidence-wins` and re-derive — the source facts are untouched.
+- **No fact is ever lost.** All three title claims are retained as Facts. The entity's `title` is a *derivation* under the conflict policy, not an overwrite. Switch the policy to `highest-confidence-wins` and re-derive. The source facts are untouched.
 - **Identity is decided online, deterministically.** The resolver does not need a batch job to dedupe later; stable IDs + alias events collapse the stream at the boundary.
 - **Provenance survives clustering.** Six months later "where did his title come from?" is answerable down to the wire report at 14:00Z.
 
 ## Next
 
-- [`news-intelligence`](../news-intelligence/README.md) — this shape applied to a real article feed with event clustering.
-- [`docs/ingest-pipeline.md`](../../docs/ingest-pipeline.md) — the full extract → normalize → resolve → validate → append → project pipeline.
+- [`news-intelligence`](../news-intelligence/README.md): this shape applied to a real article feed with event clustering.
+- [`docs/ingest-pipeline.md`](../../docs/ingest-pipeline.md): the full extract → normalize → resolve → validate → append → project pipeline.

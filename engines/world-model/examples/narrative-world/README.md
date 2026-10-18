@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-A persistent narrative universe with bloodlines, seasons, and dynasties. Inspired by long-running football-simulation projects where **Year 145 references Year 74** — and the world model has to remember everything in between, accurately, forever.
+A persistent narrative universe with bloodlines, seasons, and dynasties. Inspired by long-running football-simulation projects where Year 145 references Year 74, and the world model has to remember everything in between accurately.
 
 ## What it shows
 
@@ -67,7 +67,7 @@ await world.upsertContext({ type: "week", externalKey: { system: "league", id: "
   parent: "season:league:145", attrs: { number: 14 }, source: { kind: "manual", at: new Date() } });
 // "week:league:14@season:league:145" is a readable display form of the parent
 // reference. The canonical context id is hash(type + externalKey + parentId)
-// per docs/stable-ids.md — which is exactly why week 14 of season 145 hashes
+// per docs/stable-ids.md, which is exactly why week 14 of season 145 hashes
 // differently from week 14 of season 144.
 await world.upsertContext({ type: "game", externalKey: { system: "league", id: "bengals-vs-chiefs-145-14" },
   parent: "week:league:14@season:league:145", attrs: { home: "bengals" },
@@ -102,7 +102,7 @@ console.log(roster145.map((p) => p.attrs.name));
 
 ## Run it
 
-This repo is an implementation spec — `@meterless/world-model` is not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` is the name of your implementation, not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -111,17 +111,17 @@ This repo is an implementation spec — `@meterless/world-model` is not a publis
 ["Tommie Frazier Iii"]
 ```
 
-Generation I has two descendants down the chain. In season 145, only Frazier III is rostered — the relationship's `validFrom/validTo` window (144–146) includes 145, so he appears; query season 150 and the roster is empty without deleting anything.
+Generation I has two descendants down the chain. In season 145, only Frazier III is rostered. The relationship's `validFrom/validTo` window (144–146) includes 145, so he appears; query season 150 and the roster is empty without deleting anything.
 
 ---
 
 ## Why it matters
 
-- **The world remembers across decades.** Year 145 can reference Year 74 because every entity has a stable ID and every relationship its own record — nothing is renumbered or overwritten as the simulation runs.
+- **The world remembers across decades.** Year 145 can reference Year 74 because every entity has a stable ID and every relationship its own record. Nothing is renumbered or overwritten as the simulation runs.
 - **Nested context IDs prevent collisions.** `week:14` only means something *under a season*. Encoding the parent in the context ID is what makes `season → week → game` unambiguous across 145 simulated years.
-- **Temporal bounds replace deletion.** A player leaving a team is a `validTo`, not a delete. The season-150 roster is correctly empty *and* the season-145 roster is still correct — both are derivations over the same edges.
+- **Temporal bounds replace deletion.** A player leaving a team is a `validTo`, not a delete. The season-150 roster is correctly empty *and* the season-145 roster is still correct. Both are derivations over the same edges.
 
 ## Next
 
-- [`timeline-of-snapshots`](../timeline-of-snapshots/README.md) — point-in-time *attribute* history (complements relationship time-bounds).
-- [`agent-run-world-state`](../agent-run-world-state/README.md) — the same nested-context pattern for agent run/step state.
+- [`timeline-of-snapshots`](../timeline-of-snapshots/README.md): point-in-time *attribute* history (complements relationship time-bounds).
+- [`agent-run-world-state`](../agent-run-world-state/README.md): the same nested-context pattern for agent run/step state.

@@ -17,10 +17,10 @@ source ──▶ extract ──▶ normalize ──▶ resolve ──▶ validat
 | **Normalize** | Map raw records to canonical shapes | Bad record → dead-letter, alert |
 | **Resolve** | Compute stable IDs, follow aliases | Ambiguous match → operator queue |
 | **Validate** | Schema check + provenance check | Schema violation → reject, log |
-| **Append** | Write event to log | Append-only — cannot fail mid-write |
+| **Append** | Write event to log | Append-only; cannot fail mid-write |
 | **Project** | Update derived views | View error → rebuild that view only |
 
-These six stages are the **per-observation write path** — the inner loop. Batch and streaming ingests wrap it in the 10-step aggregate cycle (reconcile → cluster/classify → persist aggregates → score → infer derived → persist edges → rebuild views → patch source items → **rebuild aggregates** → **mark stale**) defined in [`AGENTS.md`](../AGENTS.md) §4.1. The two orderings are complementary: every record a cycle touches still flows through the six stages above.
+These six stages are the **per-observation write path**, the inner loop. Batch and streaming ingests wrap it in the 10-step aggregate cycle (reconcile → cluster/classify → persist aggregates → score → infer derived → persist edges → rebuild views → patch source items → **rebuild aggregates** → **mark stale**) defined in [`AGENTS.md`](../AGENTS.md) §4.1. The two orderings are complementary: every record a cycle touches still flows through the six stages above.
 
 ## Idempotency
 
@@ -28,10 +28,10 @@ Every stage is idempotent at the **event level**. Re-running the pipeline produc
 
 How:
 
-- **Dedupe key** — every input record gets a content-addressed dedupe key at the extract stage.
-- **Checkpoints** — pipelines persist their position. Restarting picks up where it left off.
-- **Append-only log** — the canonical store never overwrites. State is a fold over events.
-- **Stable IDs** — re-ingesting the same record collapses to the same entity ID.
+- **Dedupe key**: every input record gets a content-addressed dedupe key at the extract stage.
+- **Checkpoints**: pipelines persist their position. Restarting picks up where it left off.
+- **Append-only log**: the canonical store never overwrites. State is a fold over events.
+- **Stable IDs**: re-ingesting the same record collapses to the same entity ID.
 
 The test: run the same pipeline twice in a row. The second run should produce zero new events.
 
@@ -56,9 +56,9 @@ The resolve stage does the work of "is this the same entity we already know abou
 
 Three strategies, layered:
 
-1. **Exact match on canonical key** — same URL, same external ID, same normalized name. Done.
-2. **Confident match on alias** — same primary ID after alias resolution. Done.
-3. **Probabilistic match** — embedding similarity + attribute overlap, with **banded thresholds**: similarity **≥ 0.92 → auto-merge**; **0.82–0.92 → queue for operator review** (never auto-merge in the band); **< 0.82 → create a new entity**.
+1. **Exact match on canonical key**: same URL, same external ID, same normalized name. Done.
+2. **Confident match on alias**: same primary ID after alias resolution. Done.
+3. **Probabilistic match**: embedding similarity + attribute overlap, with **banded thresholds**: similarity **≥ 0.92 → auto-merge**; **0.82–0.92 → queue for operator review** (never auto-merge in the band); **< 0.82 → create a new entity**.
 
 Probabilistic merges always write the **alias** event, never a destructive overwrite. An operator can undo them.
 
@@ -86,8 +86,8 @@ No fact is ever lost. The entity's current state is a derivation.
 
 Both modes use the same pipeline.
 
-- **Batch** — extract a file, run it through, checkpoint at the end.
-- **Streaming** — subscribe to a source, run each record through with a watermark-based checkpoint.
+- **Batch**: extract a file, run it through, checkpoint at the end.
+- **Streaming**: subscribe to a source, run each record through with a watermark-based checkpoint.
 
 The append stage is the same. The difference is upstream.
 
@@ -95,9 +95,9 @@ The append stage is the same. The difference is upstream.
 
 Because the event log is append-only and stages are idempotent:
 
-- **Replay a single source** — recompute all events from one source after a bug fix.
-- **Replay a schema migration** — re-derive entity attributes under a new schema version.
-- **Replay a view** — wipe a derived view and re-project from events.
+- **Replay a single source**: recompute all events from one source after a bug fix.
+- **Replay a schema migration**: re-derive entity attributes under a new schema version.
+- **Replay a view**: wipe a derived view and re-project from events.
 
 A replay never corrupts the store. It rewrites events with a new schema version while preserving the originals.
 

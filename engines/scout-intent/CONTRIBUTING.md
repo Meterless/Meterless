@@ -1,13 +1,13 @@
 # Contributing to Scout
 
-Thanks for being here. Scout is an Apache 2.0-licensed engine in the Meterless stack and contributions are very welcome.
+Scout is an Apache 2.0-licensed engine in the Meterless stack. Contributions are welcome.
 
 ## Ways to help
 
-- **Use it and report bugs.** Especially decision bugs — Scout decided X when it should have decided Y. Include the prompt, user role, surface, and what you expected.
-- **Add adversarial examples.** A real-world injection that slipped past the default policy pack is gold. Add it as a JSONL example in `evals/regression-set/v1/injection/`.
+- **Use it and report bugs.** Decision bugs matter most: Scout decided X when it should have decided Y. Include the prompt, user role, surface, and what you expected.
+- **Add adversarial examples.** A real-world injection that slipped past the default policy pack is especially useful. Add it as a JSONL example in `evals/regression-set/v1/injection/`.
 - **Improve docs and workshops.** Whatever confused you, fix it.
-- **New intent / policy / capability libraries.** Domain-specific bundles (CRM, fintech, regulated industries) are great as separate packages that depend on `@meterless/scout`.
+- **New intent / policy / capability libraries.** Domain-specific bundles (CRM, fintech, regulated industries) work well as separate packages that depend on your `@meterless/scout` implementation.
 
 ## Getting set up
 

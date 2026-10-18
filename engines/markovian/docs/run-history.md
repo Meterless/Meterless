@@ -8,7 +8,7 @@ Every Markovian run produces a structured history. It's how you debug a run, rep
 type Run = {
   id: string;                    // canonical: run.id (not runId)
   goal: string;
-  chunkConfig: ChunkConfig;      // MANDATORY per-run snapshot — efficiency is
+  chunkConfig: ChunkConfig;      // MANDATORY per-run snapshot; efficiency is
                                  // always recomputed against the run's own config
   chunks: ChunkRecord[];
   stats: RunStats;
@@ -40,7 +40,7 @@ Everything needed to reconstruct the run:
 
 - Full prompt and full output, per chunk
 - Both carryovers (in and out), so you can diff them
-- Parsed markers (STATE_CHECKPOINT, TASK_COMPLETE, NEEDS_TOOL, NEEDS_CLARIFICATION — or their XML alternates)
+- Parsed markers (STATE_CHECKPOINT, TASK_COMPLETE, NEEDS_TOOL, NEEDS_CLARIFICATION, or their XML alternates)
 - Token counts on both sides (provider-reported usage when available; `chars/4` estimate labeled as such otherwise)
 - Latency per chunk
 - Tool calls if any
@@ -83,26 +83,26 @@ A run can be replayed deterministically given the same model and the same temper
 const replay = await markovian.replay(runId);
 ```
 
-Replay runs each chunk fresh with the same prompts. Useful for debugging — you can change the compression cascade or marker parser and see how the same run would have gone.
+Replay runs each chunk fresh with the same prompts. Useful for debugging: you can change the compression cascade or marker parser and see how the same run would have gone.
 
 For pure inspection without re-running, the stored history is enough on its own.
 
 ## Diffs
 
-The most useful operation on history is **diffing two carryovers** — usually consecutive ones, sometimes the same step across two runs.
+The most useful operation on history is diffing two carryovers, usually consecutive ones, sometimes the same step across two runs.
 
 ```ts
 const diff = markovian.diff(run.chunks[3].carryoverIn, run.chunks[3].carryoverOut);
 // → { added: [...], removed: [...], retained: [...] }
 ```
 
-Added items mean the chunk learned something. Removed items mean compression dropped something — sometimes correctly, sometimes not. Retained items are the steady backbone of the run.
+Added items mean the chunk learned something. Removed items mean compression dropped something, sometimes correctly and sometimes not. Retained items are the steady backbone of the run.
 
 ## Privacy
 
 By default, run history stays local. Switching to a centralized backend requires explicit opt-in.
 
-You can configure **per-field redaction** — e.g., store metadata but not full prompt content for sensitive runs:
+You can configure per-field redaction. For example, store metadata but not full prompt content for sensitive runs:
 
 ```ts
 const markovian = new Markovian({
@@ -128,6 +128,6 @@ const markovian = new Markovian({
 
 ## What's next
 
-- [Telemetry](./telemetry.md) — aggregate counters from history
-- [Reflection](./reflection.md) — using history to drive self-review
-- [Streaming UI](./streaming-ui.md) — surfacing history as it happens
+- [Telemetry](./telemetry.md): aggregate counters from history
+- [Reflection](./reflection.md): using history to drive self-review
+- [Streaming UI](./streaming-ui.md): surfacing history as it happens

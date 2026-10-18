@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-This is the operational heart of H-MEM. Capture is worthless if the right memory does not come back at the right moment, grouped, and explainable. This example runs the hybrid ranker and formats grouped prompt context with trace metadata.
+Retrieval and reinjection are where stored memory reaches the model. Capture has no value if the right memory does not come back at the right moment, grouped and explainable. This example runs the hybrid ranker and formats grouped prompt context with trace metadata.
 
 Prerequisite reading: [`docs/retrieval-ranking.md`](../../docs/retrieval-ranking.md), [`docs/reinjection.md`](../../docs/reinjection.md).
 
@@ -86,13 +86,13 @@ Keyword is the Jaccard overlap of the top-8 query tokens; layer weights are long
 
 Worked arithmetic for `mem_pnpm`: `0.35·0.70 + 0.20·0.25 + 0.10·0.5 + 0.10·1 + 0.15·0.4 + 0.05·1.0 + 0.05·0.6 = 0.585`; `0.585 × 0.90 = 0.53`.
 
-Two memories clear the `0.35` threshold on the final score — `mem_node18` only just, because its lower confidence (0.78, model-extracted and not yet validated) drags the multiplier down.
+Two memories clear the `0.35` threshold on the final score. `mem_node18` only just clears it, because its lower confidence (0.78, model-extracted and not yet validated) drags the multiplier down.
 
 ---
 
 ## Expected prompt context
 
-Grouped by domain, with layer markers and entities — the model sees structure without being told "this is from memory":
+Grouped by domain, with layer markers and entities. The model sees structure without being told "this is from memory":
 
 ```text
 [tech/frontend] (long_term) Project uses pnpm, not npm. {entities: pnpm, npm}
@@ -123,10 +123,10 @@ Each `read` also writes a ledger entry so retrieval itself is auditable.
 
 ## Why it matters
 
-- **Hybrid, not nearest-neighbor.** Pure cosine similarity would surface `mem_node18` and `mem_pnpm` roughly equally and might leak the irrelevant `mem_deploy`. Domain + entity + layer weighting makes the install-critical pnpm rule the top result.
+- **Hybrid ranking picks the right rule.** Pure cosine similarity would surface `mem_node18` and `mem_pnpm` roughly equally and might leak the irrelevant `mem_deploy`. Domain + entity + layer weighting makes the install-critical pnpm rule the top result.
 - **Grouping is the interface.** Domain-grouped context with layer markers lets the model weigh a validated `long_term` rule above a still-tentative `working` one.
-- **Trace answers the second failure mode.** "Why did the model know to use pnpm?" → `trace_7a1`, score 0.53, domain+entity match. The agent does not just remember; it can explain.
+- **Trace answers the second failure mode.** "Why did the model know to use pnpm?" → `trace_7a1`, score 0.53, domain+entity match. The agent can explain why it used the memory.
 
 ## Next
 
-[`05-dreaming-proposals`](../05-dreaming-proposals/README.md) — synthesizing new knowledge from clusters of memories like these.
+[`05-dreaming-proposals`](../05-dreaming-proposals/README.md: synthesizing new knowledge from clusters of memories like these.

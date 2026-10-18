@@ -1,17 +1,17 @@
-# Workshop 02 — Block your first injection
+# Workshop 02: Block your first injection
 
 **Time:** 30 minutes
-**You'll leave with:** working pattern detection, a tested injection block, and confidence that the guard stack does what it says.
+**You'll leave with:** working pattern detection, a tested injection block, and a check that the guard stack does what it says.
 
 ## Why this matters
 
-The most common production failure of agent stacks is not the model being wrong — it's the model doing exactly what it was told by a user who shouldn't have been allowed to tell it that. The guard stage is what prevents the second class of failure.
+The most common production failure of agent stacks is the model doing exactly what it was told by a user who shouldn't have been allowed to tell it that. The model being wrong is less common. The guard stage prevents the first kind of failure.
 
 ## Setup
 
 Use the project from Workshop 01.
 
-## Step 1 — Run a clean prompt (5 min)
+## Step 1: Run a clean prompt (5 min)
 
 ```ts
 const guard = await scout.guard({
@@ -25,7 +25,7 @@ console.log(guard.flags); // []
 
 Baseline: low, no flags.
 
-## Step 2 — Run a classic injection (10 min)
+## Step 2: Run a classic injection (10 min)
 
 ```ts
 const probes = [
@@ -42,7 +42,7 @@ for (const p of probes) {
 
 All three should produce `level: "block"` with appropriate flags.
 
-## Step 3 — Custom pattern (10 min)
+## Step 3: Custom pattern (10 min)
 
 Your domain has specific injection patterns the default pack doesn't cover. Add them:
 
@@ -66,7 +66,7 @@ console.log(result.level); // "block"
 console.log(result.flags); // [{ kind: "injection", evidence: ["internal_admin_panel"] }]
 ```
 
-## Step 4 — Add it to your evals (5 min)
+## Step 4: Add it to your evals (5 min)
 
 Real protection lives in regression tests. Append to your local eval set:
 
@@ -82,8 +82,8 @@ Run `npm run evals:injection`. The new example should pass.
 - The guard stack is composable.
 - Custom patterns extend, don't replace, the default pack.
 - Every block belongs in the regression set.
-- The pattern not in evals isn't actually being protected against.
+- A pattern that is not in evals is not protected against.
 
 ## Next
 
-[Workshop 03 — Route to the right downstream engine →](./03-route-downstream.md)
+[Workshop 03: Route to the right downstream engine →](./03-route-downstream.md)

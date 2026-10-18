@@ -1,4 +1,4 @@
-# Workshop 04 — Reflect and resume
+# Workshop 04: Reflect and resume
 
 **Time:** 30 minutes
 **You'll leave with:** a run that ratifies its own work, and the muscle memory for resuming a paused chain.
@@ -21,15 +21,15 @@ console.log(run.reflection.issues);     // structured list if flagged
 
 ### When to ratify vs refine vs branch
 
-- **Ratify** — fast verdict; you'll use it as a signal downstream
-- **Refine** — you want a single improved output
-- **Branch and converge** — you want the engine to actually do the fix-up work and converge
+- **Ratify:** fast verdict; you'll use it as a signal downstream
+- **Refine:** you want a single improved output
+- **Branch and converge:** you want the engine to do the fix-up work and converge
 
 Default to `ratify`. Move to `refine` when the output is going to a customer. Move to `branch` only for high-stakes work where the additional cost is justified.
 
 ## Resume
 
-Long chains sometimes pause — for tool calls, for clarification, for approval gates. The engine surfaces a pause event; you resume after providing the input.
+Long chains sometimes pause for tool calls, clarification, or approval gates. The engine surfaces a pause event; you resume after providing the input.
 
 ```ts
 markovian.on("chunk.clarification", async ({ runId, question }) => {
@@ -63,7 +63,7 @@ The streaming UI is where approvals happen. The contract specifies they're requi
 
 ## What you learned
 
-- Reflection is optional, bounded, and modal — pick the right mode for the cost.
+- Reflection is optional, bounded, and modal. Pick the right mode for the cost.
 - Resume turns one-shot runs into collaborative work.
 - Approval gates make high-risk chains safe without making them sluggish.
 
@@ -71,7 +71,7 @@ The streaming UI is where approvals happen. The contract specifies they're requi
 
 You've completed the Markovian workshop series. Next steps:
 
-- Compose with Swarm — see [`examples/markovian-inside-swarm`](../examples/markovian-inside-swarm)
-- Feed H-MEM — see [`examples/markovian-with-hmem`](../examples/markovian-with-hmem)
+- Compose with Swarm: see [`examples/markovian-inside-swarm`](../examples/markovian-inside-swarm)
+- Feed H-MEM: see [`examples/markovian-with-hmem`](../examples/markovian-with-hmem)
 - Read [`docs/efficiency-model.md`](../docs/efficiency-model.md) and play with [`token-economics-demo`](../token-economics-demo) to internalize the math
 - Compose with the rest of the [Meterless engine stack](https://github.com/meterless/meterless).

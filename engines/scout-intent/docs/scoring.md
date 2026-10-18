@@ -1,15 +1,15 @@
 # Scoring
 
-How Scout decides which intent the user actually wants. Two execution stages, one canonical formula, confidence bands, clarification triggers.
+This doc covers how Scout decides which intent the user wants: two execution stages, one canonical formula, confidence bands, and clarification triggers.
 
 ## Two stages, one formula
 
 Scout scores in two stages:
 
-- **Stage 1 — deterministic trigger scan (always on).** A weighted trigger-word/substring scan over the full registry. Winner = highest weighted-match sum; confidence = the winner's score as a fraction of matched weight. Must complete a full-registry scan in **< 16 ms**, enforced by a startup self-test that scans a fixed probe set and fails loudly if exceeded. Runs on every keystroke for UI feedback and on submit for routing.
-- **Stage 2 — hybrid rescoring (optional, recommended for routing decisions).** A small local classifier (embedding model, 50–200 MB, ONNX/WebLLM-class) adds semantic similarity; conversation window and retrieved context add the contextual term. If Stage 2 is unavailable (no model, cold start), Stage 1's result stands — graceful degradation, never a hard dependency.
+- **Stage 1: deterministic trigger scan (always on).** A weighted trigger-word/substring scan over the full registry. Winner = highest weighted-match sum; confidence = the winner's score as a fraction of matched weight. Must complete a full-registry scan in < 16 ms, enforced by a startup self-test that scans a fixed probe set and fails loudly if exceeded. Runs on every keystroke for UI feedback and on submit for routing.
+- **Stage 2: hybrid rescoring (optional, recommended for routing decisions).** A small local classifier (embedding model, 50–200 MB, ONNX/WebLLM-class) adds semantic similarity; conversation window and retrieved context add the contextual term. If Stage 2 is unavailable (no model, cold start), Stage 1's result stands. Stage 2 degrades gracefully and is never a hard dependency.
 
-Both stages target the same semantics — the canonical formula:
+Both stages target the same semantics, defined by the canonical formula:
 
 ```
 finalScore(intent) =
@@ -20,7 +20,7 @@ finalScore(intent) =
 - riskPenalty(intent)         // down-rank intents requesting blocked actions
 ```
 
-Stage 1 alone yields `lexical` and (from session state) `recency`; `semantic` and `contextual` default to 0 until Stage 2 runs. The merge step is a single dot product with these weights. All weights are config data, not code — tunable per surface.
+Stage 1 alone yields `lexical` and (from session state) `recency`; `semantic` and `contextual` default to 0 until Stage 2 runs. The merge step is a single dot product with these weights. All weights are config data, not code, and are tunable per surface.
 
 ```
 prompt ──▶ Stage 1: deterministic trigger scan (<16 ms, always on)
@@ -32,7 +32,7 @@ prompt ──▶ Stage 1: deterministic trigger scan (<16 ms, always on)
              └──▶ merge       ──▶ top-k candidates with scores
 ```
 
-The `0.20 · contextual` term is where retrieved memory and world context lift confidence after retrieval — see [`examples/query-hmem-before-action`](../examples/query-hmem-before-action) for a documented Medium→High band shift (0.61 → 0.93).
+The `0.20 · contextual` term is where retrieved memory and world context lift confidence after retrieval. See [`examples/query-hmem-before-action`](../examples/query-hmem-before-action) for a documented Medium→High band shift (0.61 → 0.93).
 
 ## Confidence bands
 
@@ -62,7 +62,7 @@ The classifier emits two candidates:
 ]
 ```
 
-When two candidates are both in the High band and reference disjoint spans of the prompt, Scout returns a **plan with both intents** rather than choosing. Secondary intents are everything at or above the **0.55** threshold (the Medium band floor).
+When two candidates are both in the High band and reference disjoint spans of the prompt, Scout returns a plan with both intents rather than choosing. Secondary intents are everything at or above the 0.55 threshold (the Medium band floor).
 
 See [`examples/detect-multi-intent`](../examples/detect-multi-intent).
 
@@ -87,7 +87,7 @@ Clarifications go back to the surface as structured prompts with up to 4 options
 }
 ```
 
-The surface picks how to render that — buttons, voice, a chat reply. Clarification rate is a tracked metric with a hard ceiling ([eval harness](./eval-harness.md)) — an implementation that clarifies constantly is failing, not being safe.
+The surface picks how to render that: buttons, voice, or a chat reply. Clarification rate is a tracked metric with a hard ceiling ([eval harness](./eval-harness.md)). An implementation that clarifies constantly fails that gate.
 
 ## Learning loop
 
@@ -108,13 +108,13 @@ Stage 1 is the always-available floor; Stage 2 carries the load when nuance matt
 
 ## Implementation notes
 
-- Stage 1 is pure rules — no model call — and must pass the < 16 ms full-registry self-test at startup.
+- Stage 1 is pure rules with no model call, and must pass the < 16 ms full-registry self-test at startup.
 - Stage 2's classifier defaults to a small embedding model (50-200MB) running locally via WebLLM or ONNX.
 - The merge step is a single dot product with the canonical weights.
 - Stage 2 latency: typically 20-80ms client-side, 100-300ms with a remote classifier.
 
 ## What's next
 
-- [Risk and policy](./risk-and-policy.md) — what happens after scoring
-- [Capability graph](./capability-graph.md) — how the scored intent becomes a plan
-- [Eval harness](./eval-harness.md) — the metrics that gate scoring changes
+- [Risk and policy](./risk-and-policy.md): what happens after scoring
+- [Capability graph](./capability-graph.md): how the scored intent becomes a plan
+- [Eval harness](./eval-harness.md): the metrics that gate scoring changes

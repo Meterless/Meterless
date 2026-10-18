@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-The **timeline aggregate shape**: state evolves through discrete updates, and you can reconstruct the world as it was at any past moment. Ask *"what did this entity look like on date X?"* and get the answer from an event-log fold — not a separate audit table.
+The **timeline aggregate shape**: state evolves through discrete updates, and you can reconstruct the world as it was at any past moment. Ask *"what did this entity look like on date X?"* and get the answer from an event-log fold instead of a separate audit table.
 
 ## What it shows
 
@@ -62,7 +62,7 @@ await world.upsertEntity({
   source: { kind: "manual", at: new Date("2087-09-15") },
 });
 
-// Point-in-time queries — the snapshot view folds the event log up to a timestamp.
+// Point-in-time queries: the snapshot view folds the event log up to a timestamp.
 const in2081 = await world.view("snapshot").entityAt("team:league:bengals", "2081-01-01");
 const in2085 = await world.view("snapshot").entityAt("team:league:bengals", "2085-01-01");
 const today  = await world.view("snapshot").entityAt("team:league:bengals", "2090-01-01");
@@ -74,7 +74,7 @@ console.log(today.attrs.valuation,  today.attrs.stadium, today.attrs.capacity);
 
 ## Run it
 
-This repo is an implementation spec — `@meterless/world-model` is not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` is the name of your implementation, not a published package. Treat `index.ts` as a reference program against the contract in [`/docs`](../../docs/architecture.md): point the import at your own implementation (built per [`AGENTS.md`](../../AGENTS.md)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -84,7 +84,7 @@ This repo is an implementation spec — `@meterless/world-model` is not a publis
 3400000000 Queen City Dome 68000
 ```
 
-The 2081 query returns the 2080 state. The 2085 query returns the 2084 state. The schema-v2 `capacity` field is `undefined` in pre-2087 snapshots — and that is correct, not a bug.
+The 2081 query returns the 2080 state. The 2085 query returns the 2084 state. The schema-v2 `capacity` field is `undefined` in pre-2087 snapshots. That is correct behavior.
 
 ---
 
@@ -97,5 +97,5 @@ The 2081 query returns the 2080 state. The 2085 query returns the 2084 state. Th
 
 ## Next
 
-- [`narrative-world`](../narrative-world/README.md) — timelines with nested contexts and multi-generational bloodlines.
-- [`stream-clustered-facts`](../stream-clustered-facts/README.md) — the other aggregate shape: continuous ingest, online clustering.
+- [`narrative-world`](../narrative-world/README.md): timelines with nested contexts and multi-generational bloodlines.
+- [`stream-clustered-facts`](../stream-clustered-facts/README.md): the other aggregate shape: continuous ingest, online clustering.

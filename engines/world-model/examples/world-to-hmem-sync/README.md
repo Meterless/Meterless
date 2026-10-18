@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-World Model facts replicated into an agent's [H-MEM](https://github.com/meterless/meterless/tree/main/engines/hmem). **The World Model is shared state; H-MEM is the agent's personal memory of that state.** They are complementary, not competing — this example wires them together.
+World Model facts replicated into an agent's [H-MEM](https://github.com/meterless/meterless/tree/main/engines/hmem). The World Model is shared state. H-MEM is the agent's personal memory of that state. They are complementary, and this example wires them together.
 
 ## What it shows
 
@@ -72,7 +72,7 @@ unsub();
 
 ## Run it
 
-This repo is an implementation spec — neither `@meterless/world-model` nor `@meterless/hmem` is a published package. Treat `index.ts` as a reference program against the two contracts: point the imports at your own implementations (World Model per [`AGENTS.md`](../../AGENTS.md); H-MEM per its own repo, [github.com/meterless/meterless/tree/main/engines/hmem](https://github.com/meterless/meterless/tree/main/engines/hmem)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` and `@meterless/hmem` name your implementations; neither is a published package. Treat `index.ts` as a reference program against the two contracts: point the imports at your own implementations (World Model per [`AGENTS.md`](../../AGENTS.md); H-MEM per its own repo, [github.com/meterless/meterless/tree/main/engines/hmem](https://github.com/meterless/meterless/tree/main/engines/hmem)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -81,7 +81,7 @@ Acme Corp (account): Renewed enterprise plan, $80k ARR
 world:account:salesforce:0015g00000ACME
 ```
 
-The agent recalls the Acme fact from its own H-MEM. The `source` proves it originated in the World Model — and H-MEM's trust ledger has a `create` entry for it (see the trust-ledger example in the [H-MEM repo](https://github.com/meterless/meterless/tree/main/engines/hmem)).
+The agent recalls the Acme fact from its own H-MEM. The `source` proves it originated in the World Model, and H-MEM's trust ledger has a `create` entry for it (see the trust-ledger example in the [H-MEM repo](https://github.com/meterless/meterless/tree/main/engines/hmem)).
 
 ---
 
@@ -94,6 +94,6 @@ The agent recalls the Acme fact from its own H-MEM. The `source` proves it origi
 
 ## Next
 
-- The `world-model-sync` example in the [H-MEM repo](https://github.com/meterless/meterless/tree/main/engines/hmem) — the reciprocal: the same sync from inside H-MEM.
-- [`scout-context-plan-to-world-query`](../scout-context-plan-to-world-query/README.md) — Scout deciding *which* world slice to pull.
-- [`agent-run-world-state`](../agent-run-world-state/README.md) — the agent's run state living in the world too.
+- The `world-model-sync` example in the [H-MEM repo](https://github.com/meterless/meterless/tree/main/engines/hmem): the reciprocal, the same sync from inside H-MEM.
+- [`scout-context-plan-to-world-query`](../scout-context-plan-to-world-query/README.md): Scout deciding *which* world slice to pull.
+- [`agent-run-world-state`](../agent-run-world-state/README.md): the agent's run state living in the world too.

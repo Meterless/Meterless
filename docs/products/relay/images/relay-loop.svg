@@ -39,13 +39,13 @@
     <rect x="40" y="106" width="172" height="88" rx="11" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
     <text x="56" y="130" font-size="13.5" font-weight="700" fill="#171310">Instruction</text>
     <text x="56" y="150" font-size="10.3" fill="#756D60">&#8220;do the morning report&#8221;</text>
-    <text x="56" y="165" font-size="10.3" fill="#756D60">specific or loose &#8212;</text>
+    <text x="56" y="165" font-size="10.3" fill="#756D60">specific or loose,</text>
     <text x="56" y="180" font-size="10.3" fill="#756D60">natural language in</text>
 
     <rect x="238" y="106" width="172" height="88" rx="11" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
     <text x="254" y="130" font-size="13.5" font-weight="700" fill="#171310">Plan</text>
     <text x="254" y="150" font-size="10.3" fill="#756D60">shown in plain English</text>
-    <text x="254" y="165" font-size="10.3" fill="#756D60">before any clicks &#8212;</text>
+    <text x="254" y="165" font-size="10.3" fill="#756D60">before any clicks,</text>
     <text x="254" y="180" font-size="10.3" fill="#756D60">cancel with no harm done</text>
 
     <rect x="436" y="106" width="126" height="88" rx="11" fill="#FFF9EF" stroke="#E8A13C" stroke-width="1.5"/>
@@ -57,7 +57,7 @@
     <rect x="588" y="106" width="172" height="88" rx="11" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
     <text x="604" y="130" font-size="13.5" font-weight="700" fill="#171310">Execute + verify</text>
     <text x="604" y="150" font-size="10.3" fill="#756D60">screenshot checks &#183; OS-level</text>
-    <text x="604" y="165" font-size="10.3" fill="#756D60">postconditions &#8212; verified /</text>
+    <text x="604" y="165" font-size="10.3" fill="#756D60">postconditions: verified /</text>
     <text x="604" y="180" font-size="10.3" fill="#756D60">failed / unverifiable</text>
 
     <rect x="786" y="106" width="138" height="88" rx="11" fill="#FFFFFF" stroke="#6D28D9" stroke-width="1.5"/>
@@ -92,7 +92,7 @@
     <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.84;0.86;0.97;0.99;1" dur="9s" repeatCount="indefinite"/>
     <animateMotion dur="9s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.84;0.99;1" path="M855 198 C855 244 324 244 324 198"/>
   </circle>
-  <text x="590" y="262" font-size="10.5" fill="#6A3FC7" text-anchor="middle">remembered procedures make the next plan shorter and faster &#8212; a 30-day half-life keeps stale habits out</text>
+  <text x="590" y="262" font-size="10.5" fill="#6A3FC7" text-anchor="middle">remembered procedures make the next plan shorter and faster. A 30-day half-life keeps stale habits out</text>
 
-  <text x="40" y="298" font-size="11" fill="#9A9284">Verification ships in shadow mode by default &#8212; it logs verdicts but never blocks a run until you opt in to enforcement.</text>
+  <text x="40" y="298" font-size="11" fill="#9A9284">Verification ships in shadow mode by default. It logs verdicts but never blocks a run until you opt in to enforcement.</text>
 </svg>

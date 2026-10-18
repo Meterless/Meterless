@@ -1,11 +1,11 @@
-# Workshop 01 — Build your first world
+# Workshop 01: Build your first world
 
 **Time:** 30 minutes
 **You'll leave with:** a running World Model with five entities, two contexts, four relationships, and one custom view.
 
 ## Setup
 
-> **Before you start:** this repo is the implementation spec — `@meterless/world-model` is not a published npm package. Build the engine first (open the repo in your coding agent and follow [`AGENTS.md`](../AGENTS.md)), then work through the labs against your implementation. The workshop code targets the canonical contract, so it applies to any conforming build.
+> **Before you start:** this repo is the implementation spec. `@meterless/world-model` is the name of your implementation, not a published npm package. Build the engine first (open the repo in your coding agent and follow [`AGENTS.md`](../AGENTS.md)), then work through the labs against your implementation. The workshop code targets the canonical contract, so it applies to any conforming build.
 
 ```bash
 mkdir my-first-world && cd my-first-world
@@ -21,7 +21,7 @@ import { WorldModel } from "@meterless/world-model"; // ← your implementation 
 const world = new WorldModel({ storage: "local", namespace: "my-first-world" });
 ```
 
-## Step 1 — Add three entities (5 min)
+## Step 1: Add three entities (5 min)
 
 Pick a domain you know well. Customers, books, characters in a story, players in a game.
 
@@ -36,7 +36,7 @@ await world.upsertEntity({
 
 Add two more.
 
-## Step 2 — Add a context (5 min)
+## Step 2: Add a context (5 min)
 
 Contexts are bounded situations.
 
@@ -49,7 +49,7 @@ await world.upsertContext({
 });
 ```
 
-## Step 3 — Connect them with relationships (5 min)
+## Step 3: Connect them with relationships (5 min)
 
 ```ts
 await world.relate({
@@ -60,7 +60,7 @@ await world.relate({
 });
 ```
 
-## Step 4 — Query a built-in view (5 min)
+## Step 4: Query a built-in view (5 min)
 
 ```ts
 const books = await world.view("graph").entitiesInContext(
@@ -70,7 +70,7 @@ const books = await world.view("graph").entitiesInContext(
 console.log(books);
 ```
 
-## Step 5 — Build a custom view (10 min)
+## Step 5: Build a custom view (10 min)
 
 ```ts
 world.registerView("books-by-year", {
@@ -98,4 +98,4 @@ const byYear = await world.view("books-by-year").get();
 
 ## Next
 
-[Workshop 02 — Idempotent ingest →](./02-idempotent-ingest.md)
+[Workshop 02: Idempotent ingest →](./02-idempotent-ingest.md)

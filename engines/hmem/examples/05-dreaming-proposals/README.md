@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-Retrieval ([04](../04-retrieve-and-reinject/README.md)) uses memory. Dreaming **builds** memory — it clusters existing records and proposes higher-order knowledge that no single memory states. Nothing it proposes becomes durable without human approval.
+Retrieval ([04](../04-retrieve-and-reinject/README.md)) uses memory. Dreaming builds memory: it clusters existing records and proposes higher-order knowledge that no single memory states. Nothing it proposes becomes durable without human approval.
 
 Prerequisite reading: [`docs/dreaming.md`](../../docs/dreaming.md).
 
@@ -18,7 +18,7 @@ mem_b  "User rejected cloud-only memory sync."       correction  source:session:
 mem_c  "User asked for private memory by default."   preference  source:session:7
 ```
 
-No record states the general rule. Dreaming's job is to notice the pattern and propose it — for review, not for silent adoption.
+No record states the general rule. Dreaming's job is to notice the pattern and propose it for review. It never adopts the rule silently.
 
 ---
 
@@ -34,7 +34,7 @@ const proposals = await dreaming.run({
 });
 
 for (const p of proposals.invariants) {
-  await ui.presentProposal(p);     // human reviews — required
+  await ui.presentProposal(p);     // human reviews; required
 }
 
 await dreaming.approve("dream_prop_lf1");
@@ -61,7 +61,7 @@ await dreaming.reject("dream_prop_x9", reason="too speculative")
 
 ## How the cluster forms
 
-Dreaming clusters on multi-signal relatedness — content similarity, tag overlap, shared domain/type, entity overlap. `mem_a`, `mem_b`, `mem_c` cluster because they share the `privacy` / `local-first` entity space and the same domain, above the `0.35` relatedness threshold.
+Dreaming clusters on multi-signal relatedness: content similarity, tag overlap, shared domain/type, entity overlap. `mem_a`, `mem_b`, `mem_c` cluster because they share the `privacy` / `local-first` entity space and the same domain, above the `0.35` relatedness threshold.
 
 ## Expected proposal
 
@@ -93,16 +93,16 @@ On approval of `dream_prop_lf1`:
 ]
 ```
 
-On rejection, only a `dream_rejected` ledger entry is written — nothing materializes.
+On rejection, only a `dream_rejected` ledger entry is written. Nothing materializes.
 
 ---
 
 ## Why it matters
 
-- **Dreaming is not cleanup.** Cleanup is sleep ([06](../06-sleep-preview/README.md)). Dreaming generates *new reviewed knowledge*. Conflating the two is the most common implementation mistake.
-- **The approval boundary is non-negotiable.** Unsupervised synthesis is the fourth agent-memory failure mode: derived guesses hardening into "facts." Every materialized dream carries `derivedFrom` lineage back to every source — the system never lies about where a belief came from.
+- **Dreaming is separate from cleanup.** Cleanup is sleep ([06](../06-sleep-preview/README.md)). Dreaming generates new reviewed knowledge. Conflating the two is the most common implementation mistake.
+- **The approval boundary is mandatory.** Unsupervised synthesis is the fourth agent-memory failure mode: derived guesses hardening into "facts." Every materialized dream carries `derivedFrom` lineage back to every source, so every belief records where it came from.
 - **Confidence stays below 1.0.** A synthesized invariant is an inference over inferences. `0.74` reflects that; feedback and repeated retrieval can raise it over time.
 
 ## Next
 
-[`06-sleep-preview`](../06-sleep-preview/README.md) — the maintenance counterpart: previewing what to consolidate, archive, or synthesize.
+[`06-sleep-preview`](../06-sleep-preview/README.md: the maintenance counterpart. previewing what to consolidate, archive, or synthesize.

@@ -1,6 +1,6 @@
 # How to Use World Model
 
-A practical walkthrough of building and operating a domain-agnostic world model. Code samples in **TypeScript**, **Python**, and **Rust**.
+A practical walkthrough of building and operating a domain-agnostic world model. Code samples are in TypeScript, Python, and Rust.
 
 This guide assumes you have read the architecture overview. If you have not, start there. This document is about wiring it up.
 
@@ -238,7 +238,7 @@ pub struct Entity {
 
 ## 3. Generate stable hash IDs
 
-**This one decision unlocks everything else.** Independent processes agree on entity identity without coordination. Re-ingesting the same input produces the same IDs. Backfill from cold data does not create duplicates.
+The rest of the design depends on this decision. Independent processes agree on entity identity without coordination. Re-ingesting the same input produces the same IDs. Backfill from cold data does not create duplicates.
 
 ### TypeScript
 
@@ -374,9 +374,9 @@ Debounce writes around 300ms to avoid write storms during rapid edits.
 
 ## 5. Run the ingest pipeline
 
-Every ingest path runs the same ordered steps. **Order matters. Re-runnability is the prize.**
+Every ingest path runs the same ordered steps. Order matters, and every step must be safe to re-run.
 
-These ten steps are the **batch/stream cycle** (AGENTS.md §4.1). Each record inside the cycle runs the six-stage **per-observation event path** — `extract → normalize → resolve → validate → append → project` (see [`docs/ingest-pipeline.md`](docs/ingest-pipeline.md)). The two orderings are complementary: the six stages are the inner loop; the ten steps are the cycle built on top of it.
+These ten steps are the **batch/stream cycle** (AGENTS.md §4.1). Each record inside the cycle runs the six-stage **per-observation event path**, `extract → normalize → resolve → validate → append → project` (see [`docs/ingest-pipeline.md`](docs/ingest-pipeline.md)). The two orderings are complementary: the six stages are the inner loop; the ten steps are the cycle built on top of it.
 
 ```text
 1.  Reconcile           Detach stale edges/aggregates touching reprocessed items
@@ -436,7 +436,7 @@ async function ingest(items: RawItem[]): Promise<IngestReport> {
   // 9. Rebuild aggregates (mention counts, trend direction, last-seen)
   await rebuildAggregates(affectedIds);
 
-  // 10. Mark stale — items untouched this cycle whose state is out of date
+  // 10. Mark stale: items untouched this cycle whose state is out of date
   await markStale({ untouchedSince: report.startedAt });
 
   return report;
@@ -509,7 +509,7 @@ pub async fn ingest(stores: &Stores, items: Vec<RawItem>) -> anyhow::Result<Inge
 
 ### Idempotency check
 
-Run the pipeline twice on the same input. Compare the resulting world. **Diff should be empty.** If not, you have a non-deterministic enrichment step. Cache or seed it.
+Run the pipeline twice on the same input. Compare the resulting world. The diff should be empty. If not, you have a non-deterministic enrichment step. Cache or seed it.
 
 ---
 
@@ -531,7 +531,7 @@ class EntityResolver {
     const aliasMatch = await stores.entities.queryByAlias(normalizeName(name), type);
     if (aliasMatch) return aliasMatch;
 
-    // 3. Try fuzzy match within type — banded thresholds:
+    // 3. Try fuzzy match within type, with banded thresholds:
     //    ≥ 0.92            auto-merge (always recorded as an alias event)
     //    0.82 – 0.92       queue for operator review, do NOT merge
     //    < 0.82            new entity
@@ -596,7 +596,7 @@ async function mergeEntities(keepId: string, mergeId: string, actor: string): Pr
 }
 ```
 
-The control plane writes back through the **same pipeline** as the ingest path. There is no privileged write path.
+The control plane writes back through the same pipeline as the ingest path. There is no privileged write path.
 
 ---
 
@@ -773,13 +773,13 @@ impl ReadSurface {
 
 ### Provenance is non-negotiable
 
-Every read can trace back to the rows that contributed. The trace is what makes the world model **auditable**.
+Every read can trace back to the rows that contributed. The trace is what makes the world model auditable.
 
 ---
 
 ## 10. Operate the control plane
 
-A world model needs a control plane, not just an API. Operators inspect entities, merge duplicates, split conflated entities, mark canonical preferences, and trigger re-enrichment.
+A world model needs an operator control plane as well as an API. Operators inspect entities, merge duplicates, split conflated entities, mark canonical preferences, and trigger re-enrichment.
 
 ### TypeScript
 
@@ -818,7 +818,7 @@ class ControlPlane {
 }
 ```
 
-The control plane writes back **through the same pipeline as the ingest path**. There is no privileged write path. That is what keeps the world trustworthy.
+The control plane writes back through the same pipeline as the ingest path. There is no privileged write path, which keeps the world trustworthy.
 
 ---
 
@@ -876,7 +876,7 @@ async function migrate(currentVersion: number, target: number): Promise<void> {
 }
 ```
 
-Run migrations through the **same write-through adapter**. The adapter is your seam against backwards compatibility.
+Run migrations through the same write-through adapter. The adapter is your seam against backwards compatibility.
 
 ---
 
@@ -884,7 +884,7 @@ Run migrations through the **same write-through adapter**. The adapter is your s
 
 ### With H-MEM
 
-The world model is the **system of record** for entities and relationships. H-MEM is the **agent's memory** — short-term, working, long-term recall. They are complementary.
+The world model is the **system of record** for entities and relationships. H-MEM is the **agent's memory**: short-term, working, and long-term recall. They are complementary.
 
 ```ts
 // Pull world-model context into H-MEM as durable factual memories:
@@ -963,7 +963,7 @@ If you only adopt three things from this guide:
 2. **Append-only canonical store. Recomputed derived views.** No silent mutations.
 3. **Bounded blast radius on enrichment.** One worker per entity type. Failures isolated.
 
-Those three take a system from "works in demo" to "survives production."
+Those three do most of the work of making a demo system hold up in production.
 
 ---
 
@@ -991,9 +991,10 @@ World-Model/
 │   │                                      Domain scenarios
 │   └── world-to-hmem-sync, swarm-planning-with-world-context,
 │       scout-context-plan-to-world-query  Cross-engine integration
-├── control-plane/       Illustrative operator-UI mock (index.html + README)
+├── control-plane/       Operator-UI mock (index.html), live version (live.html), README
 ├── workshops/           Four-lab track (build → idempotent ingest → rebuild a view → merge)
-├── src/                 Reserved for your implementation (contracts are language-agnostic)
+├── reference/           Minimal runnable reference implementation
+├── conformance/         Conformance suite for your implementation
 └── content/             Launch post, one-pager, comparison
 ```
 
@@ -1003,4 +1004,4 @@ The repo folder specifies the contract; you bring the stack. A minimal runnable 
 
 ## License
 
-Apache 2.0. Use it. Fork it. Ship it.
+Apache 2.0. You can use, fork, and ship it.

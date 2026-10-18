@@ -20,7 +20,7 @@ For each event:
 
 1. Build an extraction prompt specialized to the event type.
 2. Ask a background model for a strict JSON array of memory strings.
-3. Strip markdown fences and parse robustly.
+3. Strip markdown fences and parse tolerantly.
 4. Validate each item: must be a string with length ≥ 6; skip otherwise.
 5. Add each item with event-derived type, tags, source, layer, provenance origin, and the active `chatId`/`goalRunId` scope.
 

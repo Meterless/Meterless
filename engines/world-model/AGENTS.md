@@ -1,26 +1,26 @@
-# World Model Implementation Deep Dive
+# World Model Agnostic Implementation Guide
 
 ## Purpose
 
-This document is a universal architecture guide for building a **world model** — a persistent, queryable, evolving representation of *things* (entities of any kind), the *contexts* they appear in, and the *relationships* between them.
+This document is a universal architecture guide for building a **world model**: a persistent, queryable, evolving representation of *things* (entities of any kind), the *contexts* they appear in, and the *relationships* between them.
 
 It is deliberately domain-agnostic. The same architecture applies to:
 
-- **Narrative & creative tools** — characters, locations, props, scenes
-- **Knowledge & research systems** — documents, sources, claims, topics, citations
-- **News & social aggregators** — articles, stories, publishers, hashtags, public figures
-- **Agent platforms** — tasks, tools, sessions, observations, world state
-- **Simulations & games** — actors, items, regions, factions, events
-- **Product analytics** — users, accounts, features, sessions, cohorts
-- **CRM / sales intelligence** — companies, contacts, deals, signals
-- **Scientific knowledge bases** — molecules, papers, authors, experiments
-- **Enterprise data catalogs** — datasets, owners, schemas, lineage
-- **Personal knowledge management** — notes, tags, references, projects
-- **IoT / monitoring** — devices, telemetry streams, incidents, regions
-- **Recommendation systems** — items, users, interactions, taxonomies
-- **Compliance & risk** — entities, sanctions lists, transactions, alerts
+- **Narrative & creative tools**: characters, locations, props, scenes
+- **Knowledge & research systems**: documents, sources, claims, topics, citations
+- **News & social aggregators**: articles, stories, publishers, hashtags, public figures
+- **Agent platforms**: tasks, tools, sessions, observations, world state
+- **Simulations & games**: actors, items, regions, factions, events
+- **Product analytics**: users, accounts, features, sessions, cohorts
+- **CRM / sales intelligence**: companies, contacts, deals, signals
+- **Scientific knowledge bases**: molecules, papers, authors, experiments
+- **Enterprise data catalogs**: datasets, owners, schemas, lineage
+- **Personal knowledge management**: notes, tags, references, projects
+- **IoT / monitoring**: devices, telemetry streams, incidents, regions
+- **Recommendation systems**: items, users, interactions, taxonomies
+- **Compliance & risk**: entities, sanctions lists, transactions, alerts
 
-The word *entity* is used throughout in its broadest sense: anything the system needs to remember, reason about, or display. A character, a news story, a sensor, a paper, a company, a task, a concept — all are entities under this model.
+The word *entity* is used throughout in its broadest sense: anything the system needs to remember, reason about, or display. A character, a news story, a sensor, a paper, a company, a task, a concept: all are entities under this model.
 
 The document covers:
 
@@ -36,8 +36,8 @@ The document covers:
 
 Two recurring example shapes are used to keep the abstractions concrete:
 
-- **Example A — Timeline-of-snapshots**: a history of states (steps, scenes, frames, sessions) where entities exist *within* the snapshots. Suits narrative, simulation, agent trace, and game-state use cases.
-- **Example B — Stream-clustered facts**: a stream of incoming items (articles, observations, events) clustered into higher-order aggregates (stories, topics, incidents). Suits research, news, monitoring, and intelligence use cases.
+- **Example A, timeline-of-snapshots**: a history of states (steps, scenes, frames, sessions) where entities exist *within* the snapshots. Suits narrative, simulation, agent trace, and game-state use cases.
+- **Example B, stream-clustered facts**: a stream of incoming items (articles, observations, events) clustered into higher-order aggregates (stories, topics, incidents). Suits research, news, monitoring, and intelligence use cases.
 
 Both are valid world-model shapes. Most real systems are hybrids.
 
@@ -47,13 +47,13 @@ Both are valid world-model shapes. Most real systems are hybrids.
 
 A world model is, at minimum, three things layered together:
 
-1. **A schema** — typed records for entities, contexts, and relationships.
-2. **A pipeline** — an ordered set of steps that ingests raw input, derives entities, and writes them into a durable store.
-3. **A read surface** — queries, projections, and context builders that downstream consumers (UI, ranking, generation, retrieval) call into.
+1. **A schema**: typed records for entities, contexts, and relationships.
+2. **A pipeline**: an ordered set of steps that ingests raw input, derives entities, and writes them into a durable store.
+3. **A read surface**: queries, projections, and context builders that downstream consumers (UI, ranking, generation, retrieval) call into.
 
 Common architectural traits across well-built world models:
 
-- **One canonical store, many derived views.** The persisted rows are the source of truth. Derived state (latest-version maps, sparklines, leaderboards, canonical merged entities) is reconstructed on read or rebuilt as a materialized view — never mutated independently.
+- **One canonical store, many derived views.** The persisted rows are the source of truth. Derived state (latest-version maps, sparklines, leaderboards, canonical merged entities) is reconstructed on read or rebuilt as a materialized view. It is never mutated independently.
 - **Append-friendly, mutate-cautiously.** Snapshots, events, and observations are appended. Canonical aggregates are recomputed from the append log rather than edited in place.
 - **Idempotent pipelines.** Re-running ingest on the same input produces the same world state. This makes repair, backfill, and replay safe.
 - **Stable IDs derived from content, not autoincrement.** Externally-keyed entities use `type:system:externalId`; name-keyed entities use `` ent_${sha256(`${type}:${normalizeName(name)}`).hex.slice(0, 16)} `` (see `docs/stable-ids.md`). Content-derived IDs let independent processes agree on entity identity without coordination.
@@ -109,11 +109,11 @@ There is no single "right" aggregate. Pick the one that matches how your domain 
 
   Use when relationships are first-class and time-bitemporality matters (knowledge graphs, lineage, compliance).
 
-- **Hybrid** — most production systems combine two or more. A narrative tool may have a timeline plus a location registry plus an entity graph. A news system may have a stream-cluster plus a publisher graph plus a topic taxonomy.
+- **Hybrid**: most production systems combine two or more. A narrative tool may have a timeline plus a location registry plus an entity graph. A news system may have a stream-cluster plus a publisher graph plus a topic taxonomy.
 
 ### 2.2 Entity records
 
-A robust entity record separates **identity**, **semantics**, **continuity anchors**, and **provenance**:
+A complete entity record separates **identity**, **semantics**, **continuity anchors**, and **provenance**:
 
 | Layer | Purpose | Examples |
 |---|---|---|
@@ -147,7 +147,7 @@ Edges between entities, when promoted to first-class records, gain:
 - **Properties** (weight, confidence, time bounds)
 - **Provenance** (which observation produced this edge)
 
-If you don't need this richness, edges can stay implicit — denormalized as ID arrays on the endpoints (`entity.linkedStoryIds`, `story.entityIds`). Implicit edges are cheaper but harder to evolve.
+If you don't need this richness, edges can stay implicit, denormalized as ID arrays on the endpoints (`entity.linkedStoryIds`, `story.entityIds`). Implicit edges are cheaper but harder to evolve.
 
 ---
 
@@ -171,13 +171,13 @@ A practical pattern is **one write-through adapter** that hides substrate choice
 
 Concrete store names will vary; the *kinds* recur:
 
-- **Canonical entity store** — keyed by stable ID
-- **Canonical context store** — keyed by stable ID (locations, sources, sessions)
-- **Edge / mention store** — with indexes on both endpoints
-- **Snapshot / observation store** — append-only history
-- **Score / metric snapshot store** — for time series and ranking
-- **Aggregate / materialized view store** — rebuilt from canonicals (do not mutate independently)
-- **App / pointer state** — current selections, queues, dreaming state, active world
+- **Canonical entity store**: keyed by stable ID
+- **Canonical context store**: keyed by stable ID (locations, sources, sessions)
+- **Edge / mention store**: with indexes on both endpoints
+- **Snapshot / observation store**: append-only history
+- **Score / metric snapshot store**: for time series and ranking
+- **Aggregate / materialized view store**: rebuilt from canonicals (do not mutate independently)
+- **App / pointer state**: current selections, queues, dreaming state, active world
 
 ### 3.3 Indexing
 
@@ -208,20 +208,20 @@ The write path is the most consequential part of a world model. Get this right a
 
 ### 4.1 The canonical pipeline shape
 
-There are **two complementary orderings, not competing ones**. The ten steps below are the **batch/stream cycle**. Each record inside a cycle runs the six-stage **per-observation event path** — `extract → normalize → resolve → validate → append → project` (see `docs/ingest-pipeline.md`) — with append as the only exactly-once stage.
+There are **two complementary orderings, not competing ones**. The ten steps below are the **batch/stream cycle**. Each record inside a cycle runs the six-stage **per-observation event path** (`extract → normalize → resolve → validate → append → project`; see `docs/ingest-pipeline.md`), with append as the only exactly-once stage.
 
 Regardless of domain, batch/stream ingest cycles follow this order:
 
-1. **Reconcile** — detach stale edges/aggregates touching items being reprocessed.
-2. **Cluster / classify** — group raw items into higher-order aggregates (stories, scenes, sessions).
-3. **Persist primary aggregates** — stories, snapshots, sessions.
-4. **Score / measure** — compute trend velocity, salience, confidence; persist a snapshot row per measurement. Velocity is defined as `velocity(w) = mentions in window w / hours(w)` over bucketed windows of 1 h / 24 h / 7 d; `trendDirection = sign(velocity(current bucket) − velocity(previous bucket))`.
-5. **Infer derived records** — events, milestones, alerts.
-6. **Persist edges** — mentions, links, citations.
-7. **Rebuild materialized views** — sources, leaderboards, "latest" maps.
-8. **Patch source items** — write computed fields back onto raw items so downstream readers can avoid joins.
-9. **Rebuild aggregates** — entity mention counts, trend direction, last-seen timestamps.
-10. **Mark stale** — items not touched this cycle whose state is now out of date.
+1. **Reconcile**: detach stale edges/aggregates touching items being reprocessed.
+2. **Cluster / classify**: group raw items into higher-order aggregates (stories, scenes, sessions).
+3. **Persist primary aggregates**: stories, snapshots, sessions.
+4. **Score / measure**: compute trend velocity, salience, confidence; persist a snapshot row per measurement. Velocity is defined as `velocity(w) = mentions in window w / hours(w)` over bucketed windows of 1 h / 24 h / 7 d; `trendDirection = sign(velocity(current bucket) − velocity(previous bucket))`.
+5. **Infer derived records**: events, milestones, alerts.
+6. **Persist edges**: mentions, links, citations.
+7. **Rebuild materialized views**: sources, leaderboards, "latest" maps.
+8. **Patch source items**: write computed fields back onto raw items so downstream readers can avoid joins.
+9. **Rebuild aggregates**: entity mention counts, trend direction, last-seen timestamps.
+10. **Mark stale**: items not touched this cycle whose state is now out of date.
 
 Each stage should be **awaited per record**, **idempotent**, and **safe to interrupt**.
 
@@ -255,7 +255,7 @@ Some operations are world-wide rewrites:
 - Backfill embeddings for every entity after switching providers.
 - Repair orphan edges after a schema migration.
 
-These should be modeled as **explicit jobs** with progress tracking, cancellation, and resumability — not as incidental side effects of an edit. They are world-model migrations at the content level, and they deserve the same rigor as schema migrations.
+These should be modeled as **explicit jobs** with progress tracking, cancellation, and resumability. Do not model them as incidental side effects of an edit. They are world-model migrations at the content level, and they deserve the same rigor as schema migrations.
 
 ---
 
@@ -303,11 +303,11 @@ When a generation or inference step might *invent* a new version of an entity, a
 
 Long-running world models often grow a memory layer separate from the canonical store:
 
-- **Short-term / working memory** — the last N observations, kept verbatim
-- **Episodic memory** — recent sessions or runs, lightly summarized
-- **Long-term memory** — distilled facts, retrievable by similarity
+- **Short-term / working memory**: the last N observations, kept verbatim
+- **Episodic memory**: recent sessions or runs, lightly summarized
+- **Long-term memory**: distilled facts, retrievable by similarity
 
-Memory is consulted at context-construction time and emitted as a `[RELEVANT MEMORIES]` block (or equivalent) to whatever consumer needs it. Keep memory writes automatic but bounded — every observation does not deserve to be remembered forever.
+Memory is consulted at context-construction time and emitted as a `[RELEVANT MEMORIES]` block (or equivalent) to whatever consumer needs it. Keep memory writes automatic but bounded. Not every observation deserves to be remembered forever.
 
 ---
 
@@ -317,22 +317,22 @@ Memory is consulted at context-construction time and emitted as a `[RELEVANT MEM
 
 Most world models do not need a full graph database. They progress through levels:
 
-1. **Implicit** — relationships emerge from co-occurrence in snapshots or shared aggregates. No edges stored.
-2. **Denormalized** — edges live as ID arrays on the endpoints (`entity.linkedStoryIds`).
-3. **First-class edge records** — `mentions` table with indexes on both endpoints; supports edge properties.
-4. **Typed graph** — multiple edge types, each with its own constraints and queries.
-5. **Bitemporal graph** — edges have validity intervals; you can query "the world as it was on date X."
+1. **Implicit**: relationships emerge from co-occurrence in snapshots or shared aggregates. No edges stored.
+2. **Denormalized**: edges live as ID arrays on the endpoints (`entity.linkedStoryIds`).
+3. **First-class edge records**: `mentions` table with indexes on both endpoints; supports edge properties.
+4. **Typed graph**: multiple edge types, each with its own constraints and queries.
+5. **Bitemporal graph**: edges have validity intervals; you can query "the world as it was on date X."
 
 Move up a level only when the previous level is provably insufficient. Each level adds query power and operational cost.
 
 ### 6.2 Common edge patterns
 
-- **Mentions** — item ↔ entity (item's text references entity)
-- **Member-of** — entity ↔ aggregate (article in story, character in scene)
-- **Adjacency** — context ↔ context (location connects to location)
-- **Hierarchy** — entity ↔ entity (topic → subtopic)
-- **Citation / lineage** — directed, often with weight
-- **Co-occurrence** — derived, often a materialized view
+- **Mentions**: item ↔ entity (item's text references entity)
+- **Member-of**: entity ↔ aggregate (article in story, character in scene)
+- **Adjacency**: context ↔ context (location connects to location)
+- **Hierarchy**: entity ↔ entity (topic → subtopic)
+- **Citation / lineage**: directed, often with weight
+- **Co-occurrence**: derived, often a materialized view
 
 ### 6.3 Implicit signals to harvest before building a graph
 
@@ -354,14 +354,14 @@ Enrichment is the set of post-ingest jobs that improve fidelity over time. The w
 
 ### 7.1 Common enrichment kinds
 
-- **Detail extraction** — pull structured attributes out of unstructured artifacts (face details from image, schema from CSV, entities from text).
-- **Continuity anchor computation** — derive dense fingerprints (visual essence, embeddings, hashes).
-- **Trait / tag generation** — produce categorical labels from descriptions or context.
-- **Cross-source enrichment** — merge information about the same entity from multiple sources.
-- **Vision / multimodal import** — accept an image, audio file, or document and produce a typed entity.
-- **Rebuild / replay** — re-run a prior enrichment over historical content with an improved model.
-- **Merge detection** — find probable duplicates and propose merges. A proposal fires when two same-type entities have **normalized-Levenshtein name similarity ≥ 0.85**, or high story/context overlap, or embedding proximity above the operator-review band. Proposals go to the operator queue — never auto-destructive.
-- **Stale flagging** — mark entities whose underlying source has changed since their last enrichment.
+- **Detail extraction**: pull structured attributes out of unstructured artifacts (face details from image, schema from CSV, entities from text).
+- **Continuity anchor computation**: derive dense fingerprints (visual essence, embeddings, hashes).
+- **Trait / tag generation**: produce categorical labels from descriptions or context.
+- **Cross-source enrichment**: merge information about the same entity from multiple sources.
+- **Vision / multimodal import**: accept an image, audio file, or document and produce a typed entity.
+- **Rebuild / replay**: re-run a prior enrichment over historical content with an improved model.
+- **Merge detection**: find probable duplicates and propose merges. A proposal fires when two same-type entities have **normalized-Levenshtein name similarity ≥ 0.85**, or high story/context overlap, or embedding proximity above the operator-review band. Proposals go to the operator queue and are never auto-destructive.
+- **Stale flagging**: mark entities whose underlying source has changed since their last enrichment.
 
 ### 7.2 Enrichment as a queue, not a side effect
 
@@ -392,19 +392,19 @@ The world model exists to be *consumed*. Most consumption happens at context-con
 
 ### 8.1 Common injection points
 
-- **Generation prompts** — entity canon, recent history, relevant memories, location atmosphere.
-- **Search and ranking** — story velocity, source diversity, entity mention counts as features.
-- **Retrieval-augmented generation** — top-K relevant entities or memories prepended to a query.
-- **UI rendering** — leaderboards, sparklines, "related" panels, hero images.
-- **Recap / digest generation** — periodic summaries of what changed.
-- **Notifications** — fire when an entity crosses a threshold (velocity, confidence, staleness).
+- **Generation prompts**: entity canon, recent history, relevant memories, location atmosphere.
+- **Search and ranking**: story velocity, source diversity, entity mention counts as features.
+- **Retrieval-augmented generation**: top-K relevant entities or memories prepended to a query.
+- **UI rendering**: leaderboards, sparklines, "related" panels, hero images.
+- **Recap / digest generation**: periodic summaries of what changed.
+- **Notifications**: fire when an entity crosses a threshold (velocity, confidence, staleness).
 
 ### 8.2 Building context
 
 A good context builder:
 
 1. Accepts the *intent* (what is being generated, ranked, or rendered).
-2. Selects which entities and contexts are relevant — typically by mention, recency, similarity, or salience.
+2. Selects which entities and contexts are relevant, typically by mention, recency, similarity, or salience.
 3. Prioritizes (mention-prioritized first, then recency, then similarity).
 4. Prefers continuity anchors over raw fields (use the visual essence, not the raw description).
 5. Falls back gracefully when an anchor is missing.
@@ -452,7 +452,7 @@ Contexts have their own write patterns:
 
 ### 9.4 Snapshots and items
 
-Snapshots are immutable by default — they are observations of the world at a moment. The UI may permit reordering, branching, duplicating, or deleting snapshots, but mutating an existing snapshot's content should be rare and explicit.
+Snapshots are immutable by default. They are observations of the world at a moment. The UI may permit reordering, branching, duplicating, or deleting snapshots, but mutating an existing snapshot's content should be rare and explicit.
 
 Items in a stream model (articles, observations) are likewise immutable inputs; their *world-model annotations* (storyId, entityIds, sync state) are the mutable surface.
 
@@ -460,16 +460,16 @@ Items in a stream model (articles, observations) are likewise immutable inputs; 
 
 Every world model accumulates rot. Build in:
 
-- **Stale flags** — items that were once synced but whose aggregate has changed.
-- **Orphan detection** — entities or events not linked to any aggregate (a data-quality canary).
-- **Tombstones** — soft deletes that preserve historical references.
-- **Repair jobs** — explicit operator-triggered rebuilds.
+- **Stale flags**: items that were once synced but whose aggregate has changed.
+- **Orphan detection**: entities or events not linked to any aggregate (a data-quality canary).
+- **Tombstones**: soft deletes that preserve historical references.
+- **Repair jobs**: explicit operator-triggered rebuilds.
 
 ---
 
 ## 10) The Library / Control Plane
 
-The operator-facing UI for a world model is not just a viewer — it is a **control plane** for CRUD, enrichment, and maintenance. Every world model worth keeping deserves one.
+The operator-facing UI for a world model is a **control plane** for CRUD, enrichment, and maintenance, in addition to a viewer. Every world model worth keeping deserves one.
 
 ### 10.1 Display
 
@@ -526,12 +526,12 @@ A real world model has many concurrent operations: ingestion, enrichment, bulk r
 
 ### 11.1 A practical queueing model
 
-- **Per-aggregate queue** — one running job at a time per world / project / stream, with FIFO backlog. Avoids cross-talk.
-- **Job typing** — `ingest`, `action`, `bulk_update`, `rebuild`, `enrichment`. Different policies per type.
-- **Processing head** — for chained jobs, a pointer to the snapshot they extend from.
-- **Stale discard** — jobs older than **10 minutes** are discarded with a reason.
-- **Retry / fallback** — network errors retry with backoff; persistent provider failures fall back to alternatives.
-- **Cancellation** — jobs are cancellable; the canceller wins.
+- **Per-aggregate queue**: one running job at a time per world / project / stream, with FIFO backlog. Avoids cross-talk.
+- **Job typing**: `ingest`, `action`, `bulk_update`, `rebuild`, `enrichment`. Different policies per type.
+- **Processing head**: for chained jobs, a pointer to the snapshot they extend from.
+- **Stale discard**: jobs older than **10 minutes** are discarded with a reason.
+- **Retry / fallback**: network errors retry with backoff; persistent provider failures fall back to alternatives.
+- **Cancellation**: jobs are cancellable; the canceller wins.
 
 ### 11.2 Background coordination
 
@@ -549,22 +549,22 @@ Three axes that drive most world-model design decisions:
 
 ### 12.1 Semantic depth vs scalability
 
-- **Deep semantics** (typed ontology, LLM entity classification, knowledge graph linkage) — better reasoning, slower ingest, expensive merge logic.
-- **Shallow semantics** (regex extraction, denormalized aggregates, structural signals) — fast, cheap, scales freely; weaker explanations.
+- **Deep semantics** (typed ontology, LLM entity classification, knowledge graph linkage): better reasoning, slower ingest, expensive merge logic.
+- **Shallow semantics** (regex extraction, denormalized aggregates, structural signals): fast, cheap, scales freely; weaker explanations.
 
 Pick the depth your *consumers* actually need. A search tool needs less depth than a compliance system.
 
 ### 12.2 Mutable canon vs immutable append
 
-- **Mutable canon** (operator can edit entities directly) — flexible, low-friction, drift-prone.
-- **Immutable append** (ingest writes only; canon is rebuilt) — consistent, replayable, harder to "fix one wrong field."
+- **Mutable canon** (operator can edit entities directly): flexible, low-friction, drift-prone.
+- **Immutable append** (ingest writes only; canon is rebuilt): consistent, replayable, harder to "fix one wrong field."
 
 Most systems are mutable-canon for operator-facing entities and immutable-append for derived aggregates.
 
 ### 12.3 Generative vs observational
 
-- **Generative** (LLM produces entities, traits, summaries) — rich content, hallucination risk, needs continuity anchors.
-- **Observational** (entities extracted from real-world signals) — grounded, sparse, needs aggregation to feel "alive."
+- **Generative** (LLM produces entities, traits, summaries): rich content, hallucination risk, needs continuity anchors.
+- **Observational** (entities extracted from real-world signals): grounded, sparse, needs aggregation to feel "alive."
 
 Real systems mix: observational ingest + generative enrichment + operator override.
 
@@ -585,8 +585,8 @@ Most world models need at least two of these.
 
 To stand up this architecture in a new product, in roughly this order:
 
-1. **Pick aggregate shape** — timeline, stream-cluster, graph, or hybrid.
-2. **Define the entity record** — identity / semantics / continuity / aggregates / provenance / lifecycle.
+1. **Pick aggregate shape**: timeline, stream-cluster, graph, or hybrid.
+2. **Define the entity record**: identity / semantics / continuity / aggregates / provenance / lifecycle.
 3. **Choose a persistence substrate** with a write-through adapter and graceful fallback.
 4. **Implement stable ID derivation** (content-hash, normalized-name, external-key).
 5. **Build the ingest pipeline** in canonical order (§4.1), idempotent and resumable.
@@ -619,14 +619,14 @@ To stand up this architecture in a new product, in roughly this order:
 
 - A world model is **persistent typed memory of things and how they relate**, with a write pipeline, a read surface, and an operator UI around it.
 - The best architectures share traits across wildly different domains: stable IDs, idempotent ingest, derived canon, queued enrichment, structured context injection.
-- Pick your aggregate shape (timeline, stream-cluster, graph, hybrid) deliberately — it shapes everything downstream.
+- Pick your aggregate shape (timeline, stream-cluster, graph, hybrid) deliberately. It shapes everything downstream.
 - Continuity is the hardest property to preserve and the most valuable. Invest in continuity anchors early.
 - Relationships should grow from implicit to typed only when consumers demand it.
 - Enrichment is what makes the world model *get better* over time. Promote it to first-class jobs.
-- The library is not a viewer. It is the control plane. Without one, the model decays.
-- Trade-offs (semantic depth vs scale, mutable vs append, generative vs observational) are choices, not absolutes — and most production systems land in the middle of each axis.
+- The library is the control plane for the model. Without one, the model decays.
+- Trade-offs (semantic depth vs scale, mutable vs append, generative vs observational) are choices, not absolutes. Most production systems land in the middle of each axis.
 
-A well-built world model is the substrate that makes downstream features — generation, search, ranking, recap, retrieval, agent reasoning — feel coherent. It is worth treating as a first-class subsystem with its own architecture, its own UI, and its own operational discipline, regardless of what your "things" happen to be.
+A well-built world model is the substrate that makes downstream features (generation, search, ranking, recap, retrieval, agent reasoning) feel coherent. It is worth treating as a first-class subsystem with its own architecture, its own UI, and its own operational discipline, regardless of what your "things" happen to be.
 
 ---
 

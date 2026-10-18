@@ -12,9 +12,9 @@ Where Markovian fits and where it doesn't.
 | Provider-portable | ✓ | ⚠ tied to model class |
 | Inspectable per-step state | ✓ | ⚠ buried in transcript |
 
-**Bigger context** delays the failure. It doesn't change the shape. A 200K-token window runs out at maybe step 80 instead of step 30 — the architecture problem is unchanged.
+A bigger context window delays the failure, but the cost curve keeps the same shape. A 200K-token window runs out at maybe step 80 instead of step 30. The architecture problem is unchanged.
 
-Markovian removes the ceiling.
+Markovian removes the ceiling because per-step cost stays flat.
 
 ## vs. "Summarize the transcript every N steps"
 
@@ -25,9 +25,9 @@ Markovian removes the ceiling.
 | Entity preservation | ✓ (extractor pass) | ⚠ (depends on summary) |
 | Cost predictability | ✓ | ⚠ (summary calls add cost) |
 
-Periodic summary works for ~10 steps. By step 25, the summary has been re-summarized 3 times. The first lost fact is the one you needed.
+Periodic summary works for ~10 steps. By step 25, the summary has been re-summarized 3 times. Each pass can drop a fact, and later steps cannot recover it.
 
-Structured markers don't drift because they aren't summaries — they're typed data the engine reads.
+Structured markers are typed data the engine reads, so they do not drift the way prose summaries do.
 
 ## vs. LangGraph / state-machine agents
 
@@ -38,7 +38,7 @@ Structured markers don't drift because they aren't summaries — they're typed d
 | Composable as a node inside a state machine | ✓ | n/a |
 | Inspectable carryover diffs | ✓ | ⚠ |
 
-These compose. LangGraph (or any state-machine framework) is a great way to orchestrate *across* tasks. Markovian is what runs *inside* a node when the node's job is genuinely long.
+These compose. LangGraph (or any state-machine framework) orchestrates work across tasks. Markovian runs inside a node when that node's job is long.
 
 A node that needs 30 steps of reasoning calls Markovian. A node that needs one LLM call doesn't.
 
@@ -50,9 +50,9 @@ A node that needs 30 steps of reasoning calls Markovian. A node that needs one L
 | Preserves entities introduced early | ✓ | ✗ |
 | Bounded memory cost | ✓ | ✓ |
 
-Sliding windows are bounded but **arbitrary**. They drop information by position, not by importance. The fact you needed at step 47 was introduced at step 3, and the window dropped it at step 25.
+Sliding windows are bounded, but they drop information by position instead of importance. The fact you needed at step 47 was introduced at step 3, and the window dropped it at step 25.
 
-Markovian preserves by importance, not position.
+Markovian keeps decisions and entities in the structured carryover regardless of when they first appeared.
 
 ## vs. Tree-of-thoughts / reflection-heavy frameworks
 
@@ -62,12 +62,12 @@ Markovian preserves by importance, not position.
 | Optimized for branching exploration | ⚠ | ✓ |
 | Cost predictability | ✓ | ⚠ (branching multiplies cost) |
 
-These solve different problems. Tree-of-thoughts is for *exploring alternatives*. Markovian is for *going deep along one path*. They compose — a tree-of-thoughts step can call Markovian to expand a branch.
+These solve different problems. Tree-of-thoughts explores alternatives. Markovian goes deep along one path. They compose: a tree-of-thoughts step can call Markovian to expand a branch.
 
-## The honest summary
+## Summary
 
-Markovian is opinionated. It's good at one specific thing: **long sequential reasoning with bounded per-step cost**. If that's your problem, the alternatives all delay or rename the failure mode without removing it.
+Markovian targets one problem: long sequential reasoning with bounded per-step cost. For that problem, the alternatives above delay or rename the failure mode without removing it.
 
-If your work fits in one model call, you don't need Markovian. If it fits in three, probably still no. The engine starts winning around step 5 and becomes essential around step 20.
+If your work fits in one model call, you don't need Markovian. If it fits in three, probably still no. The engine starts saving tokens around step 5 and becomes necessary around step 20.
 
-For everything beyond that bar, Markovian — with the rest of the [Meterless stack](https://github.com/meterless/meterless) — is the architecture.
+Past that point, use Markovian with the rest of the [Meterless engines](https://github.com/meterless/meterless).

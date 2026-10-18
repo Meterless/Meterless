@@ -1,10 +1,10 @@
 # Scout context plan → World Model query
 
-> Cross-engine example: the scout-intent spec has dropped (see [`engines/scout-intent/`](../../../scout-intent/)); this runs once a Scout reference implementation lands. Until then treat the code as a reference sketch of the contract.
+> Cross-engine example: the scout-intent spec is published (see [`engines/scout-intent/`](../../../scout-intent/)). This runs once a Scout reference implementation exists. Until then treat the code as a reference sketch of the contract.
 
-[Scout Intent](https://github.com/meterless/meterless/tree/main/engines/scout-intent) decides the query plan; the World Model answers it. The reasoning agent never has to know how to navigate the world — **Scout figures out how broad a context to assemble, and the World Model's read surface produces it.**
+[Scout Intent](https://github.com/meterless/meterless/tree/main/engines/scout-intent) decides the query plan; the World Model answers it. The reasoning agent never has to know how to navigate the world. Scout decides how broad a context to assemble, and the World Model's read surface produces it.
 
-> This is the World Model side of the `scout-to-world-model` example in the [Scout Intent engine](https://github.com/meterless/meterless/tree/main/engines/scout-intent) — that example shows Scout *issuing* the scoped context plan; this one shows the world *answering* it.
+> This is the World Model side of the `scout-to-world-model` example in the [Scout Intent engine](https://github.com/meterless/meterless/tree/main/engines/scout-intent). That example shows Scout *issuing* the scoped context plan; this one shows the world *answering* it.
 
 ## What it shows
 
@@ -41,7 +41,7 @@ async function answer(rawInput: string) {
   // 2. The context plan decides breadth. Big task → wide context; quick lookup → narrow.
   const wide = contract.contextPlan.maxTokens > 16_000;
 
-  // 3. The plan becomes a World Model query — the agent wrote none of this.
+  // 3. The plan becomes a World Model query; the agent wrote none of this.
   const context = await world.buildPromptContext({
     subjectId: contract.contextPlan.subjectId,        // e.g. "account:salesforce:0015g00000ACME"
     limit: wide ? 50 : 20,
@@ -65,7 +65,7 @@ console.log("deep context entities:",  deep.provenance.length);
 
 ## Run it
 
-This repo is an implementation spec — neither `@meterless/world-model` nor `@meterless/scout` is a published package. Treat `index.ts` as a reference program against the two contracts: point the imports at your own implementations (World Model per [`AGENTS.md`](../../AGENTS.md); Scout per [the scout-intent engine](https://github.com/meterless/meterless/tree/main/engines/scout-intent)), then run `npx tsx ./index.ts`.
+This repo is an implementation spec. `@meterless/world-model` and `@meterless/scout` name your implementations; neither is a published package. Treat `index.ts` as a reference program against the two contracts: point the imports at your own implementations (World Model per [`AGENTS.md`](../../AGENTS.md); Scout per [the scout-intent engine](https://github.com/meterless/meterless/tree/main/engines/scout-intent)), then run `npx tsx ./index.ts`.
 
 ## Expected output
 
@@ -74,7 +74,7 @@ quick context entities: 6
 deep context entities: 41
 ```
 
-Same world, same subject. The quick lookup pulled a tight neighborhood (≤20). The account-planning prompt triggered a wide plan (≤50), so Scout asked the World Model for far more context — automatically.
+Same world, same subject. The quick lookup pulled a tight neighborhood (≤20). The account-planning prompt triggered a wide plan (≤50), so Scout asked the World Model for far more context without any change to the agent.
 
 ---
 
@@ -87,6 +87,6 @@ Same world, same subject. The quick lookup pulled a tight neighborhood (≤20). 
 
 ## Next
 
-- The `scout-to-world-model` example in the [Scout Intent engine](https://github.com/meterless/meterless/tree/main/engines/scout-intent) — the reciprocal: the same integration from inside Scout.
-- [`world-to-hmem-sync`](../world-to-hmem-sync/README.md) — caching the pulled context in the agent's memory.
-- [`swarm-planning-with-world-context`](../swarm-planning-with-world-context/README.md) — a multi-agent planner reading the world before it builds a DAG.
+- The `scout-to-world-model` example in the [Scout Intent engine](https://github.com/meterless/meterless/tree/main/engines/scout-intent): the reciprocal, the same integration from inside Scout.
+- [`world-to-hmem-sync`](../world-to-hmem-sync/README.md): caching the pulled context in the agent's memory.
+- [`swarm-planning-with-world-context`](../swarm-planning-with-world-context/README.md): a multi-agent planner reading the world before it builds a DAG.

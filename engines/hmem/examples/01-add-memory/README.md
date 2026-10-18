@@ -4,7 +4,7 @@
 
 The smallest useful H-MEM operation: turn one statement into a governed, audited memory record.
 
-Everything else in H-MEM — retrieval, dreaming, sleep, conflict resolution — operates on records created by this step. If `add` is not auditable, nothing downstream can be trusted.
+Everything else in H-MEM (retrieval, dreaming, sleep, conflict resolution) operates on records created by this step. If `add` is not auditable, nothing downstream can be trusted.
 
 Prerequisite reading: [`docs/memory-record.md`](../../docs/memory-record.md), [`docs/trust-ledger.md`](../../docs/trust-ledger.md).
 
@@ -124,7 +124,7 @@ timestamp:   1730000000000
 
 - **`layer: working`, not `long_term`.** A directly stated preference is still inferred intent. Promotion to long-term is earned through repeated access and helpful feedback (see [`docs/tiered-storage.md`](../../docs/tiered-storage.md)), not granted at capture time.
 - **`confidence: 0.9`, not `1.0`.** Reserve `1.0` for facts the system observed itself. Extracted or stated-intent memory starts below 1.0 so the ranker and conflict detector can reason about reliability.
-- **The create is ledgered.** Without the ledger entry you can never answer "where did this memory come from?" — the first of the three failure modes H-MEM exists to prevent.
+- **The create is ledgered.** Without the ledger entry you can never answer "where did this memory come from?" That is the first of the three failure modes H-MEM is designed to prevent.
 
 ---
 
@@ -133,9 +133,9 @@ timestamp:   1730000000000
 | Change | Expected effect |
 | --- | --- |
 | `layer: "short_term"` | Memory decays under the forgetting curve; not hydrated next session unless promoted |
-| Omit `source` | Store should reject — provenance is mandatory |
+| Omit `source` | Store should reject; provenance is mandatory |
 | `type: "factual"` | Different conflict-detection behavior; factual claims conflict on divergent values |
 
 ## Next
 
-[`02-mine-from-chat`](../02-mine-from-chat/README.md) — the same record, but extracted by a model from a raw conversation instead of hand-built.
+[`02-mine-from-chat`](../02-mine-from-chat/README.md: the same record, but extracted by a model from a raw conversation instead of hand-built.

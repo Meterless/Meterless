@@ -8,7 +8,7 @@ Launch and education assets for Meterless H-MEM. These are the audience-facing a
 | --- | --- | --- |
 | [`launch-post.md`](launch-post.md) | Engineers, HN/social | Announcement; the "three failure modes" hook |
 | [`one-pager.md`](one-pager.md) | Decision-makers, eval gate | One-screen "should we use this?" |
-| [`comparison.md`](comparison.md) | Teams holding a vector store | "Why not just X?" rebuttals |
+| [`comparison.md`](comparison.md) | Teams holding a vector store | Answers to "why not use X instead?" |
 | [`demo-script.md`](demo-script.md) | Whoever runs the live demo | A timed 6-minute narrative |
 
 ## Positioning
@@ -17,7 +17,7 @@ H-MEM is a hierarchical human-memory architecture for agents: short-term, workin
 
 ## Message
 
-Do not sell "AI memory." Sell living memory:
+Lead with these properties instead of a generic "AI memory" claim:
 
 - tiered storage with a forgetting curve,
 - explicit, traceable reinjection,

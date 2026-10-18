@@ -36,7 +36,7 @@ interface Memory {
   embedding?: number[];
   score?: number;                      // runtime only, never persisted as truth
   confidence: number;                  // MANDATORY
-  source: string;                      // MANDATORY — reject records without it
+  source: string;                      // MANDATORY; reject records without it
   provenance?: MemoryProvenance;       // mandatory for NEW writes; derived for legacy rows
   // Recall scoping
   chatId?: string;

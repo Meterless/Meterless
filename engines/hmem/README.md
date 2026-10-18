@@ -4,7 +4,7 @@
 
 # Meterless H-MEM
 
-**A living memory system for AI agents. Not a vector store. Not a chat log. A knowledge graph that mines, retrieves, dreams, and audits.**
+**A memory system for AI agents, built as a knowledge graph that mines, retrieves, dreams, and audits.**
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Architecture](https://img.shields.io/badge/architecture-provider--agnostic-purple.svg)](docs/architecture.md)
@@ -37,17 +37,17 @@ Then open the folder in Claude Code or another coding agent and follow this fold
 
 Most "AI memory" today is a vector database with a summarizer bolted on. That works until your agent contradicts itself, forgets a correction, surfaces stale facts, or can't explain why it knew something.
 
-H-MEM is the alternative. It stands for hierarchical memory. Which treats memory as **a living knowledge graph with provenance**:
+H-MEM stands for hierarchical memory. It treats memory as a knowledge graph with provenance:
 
 - Memories are mined from chats, files, plans, corrections, and model outputs.
 - Every record carries lineage, confidence, source, entities, and relationship edges.
-- Retrieval uses hybrid ranking, not just cosine similarity.
+- Retrieval uses hybrid ranking over eight signals. Cosine similarity is one of them.
 - A dreaming cycle proposes new knowledge from clusters of existing memories.
 - A sleep cycle consolidates, archives, and synthesizes.
 - A trust ledger audits every mutation.
 - Conflicts are detected and resolved on a schedule.
 
-Replay and session rewind are deliberately out of scope. This is memory architecture, not playback.
+Replay and session rewind are deliberately out of scope. H-MEM covers memory architecture only.
 
 ---
 
@@ -55,13 +55,13 @@ Replay and session rewind are deliberately out of scope. This is memory architec
 
 <img src="images/H-MEM__Lifecycle.png" alt="Meterless H-MEM Lifecycle" width="100%" />
 
-Memory frameworks are everywhere now. Most of them are a vector store with a system prompt taped to the front. You retrieve some chunks, paste them in, call it memory. It works until the model contradicts itself in the same conversation. It works until a correction from yesterday gets buried under five new chunks today. It works until you ask why the agent believes something and there's nothing to point at.
+Many memory frameworks are a vector store with a system prompt in front. They retrieve some chunks and paste them into the prompt. That approach breaks in three common ways. The model contradicts itself in the same conversation. A correction from yesterday gets buried under five new chunks today. Nothing records why the agent believes something.
 
-H-MEM is built for what comes after that.
+H-MEM is built to handle those failures.
 
-You get tiered storage so the agent actually has a difference between right now, this week, and forever. Hybrid retrieval that ranks by semantic similarity, domain, entities, recency, and trust, not just by cosine distance. An audit ledger so every memory has provenance, every change has an author, and every contradiction gets surfaced instead of silently overwritten. Dreaming and sleep cycles that consolidate, synthesize, and prune, because real memory isn't just storage. It's metabolism.
+Tiered storage separates right now, this week, and long-term knowledge. Hybrid retrieval ranks by semantic similarity, domain, entities, recency, and trust. An audit ledger gives every memory provenance and every change an author. It surfaces contradictions instead of silently overwriting them. Dreaming and sleep cycles consolidate, synthesize, and prune the store over time.
 
-What that gets you is an agent that doesn't just remember. It builds knowledge. It catches its own contradictions. It develops a history with you that survives a hundred sessions, ten model swaps, and a corrupted database. That's the gap "stuff it in a vector DB" never closes. It's the difference between an agent that performs memory and an agent that actually has one.
+The result is an agent that builds knowledge from what it stores and catches its own contradictions. Its memory persists across sessions and model swaps, and sleep-cycle backups let it recover from a corrupted database. A plain vector store does not provide these properties.
 
 ---
 
@@ -79,14 +79,14 @@ Then prompt your agent: *"Implement the H-MEM engine in this project following A
 
 ### Run something right now
 
-A minimal deterministic reference implementation ships in [`reference/`](reference/). It is not a production library; it is the spec made executable.
+A minimal deterministic reference implementation ships in [`reference/`](reference/). It makes the spec executable. It is not a production library.
 
 ```bash
 cd reference && npm install && npm test
 npx tsx ../examples/01-add-memory/index.ts
 ```
 
-Every example in [`examples/`](examples/) runs against it with `npx tsx index.ts` (run from `reference/` or after installing tsx). Three cross-engine examples wait on sibling engine references and say so in their READMEs.
+Every example in [`examples/`](examples/) runs against it with `npx tsx index.ts` (run from `reference/` or after installing tsx). Three cross-engine examples have no runnable code yet. They are reference sketches and say so in their READMEs.
 
 The agent will set up your tiered storage (short-term, working, long-term), scaffold the mining pipeline, wire up hybrid retrieval and reinjection, stand up the trust ledger, and leave dreaming and sleep cycles as opt-in stages you can grow into. Architectural reference in `/docs`.
 
@@ -94,7 +94,7 @@ The agent will set up your tiered storage (short-term, working, long-term), scaf
 
 ## Architecture at a glance
 
-<img src="images/H-MEM_Architecture.png" alt="Meterless H-MEM Achitecture" width="100%" />
+<img src="images/H-MEM_Architecture.png" alt="Meterless H-MEM Architecture" width="100%" />
 
 ```mermaid
 flowchart LR
@@ -124,9 +124,9 @@ Every memory carries enough metadata to be ranked, audited, and explained.
 | `timestamp`, `lastAccessed`, `accessCount` | Recency and usage signal |
 | `tags`, `domain`, `namespace` | Hierarchical organization |
 | `embedding`, `score` | Retrieval ranking |
-| `confidence`, `source` | Reliability tracking — both mandatory; a record without `source` is rejected |
+| `confidence`, `source` | Reliability tracking. Both are mandatory, and a record without `source` is rejected |
 | `provenance` | Origin, when-learned, and human-readable "how I learned this" (mandatory for new writes) |
-| `chatId`, `missionId`, `goalRunId` | Recall scoping — chat-scoped and goal-run-isolated retrieval |
+| `chatId`, `missionId`, `goalRunId` | Recall scoping for chat-scoped and goal-run-isolated retrieval |
 | `entities[]`, `relatedTo[]` | Graph edges |
 | `supersedes`, `supersededBy`, `derivedFrom[]` | Replacement and synthesis lineage |
 
@@ -138,7 +138,7 @@ Nothing in the system mutates a memory without writing to the ledger.
 
 <img src="images/H-MEM_Ranking.png" alt="Meterless H-MEM Query" width="100%" />
 
-When the agent needs context, H-MEM does not just nearest-neighbor on an embedding.
+When the agent needs context, H-MEM combines embedding similarity with seven other signals.
 
 The hybrid ranker scores every candidate on:
 
@@ -153,7 +153,7 @@ The hybrid ranker scores every candidate on:
 
 The blended score is clamped to [0, 1] and multiplied by the record's `confidence`, so feedback directly moves future ranking (exact weights in [`docs/retrieval-ranking.md`](docs/retrieval-ranking.md)). Top N memories are filtered by threshold and grouped by domain before being injected into the prompt. Each block carries trace metadata: `retrievalReason`, per-memory relevance score, and a strategy label (`minimal`, `personal`, `comprehensive`).
 
-The agent does not just remember. It can explain why.
+The trace metadata lets the agent explain why it used each memory.
 
 ---
 
@@ -161,7 +161,7 @@ The agent does not just remember. It can explain why.
 
 <img src="images/H-MEM_Sleep_Dream.png" alt="Meterless H-MEM Sleep and Dream" width="100%" />
 
-Sleep cleans. Dreaming **builds**.
+Sleep maintains the existing store. Dreaming builds new knowledge from it.
 
 The dreaming cycle clusters related memories using content similarity, tag overlap, entity overlap, and domain affinity. Then it proposes three things:
 
@@ -169,7 +169,7 @@ The dreaming cycle clusters related memories using content similarity, tag overl
 - **Invariants.** Stable behavioral rules drawn from preferences and corrections.
 - **Domain suggestions.** Reclassifications for memories that ended up in the wrong bucket.
 
-Nothing materializes without human approval. Approved proposals become new long-term memories with `derivedFrom` lineage pointing at every source. Rejections are logged. The system never lies about where a fact came from.
+Nothing materializes without human approval. Approved proposals become new long-term memories with `derivedFrom` lineage pointing at every source. Rejections are logged. Every derived fact records where it came from.
 
 ---
 
@@ -201,7 +201,7 @@ Feedback closes the loop. `helpful` raises confidence and access count. `wrong` 
 
 ## Conflict detection
 
-When two memories contradict, the system does not pick the louder one.
+When two memories contradict, the system resolves the conflict by explicit rules.
 
 A scanner finds candidates using opposing-phrase pairs, divergent numeric claims about shared entities, and high-similarity contradictory statements. Confidence is modified by shared entities, domain match, and explicit relations. Resolutions are explicit (`keep A`, `keep B`, `keep both`, `merge`, `delete both`) and always logged.
 
@@ -283,4 +283,4 @@ Details in [`conformance/`](conformance/).
 
 ## License
 
-Apache 2.0. Use it. Fork it. Ship it.
+Apache 2.0.

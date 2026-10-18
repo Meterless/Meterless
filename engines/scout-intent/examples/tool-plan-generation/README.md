@@ -1,6 +1,6 @@
 # Tool plan generation
 
-The Route stage. Scout maps an intent to **capabilities**, not concrete tools — then resolves capabilities to whatever tool adapters exist in *this* environment. That indirection is what makes a Scout plan portable across stacks.
+This example covers the Route stage. Scout maps an intent to capabilities, not concrete tools. It then resolves capabilities to whatever tool adapters exist in this environment. That indirection makes a Scout plan portable across stacks.
 
 Prerequisite reading: [`docs/capability-graph.md`](../../docs/capability-graph.md).
 
@@ -8,7 +8,7 @@ Prerequisite reading: [`docs/capability-graph.md`](../../docs/capability-graph.m
 
 ## Scenario
 
-The `deal.recover` intent declares three capabilities. Two tools are registered for them; one capability has no adapter available — Scout must produce a structured error, not a silent gap.
+The `deal.recover` intent declares three capabilities. Two tools are registered for them; one capability has no adapter available. Scout must produce a structured error, not a silent gap.
 
 ```text
 intent deal.recover  declares: world.query, swarm.run, email.draft
@@ -19,7 +19,7 @@ registered tools:     crm.search → world.query
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Scout } from "@meterless/scout";
@@ -48,8 +48,8 @@ console.log("unresolved:", decision.unresolvedCapabilities);
 ## Run it
 
 ```bash
-# The @meterless packages are not yet published — this repository is the
-# implementation spec. With a spec-conforming implementation on your import path:
+# No @meterless package is published. @meterless/scout names your own
+# spec-conforming implementation. With it on your import path:
 npx tsx ./index.ts
 ```
 
@@ -76,7 +76,7 @@ unresolved: [
 5. unresolved → structured ← no adapter = a typed warning, never a silent skip
 ```
 
-`world.query` resolved to `crm.search` because it was the registered adapter on this stack. On a different deployment it might resolve to a local AST service or a remote index — **the intent and the plan do not change; only the resolution does.**
+`world.query` resolved to `crm.search` because it was the registered adapter on this stack. On a different deployment it might resolve to a local AST service or a remote index. The intent and the plan do not change; only the resolution does.
 
 ## Why capabilities, not tools
 
@@ -88,17 +88,17 @@ unresolved: [
 
 ## Unresolved is a signal, not a crash
 
-`email.draft` had no adapter. Scout did **not** drop it silently and did **not** throw — it emitted a structured `unresolved` entry. The downstream system decides: degrade (skip the email step), prompt the operator to register an adapter, or refuse the contract. The decision is explicit and on the record.
+`email.draft` had no adapter. Scout did not drop it silently and did not throw. It emitted a structured `unresolved` entry. The downstream system decides: degrade (skip the email step), prompt the operator to register an adapter, or refuse the contract. The decision is explicit and on the record.
 
 ---
 
 ## Why it matters
 
-- **Capabilities make Scout portable.** The same `deal.recover` plan runs on a local-first laptop and a cloud deployment because the intent commits to *what* (a capability), never *which tool*. Resolution is an environment concern.
-- **Risk filtering happens before ranking.** A high-risk verdict strips dangerous capabilities *before* the ranker ever sees them — a blocked capability cannot be reintroduced later by a high utility score. Order is the safety guarantee (see [`prompt-injection-block`](../prompt-injection-block/README.md)).
+- **Capabilities make Scout portable.** The same `deal.recover` plan runs on a local-first laptop and a cloud deployment because the intent commits to what (a capability), never which tool. Resolution is an environment concern.
+- **Risk filtering happens before ranking.** A high-risk verdict strips dangerous capabilities before the ranker sees them, so a blocked capability cannot be reintroduced later by a high utility score. Order is the safety guarantee (see [`prompt-injection-block`](../prompt-injection-block/README.md)).
 - **A missing tool is a typed outcome.** Silent capability gaps are how agents quietly do half a task. The structured `unresolved` entry forces an explicit decision instead of an invisible omission.
 
 ## Next
 
-- [`model-profile-routing`](../model-profile-routing/README.md) — the parallel decision: which model profile runs this plan.
-- [`scout-to-swarm`](../scout-to-swarm/README.md) — the `swarm.run` step handed off as a scoped contract.
+- [`model-profile-routing`](../model-profile-routing/README.md): the parallel decision: which model profile runs this plan.
+- [`scout-to-swarm`](../scout-to-swarm/README.md): the `swarm.run` step handed off as a scoped contract.

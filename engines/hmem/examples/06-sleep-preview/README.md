@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-Sleep keeps the store healthy: it consolidates earned memories, archives dead ones, and merges duplicates. The rule that makes it safe: **preview first, execute second, back up always.** Execution never discovers new work — if it was not in the preview, it does not happen.
+Sleep keeps the store healthy: it consolidates earned memories, archives dead ones, and merges duplicates. The rule that makes it safe: preview first, execute second, back up always. Execution never discovers new work. If it was not in the preview, it does not happen.
 
 Prerequisite reading: [`docs/sleep-cycle.md`](../../docs/sleep-cycle.md), [`docs/preview-first-sleep-cycle.md`](../../docs/preview-first-sleep-cycle.md).
 
@@ -59,10 +59,10 @@ await sleep.restore(report.backup_id)   # if needed
 
 | Action | Memory | Reason | Guardrail |
 | --- | --- | --- | --- |
-| consolidate | `mem_tmp_deadline` | 4 accesses, helpful, 8 days old | pass — promote to long_term |
-| archive | `mem_old_noise` | 45 days, 0 access, conf 0.3 | pass — safe to remove |
+| consolidate | `mem_tmp_deadline` | 4 accesses, helpful, 8 days old | pass; promote to long_term |
+| archive | `mem_old_noise` | 45 days, 0 access, conf 0.3 | pass; safe to remove |
 | synthesize | `mem_pnpm_a/b/c` | high-similarity duplicate group | needs approval |
-| skip archive | `mem_project_hub` | relationship hub (11 links) | **blocked** |
+| skip archive | `mem_project_hub` | relationship hub (11 links) | blocked |
 
 ## Guardrails that fired
 
@@ -74,7 +74,7 @@ Sleep refused to touch `mem_project_hub`. Guardrails block archival of:
 - records with unresolved conflicts,
 - records above confidence/access thresholds.
 
-These checks live in the **preview** phase. Execute trusts the preview.
+These checks live in the preview phase. Execute trusts the preview.
 
 ## Expected execution report
 
@@ -100,10 +100,10 @@ Every line above is also a trust-ledger entry. Restore writes its own entry and 
 
 ## Why it matters
 
-- **Preview-first prevents the third failure mode.** Memory rot kills retrieval quality over time. Sleep fixes it — but unsupervised deletion is dangerous, so the operator sees and edits the plan before anything is destroyed.
-- **Guardrails protect graph value.** Archiving a relationship hub or a derived memory silently corrupts the knowledge graph. The block is not optional.
+- **Preview-first prevents the third failure mode.** Memory rot kills retrieval quality over time. Sleep fixes it. Unsupervised deletion is dangerous, so the operator sees and edits the plan before anything is destroyed.
+- **Guardrails protect graph value.** Archiving a relationship hub or a derived memory silently corrupts the knowledge graph. The block is mandatory.
 - **Backup + restore is the safety net.** Synthesis and archival are destructive. One `restore(backupId)` call reverses a bad run, and the attempt stays in the audit trail.
 
 ## Next
 
-[`07-conflict-resolution`](../07-conflict-resolution/README.md) — handling memories that directly contradict each other.
+[`07-conflict-resolution`](../07-conflict-resolution/README.md: handling memories that directly contradict each other.

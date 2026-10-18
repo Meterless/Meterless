@@ -41,7 +41,7 @@ Most production deployments use both: Postgres for transactional data, World Mod
 | Provenance and audit | ✓ | ✗ |
 | Text similarity retrieval | ⚠ | ✓ |
 
-**Use World Model when:** you need to model your domain, not just retrieve similar text.
+**Use World Model when:** you need to model your domain as well as retrieve similar text.
 **Use a vector DB when:** you need RAG over a large corpus.
 
 Use both: vector DB for retrieval, World Model for the structured layer that surfaces the right entities to retrieve against.
@@ -79,6 +79,6 @@ Use both: vector DB for retrieval, World Model for the structured layer that sur
 
 World Model is opinionated. It's good at one specific layer: **the derived domain model that agents and applications share**. If that's what you need, the alternatives all require you to assemble two or three of them and write the glue yourself.
 
-If you need something else — billion-scale vector retrieval, real-time graph algorithms, ACID over money — World Model is the wrong answer. Use the right tool.
+If you need something else, such as billion-scale vector retrieval, real-time graph algorithms, or ACID over money, World Model is the wrong answer. Use the right tool.
 
 It composes with all of them.

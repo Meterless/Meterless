@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-When two memories contradict, H-MEM does not pick the louder one. A scanner finds candidate contradictions; a resolver decides with weighted heuristics or hands off to a human; every resolution is audited.
+When two memories contradict, H-MEM resolves the conflict by explicit rules. A scanner finds candidate contradictions; a resolver decides with weighted heuristics or hands off to a human; every resolution is audited.
 
 Prerequisite reading: [`docs/conflict-resolution.md`](../../docs/conflict-resolution.md).
 
@@ -58,7 +58,7 @@ for c in detected:
 
 Auto-decision inputs: recency, access frequency, confidence, content richness, source reliability, conflict type, similarity/domain context.
 
-Here `mem_b` is **newer** and came from a **`user_correction`** (a high-reliability source), which outweighs `mem_a`'s higher access count. Decision:
+Here `mem_b` is newer and came from a `user_correction` (a high-reliability source), which outweighs `mem_a`'s higher access count. Decision:
 
 ```text
 strategy: keep_b
@@ -70,7 +70,7 @@ confidence: 0.88
 
 `keep_a` · `keep_b` · `keep_both` · `merge` · `delete_both`
 
-`keep_both` is correct when the two are not actually contradictory (e.g. two different standups). The scanner's confidence modifiers — shared entities raise it, an explicit `supersedes` relation suppresses it as an intended replacement — exist to avoid false positives here.
+`keep_both` is correct when the two are not actually contradictory (e.g. two different standups). The scanner's confidence modifiers exist to avoid false positives here: shared entities raise it, and an explicit `supersedes` relation suppresses it as an intended replacement.
 
 ## Expected effects + ledger
 
@@ -84,17 +84,17 @@ confidence: 0.88
 ```
 
 - `mem_b` remains current.
-- `mem_a` is marked superseded (kept for audit history, penalized in retrieval — not deleted).
+- `mem_a` is marked superseded (kept for audit history, penalized in retrieval, not deleted).
 - The resolution carries `previousState` and `newState`.
 
 ---
 
 ## Why it matters
 
-- **Superseded ≠ deleted.** `mem_a` stays in the store so the audit trail can still answer "what did the agent believe before the correction?" It is just `-0.20` penalized in the ranker so it stops surfacing.
+- **Superseded ≠ deleted.** `mem_a` stays in the store so the audit trail can still answer "what did the agent believe before the correction?" It carries the `-0.20` ranker penalty so it stops surfacing.
 - **Escalate on low confidence.** Auto-resolving an ambiguous contradiction is how agents silently corrupt memory. Below threshold → a human decides, and that decision is ledgered with `actor`.
 - **This closes the first failure mode.** "The agent used something I corrected two weeks ago" cannot happen when corrections are detected, scored against the stale value, and audited.
 
 ## Next
 
-[`08-trust-ledger`](../08-trust-ledger/README.md) — the audit substrate every step above writes to.
+[`08-trust-ledger`](../08-trust-ledger/README.md: the audit substrate every step above writes to.

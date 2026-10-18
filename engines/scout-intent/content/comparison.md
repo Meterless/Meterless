@@ -28,10 +28,10 @@ Where Scout fits and where it doesn't.
 | Signed contracts for downstream | ✓ | ✗ |
 | Locked regression set with gated CI | ✓ | ⚠ |
 
-**Use Scout when:** you need the whole decision pipeline — intent + risk + routing + model.
+**Use Scout when:** you need the whole decision pipeline: intent + risk + routing + model.
 **Use guardrails libraries when:** you only need output filtering and your routing is solved elsewhere.
 
-Scout *composes* with them — Scout's policy pack can call out to a guardrails library for specific checks.
+Scout composes with them. Scout's policy pack can call out to a guardrails library for specific checks.
 
 ## vs. OPA / policy engines
 
@@ -65,8 +65,8 @@ These compose cleanly. Scout's policy stage can defer to OPA for organization-wi
 
 ## The honest summary
 
-Scout is opinionated. It's good at one specific layer: **the decision pipeline that runs before every meaningful action your AI system takes**. If that's what you need, the alternatives all require you to assemble two or three of them and write the glue yourself.
+Scout is opinionated. It covers one specific layer: the decision pipeline that runs before every meaningful action your AI system takes. If that's what you need, the alternatives all require you to assemble two or three of them and write the glue yourself.
 
-If you don't need a decision layer — single-agent demo, one-shot script, no policy concerns — Scout is overkill. Use the right tool.
+If you don't need a decision layer (a single-agent demo, a one-shot script, no policy concerns), Scout is overkill. Use a simpler tool.
 
-For everything in between: Scout, with the rest of the [Meterless stack](https://github.com/meterless/meterless) downstream.
+For everything in between, use Scout with the rest of the [Meterless stack](https://github.com/meterless/meterless) downstream.

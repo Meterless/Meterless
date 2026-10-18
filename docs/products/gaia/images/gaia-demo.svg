@@ -1,5 +1,5 @@
 <svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
-  <title>Animated: the Gaia cognitive kernel boots — a core wakes, four rings of specialist brains come online and orbit it, and the workspace reports memory, goals, decisions, and artifacts linked across sessions</title>
+  <title>Animated: the Gaia cognitive kernel boots: a core wakes, four rings of specialist brains come online and orbit it, and the workspace reports memory, goals, decisions, and artifacts linked across sessions</title>
   <defs>
     <radialGradient id="gaiaCore" cx="50%" cy="45%" r="60%">
       <stop offset="0%" stop-color="#7FB7FF"/>
@@ -145,7 +145,7 @@
       <text x="14" y="17" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="9.5" fill="#756D60">Commander &#183; Healer &#183; Wanderer</text>
     </g>
   <text x="700" y="368" font-size="11" fill="#9A9284">Every brain writes into one shared</text>
-  <text x="700" y="384" font-size="11" fill="#9A9284">context &#8212; independent of the model</text>
+  <text x="700" y="384" font-size="11" fill="#9A9284">context, independent of the model</text>
   <text x="700" y="400" font-size="11" fill="#9A9284">that created it.</text>
 
   <!-- status -->

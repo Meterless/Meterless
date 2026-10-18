@@ -4,15 +4,15 @@ Three primary types. They compose to model almost any domain.
 
 > **A note on ids in this doc:** readable ids like `player:tommie-frazier-iii` and `season:145` are **display labels** used for clarity. Canonical stable ids follow the grammar in [`stable-ids.md`](./stable-ids.md): `type:system:externalId` when externally keyed, `ent_<hash>` when name keyed, and context ids include their parent in the hash.
 
-## Why three?
+## Why three types
 
-Most graph databases give you two: nodes and edges. That's not enough for systems where the **situation** matters as much as the entities.
+Most graph databases give you two: nodes and edges. Two is not enough for systems where the **situation** matters as much as the entities.
 
-A player "plays for" a team. But which season? Which league? Under which coach? In a flat graph, you cram those into edge attributes and lose the ability to query them as first-class concepts. In World Model, the season *is* a first-class entity — specifically, a **context** — and the relationship is scoped to it.
+A player "plays for" a team. But which season? Which league? Under which coach? In a flat graph, you cram those into edge attributes and lose the ability to query them as first-class concepts. In World Model, the season *is* a first-class record (specifically, a **context**), and the relationship is scoped to it.
 
 ## The three roles
 
-### Entity — the *what*
+### Entity: the *what*
 
 A discrete, identifiable thing.
 
@@ -21,7 +21,7 @@ A discrete, identifiable thing.
 - `account:acme-corp`
 - `incident:inc-2026-04-19-payment-outage`
 
-### Context — the *when / where / situation*
+### Context: the *when / where / situation*
 
 A bounded situation in which facts hold.
 
@@ -32,7 +32,7 @@ A bounded situation in which facts hold.
 
 Contexts nest. `season:145 → week:14 → game:1287` is a path. Facts can be scoped to any level.
 
-### Relationship — the *connection*
+### Relationship: the *connection*
 
 A typed edge between two entities, optionally scoped to a context.
 
@@ -47,7 +47,7 @@ A typed edge between two entities, optionally scoped to a context.
 }
 ```
 
-## Worked example — Gridiron Scripture
+## Worked example: Gridiron Scripture
 
 A narrative-football universe with bloodlines, seasons, and dynasties.
 
@@ -79,13 +79,13 @@ A narrative-football universe with bloodlines, seasons, and dynasties.
 
 Now you can ask:
 
-- *Who plays for the Bengals in season 145?* — graph view, filter by relationship type and context
-- *What's Tommie Frazier III's bloodline?* — graph view, recursive child-of traversal
-- *Show me every Super Bowl* — timeline view, entities of type `game` with attribute `playoff-round=super-bowl`
+- *Who plays for the Bengals in season 145?* Use the graph view, filtered by relationship type and context.
+- *What's Tommie Frazier III's bloodline?* Use the graph view with a recursive child-of traversal.
+- *Show me every Super Bowl.* Use the timeline view: entities of type `game` with attribute `playoff-round=super-bowl`.
 
 All from the same canonical store.
 
-## Worked example — News intelligence
+## Worked example: News intelligence
 
 ```ts
 { type: "article", id: "guardian-2026-05-17-fed-rate" }
@@ -103,7 +103,7 @@ All from the same canonical store.
 { from: "article:guardian-2026-05-17-fed-rate", type: "covers", to: "event:fed-rate-decision-2026-05", context: "incident-window:fed-may-2026" }
 ```
 
-Ask: *what does every article in the May 2026 incident window say about the Fed?* — one query.
+Ask: *what does every article in the May 2026 incident window say about the Fed?* One query answers it.
 
 ## When to use what
 

@@ -1,6 +1,6 @@
 # Scout Evals
 
-**This is the unique asset of the Scout repo.** Decision systems need decision-quality tests. Scout's whole reason for existing is making the right call before action, so the test harness is a first-class citizen.
+The eval harness is the most important part of the Scout repo. Decision systems need decision-quality tests. Scout exists to make the right call before action, so the test harness is a first-class deliverable.
 
 ## What's in here
 
@@ -30,7 +30,7 @@ evals/
 | Clarification rate | Prompts triggering clarification | ≤ 0.15 |
 | User override frequency | User corrections ("No, I meant…" + intent switch in the same trace) ÷ contracts issued | ≤ 0.08 |
 
-Thresholds live in [`config/thresholds.yaml`](./config/thresholds.yaml). **These are targets, not measured results** — corpus v1 is a 32-example smoke set (15 intent-labeled, 10 injection, 3 multi-intent, 4 edge cases). The growth target before any implementation may claim these numbers: ≥ 50 examples per major intent family and a per-class injection split (see [`docs/eval-harness.md`](../docs/eval-harness.md)). The fixtures carry no override data, so offline runs report `override_frequency` as 0 with an explicit note.
+Thresholds live in [`config/thresholds.yaml`](./config/thresholds.yaml). These are targets, not measured results. Corpus v1 is a 32-example smoke set (15 intent-labeled, 10 injection, 3 multi-intent, 4 edge cases). The growth target before any implementation may claim these numbers: ≥ 50 examples per major intent family and a per-class injection split (see [`docs/eval-harness.md`](../docs/eval-harness.md)). The fixtures carry no override data, so offline runs report `override_frequency` as 0 with an explicit note.
 
 ## Running
 
@@ -42,7 +42,7 @@ npm run evals:multi-intent  # composed intents
 npm run evals:report        # generates a markdown report under reports/
 ```
 
-The runner needs a Scout implementation to score — this folder is the implementation spec; there is no `src/` directory, by design. Point the harness at your implementation of the specified API:
+The runner needs a Scout implementation to score. This folder is the implementation spec, and there is no `src/` directory, by design. Point the harness at your implementation of the specified API:
 
 ```bash
 SCOUT_IMPL=/abs/path/to/your/scout npm run evals
@@ -54,11 +54,11 @@ CI exits non-zero if any metric drops below its threshold. PRs that drop metrics
 
 Aggregates hide problems. Every run produces slice reports broken down by:
 
-- Surface — chat vs. inbox vs. API
-- Role — admin vs. ae vs. viewer
-- Intent family — `deal.*` vs. `research.*`
-- Risk class — low / medium / high
-- Time window — last 7 days vs. last 30
+- Surface: chat vs. inbox vs. API
+- Role: admin vs. ae vs. viewer
+- Intent family: `deal.*` vs. `research.*`
+- Risk class: low / medium / high
+- Time window: last 7 days vs. last 30
 
 A release that holds aggregate accuracy but drops a single slice below threshold fails the gate.
 
@@ -76,7 +76,7 @@ Each new example gets a unique ID, a creation timestamp, and a labeler ID. PRs a
 
 ## Versioning
 
-The corpus is **append-only at the example level** and **versioned at the corpus level**. New examples land in the current version. Threshold changes or fixture migrations bump the version. Old versions stay queryable so you can ask: "did we regress against v1?"
+The corpus is append-only at the example level and versioned at the corpus level. New examples land in the current version. Threshold changes or fixture migrations bump the version. Old versions stay queryable so you can ask: "did we regress against v1?"
 
 ## What evals don't measure
 
@@ -84,9 +84,9 @@ The corpus is **append-only at the example level** and **versioned at the corpus
 - End-user satisfaction (product analytics)
 - System throughput (telemetry)
 
-Scout evals are **decision-quality evals**. Stay focused.
+Scout evals measure decision quality only.
 
 ## See also
 
-- [`docs/eval-harness.md`](../docs/eval-harness.md) — the full design
-- [`docs/telemetry-and-learning.md`](../docs/telemetry-and-learning.md) — how production feeds back
+- [`docs/eval-harness.md`](../docs/eval-harness.md): the full design
+- [`docs/telemetry-and-learning.md`](../docs/telemetry-and-learning.md): how production feeds back

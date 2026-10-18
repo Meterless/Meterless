@@ -1,16 +1,19 @@
 # Meterless Docs
 
-Meterless is the local-first context stack for agentic AI.
+Meterless turns the computer you already own into an AI hotspot. [Nightshift](products/nightshift/README.md) is the flagship. The open engines are the context layer underneath it.
 
-<img src="images/meterless-stack.svg" alt="Animated: a request flows from user event through Scout Intent, H-MEM and World Model, Markovian or Swarm, the Runtime Quality Layer, and the product surfaces to verified output — with memory written back" width="820" />
+<img src="images/meterless-stack.svg" alt="Animated: apps call the Meterless provider; the Meterless Runtime and Nightshift serve them by day and race jobs by night on the open engines and your own hardware" width="820" />
 
 ## Sections
 
-- [Architecture](architecture/) - why Meterless exists and how the stack fits together
-- [Engines](engines/) - overview pages for H-MEM, World Model, Markovian, and Scout Intent
-- [Products](products/) - Gaia, Relay, and Swarms documentation
-- [Agent-ready](agent-ready/) - using this repo with Claude Code and Cursor
-- [Community](community/) - hackathon guide
+- [Nightshift](products/nightshift/README.md): the flagship. How it works, job modes, the hotspot, editions and a gallery of real nights.
+- [Benchmarks](benchmarks/README.md): every published run, failures included.
+- [Products](products/README.md): Nightshift, the free apps (Gaia, Relay, Swarms) and the browser utilities.
+- [Experiments](experiments/README.md): Meterless City, Sitcomify and DataPlant.
+- [Architecture](architecture/): why Meterless exists, the stack, local-first context, and [learnings](architecture/learnings.md).
+- [Engines](engines/): overview pages for H-MEM, World Model, Markovian and Scout Intent.
+- [Agent-ready](agent-ready/): Claude Code, Cursor, the [prompt library](agent-ready/prompt-library.md) and the [provider contract](agent-ready/add-meterless-provider.md).
+- [Community](community/hackathon-guide.md): hackathons, tracks and judging.
 
 ## Engine specs
 
@@ -25,8 +28,9 @@ Future engines (swarm-orchestration, runtime, fulcrum) land as new folders on dr
 
 ## Products
 
-Product docs live here. Product installers live on the per-app repos.
+Product docs live here. Installers live on each app's repo and on [meterless.ai](https://www.meterless.ai).
 
-- [Gaia](products/gaia/README.md) - the personal agent workspace
-- [Relay](products/relay/README.md) - the agent execution layer
-- [Swarms](products/swarms/README.md) - the divergent generation layer
+- [Nightshift](products/nightshift/README.md): AI hotspot by day, overnight production by night
+- [Gaia](products/gaia/README.md): the persistent workspace where your work compounds
+- [Relay](products/relay/README.md): describe the job, watch it get done, replay it with no model calls
+- [Swarms](products/swarms/README.md): the swarm builds itself, you keep it

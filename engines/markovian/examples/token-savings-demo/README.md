@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-The whole pitch of this engine is "flat cost, not linear." This example proves it with numbers: the **same task content**, assembled two ways — Markovian bounded carryover vs a naive history-growing baseline — printed step by step.
+The engine's central claim is that per-step cost stays flat instead of growing linearly. This example checks it with numbers. It assembles the same task content two ways, Markovian bounded carryover vs a naive history-growing baseline, and prints them step by step.
 
 Prerequisite reading: [`docs/efficiency-model.md`](../../docs/efficiency-model.md). Visual version: [`../../token-economics-demo`](../../token-economics-demo/README.md).
 
@@ -10,16 +10,16 @@ Prerequisite reading: [`docs/efficiency-model.md`](../../docs/efficiency-model.m
 
 ## Scenario
 
-Hold the per-step *content* identical across both runs. Vary only how the prompt is assembled:
+Hold the per-step content identical across both runs. Vary only how the prompt is assembled:
 
 - **Naive:** every step's prompt = framing + goal + all prior outputs + this step.
 - **Markovian:** every step's prompt = framing + goal + bounded carryover + this step.
 
-If content is constant, every token difference is attributable to prompt assembly — the cleanest possible demonstration.
+If content is constant, every token difference comes from prompt assembly. That isolates the one variable being measured.
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian, estimateNaiveBaseline } from "@meterless/markovian";
@@ -60,7 +60,7 @@ console.log(`Efficiency: ${run.stats.efficiency}%  ·  crossover at step ${run.s
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
@@ -88,17 +88,17 @@ The numbers match the worked example in [`docs/efficiency-model.md`](../../docs/
 | 1–2 | naive (barely) | Markovian pays a fixed ~800-tok carryover before it has history to beat |
 | 3 | crossover | naive's growing history overtakes the flat carryover cost |
 | 20 | Markovian by 7× | naive is quadratic; the gap widens every step |
-| 50+ | Markovian only | naive exceeds the context ceiling — it stops *running*, not just costing |
+| 50+ | Markovian only | naive exceeds the context ceiling and stops running |
 
 ---
 
 ## Why it matters
 
-- **Below the crossover, Markovian is not free — and that is honest.** For a 2-step task, just call the model. The engine earns its keep from step ~3 onward; pretending it wins everywhere would be the kind of claim this demo exists to disprove.
-- **The gap is structural, not tuning.** Naive is `O(N²)` *by construction* — every step ships every prior output. No prompt trick changes the shape; only bounded carryover does.
-- **Past ~50 steps the metric stops being "cost."** It becomes "runs vs does not run." The naive total at 500 steps (~150M tokens in) is not expensive — it is impossible. That is the real argument; the efficiency % is just the visible part of it.
+- **Below the crossover, Markovian costs more.** For a 2-step task, call the model directly. The engine pays off from step ~3 onward. This demo shows the losing steps too, so the claim stays honest.
+- **The gap is structural.** Naive is `O(N²)` by construction, because every step ships every prior output. No prompt trick changes the shape; only bounded carryover does.
+- **Past ~50 steps the question is whether the run fits at all.** The naive total at 500 steps (~150M tokens in) cannot run. The efficiency % shows only part of that gap.
 
 ## Next
 
-- [`../../token-economics-demo`](../../token-economics-demo/README.md) — the same comparison as an interactive chart.
-- [`docs/efficiency-model.md`](../../docs/efficiency-model.md) — the full derivation and where the approximation is loose.
+- [`../../token-economics-demo`](../../token-economics-demo/README.md): the same comparison as an interactive chart.
+- [`docs/efficiency-model.md`](../../docs/efficiency-model.md): the full derivation and where the approximation is loose.

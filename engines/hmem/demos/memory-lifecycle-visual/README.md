@@ -1,6 +1,6 @@
 # Demo · Memory Lifecycle (Visual)
 
-A single memory, watched from the moment it is spoken to the moment it becomes validated, synthesized, and audited durable knowledge. Every stage shows the **record state** and the **ledger entry** it produced — because in H-MEM nothing happens off the record.
+A single memory, watched from the moment it is spoken to the moment it becomes validated, synthesized, and audited durable knowledge. Every stage shows the record state and the ledger entry it produced. In H-MEM, every change is on the record.
 
 ```text
  capture → enrich → store → retrieve → reinject → feedback
@@ -36,7 +36,7 @@ Mining extracts one durable candidate (not the whole turn):
 candidate: "The user prefers pnpm over npm for this project."
 ```
 
-Ledger: *(nothing yet — not stored until enriched + written)*
+Ledger: *(nothing yet; not stored until enriched + written)*
 
 ## 2 · Enrich
 
@@ -138,10 +138,10 @@ Ledger: `sleep_synthesize · backup=backup_sleep_007`
 1. Where did the pnpm rule come from? → mined from `session:abc`.
 2. Why was it used? → retrieved at 0.58 under `trace_1`.
 3. Why is it trusted now? → helpful feedback x2, promoted to long-term.
-4. Where did the *general* invariant come from? → dreamed from 3 sources, **human-approved**.
+4. Where did the general invariant come from? → dreamed from 3 sources, human-approved.
 5. What happened to the duplicates? → synthesized under sleep, backup `backup_sleep_007`.
 
-That unbroken chain — capture to consolidation, every link audited — is the entire thesis of H-MEM.
+H-MEM is designed around this chain: capture to consolidation, with every link audited.
 
 ## See also
 

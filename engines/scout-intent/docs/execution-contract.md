@@ -1,8 +1,8 @@
 # Execution contract
 
-The execution contract is the **only thing downstream engines accept**. Swarm, Markovian, H-MEM, World Model — none of them act on a raw user prompt. They act on contracts.
+The execution contract is the only thing downstream engines accept. Swarm, Markovian, H-MEM, and World Model never act on a raw user prompt. They act on contracts.
 
-This is the single most important property in the Scout design.
+This is the most important property in the Scout design.
 
 ## The shape
 
@@ -59,11 +59,11 @@ type ExecutionContract = {
 
 Three reasons.
 
-**1. Scope enforcement.** A function call says *what to do*. A contract says *what's allowed*. Downstream engines verify that every tool they invoke is in the contract's `capabilities` set. A swarm task that tries to call a tool outside scope gets refused at the boundary — not stopped by a wrapper, refused by the executor.
+**1. Scope enforcement.** A function call says what to do. A contract says what is allowed. Downstream engines verify that every tool they invoke is in the contract's `capabilities` set. A swarm task that tries to call a tool outside scope gets refused at the boundary by the executor itself, not by a wrapper.
 
-**2. Auditability.** A function call is a transient event. A contract is a durable artifact. Every action your system takes can be traced back to a specific contract, with the exact intent, risk assessment, and plan that authorized it. Replay is trivial.
+**2. Auditability.** A function call is a transient event. A contract is a durable artifact. Every action your system takes can be traced back to a specific contract, with the exact intent, risk assessment, and plan that authorized it. Replay is straightforward.
 
-**3. Decoupling.** Without a contract, every agent has to re-implement intent classification, risk checks, and routing. With a contract, all that lives in Scout. Agents become **executors of contracts** — much simpler, much more testable.
+**3. Decoupling.** Without a contract, every agent has to re-implement intent classification, risk checks, and routing. With a contract, all that lives in Scout. Agents become executors of contracts, which makes them simpler and easier to test.
 
 ## Signing
 
@@ -75,7 +75,7 @@ signature = HMAC_SHA256(secret, canonical_json(contract_without_signature))
 
 The secret is per-deployment, stored locally. Downstream engines verify on receipt.
 
-This is not a cryptographic-grade defense — it's an **integrity check** that catches:
+This is an integrity check, not a cryptographic-grade defense. It catches:
 
 - Accidental mutation of the contract in transit between modules
 - Misconfigured downstream engines accepting hand-crafted plans
@@ -87,9 +87,9 @@ If you need stronger guarantees (multi-party signing, distributed enforcement), 
 
 Contracts expire. Default TTL is 5 minutes. Downstream engines refuse contracts past `expiresAt`.
 
-Why short: a contract represents a decision made with specific context. Five minutes later, the context may have changed — the user revoked permissions, the data class shifted, a policy update went live. The short TTL forces re-decision instead of letting old plans rot.
+Why short: a contract represents a decision made with specific context. Five minutes later, the context may have changed: the user revoked permissions, the data class shifted, a policy update went live. The short TTL forces a new decision instead of letting old plans go stale.
 
-Long-running work (a research swarm, a multi-day reflection) **refreshes** contracts: each new chunk or phase asks Scout for a fresh contract bound to the current parent.
+Long-running work (a research swarm, a multi-day reflection) refreshes contracts: each new chunk or phase asks Scout for a fresh contract bound to the current parent.
 
 ## Re-planning
 
@@ -140,5 +140,5 @@ See [`telemetry-and-learning.md`](./telemetry-and-learning.md).
 
 ## What's next
 
-- [Eval harness](./eval-harness.md) — measuring contract quality
-- [Telemetry and learning](./telemetry-and-learning.md) — what the contract trail teaches you
+- [Eval harness](./eval-harness.md): measuring contract quality
+- [Telemetry and learning](./telemetry-and-learning.md): what the contract trail teaches you

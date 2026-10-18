@@ -1,6 +1,6 @@
-# 04 — Generate an execution contract
+# 04: Generate an execution contract
 
-The keystone. Examples [`01`](../classify-simple-intent/README.md)–[`03`](../risk-check/README.md) showed pipeline stages in isolation; this runs all of them and emits the one artifact that matters: a **signed execution contract**. Downstream engines act on this, and nothing else.
+This example ties the pipeline together. Examples [`01`](../classify-simple-intent/README.md)–[`03`](../risk-check/README.md) showed pipeline stages in isolation; this runs all of them and emits the one artifact that matters: a signed execution contract. Downstream engines act on this and nothing else.
 
 Prerequisite reading: [`docs/execution-contract.md`](../../docs/execution-contract.md), [`docs/architecture.md`](../../docs/architecture.md).
 
@@ -16,7 +16,7 @@ One `scout.decide()` call runs the full Sense → Interpret → Guard → Route 
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Scout, verifyContract } from "@meterless/scout";
@@ -45,8 +45,8 @@ console.log(JSON.stringify(contract, null, 2));
 ## Run it
 
 ```bash
-# The @meterless packages are not yet published — this repository is the
-# implementation spec. With a spec-conforming implementation on your import path:
+# No @meterless package is published. @meterless/scout names your own
+# spec-conforming implementation. With it on your import path:
 npx tsx ./index.ts
 ```
 
@@ -85,9 +85,9 @@ npx tsx ./index.ts
 
 | Property | What it buys |
 | --- | --- |
-| **Scope enforcement** | `scope.capabilities` is the *exact* allowed set. A swarm task that calls a tool outside it is refused at the boundary — by the executor, not a wrapper. |
+| **Scope enforcement** | `scope.capabilities` is the exact allowed set. A swarm task that calls a tool outside it is refused at the boundary by the executor, not a wrapper. |
 | **Auditability** | The contract is a durable artifact. Every action traces to the `contractId` that authorized it; replay is a JSON load. |
-| **Decoupling** | Agents become *executors of contracts*. Intent/risk/routing live in Scout, not re-implemented in every engine. |
+| **Decoupling** | Agents become executors of contracts. Intent/risk/routing live in Scout, not re-implemented in every engine. |
 
 ## Verification at the boundary
 
@@ -99,17 +99,17 @@ verifyContract():
 ok → the engine may run ONLY the tools in scope.capabilities
 ```
 
-Default TTL is **5 minutes**. A contract past `expiresAt` is refused — stale context (revoked permissions, a policy update) must force a re-decision, not run an old plan. Long work calls `scout.replan({ parent })` for a fresh contract on the same `traceId`.
+Default TTL is 5 minutes. A contract past `expiresAt` is refused. Stale context (revoked permissions, a policy update) must force a re-decision instead of running an old plan. Long work calls `scout.replan({ parent })` for a fresh contract on the same `traceId`.
 
 ---
 
 ## Why it matters
 
 - **The contract is the only thing downstream trusts.** Swarm, Markovian, H-MEM, World Model never act on a raw prompt. This single property eliminates the whole class of bug where an agent wanders outside its declared scope.
-- **Signature is an integrity check, not transport security.** HMAC over canonical JSON catches accidental mutation, misconfigured engines accepting hand-crafted plans, and replay of expired contracts. Swap the signer for a real signing service if you need multi-party guarantees — the interface is pluggable.
-- **Short TTL is a feature.** A decision is bound to the context it was made in. Five minutes later that context may be stale; forcing re-decision beats letting old plans rot.
+- **Signature is an integrity check, not transport security.** HMAC over canonical JSON catches accidental mutation, misconfigured engines accepting hand-crafted plans, and replay of expired contracts. Swap the signer for a real signing service if you need multi-party guarantees. The interface is pluggable.
+- **Short TTL is deliberate.** A decision is bound to the context it was made in. Five minutes later that context may be stale, so Scout forces a new decision instead of letting old plans go stale.
 
 ## Next
 
-- [`scout-to-swarm`](../scout-to-swarm/README.md) — this exact contract handed to Swarm, verified before the DAG is built.
-- [`route-to-markovian`](../route-to-markovian/README.md) — the long-horizon handoff.
+- [`scout-to-swarm`](../scout-to-swarm/README.md): this exact contract handed to Swarm, verified before the DAG is built.
+- [`route-to-markovian`](../route-to-markovian/README.md): the long-horizon handoff.

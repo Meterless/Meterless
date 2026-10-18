@@ -1,16 +1,16 @@
 # Workshop 01 · Build the Record and Store
 
-**Prereq:** none. **Time:** ~60 min. **Builds on:** —
+**Prereq:** none. **Time:** ~60 min. **Builds on:** nothing.
 
 ## Outcome
 
-By the end you can capture, persist across tiers, hydrate, and audit a memory record — and explain why provenance and the ledger are not optional.
+By the end you can capture, persist across tiers, hydrate, and audit a memory record. You can also explain why provenance and the ledger are required.
 
 Reference: [`docs/memory-record.md`](../docs/memory-record.md), [`docs/tiered-storage.md`](../docs/tiered-storage.md), [`docs/trust-ledger.md`](../docs/trust-ledger.md).
 
 ---
 
-## Exercise 1 — Define the canonical record
+## Exercise 1: Define the canonical record
 
 Implement the shape in your language. Required field families:
 
@@ -21,7 +21,7 @@ Time/usage   timestamp, lastAccessed, accessCount
 Organization tags, domain?, namespace?
 Retrieval    embedding?, score?
 Reliability  confidence, source
-Provenance   provenance?(origin, learnedAt, label, refs?) — mandatory for new writes
+Provenance   provenance?(origin, learnedAt, label, refs?); mandatory for new writes
 Scoping      chatId?, missionId?, goalRunId?
 Graph        entities[], relatedTo[]
 Lineage      supersedes?, supersededBy?, derivedFrom[]
@@ -29,7 +29,7 @@ Lineage      supersedes?, supersededBy?, derivedFrom[]
 
 **Checkpoint:** a record with no `source` must be rejected by construction (type system or a validator). Provenance is mandatory.
 
-## Exercise 2 — Tiered storage
+## Exercise 2: Tiered storage
 
 Back each tier with a different store:
 
@@ -39,7 +39,7 @@ Back each tier with a different store:
 
 **Checkpoint:** `add(memory)` routes by `memory.layer` and returns the stored record with `id` and timestamps assigned.
 
-## Exercise 3 — Hydrate
+## Exercise 3: Hydrate
 
 ```text
 load long_term
@@ -52,9 +52,9 @@ load long_term
 
 **Checkpoint:** after a simulated restart, long-term and working memories return; a stale low-access short-term memory is decayed out.
 
-## Exercise 4 — Ledger on every mutation
+## Exercise 4: Ledger on every mutation
 
-Wrap `add` / `update` / `delete` so each writes a ledger entry. A delete must ledger *before* removal.
+Wrap `add` / `update` / `delete` so each writes a ledger entry. A delete must ledger before removal.
 
 **Checkpoint:** create one memory, update its confidence, then run:
 
@@ -65,10 +65,10 @@ ledger.history(memoryId)
 
 If `history` cannot reconstruct the change, the lab is not complete.
 
-## Exercise 5 — Discussion (do not skip)
+## Exercise 5: Discussion (do not skip)
 
 1. **Skip the ledger:** the store still "works." What exact question can you no longer answer? (Map it to one of the three agent-memory failure modes.)
-2. **Skip tiering — one flat table:** what breaks first as the store grows — correctness or retrieval quality? Why does the forgetting curve need the tier distinction?
+2. **Skip tiering (one flat table):** what breaks first as the store grows: correctness or retrieval quality? Why does the forgetting curve need the tier distinction?
 3. Where should `confidence` start for a hand-entered memory vs. a model-extracted one, and why never `1.0` for the latter?
 
 ---
@@ -83,4 +83,4 @@ Validate against the **Trust ledger** eval category in [`evals/tests`](../evals/
 
 ## Next
 
-[`02-mine-and-enrich.md`](02-mine-and-enrich.md) — stop hand-building records; extract them from interactions.
+[`02-mine-and-enrich.md`](02-mine-and-enrich.md): stop hand-building records; extract them from interactions.

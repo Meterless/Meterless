@@ -1,10 +1,10 @@
-# 05 — Streaming progress
+# 05: Streaming progress
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`) — see [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
+> **Marker note:** this walkthrough uses the XML alternate (`<CARRYOVER>`, `<DONE>`) of the canonical bracket protocol (`[STATE_CHECKPOINT]` / `[TASK_COMPLETE]`). See [docs/marker-protocol.md](../../docs/marker-protocol.md) for the 1:1 mapping.
 
-A long chain is a poor experience if the user stares at a blank screen for 40 steps. This example subscribes to per-chunk events and renders live progress — the human-in-the-loop surface for Markovian.
+A long chain is a poor experience if the user stares at a blank screen for 40 steps. This example subscribes to per-chunk events and renders live progress. This is the human-in-the-loop surface for Markovian.
 
 Prerequisite reading: [`docs/streaming-ui.md`](../../docs/streaming-ui.md).
 
@@ -16,7 +16,7 @@ A 12-step migration plan. The user should see, in real time: which step is runni
 
 ---
 
-## Walkthrough — `index.ts`
+## Walkthrough: `index.ts`
 
 ```ts
 import { Markovian } from "@meterless/markovian";
@@ -48,7 +48,7 @@ const run = await runPromise;
 ## Run it
 
 ```bash
-# No npm package is published — this repo is an implementation spec.
+# No npm package is published. This repo is an implementation spec.
 # Point the import at your implementation of the engine contract (see ../../AGENTS.md), then:
 npx tsx ./index.ts
 ```
@@ -73,7 +73,7 @@ step 12/12 done                                        [████████
 
 ## UX rules from the doc
 
-- **Throttle subscriptions to ~300ms.** A fast model fires deltas faster than a terminal (or React) can paint. Unthrottled = flicker.
+- **Throttle subscriptions to ~300ms.** A fast model fires deltas faster than a terminal (or React) can paint. Without throttling, the display flickers.
 - **Fixed-height container for the live region.** The active step's text grows as it streams; a fixed box prevents layout shift.
 - **Strip markers before display.** `<CARRYOVER>`/`<DONE>` are engine data, never user-visible. The events already hand you cleaned text.
 
@@ -81,11 +81,11 @@ step 12/12 done                                        [████████
 
 ## Why it matters
 
-- **The token gauge is the pitch, live.** Watching `tokensUsed` climb *linearly* (not quadratically) across 12 steps is the flat-cost property you can see, not just claim — the bar would be pinned at step 5 under a naive baseline.
+- **The token gauge shows flat per-step cost as it happens.** `tokensUsed` climbs linearly (not quadratically) across 12 steps, so the flat-cost property is visible on screen. Under a naive baseline the bar would be pinned at step 5.
 - **`<PROGRESS>` is for humans; `<CARRYOVER>` is for the engine.** They are different markers on purpose. Progress is a disposable status line; carryover is load-bearing state. Surfacing the right one keeps the UI honest.
-- **Long runs become supervisable.** A 200-step run is only acceptable if a human can watch it advance and abort a wrong turn. Streaming events are what make long-horizon work operable, not just possible.
+- **Long runs become supervisable.** A 200-step run is only acceptable if a human can watch it advance and abort a wrong turn. Streaming events make long-horizon work operable.
 
 ## Next
 
-- [`06 — run-history-and-stats`](../run-history-and-stats/README.md) — the same data, after the run, for replay and analysis.
-- [`07 — reflection-pass`](../reflection-pass/README.md) — the optional self-review step at the end.
+- [06: `run-history-and-stats`](../run-history-and-stats/README.md): the same data, after the run, for replay and analysis.
+- [07: `reflection-pass`](../reflection-pass/README.md): the optional self-review step at the end.

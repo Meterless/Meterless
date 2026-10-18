@@ -46,7 +46,7 @@ Promote a memory when it has:
 H-MEM should run well with local storage first:
 
 - Short-term in memory/session.
-- Working in SQLite, IndexedDB, or local document store — a real database, never LocalStorage (its ~5–10 MB cap silently truncates the working tier).
+- Working in SQLite, IndexedDB, or local document store. Use a real database, never LocalStorage (its ~5–10 MB cap silently truncates the working tier).
 - Long-term in user-controlled durable storage.
 
 Remote sync is optional and should preserve source, timestamp, and ledger lineage.

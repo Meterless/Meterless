@@ -1,6 +1,6 @@
 # Token economics demo
 
-**This is the unique asset of the Markovian repo.** The whole pitch is "flat cost, not linear." This is the interactive chart that proves it.
+This interactive chart shows the main claim of the Markovian engine: per-step cost stays flat while the naive cost keeps growing.
 
 ## Run it
 
@@ -10,7 +10,7 @@ npm run dev
 # → vite prints the local URL to open
 ```
 
-Or just open `index.html` in any modern browser — the demo runs entirely client-side with no build step.
+Or open `index.html` in any modern browser. The demo runs client-side with no build step.
 
 ## What you can do
 
@@ -41,17 +41,17 @@ Tokens-in per step
 
 The naive line is the cost-per-step of an agent that ships the full transcript every step. The Markovian line is the cost-per-step of an agent that ships a compressed carryover.
 
-All numbers here are **modeled** from the symbolic cost model in [`docs/efficiency-model.md`](../docs/efficiency-model.md) — they are projections, not measured provider usage. Real runs should account with provider-reported usage (`chars/4` is the fallback estimate only) and label numbers accordingly.
+All numbers here are modeled from the symbolic cost model in [`docs/efficiency-model.md`](../docs/efficiency-model.md). They are projections, not measured provider usage. Real runs should account with provider-reported usage (`chars/4` is the fallback estimate only) and label numbers accordingly.
 
 The total area under each curve is the run cost. For naive, that area grows quadratically with step count. For Markovian, linearly.
 
-This is the entire pitch of the engine in one chart.
+This chart summarizes the case for the engine.
 
 ## Why this exists
 
 Documentation can claim "flat cost." A chart shows it. A chart you can adjust shows that the relationship is structural, not a cherry-picked example.
 
-The brief said Markovian needs a token economics demo as its unique repo asset because the whole engine is justified by exactly this graph. So it's here.
+The main argument for the engine is this graph, so the repo ships it as a runnable demo.
 
 See also:
 

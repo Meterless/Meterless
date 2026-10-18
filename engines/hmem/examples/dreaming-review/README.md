@@ -2,7 +2,7 @@
 
 > Run it: `npx tsx index.ts` (uses the reference implementation in [`../../reference`](../../reference)).
 
-[`05-dreaming-proposals`](../05-dreaming-proposals/README.md) shows how proposals are *generated*. This scenario is about the other half — the **human approval boundary**: what a reviewer sees, what each decision does, and why this gate is the single most important safety property in H-MEM.
+[`05-dreaming-proposals`](../05-dreaming-proposals/README.md) shows how proposals are generated. This scenario covers the other half, the human approval boundary: what a reviewer sees, what each decision does, and why this gate is the most important safety property in H-MEM.
 
 Prerequisite reading: [`docs/dreaming.md`](../../docs/dreaming.md).
 
@@ -53,20 +53,20 @@ await dreaming.reject("dream_prop_zz9", "over-generalized from one data point");
 ]
 ```
 
-Note the rejection is **on the record**. A rejected proposal still produces an audit entry; it just never becomes a memory.
+The rejection is on the record. A rejected proposal still produces an audit entry; it just never becomes a memory.
 
 ## What a good review checks
 
-- **Lineage strength** — how many independent sources? `zz9` failed on one.
-- **Over-generalization** — does the claim exceed what the sources support?
-- **Privacy** — does the synthesized statement expose anything the sources kept private?
-- **Conflict** — does it contradict an existing long-term memory? (route to [`07`](../07-conflict-resolution/README.md))
+- **Lineage strength**: how many independent sources? `zz9` failed on one.
+- **Over-generalization**: does the claim exceed what the sources support?
+- **Privacy**: does the synthesized statement expose anything the sources kept private?
+- **Conflict**: does it contradict an existing long-term memory? (route to [`07`](../07-conflict-resolution/README.md))
 
 ---
 
 ## Why it matters
 
-- **This boundary is why dreaming is safe.** Unsupervised synthesis — derived guesses silently hardening into "facts" — is the fourth agent-memory failure mode. The approval gate is the entire defense, and it cannot be auto-approved away.
+- **This boundary is why dreaming is safe.** Unsupervised synthesis (derived guesses silently hardening into "facts") is the fourth agent-memory failure mode. The approval gate is the entire defense, and it cannot be auto-approved away.
 - **`derivedFrom` makes review possible.** A reviewer can only judge a proposal because every one points back at its exact sources. The system never asks you to trust a claim with no provenance.
 - **Rejections are data too.** Logging rejections lets you tune dreaming (raise relatedness threshold, raise cluster min size) when it produces garbage like `zz9`.
 
