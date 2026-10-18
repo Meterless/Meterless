@@ -15,9 +15,9 @@ In the morning you get the files that passed, with a receipt for every check.
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 [![Benchmarks](https://img.shields.io/badge/benchmarks-failures_included-18E299.svg)](docs/benchmarks/README.md)
 
-<a href="#open-the-files"><img src="docs/images/nightshift-one-night.webp" alt="Animation of real Nightshift output: a raymarched HTML scene from 200 attempts, period-drama stills from 299 attempts, a filmed and scored scene, 3D models that all pass the glTF validator, a go-to-market memo checked against an answer key, and four races still finding new approaches after attempt 250" width="880" /></a>
+<a href="#open-the-files"><img src="docs/images/nightshift-one-night.webp" alt="Animation of real Nightshift output: a night in fast forward where three local models land 202 attempts into two clusters and one result passes every check, live captures of a raymarched HTML scene and a particle-life simulation, period-drama stills, a filmed and scored scene, real turntable renders of two finished 3D models next to the photos they came from, a go-to-market memo with its checks ticking in, and four races still finding new approaches after attempt 250" width="880" /></a>
 
-<sub>Every frame is real output from a Nightshift night, with the numbers from its job log.</sub>
+<sub>Every frame is real Nightshift output: live captures of the generated files and renders from the 3D bench, each with the numbers from its job log.</sub>
 
 | One published night on one DGX Spark | |
 |:--|:--|

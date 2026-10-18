@@ -8,7 +8,7 @@ Create with text, code, images, video, audio and 3D on your own machine. Connect
 
 **[Try Nightshift free in your browser](https://meterless.ai/Nightshift/WEB/)** · [Preorder for Mac](https://www.meterless.ai/mac.html) · [DGX edition](https://www.meterless.ai/dgx-spark.html) · [Benchmarks](../../benchmarks/README.md)
 
-<img src="../../images/nightshift-one-night.webp" alt="Animation of real Nightshift output: an HTML scene, period-drama stills, a scored film scene, 3D models, a checked business memo, and four races still finding new approaches after attempt 250" width="100%" />
+<img src="../../images/nightshift-one-night.webp" alt="Animation of real Nightshift output: a night in fast forward where three local models land 202 attempts into two clusters and one result passes every check, live captures of a raymarched HTML scene and a particle-life simulation, period-drama stills, a filmed and scored scene, real turntable renders of two finished 3D models next to the photos they came from, a go-to-market memo with its checks ticking in, and four races still finding new approaches after attempt 250" width="100%" />
 
 <img src="../../images/nightshift-night.svg" alt="Animated: one Nightshift night. A brief and a bar go in, lanes race attempts, scribes read them, clusters form, judges and checks score them, the night settles with signed receipts, and the strongest cluster is distilled so the next night starts from it" width="100%" />
 
