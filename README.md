@@ -140,6 +140,17 @@ Apps that only make sense when a model call costs electricity instead of a per-t
 
 Everything above runs on four open context engines: memory, state, long-run reasoning and intent routing. Each one is an AGENTS.md implementation spec with a runnable reference and a conformance suite, so a coding agent can build it into your stack and prove it got it right.
 
+<table>
+  <tr>
+    <td width="50%"><a href="engines/hmem/"><img src="engines/hmem/images/H-MEM_Hero_Image.png" alt="H-MEM: a three-tier memory pyramid (short-term, working, long-term) that captures from every interaction, consolidates into lasting knowledge, dreams, sleeps, and audits with a trust ledger" width="100%" /></a></td>
+    <td width="50%"><a href="engines/world-model/"><img src="engines/world-model/images/World_Model_Hero_Image.png" alt="World Model: documents, conversations, signals and actions unified into a living graph of entities, contexts and relationships that powers search, timeline, retrieval and agents" width="100%" /></a></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="engines/markovian/"><img src="engines/markovian/images/Markovian_Engine_Hero_Image.png" alt="Markovian Engine: long work split into bounded chunks with safe carryover between steps and O(1) context per step" width="100%" /></a></td>
+    <td width="50%"><a href="engines/scout-intent/"><img src="engines/scout-intent/images/Scout_Intent_Hero_Image.png" alt="Scout Intent: detects intent from raw input, captures entities and signals, and spots ambiguity before the model runs" width="100%" /></a></td>
+  </tr>
+</table>
+
 The proof runs on your machine in 90 seconds with no API keys. The same 12-step task runs cold, then warm. The warm run starts with H-MEM memory and finishes in 8 chunks instead of 12. The output below is real; tokens are estimated at chars/4.
 
 <img src="examples/memory-compounding-research/demo.gif" alt="Cold vs warm run: memory saves 4 chunks and 814 estimated tokens" width="560" />
