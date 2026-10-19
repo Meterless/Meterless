@@ -2,7 +2,7 @@
 
 The hotspot lets one machine serve AI to many apps at once. Connect your compatible AI apps to Nightshift. While it runs, it serves each of them text, image, video and speech generation from your own machine. A laptop chat app asks for a contract summary. A phone voice app asks for a read-aloud. A desktop transcriber sends a standup recording. A tablet image tool asks for a vintage car at sunset. A studio PC queues an eight-second night drive. All of them are answered by the same box.
 
-The hotspot runs on the Mac and DGX editions. The free web edition lets you try a job in your browser.
+The hotspot runs on the Windows, Mac and DGX editions. The free web edition lets you try a job in your browser.
 
 ## How an app connects
 

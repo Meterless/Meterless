@@ -7,7 +7,7 @@ Meterless turns the computer you already own into an AI hotspot. [Nightshift](pr
 ## Sections
 
 - [Nightshift](products/nightshift/README.md): the flagship. How it works, job modes, the hotspot, editions and a gallery of real nights.
-- [Benchmarks](benchmarks/README.md): every published run, failures included.
+- [Benchmarks](benchmarks/README.md): every published run, failures included: Windows, Mac M5, Mac M1 to M4 and DGX Spark, plus live job replays and example output.
 - [Products](products/README.md): Nightshift, the free apps (Gaia, Relay, Swarms) and the browser utilities.
 - [Experiments](experiments/README.md): Meterless City, Sitcomify and DataPlant.
 - [Architecture](architecture/): why Meterless exists, the stack, local-first context, and [learnings](architecture/learnings.md).

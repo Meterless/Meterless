@@ -4,10 +4,10 @@
 
 **Turn your computer into an AI hotspot.**
 
-Your Mac or DGX Spark answers your apps while you work, then races hundreds of attempts at the jobs you leave it overnight.<br/>
+Your Mac, Windows PC or DGX Spark answers your apps while you work, then races hundreds of attempts at the jobs you leave it overnight.<br/>
 In the morning you get the files that passed, with a receipt for every check.
 
-[**Try it free in your browser**](https://meterless.ai/Nightshift/WEB/) · [Mac](https://www.meterless.ai/mac.html) · [DGX Spark](https://www.meterless.ai/dgx-spark.html) · [See real output](#open-the-files) · [Benchmarks](docs/benchmarks/README.md) · [Free apps](docs/products/README.md)
+[**Try it free in your browser**](https://meterless.ai/Nightshift/WEB/) · [Windows](https://www.meterless.ai/windows.html) · [Mac](https://www.meterless.ai/mac.html) · [DGX Spark](https://www.meterless.ai/dgx-spark.html) · [See real output](#open-the-files) · [Benchmarks](docs/benchmarks/README.md) · [Free apps](docs/products/README.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/meterless/meterless?style=flat&logo=github&color=yellow)](https://github.com/meterless/meterless/stargazers)
 [![Product Hunt](https://img.shields.io/badge/Product_Hunt-Product_of_the_Day-DA552F?logo=producthunt&logoColor=white)](https://www.producthunt.com/products/meterless-ai)
@@ -36,7 +36,7 @@ In the morning you get the files that passed, with a receipt for every check.
 |---|---|---|
 | See what it makes | [Open the files](#open-the-files) from real nights | 1 min |
 | Run a job yourself | [Try Nightshift free in your browser](https://meterless.ai/Nightshift/WEB/). Nothing to install. | 2 min |
-| Put your own machine to work overnight | [Preorder for Mac](https://www.meterless.ai/mac.html) ($199 one-time, M5 or later) or [ask about DGX Spark](https://www.meterless.ai/dgx-spark.html) | |
+| Put your own machine to work overnight | [Download for Windows](https://www.meterless.ai/windows.html) (Windows 10 or 11, dedicated GPU, out now), [preorder for Mac](https://www.meterless.ai/mac.html) ($199 one-time, M5 or later), get the [free M1+ version](https://www.meterless.ai/mac.html) for M1 to M4 Macs, or [ask about DGX Spark](https://www.meterless.ai/dgx-spark.html) | |
 | Point Cursor or Claude Code at your own hardware | Paste the [provider prompt](docs/agent-ready/add-meterless-provider.md) into your coding agent | 5 min |
 | Use free AI apps | [Gaia, Relay and Swarms](#free-apps-on-the-same-runtime) | 2 min |
 | Build on the open engines | Run the [90-second memory proof](#the-open-engines), no API keys | 90 s |
@@ -127,20 +127,38 @@ During the day the same machine is an AI hotspot. Any app that speaks the OpenAI
 
 ---
 
+## Editions
+
+| Edition | Runs on | AI hotspot for your apps | Status | Measured |
+|---|---|---|---|---|
+| **Web** | Your browser | No | [Free, live now](https://meterless.ai/Nightshift/WEB/) | |
+| **Windows** 1.2.1 | Windows 10 or 11, 64-bit, dedicated GPU. CUDA on NVIDIA cards, Vulkan on others. | Yes | [Out now](https://www.meterless.ai/windows.html) | [108 of 108 jobs on an RTX 3090](docs/benchmarks/windows.md) |
+| **Mac M5+** | Apple Silicon M5 or later, 16 GB or more, macOS 15 or later | Yes | [Preorder](https://www.meterless.ai/mac.html), $199 one-time, delivery Q4 2026 | [24 of 24 winners correct on a 16 GB M5](docs/benchmarks/mac-m5.md) |
+| **Mac M1+** | Apple Silicon M1 or later. Small models on the Mac's own GPU. | A local endpoint | [Free download](https://www.meterless.ai/mac.html) | [8 models graded in the app](docs/benchmarks/mac-m1-m4.md) |
+| **DGX** | NVIDIA DGX Spark | Yes | [On request](https://www.meterless.ai/dgx-spark.html) | [A month of real nights](docs/benchmarks/dgx-spark.md) |
+
+Hardware notes for every edition are in [editions.md](docs/products/nightshift/editions.md).
+
+---
+
 ## Benchmarks, failures included
 
-Every number comes from a job log, a harness record or a test report, and names its machine.
+Every number comes from a job log, a harness record or a test report, and names its machine. Every edition is now measured: Windows, Mac M5, Mac M1 to M4 and DGX Spark.
+
+<a href="docs/benchmarks/README.md"><img src="docs/benchmarks/media/benchmark-library.svg" alt="Overview of eight published Meterless benchmark reports with one headline number each: Windows PC 108 of 108 catalog jobs; Mac M1 to M4 edition engine restarts 19 to 0; agent frameworks +4.29 on Haiku; 3D bench 246 of 246 valid GLBs; job modes 306 of 310 candidates scored; knowledge work 0 to 11 verified deliverables per run; Mac M5 24 of 24 winners correct; real nights 5,361 landed attempts" width="880" /></a>
 
 | What we measured | Result |
 |---|---|
+| Windows PC, RTX 3090 24 GB, same catalog fleets as the Mac | 108 of 108 jobs completed, 100 winners correct, 3 to 33 s a job against 6 to 472 s on a 16 GB Mac. 553 of 553 jobs in a 3-hour run. |
+| Mac M1 to M4 edition, eight on-device models graded in the shipped app | Llama 3.2 3B got 32 of 34 prompts right. Engine restarts with the window closed went from 19 to 0. |
 | A month of real nights on one DGX Spark | 361 jobs, 5,361 landed attempts, 1,828 signed receipts, 98% of app requests served locally |
 | Verified business deliverables per run, same briefs, four builds | 0, then 3, then 4, then 11 |
 | Business briefs within a point of a frontier cloud model, same graders | 13 of 25 |
 | Meterless context layer on Haiku 4.5, hidden graders | +4.29 quality points over the same-model baseline |
 | Mac M5, 16 GB, catalog fleets after fixes | 24 of 24 jobs completed, 24 of 24 winners correct |
-| What did not work, published anyway | Judging covered only 8% of shortlisted candidates until a dedicated judge model fixed it. 12 of 12 generated apps passed "verified", but only 6 of 12 worked. |
+| What did not work, published anyway | Judging covered only 8% of shortlisted candidates until a dedicated judge model fixed it. 12 of 12 generated apps passed "verified", but only 6 of 12 worked. On Windows, a 3B judge crowned a wrong answer in 19 of 42 grid jobs where a correct one was on the table. |
 
-[All benchmarks](docs/benchmarks/README.md) · [What they taught us](docs/architecture/learnings.md)
+[All benchmarks](docs/benchmarks/README.md) · [Live job replays](docs/benchmarks/knowledge-work.md) · [Example output](docs/benchmarks/examples/README.md) · [What they taught us](docs/architecture/learnings.md)
 
 ---
 
@@ -242,7 +260,7 @@ From the benchmarks. The full list, with the run behind each lesson, is in [lear
 ## Community
 
 - **Hackathons.** The Open Agent Hackathon 2026 runs October 15 to 20, online, with up to $20,000 in prizes. Meterless has hosted 9 global hackathons with 30,000+ builders through GenAI.Works. [Hackathon guide](docs/community/hackathon-guide.md).
-- **Roadmap.** Nightshift for Mac ships Q4 2026. The next engine specs are swarm-orchestration and runtime. [ROADMAP.md](ROADMAP.md).
+- **Roadmap.** Nightshift for Windows is out now. Nightshift for Mac ships Q4 2026. The next engine specs are swarm-orchestration and runtime. [ROADMAP.md](ROADMAP.md).
 - **Contributing.** Start with [CONTRIBUTING.md](CONTRIBUTING.md). Coding agents start at [AGENTS.md](AGENTS.md); other agents at [llms.txt](llms.txt).
 
 Everything in this repo is [Apache 2.0](LICENSE). App installers ship from each app's own repo and from [meterless.ai](https://www.meterless.ai).

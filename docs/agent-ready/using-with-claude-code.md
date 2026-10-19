@@ -23,7 +23,7 @@ The engine's AGENTS.md carries the full contract. The agent does not need any ot
 
 ## Run Claude Code against your own machine
 
-Nightshift turns your Mac or DGX Spark into an AI hotspot. Add Meterless as a provider and Claude Code's requests land on your own hardware. The contract is in [add-meterless-provider.md](add-meterless-provider.md). Read [the hotspot guide](../products/nightshift/hotspot.md) for when local is the right call and when to rent latency instead.
+Nightshift turns your Mac, Windows PC or DGX Spark into an AI hotspot. Add Meterless as a provider and Claude Code's requests land on your own hardware. The contract is in [add-meterless-provider.md](add-meterless-provider.md). Read [the hotspot guide](../products/nightshift/hotspot.md) for when local is the right call and when to rent latency instead.
 
 Several Meterless apps also ship MCP servers for Claude Code: Sitcomify (`claude mcp add sitcomify -- node bin/sitcomify.mjs mcp`) and the Relay agent bridge, which lets your agent list windows, click named controls and run saved skills.
 

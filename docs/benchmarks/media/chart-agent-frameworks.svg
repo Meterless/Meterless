@@ -1,0 +1,62 @@
+<svg viewBox="0 0 960 528" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Diverging bar chart: quality lift over a same-model baseline on Claude Haiku 4.5 for fifteen arms. Meterless context layer +4.29 and Meterless prompt cards +3.36 were the only arms to clear the pre-registered bar of +1.29 set by the minimal-prompt control. The irrelevant-context placebo scored -9.61.</title>
+  <rect x="0.5" y="0.5" width="959" height="527" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+  <text x="40.0" y="44.0" font-size="20" fill="#171310" text-anchor="start" font-weight="700">Two frameworks cleared the bar on Haiku 4.5. Both were Meterless.</text>
+  <text x="40.0" y="66.0" font-size="12" fill="#756D60" text-anchor="start">Quality lift over the same-model baseline, task-balanced mean. 11 tasks, hidden graders. Interim, Oct 12, 2026: 675 of 774 runs graded.</text>
+  <line x1="300.0" y1="96" x2="300.0" y2="464" stroke="#E7DFD3"/>
+  <text x="300.0" y="480.0" font-size="11" fill="#9A9284" text-anchor="middle">-10</text>
+  <line x1="466.7" y1="96" x2="466.7" y2="464" stroke="#E7DFD3"/>
+  <text x="466.7" y="480.0" font-size="11" fill="#9A9284" text-anchor="middle">-5</text>
+  <line x1="633.3" y1="96" x2="633.3" y2="464" stroke="#9A9284"/>
+  <text x="633.3" y="480.0" font-size="11" fill="#9A9284" text-anchor="middle">0</text>
+  <line x1="800.0" y1="96" x2="800.0" y2="464" stroke="#E7DFD3"/>
+  <text x="800.0" y="480.0" font-size="11" fill="#9A9284" text-anchor="middle">+5</text>
+  <line x1="676.3" y1="90" x2="676.3" y2="464" stroke="#79a632" stroke-dasharray="4 3"/>
+  <text x="680.3" y="88.0" font-size="10" fill="#79a632" text-anchor="start">bar to beat: +1.29</text>
+  <text x="288.0" y="118.0" font-size="12" fill="#171310" text-anchor="end" font-weight="600">Meterless context layer</text>
+  <rect x="633.3" y="109.0" width="143.0" height="13.0" rx="3" fill="#79a632"><animate attributeName="width" from="0" to="143.0" dur="0.9s" begin="0.00s" fill="freeze"/></rect>
+  <text x="782.3" y="119.0" font-size="11" fill="#171310" text-anchor="start">+4.29</text>
+  <text x="288.0" y="142.0" font-size="12" fill="#171310" text-anchor="end" font-weight="600">Meterless prompt cards</text>
+  <rect x="633.3" y="133.0" width="112.0" height="13.0" rx="3" fill="#79a632"><animate attributeName="width" from="0" to="112.0" dur="0.9s" begin="0.04s" fill="freeze"/></rect>
+  <text x="751.3" y="143.0" font-size="11" fill="#171310" text-anchor="start">+3.36</text>
+  <text x="288.0" y="166.0" font-size="12" fill="#171310" text-anchor="end">skills-main (anthropics)</text>
+  <rect x="633.3" y="157.0" width="96.7" height="13.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="96.7" dur="0.9s" begin="0.08s" fill="freeze"/></rect>
+  <text x="736.0" y="167.0" font-size="11" fill="#171310" text-anchor="start">+2.90</text>
+  <text x="288.0" y="190.0" font-size="12" fill="#171310" text-anchor="end">awesome-ai-prompts</text>
+  <rect x="633.3" y="181.0" width="56.3" height="13.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="56.3" dur="0.9s" begin="0.12s" fill="freeze"/></rect>
+  <text x="695.7" y="191.0" font-size="11" fill="#171310" text-anchor="start">+1.69</text>
+  <text x="288.0" y="214.0" font-size="12" fill="#756D60" text-anchor="end">Minimal prompt (control)</text>
+  <rect x="633.3" y="205.0" width="43.0" height="13.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="43.0" dur="0.9s" begin="0.16s" fill="freeze"/></rect>
+  <text x="682.3" y="215.0" font-size="11" fill="#171310" text-anchor="start">+1.29</text>
+  <text x="288.0" y="238.0" font-size="12" fill="#171310" text-anchor="end">awesome-cursorrules</text>
+  <rect x="633.3" y="229.0" width="17.7" height="13.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="17.7" dur="0.9s" begin="0.20s" fill="freeze"/></rect>
+  <text x="657.0" y="239.0" font-size="11" fill="#171310" text-anchor="start">+0.53</text>
+  <text x="288.0" y="262.0" font-size="12" fill="#171310" text-anchor="end">omniguide</text>
+  <rect x="633.3" y="253.0" width="16.3" height="13.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="16.3" dur="0.9s" begin="0.24s" fill="freeze"/></rect>
+  <text x="655.7" y="263.0" font-size="11" fill="#171310" text-anchor="start">+0.49</text>
+  <text x="288.0" y="286.0" font-size="12" fill="#171310" text-anchor="end">awesome-agent-skills</text>
+  <rect x="620.0" y="277" width="13.3" height="13" rx="3" fill="#C0563B"/>
+  <text x="614.0" y="287.0" font-size="11" fill="#171310" text-anchor="end">−0.40</text>
+  <text x="288.0" y="310.0" font-size="12" fill="#171310" text-anchor="end" font-weight="600">Meterless cards + audit</text>
+  <rect x="587.3" y="301" width="46.0" height="13" rx="3" fill="#C0563B"/>
+  <text x="581.3" y="311.0" font-size="11" fill="#171310" text-anchor="end">−1.38</text>
+  <text x="288.0" y="334.0" font-size="12" fill="#171310" text-anchor="end">ponytail</text>
+  <rect x="552.3" y="325" width="81.0" height="13" rx="3" fill="#C0563B"/>
+  <text x="546.3" y="335.0" font-size="11" fill="#171310" text-anchor="end">−2.43</text>
+  <text x="288.0" y="358.0" font-size="12" fill="#171310" text-anchor="end">headroom</text>
+  <rect x="517.3" y="349" width="116.0" height="13" rx="3" fill="#C0563B"/>
+  <text x="511.3" y="359.0" font-size="11" fill="#171310" text-anchor="end">−3.48</text>
+  <text x="288.0" y="382.0" font-size="12" fill="#756D60" text-anchor="end">Second review (control)</text>
+  <rect x="516.7" y="373" width="116.7" height="13" rx="3" fill="#B3AA9C"/>
+  <text x="510.7" y="383.0" font-size="11" fill="#171310" text-anchor="end">−3.50</text>
+  <text x="288.0" y="406.0" font-size="12" fill="#171310" text-anchor="end">awesome-system-prompts</text>
+  <rect x="509.0" y="397" width="124.3" height="13" rx="3" fill="#C0563B"/>
+  <text x="503.0" y="407.0" font-size="11" fill="#171310" text-anchor="end">−3.73</text>
+  <text x="288.0" y="430.0" font-size="12" fill="#171310" text-anchor="end">samuels-skills</text>
+  <rect x="456.0" y="421" width="177.3" height="13" rx="3" fill="#C0563B"/>
+  <text x="450.0" y="431.0" font-size="11" fill="#171310" text-anchor="end">−5.32</text>
+  <text x="288.0" y="454.0" font-size="12" fill="#756D60" text-anchor="end">Irrelevant context (placebo)</text>
+  <rect x="313.0" y="445" width="320.3" height="13" rx="3" fill="#B3AA9C"/>
+  <text x="319.0" y="455.0" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="600">−9.61</text>
+  <text x="40.0" y="506.0" font-size="11" fill="#756D60" text-anchor="start">Interim: about 18 runs per arm, p-values not corrected. Both Meterless arms cost 66 to 68% more than the Haiku baseline. On Opus 5.5 no framework moved quality clearly.</text>
+</svg>

@@ -27,7 +27,7 @@ Kept work + signed receipts + Methods and Skills, on your disk
 |---|---|---|
 | Apps | Coding agents, the free Meterless apps, the experiments, anything that speaks the OpenAI API | [Free apps](../products/README.md) and [experiments](../experiments/README.md) shipping |
 | Provider | One OpenAI-compatible endpoint with routing modes instead of model names | Contract public: [add-meterless-provider.md](../agent-ready/add-meterless-provider.md) |
-| Runtime and Nightshift | Local AI production control plane: jobs, fleets, lanes, checks, Outcome Contract, makes, receipts, two postures | [Nightshift](../products/nightshift/README.md): web live, Mac preorder, DGX on request |
+| Runtime and Nightshift | Local AI production control plane: jobs, fleets, lanes, checks, Outcome Contract, makes, receipts, two postures | [Nightshift](../products/nightshift/README.md): web live, Windows out now, Mac preorder, free Mac M1+ edition, DGX on request |
 | Intent detection and routing | [Scout Intent](../../engines/scout-intent/) | Spec + eval harness |
 | Durable memory | [H-MEM](../../engines/hmem/) | Spec + runnable reference |
 | State modeling | [World Model](../../engines/world-model/) | Spec + runnable reference |

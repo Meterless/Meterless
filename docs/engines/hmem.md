@@ -18,7 +18,7 @@ Then open the folder in your coding agent and follow its AGENTS.md.
 
 - [Gaia](../products/gaia/README.md) keeps projects, decisions and preferences across sessions on shared memory tiers.
 - [Meterless City](../experiments/meterless-city/README.md) characters remember you. A sleep cycle consolidates old episodes into chapters; an hour of play is a memory day.
-- In the [agent framework benchmark](../benchmarks/README.md#agent-frameworks), the reference engines as a context layer (with World Model and Markovian) lifted Haiku 4.5 by 4.29 points.
+- In the [agent framework benchmark](../benchmarks/agent-frameworks.md), the reference engines as a context layer (with World Model and Markovian) lifted Haiku 4.5 by 4.29 points.
 
 ## Links
 

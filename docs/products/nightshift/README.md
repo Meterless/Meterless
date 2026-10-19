@@ -2,11 +2,11 @@
 
 **Turn your computer into an AI hotspot.**
 
-Nightshift is the flagship Meterless product. It runs on the Mac or DGX Spark you already own. While you use it, it answers your apps. When you step away, it works through the jobs you left it.
+Nightshift is the flagship Meterless product. It runs on the Mac, Windows PC or DGX Spark you already own. While you use it, it answers your apps. When you step away, it works through the jobs you left it.
 
 Create with text, code, images, video, audio and 3D on your own machine. Connect your apps, choose local or cloud models, and come back to generated work with a record of what was checked.
 
-**[Try Nightshift free in your browser](https://meterless.ai/Nightshift/WEB/)** · [Preorder for Mac](https://www.meterless.ai/mac.html) · [DGX edition](https://www.meterless.ai/dgx-spark.html) · [Benchmarks](../../benchmarks/README.md)
+**[Try Nightshift free in your browser](https://meterless.ai/Nightshift/WEB/)** · [Download for Windows](https://www.meterless.ai/windows.html) · [Preorder for Mac](https://www.meterless.ai/mac.html) · [DGX edition](https://www.meterless.ai/dgx-spark.html) · [Benchmarks](../../benchmarks/README.md)
 
 <img src="../../images/nightshift-one-night.webp" alt="Animation of real Nightshift output: a night in fast forward where three local models land 202 attempts into two clusters and one result passes every check, live captures of a raymarched HTML scene and a particle-life simulation, period-drama stills, a filmed and scored scene, real turntable renders of two finished 3D models next to the photos they came from, a go-to-market memo with its checks ticking in, and four races still finding new approaches after attempt 250" width="100%" />
 
@@ -135,10 +135,12 @@ No model is retrained. What a night learns is written down where you can read it
 | Edition | For | Status |
 |---|---|---|
 | **Web** | Run your first job in your browser. Nothing to install. | [Free, live now](https://meterless.ai/Nightshift/WEB/) |
-| **Mac** | Apple Silicon Mac with an M5 or later chip, 16 GB or more, macOS 15 or later. Hotspot for your apps plus a night shift for your work. | [Preorder](https://www.meterless.ai/mac.html), $199 USD one-time, delivery Q4 2026 |
+| **Windows** | Windows 10 or 11, 64-bit, with a dedicated GPU. Your graphics card becomes a hotspot for your apps and a night shift for your work. CUDA on NVIDIA cards, Vulkan on others. | [Out now](https://www.meterless.ai/windows.html), Windows edition 1.2.1. [Measured on an RTX 3090](../../benchmarks/windows.md). |
+| **Mac M5+** | Apple Silicon Mac with an M5 or later chip, 16 GB or more, macOS 15 or later. Hotspot for your apps plus a night shift for your work. | [Preorder](https://www.meterless.ai/mac.html), $199 USD one-time, delivery Q4 2026 |
+| **Mac M1+** | Apple Silicon M1 or later. Small models on the Mac's own GPU, a local endpoint for your apps, and Nightshift jobs. | [Free download](https://www.meterless.ai/mac.html). [Measured in the app](../../benchmarks/mac-m1-m4.md). |
 | **DGX** | NVIDIA DGX Spark. Serve your apps by day, hand it long-running jobs at night. | [Release details on request](https://www.meterless.ai/dgx-spark.html) |
 
-The hotspot for your apps runs on the Mac and DGX editions. Full hardware notes in [editions.md](editions.md).
+The hotspot for your apps runs on the Windows, Mac and DGX editions. Full hardware notes in [editions.md](editions.md).
 
 ---
 
@@ -161,6 +163,6 @@ Nightshift runs on the Meterless Runtime. The open engines in this repo are the 
 - [How it works](how-it-works.md): attempts, lanes, scribes, clusters, synthesis, the hotspot, and nights that build
 - [Job modes](job-modes.md): kinds, selectors, judges, diversity, budgets, gates, makes, schedules and watchers
 - [Hotspot](hotspot.md): connect any app to the Meterless provider
-- [Editions and hardware](editions.md): web, Mac and DGX, with the measured hardware card
+- [Editions and hardware](editions.md): web, Windows, Mac and DGX, with the measured hardware cards
 - [Gallery](gallery.md): files from real nights
 - [Benchmarks](../../benchmarks/README.md): every published run, failures included

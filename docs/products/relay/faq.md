@@ -22,7 +22,7 @@ Relay also gets cheaper the more you use it. A verified run becomes a skill, and
 
 ## How does Relay relate to Nightshift?
 
-[Nightshift](../nightshift/README.md) is the flagship Meterless product. It turns the Mac or DGX Spark you already own into an AI hotspot that answers your apps and works through jobs while you are away. Relay is one of three free Meterless apps, alongside [Gaia](../gaia/README.md) and [Swarms](../swarms/README.md).
+[Nightshift](../nightshift/README.md) is the flagship Meterless product. It turns the Mac, Windows PC or DGX Spark you already own into an AI hotspot that answers your apps and works through jobs while you are away. Relay is one of three free Meterless apps, alongside [Gaia](../gaia/README.md) and [Swarms](../swarms/README.md).
 
 You do not need Nightshift to use Relay. Relay works with your own cloud API keys. If you do run Nightshift, its [hotspot](../nightshift/hotspot.md) serves models from your machine, and Relay can use it as a provider through the Meterless Runtime. That keeps model calls local and unmetered.
 

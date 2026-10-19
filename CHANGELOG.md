@@ -1,5 +1,18 @@
 # Changelog
 
+## windows-edition-and-benchmarks (October 2026)
+
+### Added
+
+- Nightshift for Windows across the copy: the root README (header, "Pick your way in", a new Editions table), the Nightshift README, editions and hardware (Windows requirements and a measured Windows hardware card), hotspot, how it works, llms.txt, ROADMAP, the products page, the agent guides and the Gaia and Relay docs. The free Mac M1+ edition is listed beside it.
+- `docs/benchmarks/` rebuilt as a visual hub with one page per report: Windows (RTX 3090, new), Mac M1 to M4 edition (new), Mac M5, DGX Spark real nights and the hardware card, job modes, knowledge work, 3D bench and agent frameworks. Every number is copied from the published report on meterless.ai with its machine, build and date.
+- `docs/benchmarks/media/`: captures of each live report and six charts drawn from the report data (the benchmark library, Windows against the Mac, knowledge work by build, agent framework lift, the M1 to M4 models, and judge lane against majority vote).
+- `docs/benchmarks/examples/`: the 18 Morning Desk deliverables with their briefs, races and checks, each linked to its live 3D night replay, plus two files from real nights that match the provenance hashes. Model output is copied verbatim, so `scripts/check-conventions.mjs` exempts this folder from the em-dash rule.
+
+### Changed
+
+- Links that pointed at anchors in the old single-page benchmark summary now point at the new pages.
+
 ## readme-show-first (October 2026)
 
 ### Changed

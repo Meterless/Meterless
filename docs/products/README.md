@@ -1,6 +1,6 @@
 # Meterless Products
 
-[Nightshift](nightshift/README.md) is the paid flagship. It turns the Mac or DGX Spark you already own into an AI hotspot for your apps during the day, and runs queued jobs at night. Gaia, Relay and Swarms are free apps, and five free browser utilities handle everyday files on your device. The [experiments](../experiments/README.md) are apps that only make sense when a model call costs electricity instead of a per-token fee.
+[Nightshift](nightshift/README.md) is the paid flagship. It turns the Mac, Windows PC or DGX Spark you already own into an AI hotspot for your apps during the day, and runs queued jobs at night. Gaia, Relay and Swarms are free apps, and five free browser utilities handle everyday files on your device. The [experiments](../experiments/README.md) are apps that only make sense when a model call costs electricity instead of a per-token fee.
 
 All of them run on the same open engines in this repo: [H-MEM](../../engines/hmem/), [World Model](../../engines/world-model/), [Markovian](../../engines/markovian/) and [Scout Intent](../../engines/scout-intent/).
 

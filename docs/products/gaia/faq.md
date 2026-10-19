@@ -46,7 +46,7 @@ Yes. Nightshift exposes the Meterless Runtime as an OpenAI-compatible provider, 
 - Auth is a bearer token. The runtime writes it to `<stateDir>/proxy-token`.
 - Model ids are routing modes, not model files. `meterless/auto` lets the runtime decide. `meterless/fast`, `meterless/deep` and `meterless/cheap` pick a disposition. `meterless/local` never leaves the machine.
 
-The hotspot runs on the Nightshift Mac and DGX editions. Details are in the [hotspot guide](../nightshift/hotspot.md). If Gaia cannot reach it, see [troubleshooting](troubleshooting.md#11-gaia-cannot-reach-the-nightshift-hotspot).
+The hotspot runs on the Nightshift Windows, Mac and DGX editions. Details are in the [hotspot guide](../nightshift/hotspot.md). If Gaia cannot reach it, see [troubleshooting](troubleshooting.md#11-gaia-cannot-reach-the-nightshift-hotspot).
 
 ## Does it work offline?
 

@@ -32,7 +32,7 @@ Gather a cluster's members, choose a direction, and synthesize a new answer from
 
 ## 07 · The hotspot
 
-Everything above is not locked inside Nightshift. Add Meterless as a provider in Cursor, Claude Code or any app that speaks the OpenAI API, and its requests land on your machine. Any computer running Nightshift becomes an AI hotspot for your apps. The hotspot runs on the Mac and DGX editions. See [hotspot.md](hotspot.md).
+Everything above is not locked inside Nightshift. Add Meterless as a provider in Cursor, Claude Code or any app that speaks the OpenAI API, and its requests land on your machine. Any computer running Nightshift becomes an AI hotspot for your apps. The hotspot runs on the Windows, Mac and DGX editions. See [hotspot.md](hotspot.md).
 
 ## 08 · Nights that build
 

@@ -183,7 +183,7 @@ There are no packages to wait for and no runtime to license. The spec is the del
 
 - Markovian is Nightshift's `deliberate` job kind: one long chain of chunks, each carrying a compressed summary forward.
 - Meterless City runs an 8B model with Markovian state, H-MEM memory and a World Model event log for each character.
-- In the [agent framework benchmark](../docs/benchmarks/README.md#agent-frameworks), the reference engines used as a context layer raised Haiku 4.5's score by 4.29 points.
+- In the [agent framework benchmark](../docs/benchmarks/agent-frameworks.md), the reference engines used as a context layer raised Haiku 4.5's score by 4.29 points.
 
 More in [docs/architecture/learnings.md](../docs/architecture/learnings.md).
 

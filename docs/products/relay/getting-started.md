@@ -31,7 +31,7 @@ Relay does its thinking with an AI model you choose. Open Settings and go to the
 
 **Option A: a cloud API key.** Relay supports Google Gemini, Anthropic, OpenAI, OpenCode Go and OpenRouter. Paste your key into the box for the provider you want and click Test connection. A green check means you are set. If you do not have a key, a free Gemini API key from Google AI Studio is the easiest start. It takes about a minute.
 
-**Option B: local models.** If you run [Nightshift](../nightshift/README.md) on a Mac or DGX edition, Relay can use its [hotspot](../nightshift/hotspot.md). Configure it under API Keys → Meterless Runtime. The default address is `http://127.0.0.1:8088/v1`. Then open Model Routing and pick a preset. Private (on-device) pins every task to local, so nothing leaves the machine.
+**Option B: local models.** If you run [Nightshift](../nightshift/README.md) on the Windows, Mac or DGX edition, Relay can use its [hotspot](../nightshift/hotspot.md). Configure it under API Keys → Meterless Runtime. The default address is `http://127.0.0.1:8088/v1`. Then open Model Routing and pick a preset. Private (on-device) pins every task to local, so nothing leaves the machine.
 
 You can mix the two. Model Routing lets you pick a model per task: desktop planning, vision analysis and deep reasoning.
 

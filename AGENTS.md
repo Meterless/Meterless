@@ -12,7 +12,7 @@ Find your task type. Go to that folder. Load nothing else.
 | Nightshift documentation | `docs/products/nightshift/` |
 | Editing other product documentation (Gaia, Relay, Swarms) | `docs/products/<name>/` |
 | Experiment pages (Meterless City, Sitcomify, DataPlant) | `docs/experiments/<name>/` |
-| Benchmark summaries | `docs/benchmarks/` |
+| Benchmark pages, report captures, example output | `docs/benchmarks/` |
 | Architecture, narrative, or learnings docs | `docs/architecture/` |
 | Engine overview pages | `docs/engines/` |
 | Agent integration guides, prompts, the provider contract | `docs/agent-ready/` |

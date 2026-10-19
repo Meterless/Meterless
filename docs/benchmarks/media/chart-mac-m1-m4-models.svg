@@ -1,0 +1,57 @@
+<svg viewBox="0 0 960 416" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Paired bar chart for eight on-device models in the Nightshift M1 to M4 edition. Llama 3.2 3B scored best at 32 of 34 prompts at 27 tokens per second. Llama 3.2 1B was fastest at 90 tokens per second with 23 of 34.</title>
+  <rect x="0.5" y="0.5" width="959" height="415" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+  <text x="40.0" y="44.0" font-size="20" fill="#171310" text-anchor="start" font-weight="700">Eight small models, graded inside the shipped M1 to M4 app.</text>
+  <text x="40.0" y="66.0" font-size="12" fill="#756D60" text-anchor="start">Prompts right of 34 at temperature 0, and median decode speed. WebGPU on an Apple M5, 16 GB. Oct 14 to 15, 2026.</text>
+  <text x="200.0" y="94.0" font-size="10" fill="#9A9284" text-anchor="start" font-weight="600">PROMPTS RIGHT, OF 34</text>
+  <text x="620.0" y="94.0" font-size="10" fill="#9A9284" text-anchor="start" font-weight="600">MEDIAN DECODE, TOKENS PER SECOND</text>
+  <text x="188.0" y="127.0" font-size="12" fill="#171310" text-anchor="end" font-weight="600">Llama 3.2 3B</text>
+  <rect x="200" y="117" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="117.0" width="338.8" height="14.0" rx="3" fill="#79a632"><animate attributeName="width" from="0" to="338.8" dur="0.9s" begin="0.00s" fill="freeze"/></rect>
+  <text x="568.0" y="128.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">32/34</text>
+  <rect x="620.0" y="117.0" width="69.0" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="69.0" dur="0.9s" begin="0.10s" fill="freeze"/></rect>
+  <text x="697.0" y="128.0" font-size="11" fill="#171310" text-anchor="start">27 tok/s</text>
+  <text x="188.0" y="157.0" font-size="12" fill="#171310" text-anchor="end">Gemma 2 2B</text>
+  <rect x="200" y="147" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="147.0" width="328.2" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="328.2" dur="0.9s" begin="0.05s" fill="freeze"/></rect>
+  <text x="568.0" y="158.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">31/34</text>
+  <rect x="620.0" y="147.0" width="76.7" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="76.7" dur="0.9s" begin="0.15s" fill="freeze"/></rect>
+  <text x="704.7" y="158.0" font-size="11" fill="#171310" text-anchor="start">30 tok/s</text>
+  <text x="188.0" y="187.0" font-size="12" fill="#171310" text-anchor="end">Qwen 2.5 Coder 3B</text>
+  <rect x="200" y="177" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="177.0" width="307.1" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="307.1" dur="0.9s" begin="0.10s" fill="freeze"/></rect>
+  <text x="568.0" y="188.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">29/34</text>
+  <rect x="620.0" y="177.0" width="63.9" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="63.9" dur="0.9s" begin="0.20s" fill="freeze"/></rect>
+  <text x="691.9" y="188.0" font-size="11" fill="#171310" text-anchor="start">25 tok/s</text>
+  <text x="188.0" y="217.0" font-size="12" fill="#171310" text-anchor="end">Qwen 2.5 3B</text>
+  <rect x="200" y="207" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="207.0" width="296.5" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="296.5" dur="0.9s" begin="0.15s" fill="freeze"/></rect>
+  <text x="568.0" y="218.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">28/34</text>
+  <rect x="620.0" y="207.0" width="63.9" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="63.9" dur="0.9s" begin="0.25s" fill="freeze"/></rect>
+  <text x="691.9" y="218.0" font-size="11" fill="#171310" text-anchor="start">25 tok/s</text>
+  <text x="188.0" y="247.0" font-size="12" fill="#171310" text-anchor="end">Qwen 2.5 1.5B</text>
+  <rect x="200" y="237" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="237.0" width="285.9" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="285.9" dur="0.9s" begin="0.20s" fill="freeze"/></rect>
+  <text x="568.0" y="248.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">27/34</text>
+  <rect x="620.0" y="237.0" width="112.4" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="112.4" dur="0.9s" begin="0.30s" fill="freeze"/></rect>
+  <text x="740.4" y="248.0" font-size="11" fill="#171310" text-anchor="start">44 tok/s</text>
+  <text x="188.0" y="277.0" font-size="12" fill="#171310" text-anchor="end">Phi 3.5 Mini</text>
+  <rect x="200" y="267" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="267.0" width="285.9" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="285.9" dur="0.9s" begin="0.25s" fill="freeze"/></rect>
+  <text x="568.0" y="278.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">27/34</text>
+  <rect x="620.0" y="267.0" width="61.3" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="61.3" dur="0.9s" begin="0.35s" fill="freeze"/></rect>
+  <text x="689.3" y="278.0" font-size="11" fill="#171310" text-anchor="start">24 tok/s</text>
+  <text x="188.0" y="307.0" font-size="12" fill="#171310" text-anchor="end">Llama 3.2 1B</text>
+  <rect x="200" y="297" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="297.0" width="243.5" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="243.5" dur="0.9s" begin="0.30s" fill="freeze"/></rect>
+  <text x="568.0" y="308.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">23/34</text>
+  <rect x="620.0" y="297.0" width="230.0" height="14.0" rx="3" fill="#79a632"><animate attributeName="width" from="0" to="230.0" dur="0.9s" begin="0.40s" fill="freeze"/></rect>
+  <text x="858.0" y="308.0" font-size="11" fill="#171310" text-anchor="start">90 tok/s</text>
+  <text x="188.0" y="337.0" font-size="12" fill="#171310" text-anchor="end">SmolLM2 1.7B</text>
+  <rect x="200" y="327" width="360" height="14" rx="3" fill="#E7DFD3"/>
+  <rect x="200.0" y="327.0" width="211.8" height="14.0" rx="3" fill="#C9BDA8"><animate attributeName="width" from="0" to="211.8" dur="0.9s" begin="0.35s" fill="freeze"/></rect>
+  <text x="568.0" y="338.0" font-size="11" fill="#171310" text-anchor="start" font-weight="600">20/34</text>
+  <rect x="620.0" y="327.0" width="127.8" height="14.0" rx="3" fill="#B3AA9C"><animate attributeName="width" from="0" to="127.8" dur="0.9s" begin="0.45s" fill="freeze"/></rect>
+  <text x="755.8" y="338.0" font-size="11" fill="#171310" text-anchor="start">50 tok/s</text>
+  <text x="40.0" y="394.0" font-size="11" fill="#756D60" text-anchor="start">Engine restarts with the window covered or closed: 19 in 10 minutes before the fixes, 0 on every launch after. Seven problems found, seven fixed.</text>
+</svg>

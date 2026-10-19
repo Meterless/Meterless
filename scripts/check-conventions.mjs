@@ -6,7 +6,8 @@
 // 4. Banned strings: old org paths, meterless-ai, workspace tooling files.
 // 5. No package.json at repo root (spec v2 prohibition; engine-local is fine).
 // 6. No em dashes in any Markdown, text or SVG file (tone rule). Generated
-//    eval reports are exempt because the eval runner writes them.
+//    eval reports are exempt because the eval runner writes them. Benchmark
+//    example output is exempt because it is model output copied verbatim.
 // Exit 0 = clean, exit 1 = violations found.
 
 import fs from "node:fs";
@@ -68,7 +69,7 @@ walkText(ROOT);
 
 // Em-dash check: every Markdown, text and SVG file, except generated eval reports.
 const EM_DASH_EXT = new Set([".md", ".txt", ".svg"]);
-const EM_DASH_SKIP = [path.join("evals", "reports") + path.sep];
+const EM_DASH_SKIP = [path.join("evals", "reports") + path.sep, path.join("docs", "benchmarks", "examples") + path.sep];
 function walkEmDash(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(e.name)) continue;

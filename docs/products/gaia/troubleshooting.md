@@ -118,7 +118,7 @@ If the reset happens more than once, please file a bug. It indicates the setting
 
 If you set Gaia up to use the [Nightshift hotspot](../nightshift/hotspot.md) as its model provider and requests fail, check these in order.
 
-Nightshift is running. The hotspot only serves requests while Nightshift runs, on the Mac and DGX editions.
+Nightshift is running. The hotspot only serves requests while Nightshift runs, on the Windows, Mac and DGX editions.
 
 The base URL is right. The default is `http://127.0.0.1:8088/v1`. Auto Detect looks on ports 8088, 8090, 8787 and 11434 on `127.0.0.1`, `localhost` and `[::1]`.
 

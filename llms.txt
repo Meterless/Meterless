@@ -1,11 +1,11 @@
 # Meterless
 
-> Meterless turns the computer you already own into an AI hotspot. Nightshift, the flagship product, runs on a Mac or NVIDIA DGX Spark: by day it serves AI to every connected app over one OpenAI-compatible provider; when you step away it races hundreds of attempts at queued jobs, then reads, clusters, judges and checks them. Gaia, Relay and Swarms are free apps. Meterless City, Sitcomify and DataPlant are experiments. This repository is the open core: engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, benchmark summaries, product documentation, and the project narrative. Everything here is Apache 2.0. App installers live in per-app repos and on meterless.ai.
+> Meterless turns the computer you already own into an AI hotspot. Nightshift, the flagship product, runs on a Mac, a Windows PC with a dedicated GPU, or an NVIDIA DGX Spark: by day it serves AI to every connected app over one OpenAI-compatible provider; when you step away it races hundreds of attempts at queued jobs, then reads, clusters, judges and checks them. Gaia, Relay and Swarms are free apps. Meterless City, Sitcomify and DataPlant are experiments. This repository is the open core: engine implementation specs (AGENTS.md-driven, not runtime libraries), architecture docs, benchmark summaries, product documentation, and the project narrative. Everything here is Apache 2.0. App installers live in per-app repos and on meterless.ai.
 
 ## Folder map
 
 - /docs/products/nightshift/ : Nightshift, the flagship. How it works, job modes, the hotspot, editions and hardware, gallery.
-- /docs/benchmarks/ : summaries of every published benchmark, failures included: real nights, 3D, agent frameworks, knowledge work, job modes, Mac M5, hardware card.
+- /docs/benchmarks/ : every published benchmark, failures included, one page each: Windows (RTX 3090), Mac M1 to M4 edition, Mac M5, DGX Spark real nights and hardware card, job modes, knowledge work, 3D, agent frameworks. Includes report captures, charts, links to live job replays, and example output copied verbatim from published jobs (examples/).
 - /docs/products/gaia/ : Gaia, the free persistent AI workspace.
 - /docs/products/relay/ : Relay, the free desktop workflow app. Describe the job, watch it get done, replay it with no model calls.
 - /docs/products/swarms/ : Swarms, the free auto-generated agent swarm that runs in the browser.
@@ -36,7 +36,8 @@
 ## Products
 
 - Nightshift web edition (free): https://meterless.ai/Nightshift/WEB/
-- Nightshift for Mac (preorder, $199, Q4 2026): https://www.meterless.ai/mac.html
+- Nightshift for Windows (Windows edition 1.2.1, out now): https://www.meterless.ai/windows.html
+- Nightshift for Mac (preorder, $199, Q4 2026; free M1+ edition for M1 to M4 Macs): https://www.meterless.ai/mac.html
 - Nightshift for DGX Spark (on request): https://www.meterless.ai/dgx-spark.html
 - Free tools (Gaia, Relay, Swarms, browser utilities): https://www.meterless.ai/tools.html
 - Benchmarks: https://www.meterless.ai/benchmarks.html

@@ -15,6 +15,9 @@ This page tracks what has shipped and what is next. New engine specs arrive as f
 | Gaia, Relay, Swarms | Free apps. Docs at `docs/products/` |
 | Meterless City, Sitcomify, DataPlant | Free experiments. Docs at `docs/experiments/` |
 | Nightshift web edition | Free, live at meterless.ai |
+| Nightshift for Windows | Windows edition 1.2.1, out now. [Measured on an RTX 3090](docs/benchmarks/windows.md) |
+| Nightshift Mac M1+ edition | Free download for M1 to M4 Macs. [Measured in the app](docs/benchmarks/mac-m1-m4.md) |
+| Benchmarks on every edition | Windows, Mac M5, Mac M1 to M4 and DGX Spark, in `docs/benchmarks/` |
 | Meterless provider contract | Runtime 0.90.0, documented at `docs/agent-ready/add-meterless-provider.md` |
 
 ## Next
@@ -26,7 +29,7 @@ This page tracks what has shipped and what is next. New engine specs arrive as f
 | swarm-orchestration spec | DAG planning, dynamic specialists, merge and verify | Runs inside Gaia and Swarms today. Spec drop pending |
 | runtime spec | Quality, cost and latency routing and the execution substrate | Powers Nightshift today. Spec drop pending |
 | fulcrum | To be announced | Planned |
-| Benchmarks on Windows PCs and M1 to M4 Macs | Same hardware card, same honesty rules | Folders open. Results land when the runs are read |
+| More benchmarks | The M1 to M4 edition on an actual M1 to M4 Mac, a Windows PC with a 12 GB or 8 GB card, the Windows media engines | Results land when the runs are read |
 
 These are targets, and dates can move. Unreleased engines have no folder in this repo until the day the full spec ships.
 

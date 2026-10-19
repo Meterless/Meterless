@@ -1,0 +1,24 @@
+<svg viewBox="0 0 960 380" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Column chart: verified business deliverables per Nightshift benchmark run by build. v1.2.3 on Sep 23: 0. v1.2.7 on Sep 26: 3. v1.2.9 on Sep 27: 4. v1.3.0 on Sep 28: 11.</title>
+  <rect x="0.5" y="0.5" width="959" height="379" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
+  <text x="40.0" y="44.0" font-size="20" fill="#171310" text-anchor="start" font-weight="700">Same business briefs, four builds, six days: 0, then 3, then 4, then 11.</text>
+  <text x="40.0" y="66.0" font-size="12" fill="#756D60" text-anchor="start">Verified business deliverables per benchmark run. Same machine and open models, graded against an answer key. Sep 23 to 28, 2026.</text>
+  <rect x="90.0" y="300.0" width="120" height="0.0" rx="4" fill="#C9BDA8"><animate attributeName="height" from="0" to="0.0" dur="0.9s" begin="0.00s" fill="freeze"/><animate attributeName="y" from="300" to="300.0" dur="0.9s" begin="0.00s" fill="freeze"/></rect>
+  <text x="150.0" y="288.0" font-size="30" fill="#171310" text-anchor="middle" font-weight="700">0</text>
+  <text x="150.0" y="322.0" font-size="13" fill="#171310" text-anchor="middle" font-weight="600">v1.2.3</text>
+  <text x="150.0" y="340.0" font-size="11" fill="#9A9284" text-anchor="middle">Sep 23</text>
+  <rect x="290.0" y="256.4" width="120" height="43.6" rx="4" fill="#C9BDA8"><animate attributeName="height" from="0" to="43.6" dur="0.9s" begin="0.15s" fill="freeze"/><animate attributeName="y" from="300" to="256.4" dur="0.9s" begin="0.15s" fill="freeze"/></rect>
+  <text x="350.0" y="244.4" font-size="30" fill="#171310" text-anchor="middle" font-weight="700">3</text>
+  <text x="350.0" y="322.0" font-size="13" fill="#171310" text-anchor="middle" font-weight="600">v1.2.7</text>
+  <text x="350.0" y="340.0" font-size="11" fill="#9A9284" text-anchor="middle">Sep 26</text>
+  <rect x="490.0" y="241.8" width="120" height="58.2" rx="4" fill="#C9BDA8"><animate attributeName="height" from="0" to="58.2" dur="0.9s" begin="0.30s" fill="freeze"/><animate attributeName="y" from="300" to="241.8" dur="0.9s" begin="0.30s" fill="freeze"/></rect>
+  <text x="550.0" y="229.8" font-size="30" fill="#171310" text-anchor="middle" font-weight="700">4</text>
+  <text x="550.0" y="322.0" font-size="13" fill="#171310" text-anchor="middle" font-weight="600">v1.2.9</text>
+  <text x="550.0" y="340.0" font-size="11" fill="#9A9284" text-anchor="middle">Sep 27</text>
+  <rect x="690.0" y="140.0" width="120" height="160.0" rx="4" fill="#79a632"><animate attributeName="height" from="0" to="160.0" dur="0.9s" begin="0.45s" fill="freeze"/><animate attributeName="y" from="300" to="140.0" dur="0.9s" begin="0.45s" fill="freeze"/></rect>
+  <text x="750.0" y="128.0" font-size="30" fill="#171310" text-anchor="middle" font-weight="700">11</text>
+  <text x="750.0" y="322.0" font-size="13" fill="#171310" text-anchor="middle" font-weight="600">v1.3.0</text>
+  <text x="750.0" y="340.0" font-size="11" fill="#9A9284" text-anchor="middle">Sep 28</text>
+  <line x1="60" y1="300" x2="900" y2="300" stroke="#9A9284"/>
+  <text x="40.0" y="362.0" font-size="11" fill="#756D60" text-anchor="start">18 deliverables published from 12 briefs. One brief, the postmortem, scored lower on the newer build (0.95 to 0.85).</text>
+</svg>
