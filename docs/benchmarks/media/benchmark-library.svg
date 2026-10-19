@@ -3,7 +3,7 @@
   <rect x="0.5" y="0.5" width="959" height="469" rx="16" fill="#FBF7F0" stroke="#E7DFD3"/>
   <text x="40.0" y="44.0" font-size="20" fill="#171310" text-anchor="start" font-weight="700">Every run we have published, failures included.</text>
   <text x="40.0" y="66.0" font-size="12" fill="#756D60" text-anchor="start">Eight benchmark reports, Aug to Oct 2026. Each number names its machine and date. Failures stay in the denominator.</text>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.00s" fill="freeze"/>
+  <g>
   <rect x="40" y="92" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="56.0" y="118.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">WINDOWS PC · RTX 3090</text>
   <text x="56.0" y="134.0" font-size="10" fill="#9A9284" text-anchor="start">Oct 18 to 19, 2026</text>
@@ -14,7 +14,7 @@
   <line x1="56" y1="220" x2="236" y2="220" stroke="#E7DFD3"/>
   <text x="56.0" y="240.0" font-size="10.5" fill="#756D60" text-anchor="start">553/553 jobs in 3 hours, 0 errors</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.08s" fill="freeze"/>
+  <g>
   <rect x="266" y="92" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="282.0" y="118.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">MAC M1 TO M4 EDITION</text>
   <text x="282.0" y="134.0" font-size="10" fill="#9A9284" text-anchor="start">Oct 14 to 15, 2026</text>
@@ -25,7 +25,7 @@
   <line x1="282" y1="220" x2="462" y2="220" stroke="#E7DFD3"/>
   <text x="282.0" y="240.0" font-size="10.5" fill="#756D60" text-anchor="start">32/34 prompts right, Llama 3.2 3B</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.16s" fill="freeze"/>
+  <g>
   <rect x="492" y="92" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="508.0" y="118.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">AGENT FRAMEWORKS · INTERIM</text>
   <text x="508.0" y="134.0" font-size="10" fill="#9A9284" text-anchor="start">Oct 12, 2026</text>
@@ -36,7 +36,7 @@
   <line x1="508" y1="220" x2="688" y2="220" stroke="#E7DFD3"/>
   <text x="508.0" y="240.0" font-size="10.5" fill="#756D60" text-anchor="start">675 of 774 runs graded</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.24s" fill="freeze"/>
+  <g>
   <rect x="718" y="92" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="734.0" y="118.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">3D BENCH · DGX SPARK</text>
   <text x="734.0" y="134.0" font-size="10" fill="#9A9284" text-anchor="start">Oct 10, 2026</text>
@@ -47,7 +47,7 @@
   <line x1="734" y1="220" x2="914" y2="220" stroke="#E7DFD3"/>
   <text x="734.0" y="240.0" font-size="10.5" fill="#756D60" text-anchor="start">50 models from 14 desks</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.32s" fill="freeze"/>
+  <g>
   <rect x="40" y="274" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="56.0" y="300.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">JOB MODES · DGX SPARK</text>
   <text x="56.0" y="316.0" font-size="10" fill="#9A9284" text-anchor="start">Oct 1 to 3, 2026</text>
@@ -58,7 +58,7 @@
   <line x1="56" y1="402" x2="236" y2="402" stroke="#E7DFD3"/>
   <text x="56.0" y="422.0" font-size="10.5" fill="#756D60" text-anchor="start">only 6 of 12 “verified” apps worked</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.40s" fill="freeze"/>
+  <g>
   <rect x="266" y="274" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="282.0" y="300.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">KNOWLEDGE WORK</text>
   <text x="282.0" y="316.0" font-size="10" fill="#9A9284" text-anchor="start">Sep 26 to 28, 2026</text>
@@ -67,7 +67,7 @@
   <line x1="282" y1="402" x2="462" y2="402" stroke="#E7DFD3"/>
   <text x="282.0" y="422.0" font-size="10.5" fill="#756D60" text-anchor="start">18 deliverables, every draft judged</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.48s" fill="freeze"/>
+  <g>
   <rect x="492" y="274" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="508.0" y="300.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">MAC M5 · 16 GB · FANLESS</text>
   <text x="508.0" y="316.0" font-size="10" fill="#9A9284" text-anchor="start">Sep 22 to 26, 2026</text>
@@ -78,7 +78,7 @@
   <line x1="508" y1="402" x2="688" y2="402" stroke="#E7DFD3"/>
   <text x="508.0" y="422.0" font-size="10.5" fill="#756D60" text-anchor="start">301/301 soak jobs, 0 errors</text>
   </g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="0.56s" fill="freeze"/>
+  <g>
   <rect x="718" y="274" width="212" height="168" rx="12" fill="#FFFFFF" stroke="#E7DFD3"/>
   <text x="734.0" y="300.0" font-size="9.5" fill="#756D60" text-anchor="start" font-weight="700" letter-spacing="0.6">REAL NIGHTS · DGX SPARK</text>
   <text x="734.0" y="316.0" font-size="10" fill="#9A9284" text-anchor="start">Aug to Sep 2026</text>
