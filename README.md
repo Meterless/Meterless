@@ -78,6 +78,40 @@ Each night ends by condensing its strongest cluster into an insight pack. The ne
 
 ---
 
+## What Nightshift can do today
+
+Nightshift has a broad execution surface for a local AI application.
+
+| Capability | What it enables |
+|---|---|
+| Multi-model racing | Multiple attempts on the same task |
+| Judge and tournament modes | Evaluate and select competing results |
+| Deliberation | Multi-step reasoning workflows |
+| App generation | Generate applications and check them in a headless browser |
+| Refinement and repair | Improve or repair an existing output |
+| Bulk operations | Process a corpus of files, such as receipts |
+| Folder watchers and schedules | Run work when files change or on intervals |
+| Media workloads | Run tasks on specialist media models |
+| Thermal management | Protect a GPU during sustained work |
+
+---
+
+## Watch a night generate
+
+<a href="https://www.meterless.ai/how-it-works.html"><img src="docs/images/nightshift-how-it-works.webp" alt="Animated recording of the How it works story: one attempt, then one model turned into many lanes, five models racing attempts, scribes reading the night, attempts gathering into clusters, cluster synthesis producing new answers, and the machine serving other apps as an AI hotspot" width="880" /></a>
+
+<sub>Recorded from the Nightshift field renderer on the <a href="https://www.meterless.ai/how-it-works.html">How it works</a> page. The page drives the field with a sample job, marked DEMO.</sub>
+
+1. **The attempt.** One prompt, one answer. This is how most people use agentic AI today.
+2. **The variance filter.** One model runs across personas and temperatures, so no two attempts match.
+3. **The search.** A lane per model. Every finished attempt is kept.
+4. **The scribes.** Small readers summarize and tag each attempt, so the night becomes searchable.
+5. **The cluster.** Related attempts gather into families. Closer to the core means more coherent, not proven.
+6. **Cluster synthesis.** Members of a cluster are combined into a new, fuller answer.
+7. **Your AI hotspot.** Any app that speaks the OpenAI API can send its requests to the same machine.
+
+---
+
 ## How it compares
 
 | | A chat with a model | A cloud agent | Nightshift |
